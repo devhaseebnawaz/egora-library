@@ -5,6 +5,8 @@ import locationIcon from "@iconify-icons/mdi/map-marker";
 import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
+import Image from 'next/image';
+import UniversalImage from '../../../UniversalImage'
 
 export default function CustomNavbar({ prop }) {
     const [cartOpen, setCartOpen] = useState(false);
@@ -49,7 +51,7 @@ export default function CustomNavbar({ prop }) {
                                 Change Location
                             </Typography>
                             <Typography variant="caption" style={{ color: "#f6e6d6" }}>
-                                { prop.editable.address }
+                                {prop.editable.address}
                             </Typography>
                         </Box>
                     </Box>
@@ -63,14 +65,14 @@ export default function CustomNavbar({ prop }) {
                     >
                         <Icon icon={phoneIcon} width="20" height="20" color="#f6e6d6" />
                         <Typography variant="body2" fontWeight="bold" style={{ color: "#f6e6d6" }}>
-                            { prop.editable.phone }
+                            {prop.editable.phone}
                         </Typography>
                     </Box>
                 </Box>
 
                 <Box style={{ position: "relative" }}>
                     <IconButton onClick={() => setCartOpen(true)}>
-                        <Icon icon={cartIcon} width={24} height={24} color="#f6e6d6"/>
+                        <Icon icon={cartIcon} width={24} height={24} color="#f6e6d6" />
                     </IconButton>
 
                     <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
@@ -110,11 +112,21 @@ export default function CustomNavbar({ prop }) {
                     backgroundColor: "#121212",
                 }}
             >
-                <img
-                    src={prop.editable.logoImage}
-                    alt="BRGR Logo"
-                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                />
+                {prop.editable.logoImage ? (
+
+                    <UniversalImage
+                        src={prop.editable.logoImage}
+                        alt="BRGR Logo"
+                        layout="fill"
+                        objectFit="contain"
+                        onError={() => console.log("Image failed to load")}
+                        width= "100%"
+                        height= "100%"
+                    />
+
+                ) : (
+                    <div>No logo found</div>
+                )}
             </Box>
         </AppBar>
     );

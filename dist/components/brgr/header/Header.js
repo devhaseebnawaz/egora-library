@@ -12,6 +12,8 @@ var _mapMarker = _interopRequireDefault(require("@iconify-icons/mdi/map-marker")
 var _phone = _interopRequireDefault(require("@iconify-icons/mdi/phone"));
 var _cart = _interopRequireDefault(require("@iconify-icons/mdi/cart"));
 var _CartDrawer = _interopRequireDefault(require("./CartDrawer"));
+var _image = _interopRequireDefault(require("next/image"));
+var _UniversalImage = _interopRequireDefault(require("../../../UniversalImage"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, "default": e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
@@ -135,13 +137,15 @@ function CustomNavbar(_ref) {
       overflow: "hidden",
       backgroundColor: "#121212"
     }
-  }, /*#__PURE__*/_react["default"].createElement("img", {
+  }, prop.editable.logoImage ? /*#__PURE__*/_react["default"].createElement(_UniversalImage["default"], {
     src: prop.editable.logoImage,
     alt: "BRGR Logo",
-    style: {
-      width: "100%",
-      height: "100%",
-      objectFit: "contain"
-    }
-  })));
+    layout: "fill",
+    objectFit: "contain",
+    onError: function onError() {
+      return console.log("Image failed to load");
+    },
+    width: "100%",
+    height: "100%"
+  }) : /*#__PURE__*/_react["default"].createElement("div", null, "No logo found")));
 }
