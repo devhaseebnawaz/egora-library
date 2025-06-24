@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
-import locationIcon from "@iconify-icons/mdi/map-marker";
-import phoneIcon from "@iconify-icons/mdi/phone";
-import cartIcon from "@iconify-icons/mdi/cart";
+// import locationIcon from "@iconify-icons/mdi/map-marker";
+// import phoneIcon from "@iconify-icons/mdi/phone";
+// import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 
 export default function CustomNavbar() {
@@ -43,7 +43,7 @@ export default function CustomNavbar() {
                             gap: "8px",
                         }}
                     >
-                        <Icon icon={locationIcon} width="20" height="20" color="#f6e6d6" />
+                        {/* <Icon icon={locationIcon} width="20" height="20" color="#f6e6d6" /> */}
                         <Box>
                             <Typography variant="body2" fontWeight="bold" style={{ color: "#f6e6d6" }}>
                                 Change Location
@@ -61,7 +61,7 @@ export default function CustomNavbar() {
                             gap: "8px",
                         }}
                     >
-                        <Icon icon={phoneIcon} width="20" height="20" color="#f6e6d6" />
+                        {/* <Icon icon={phoneIcon} width="20" height="20" color="#f6e6d6" /> */}
                         <Typography variant="body2" fontWeight="bold" style={{ color: "#f6e6d6" }}>
                             0333–3122223
                         </Typography>
@@ -69,9 +69,9 @@ export default function CustomNavbar() {
                 </Box>
 
                 <Box style={{ position: "relative" }}>
-                    <IconButton onClick={() => setCartOpen(true)}>
+                    {/* <IconButton onClick={() => setCartOpen(true)}>
                         <Icon icon={cartIcon} width={24} height={24} color="#f6e6d6"/>
-                    </IconButton>
+                    </IconButton> */}
 
                     <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
                     <Box

@@ -6,10 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _material = require("@mui/material");
-var _react2 = require("@iconify/react");
-var _close = _interopRequireDefault(require("@iconify-icons/mdi/close"));
-var _bagPersonalOutline = _interopRequireDefault(require("@iconify-icons/mdi/bag-personal-outline"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+// import { Icon } from "@iconify/react";
+// import closeIcon from "@iconify-icons/mdi/close";
+// import cartEmpty from "@iconify-icons/mdi/bag-personal-outline";
+
 var CartDrawer = function CartDrawer(_ref) {
   var open = _ref.open,
     onClose = _ref.onClose;
@@ -33,26 +34,11 @@ var CartDrawer = function CartDrawer(_ref) {
         borderBottomLeftRadius: 16
       }
     }
-  }, /*#__PURE__*/_react["default"].createElement(_material.IconButton, {
-    onClick: onClose,
-    style: {
-      position: "absolute",
-      top: 12,
-      right: 12
-    }
-  }, /*#__PURE__*/_react["default"].createElement(_react2.Icon, {
-    icon: _close["default"],
-    width: 24,
-    height: 24
-  })), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       marginBottom: 24
     }
-  }, /*#__PURE__*/_react["default"].createElement(_react2.Icon, {
-    icon: _bagPersonalOutline["default"],
-    width: 100,
-    height: 100
-  })), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
+  }), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "h4",
     fontWeight: "bold",
     gutterBottom: true

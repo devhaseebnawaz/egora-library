@@ -6,9 +6,9 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { Icon } from "@iconify/react";
-import closeIcon from "@iconify-icons/mdi/close";
-import cartEmpty from "@iconify-icons/mdi/bag-personal-outline";
+// import { Icon } from "@iconify/react";
+// import closeIcon from "@iconify-icons/mdi/close";
+// import cartEmpty from "@iconify-icons/mdi/bag-personal-outline";
 
 const CartDrawer = ({ open, onClose }) => {
   return (
@@ -33,7 +33,7 @@ const CartDrawer = ({ open, onClose }) => {
         },
       }}
     >
-      <IconButton
+      {/* <IconButton
         onClick={onClose}
         style={{
           position: "absolute",
@@ -41,11 +41,11 @@ const CartDrawer = ({ open, onClose }) => {
           right: 12,
         }}
       >
-        <Icon icon={closeIcon} width={24} height={24} />
-      </IconButton>
+        <Icon icon={closeIcon} width={24} height={24} /> 
+      </IconButton> */}
 
       <Box style={{ marginBottom: 24 }}>
-        <Icon icon={cartEmpty} width={100} height={100} />
+        {/* <Icon icon={cartEmpty} width={100} height={100} /> */}
       </Box>
 
       <Typography variant="h4" fontWeight="bold" gutterBottom>
