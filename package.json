@@ -24,7 +24,8 @@
     ]
   },
   "dependencies": {
+    "@iconify-icons/mdi": "^1.2.48",
+    "@iconify/react": "^6.0.0",
     "@mui/material": "^7.1.2"
   }
 }
-
