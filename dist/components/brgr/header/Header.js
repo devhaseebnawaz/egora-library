@@ -136,7 +136,7 @@ function CustomNavbar(_ref) {
       backgroundColor: "#121212"
     }
   }, /*#__PURE__*/_react["default"].createElement("img", {
-    src: "".concat(prop.editable.logoImage),
+    src: prop.editable.logoImage,
     alt: "BRGR Logo",
     style: {
       width: "100%",

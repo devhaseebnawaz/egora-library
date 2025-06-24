@@ -111,7 +111,7 @@ export default function CustomNavbar({ prop }) {
                 }}
             >
                 <img
-                    src={`${prop.editable.logoImage}`}
+                    src={prop.editable.logoImage}
                     alt="BRGR Logo"
                     style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />
