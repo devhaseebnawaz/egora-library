@@ -6,7 +6,7 @@ import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 
-export default function CustomNavbar() {
+export default function CustomNavbar({ prop }) {
     const [cartOpen, setCartOpen] = useState(false);
 
     return (
@@ -49,7 +49,7 @@ export default function CustomNavbar() {
                                 Change Location
                             </Typography>
                             <Typography variant="caption" style={{ color: "#f6e6d6" }}>
-                                Ghazi Road, DHA Phase ...
+                                { prop.editable.address }
                             </Typography>
                         </Box>
                     </Box>
@@ -63,7 +63,7 @@ export default function CustomNavbar() {
                     >
                         <Icon icon={phoneIcon} width="20" height="20" color="#f6e6d6" />
                         <Typography variant="body2" fontWeight="bold" style={{ color: "#f6e6d6" }}>
-                            0333–3122223
+                            { prop.editable.phone }
                         </Typography>
                     </Box>
                 </Box>
@@ -111,7 +111,7 @@ export default function CustomNavbar() {
                 }}
             >
                 <img
-                    src="/brgr/logo/logo.webp"
+                    src={prop.editable.logoImage}
                     alt="BRGR Logo"
                     style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />

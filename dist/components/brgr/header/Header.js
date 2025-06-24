@@ -20,7 +20,8 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-function CustomNavbar() {
+function CustomNavbar(_ref) {
+  var prop = _ref.prop;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     cartOpen = _useState2[0],
@@ -70,7 +71,7 @@ function CustomNavbar() {
     style: {
       color: "#f6e6d6"
     }
-  }, "Ghazi Road, DHA Phase ..."))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, prop.editable.address))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       display: "flex",
       alignItems: "center",
@@ -87,7 +88,7 @@ function CustomNavbar() {
     style: {
       color: "#f6e6d6"
     }
-  }, "0333\u20133122223"))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, prop.editable.phone))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       position: "relative"
     }
@@ -135,7 +136,7 @@ function CustomNavbar() {
       backgroundColor: "#121212"
     }
   }, /*#__PURE__*/_react["default"].createElement("img", {
-    src: "/brgr/logo/logo.webp",
+    src: prop.editable.logoImage,
     alt: "BRGR Logo",
     style: {
       width: "100%",
