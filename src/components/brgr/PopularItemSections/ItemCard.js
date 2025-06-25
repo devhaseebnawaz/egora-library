@@ -45,7 +45,8 @@ export default function ItemCard  ({item}) {
           src={`https://api.dev.egora.pk/v1/images/${item?.photoURL}`}
           alt={item?.name}
           style={{
-            maxWidth: '100%',
+            maxWidth: '300px',
+            height:"300px",
             objectFit: 'contain',
           }}
         />
@@ -63,7 +64,7 @@ export default function ItemCard  ({item}) {
             boxShadow: 'rgba(0, 0, 0, 0.14) 0px 1px 4px',
           }}
         >
-          {item?.price}
+          Rs {item?.price}
         </Box>
       </Card>
       <ItemDetailModal

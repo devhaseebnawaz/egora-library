@@ -63,7 +63,8 @@ function ItemCard(_ref) {
     src: "https://api.dev.egora.pk/v1/images/".concat(item === null || item === void 0 ? void 0 : item.photoURL),
     alt: item === null || item === void 0 ? void 0 : item.name,
     style: {
-      maxWidth: '100%',
+      maxWidth: '300px',
+      height: "300px",
       objectFit: 'contain'
     }
   }), /*#__PURE__*/_react["default"].createElement(_material.Box, {
@@ -78,7 +79,7 @@ function ItemCard(_ref) {
       fontSize: 14,
       boxShadow: 'rgba(0, 0, 0, 0.14) 0px 1px 4px'
     }
-  }, item === null || item === void 0 ? void 0 : item.price)), /*#__PURE__*/_react["default"].createElement(_ItemDetailModal["default"], {
+  }, "Rs ", item === null || item === void 0 ? void 0 : item.price)), /*#__PURE__*/_react["default"].createElement(_ItemDetailModal["default"], {
     open: open,
     onClose: handleClose,
     item: item,
