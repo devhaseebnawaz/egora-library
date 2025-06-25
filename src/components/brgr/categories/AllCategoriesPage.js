@@ -1,5 +1,4 @@
-import { useState,useEffect } from "react";
-import React from "react";
+import React , { useState,useEffect } from "react";
 import { Grid, Typography, Container, Box } from "@mui/material";
 import { categories } from "../data/categories";
 import Banner from "./Banner";

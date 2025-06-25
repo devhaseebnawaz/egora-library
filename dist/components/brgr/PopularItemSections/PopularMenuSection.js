@@ -1,13 +1,15 @@
 "use strict";
 
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = PopularMenuSection;
-var _react = require("react");
+var _react = _interopRequireWildcard(require("react"));
 var _material = require("@mui/material");
 var _ItemCard = _interopRequireDefault(require("./ItemCard"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, "default": e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -35,29 +37,29 @@ function PopularMenuSection(_ref) {
       setProducts(prop.displayitems || []);
     }
   }, [states.query, prop.displayitems]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_material.Box, {
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_material.Box, {
     mb: 4,
     mt: 4
-  }, /*#__PURE__*/React.createElement(_material.Typography, {
+  }, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "h4",
     fontWeight: "bold",
     display: "flex",
     alignItems: "center",
     gap: 1
-  }, "Popular Items"), /*#__PURE__*/React.createElement(_material.Typography, {
+  }, "Popular Items"), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "subtitle1",
     color: "text.secondary"
-  }, "Most ordered right now")), /*#__PURE__*/React.createElement(_material.Grid, {
+  }, "Most ordered right now")), /*#__PURE__*/_react["default"].createElement(_material.Grid, {
     container: true,
     spacing: 2
   }, products.map(function (item) {
-    return /*#__PURE__*/React.createElement(_material.Grid, {
+    return /*#__PURE__*/_react["default"].createElement(_material.Grid, {
       item: true,
       xs: 12,
       sm: 6,
       md: 3,
       key: item.id
-    }, /*#__PURE__*/React.createElement(_ItemCard["default"], {
+    }, /*#__PURE__*/_react["default"].createElement(_ItemCard["default"], {
       item: item
     }));
   })));
