@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Typography, Box } from '@mui/material';
-import ItemDetailModal from 'src/sections/store/BRGR-Theme/categories/ItemDetailModal';
+import ItemDetailModal from '../categories/ItemDetailModal';
 
 
 export default function ItemCard  ({item}) {
