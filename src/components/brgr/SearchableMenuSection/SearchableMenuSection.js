@@ -1,0 +1,45 @@
+import React from 'react';
+import { Box, Typography , Container} from '@mui/material';
+import SearchBar from '../search/SearchBar';
+import PopularMenuSection from '../PopularItemSections/PopularMenuSection';
+import AllCategoriesPage from '../categories';
+import { categories } from '../data/categories';
+import { popularItems } from '../data/categories';
+
+export default function SearchableMenuSection ({ searchTerm, setSearchTerm }) {
+
+  const lowercasedTerm = searchTerm.toLowerCase();
+  const filteredPopularItems = popularItems.filter(item =>
+    item.name.toLowerCase().includes(lowercasedTerm)
+  );
+
+  const filteredCategories = categories
+    .map((category) => {
+      const matchedItems = category.items.filter((item) =>
+        item.name.toLowerCase().includes(lowercasedTerm)
+      );
+      return matchedItems.length ? { ...category, items: matchedItems } : null;
+    })
+    .filter(Boolean);
+
+  const noResults = filteredPopularItems.length === 0 && filteredCategories.length === 0;
+
+  return (
+    <Container style={{ marginTop: '30px' }}>
+      <Box mt={4}>
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+        {noResults ? (
+          <Typography variant="h5" align="center" mt={6} color="text.secondary">
+            No items found matching your search.
+          </Typography>
+        ) : (
+          <>
+            <PopularMenuSection items={filteredPopularItems} />
+            <AllCategoriesPage categories={filteredCategories} />
+          </>
+        )}
+      </Box>
+    </Container>
+  );
+};

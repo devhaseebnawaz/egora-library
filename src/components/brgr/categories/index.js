@@ -1,0 +1,32 @@
+import React from "react";
+import { Grid, Typography, Container, Box } from "@mui/material";
+import { categories } from "../data/categories";
+import Banner from "./Banner";
+import CategoryLayout from "./CategoryLayout";
+import ItemCard from "./ItemCard";
+
+export default function AllCategoriesPage({ categories }) {
+  return (
+    <>
+      {categories.map((category) => (
+        <Box key={category.id} style={{ margin: "48px 0px" }}>
+          <CategoryLayout
+          // banner={<Banner img={category.bannerImg} />}
+          >
+            <Typography variant="h3" style={{ marginBottom: "16px" }}>
+              {category.title}
+            </Typography>
+
+            <Grid container spacing={2}>
+              {category.items.map((item) => (
+                <Grid item xs={12} sm={6} md={3} key={item.id}>
+                  <ItemCard item={item} />
+                </Grid>
+              ))}
+            </Grid>
+          </CategoryLayout>
+        </Box>
+      ))}
+    </>
+  );
+}

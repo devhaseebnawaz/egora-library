@@ -15,6 +15,13 @@ Object.defineProperty(exports, "HeroCarousel", {
     return _HeroCarousel["default"];
   }
 });
+Object.defineProperty(exports, "SearchableMenuSection", {
+  enumerable: true,
+  get: function get() {
+    return _SearchableMenuSection["default"];
+  }
+});
 var _Header = _interopRequireDefault(require("./components/brgr/header/Header"));
 var _HeroCarousel = _interopRequireDefault(require("./components/brgr/header/HeroCarousel"));
+var _SearchableMenuSection = _interopRequireDefault(require("./components/brgr/SearchableMenuSection/SearchableMenuSection"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
