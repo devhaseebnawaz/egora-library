@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
-import { forwardRef } from 'react';
-// icons
+import React, { forwardRef } from 'react';
 import { Icon } from '@iconify/react';
-// @mui
 import { Box } from '@mui/material';
 
-// ----------------------------------------------------------------------
+const Iconify = forwardRef(function Iconify(props, ref) {
+  const { icon, width = 20, sx, ...other } = props;
 
-const Iconify = forwardRef(({ icon, width = 20, sx, ...other }, ref) => (
-  <Box ref={ref} component={Icon} icon={icon} sx={{ width, height: width, ...sx }} {...other} />
-));
-
-Iconify.propTypes = {
-  sx: PropTypes.object,
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
-};
+  return (
+    <Box
+      ref={ref}
+      component={Icon}
+      icon={icon}
+      sx={{ width, height: width, ...sx }}
+      {...other}
+    />
+  );
+});
 
 export default Iconify;
