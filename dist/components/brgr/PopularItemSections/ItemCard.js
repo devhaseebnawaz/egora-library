@@ -22,11 +22,11 @@ function ItemCard(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
     setOpen = _useState2[1];
-  var _useState3 = (0, _react.useState)('5'),
+  var _useState3 = (0, _react.useState)("5"),
     _useState4 = _slicedToArray(_useState3, 2),
     selectedQty = _useState4[0],
     setSelectedQty = _useState4[1];
-  var _useState5 = (0, _react.useState)(''),
+  var _useState5 = (0, _react.useState)(""),
     _useState6 = _slicedToArray(_useState5, 2),
     instructions = _useState6[0],
     setInstructions = _useState6[1];
@@ -38,46 +38,64 @@ function ItemCard(_ref) {
   };
   return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_material.Card, {
     style: {
-      position: 'relative',
+      position: "relative",
       borderRadius: 24,
-      overflow: 'hidden',
-      textAlign: 'center',
-      boxShadow: 'rgba(0, 0, 0, 0.2) 0px 4px 8px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center'
+      overflow: "hidden",
+      textAlign: "center",
+      boxShadow: "rgba(0, 0, 0, 0.2) 0px 4px 8px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
     },
     onClick: handleOpen
   }, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "subtitle1",
     style: {
-      position: 'absolute',
+      position: "absolute",
       top: 16,
       left: 16,
       zIndex: 2,
-      fontWeight: 'bold',
-      color: '#fff'
+      fontWeight: "bold",
+      color: "#fff"
     }
   }, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react["default"].createElement(_material.Box, {
-    component: "img",
-    src: "https://api.dev.egora.pk/v1/images/".concat(item === null || item === void 0 ? void 0 : item.photoURL),
-    alt: item === null || item === void 0 ? void 0 : item.name,
-    style: {
-      maxWidth: '300px',
-      height: "300px",
-      objectFit: 'contain'
+    sx: {
+      width: "100%",
+      height: "250px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#f5f5f5",
+      overflow: "hidden"
     }
-  }), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, item !== null && item !== void 0 && item.photoURL ? /*#__PURE__*/_react["default"].createElement(_material.Box, {
+    component: "img",
+    src: "https://api.dev.egora.pk/v1/images/".concat(item.photoURL),
+    alt: (item === null || item === void 0 ? void 0 : item.name) || "No Image",
+    loading: "lazy",
+    onError: function onError(e) {
+      e.target.onerror = null;
+      e.target.style.display = "none";
+    },
+    sx: {
+      maxHeight: "100%",
+      maxWidth: "100%",
+      objectFit: "contain"
+    }
+  }) : /*#__PURE__*/_react["default"].createElement(_material.Typography, {
+    variant: "caption",
+    color: "text.secondary"
+  }, "No Image")), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 12,
       right: 12,
-      backgroundColor: '#fff',
-      padding: '4px 12px',
+      backgroundColor: "#fff",
+      padding: "4px 12px",
       borderRadius: 20,
       fontWeight: 600,
       fontSize: 14,
-      boxShadow: 'rgba(0, 0, 0, 0.14) 0px 1px 4px'
+      boxShadow: "rgba(0, 0, 0, 0.14) 0px 1px 4px"
     }
   }, "Rs ", item === null || item === void 0 ? void 0 : item.price)), /*#__PURE__*/_react["default"].createElement(_ItemDetailModal["default"], {
     open: open,
@@ -89,4 +107,3 @@ function ItemCard(_ref) {
     setInstructions: setInstructions
   }));
 }
-;
