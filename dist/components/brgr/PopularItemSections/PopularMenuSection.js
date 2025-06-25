@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = PopularMenuSection;
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 var _material = require("@mui/material");
 var _ItemCard = _interopRequireDefault(require("./ItemCard"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
@@ -19,13 +19,13 @@ function PopularMenuSection(_ref) {
     actions = _ref.actions,
     styles = _ref.styles,
     states = _ref.states;
-  var _useState = useState(prop.displayitems || []),
+  var _useState = (0, _react.useState)(prop.displayitems || []),
     _useState2 = _slicedToArray(_useState, 2),
     products = _useState2[0],
     setProducts = _useState2[1];
   var _ref2 = states !== null && states !== void 0 ? states : {},
     query = _ref2.query;
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     if (query && query.trim() !== "") {
       var filtered = prop.displayitems.filter(function (p) {
         return p.name.toLowerCase().includes(states.query.toLowerCase());
@@ -35,29 +35,29 @@ function PopularMenuSection(_ref) {
       setProducts(prop.displayitems || []);
     }
   }, [states.query, prop.displayitems]);
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_material.Box, {
     mb: 4,
     mt: 4
-  }, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
+  }, /*#__PURE__*/React.createElement(_material.Typography, {
     variant: "h4",
     fontWeight: "bold",
     display: "flex",
     alignItems: "center",
     gap: 1
-  }, "Popular Items"), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
+  }, "Popular Items"), /*#__PURE__*/React.createElement(_material.Typography, {
     variant: "subtitle1",
     color: "text.secondary"
-  }, "Most ordered right now")), /*#__PURE__*/_react["default"].createElement(_material.Grid, {
+  }, "Most ordered right now")), /*#__PURE__*/React.createElement(_material.Grid, {
     container: true,
     spacing: 2
   }, products.map(function (item) {
-    return /*#__PURE__*/_react["default"].createElement(_material.Grid, {
+    return /*#__PURE__*/React.createElement(_material.Grid, {
       item: true,
       xs: 12,
       sm: 6,
       md: 3,
       key: item.id
-    }, /*#__PURE__*/_react["default"].createElement(_ItemCard["default"], {
+    }, /*#__PURE__*/React.createElement(_ItemCard["default"], {
       item: item
     }));
   })));
