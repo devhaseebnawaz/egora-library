@@ -9,9 +9,8 @@ var _material = require("@mui/material");
 var _iconify = _interopRequireDefault(require("../iconify"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function SearchBar(_ref) {
-  var prop = _ref.prop,
-    searchTerm = _ref.searchTerm,
-    setSearchTerm = _ref.setSearchTerm;
+  var query = _ref.query,
+    setQuery = _ref.setQuery;
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     // You can trigger a search action here if needed (e.g. analytics or navigation)
@@ -38,9 +37,9 @@ function SearchBar(_ref) {
     inputProps: {
       'aria-label': 'search items'
     },
-    value: searchTerm,
+    value: query,
     onChange: function onChange(e) {
-      return setSearchTerm(e.target.value);
+      return setQuery(e.target.value);
     }
   }), /*#__PURE__*/_react["default"].createElement(_material.IconButton, {
     type: "submit",

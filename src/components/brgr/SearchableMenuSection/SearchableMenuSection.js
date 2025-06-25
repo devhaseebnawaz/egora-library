@@ -6,9 +6,11 @@ import AllCategoriesPage from '../categories';
 import { categories } from '../data/categories';
 import { popularItems } from '../data/categories';
 
-export default function SearchableMenuSection ({ searchTerm, setSearchTerm }) {
+export default function SearchableMenuSection ({ prop, states }) {
 
-  const lowercasedTerm = searchTerm.toLowerCase();
+  const { query,setQuery } = states ?? {}
+
+  const lowercasedTerm = query.toLowerCase();
   const filteredPopularItems = popularItems.filter(item =>
     item.name.toLowerCase().includes(lowercasedTerm)
   );
@@ -27,7 +29,7 @@ export default function SearchableMenuSection ({ searchTerm, setSearchTerm }) {
   return (
     <Container style={{ marginTop: '30px' }}>
       <Box mt={4}>
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <SearchBar query={query} setQuery={setQuery} />
 
         {noResults ? (
           <Typography variant="h5" align="center" mt={6} color="text.secondary">

@@ -2,7 +2,7 @@ import React from 'react';
 import { InputBase, IconButton, Paper } from '@mui/material';
 import Iconify from '../iconify';
 
-export default function SearchBar ({ prop, searchTerm, setSearchTerm }) {
+export default function SearchBar ({ query ,setQuery }) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,8 +28,8 @@ export default function SearchBar ({ prop, searchTerm, setSearchTerm }) {
         sx={{ ml: 2, flex: 1 }}
         placeholder="Search for item by title..."
         inputProps={{ 'aria-label': 'search items' }}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
       />
       <IconButton
         type="submit"
