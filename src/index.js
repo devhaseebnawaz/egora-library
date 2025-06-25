@@ -5,4 +5,4 @@ import PopularMenuSection from './components/brgr/PopularItemSections/PopularMen
 import AllCategoriesPage from './components/brgr/categories/AllCategoriesPage';
 
 
-export { Header,HeroCarousel,SearchBar,PopularMenuSection,AllCategoriesPage };
+export { Header, HeroCarousel, SearchBar, PopularMenuSection, AllCategoriesPage };
