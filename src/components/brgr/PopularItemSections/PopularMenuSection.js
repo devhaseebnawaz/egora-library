@@ -1,10 +1,10 @@
-import React , { useState,useEffect } from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Grid, Box, Typography,Container } from "@mui/material";
 import ItemCard from "./ItemCard";
 
 export default function PopularMenuSection({ prop, actions, styles, states }) {
 
-  const [products, setProducts] = useState(prop.displayitems || []);
+  const [products, setProducts] = useState(prop.static.displayitems || []);
 
   const { query } = states ?? {}
 
@@ -15,12 +15,12 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
       );
       setProducts(filtered);
     } else {
-      setProducts(prop.displayitems || []);
+      setProducts(prop.static.displayitems || []);
     }
-  }, [states.query, prop.displayitems]);
+  }, [query, prop.static.displayitems]);
 
   return (
-    <>
+     <Container style={{ marginTop: '30px' }}>
       <Box mb={4} mt={4}>
         <Typography
           variant="h4"
@@ -43,7 +43,7 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
           </Grid>
         ))}
       </Grid>
-    </>
+    </Container>
   );
 };
 

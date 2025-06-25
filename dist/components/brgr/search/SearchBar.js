@@ -16,9 +16,12 @@ function SearchBar(_ref) {
     setQuery = _ref2.setQuery;
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    // You can trigger a search action here if needed (e.g. analytics or navigation)
   };
-  return /*#__PURE__*/_react["default"].createElement(_material.Paper, {
+  return /*#__PURE__*/_react["default"].createElement(_material.Container, {
+    style: {
+      marginTop: '30px'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_material.Paper, {
     component: "form",
     onSubmit: handleSubmit,
     sx: {
@@ -60,6 +63,6 @@ function SearchBar(_ref) {
     width: 14,
     height: 14,
     color: "#eac7aa"
-  })));
+  }))));
 }
 ;

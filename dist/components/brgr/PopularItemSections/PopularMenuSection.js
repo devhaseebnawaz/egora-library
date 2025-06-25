@@ -21,7 +21,7 @@ function PopularMenuSection(_ref) {
     actions = _ref.actions,
     styles = _ref.styles,
     states = _ref.states;
-  var _useState = (0, _react.useState)(prop.displayitems || []),
+  var _useState = (0, _react.useState)(prop["static"].displayitems || []),
     _useState2 = _slicedToArray(_useState, 2),
     products = _useState2[0],
     setProducts = _useState2[1];
@@ -34,10 +34,14 @@ function PopularMenuSection(_ref) {
       });
       setProducts(filtered);
     } else {
-      setProducts(prop.displayitems || []);
+      setProducts(prop["static"].displayitems || []);
     }
-  }, [states.query, prop.displayitems]);
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, [query, prop["static"].displayitems]);
+  return /*#__PURE__*/_react["default"].createElement(_material.Container, {
+    style: {
+      marginTop: '30px'
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_material.Box, {
     mb: 4,
     mt: 4
   }, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
