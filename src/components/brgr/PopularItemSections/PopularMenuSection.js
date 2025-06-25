@@ -23,7 +23,12 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
       <Box mb={4} mt={4}>
         <Typography
           variant="h4"
-          style={{ fontWeight: "bold", display: "flex", alignItems: "center", gap: 8 }}
+          style={{
+            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+          }}
         >
           Popular Items
         </Typography>
@@ -40,18 +45,9 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
           No items found.
         </Typography>
       ) : (
-        <Grid container spacing={2} wrap="wrap" justifyContent="center">
+        <Grid container spacing={3}>
           {products.map((item) => (
-            <Grid
-              item
-              key={item.id || item.name}
-              style={{
-                minWidth: "250px",
-                maxWidth: "300px",
-                flexGrow: 1,
-                flexBasis: 0,
-              }}
-            >
+            <Grid key={item.id || item.name} item xs={12} sm={6} md={4} lg={3}>
               <ItemCard item={item} />
             </Grid>
           ))}

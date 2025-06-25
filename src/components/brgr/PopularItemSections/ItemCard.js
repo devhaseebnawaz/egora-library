@@ -1,122 +1,4 @@
-// import React, { useState } from "react";
-// import { Card, Typography, Box } from "@mui/material";
-// import ItemDetailModal from "../categories/ItemDetailModal";
-
-// export default function ItemCard({ item }) {
-//   const [open, setOpen] = useState(false);
-//   const [selectedQty, setSelectedQty] = useState("5");
-//   const [instructions, setInstructions] = useState("");
-
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
-//   return (
-//     <>
-//       <Card
-//         style={{
-//           position: "relative",
-//           borderRadius: 24,
-//           overflow: "hidden",
-//           textAlign: "center",
-//           boxShadow: "rgba(0, 0, 0, 0.2) 0px 4px 8px",
-//           display: "flex",
-//           flexDirection: "column",
-//           justifyContent: "center",
-//         }}
-//         onClick={handleOpen}
-//       >
-//         <Typography
-//           variant="subtitle1"
-//           style={{
-//             position: "absolute",
-//             top: 16,
-//             left: 16,
-//             zIndex: 2,
-//             fontWeight: "bold",
-//             color: "#fff",
-//           }}
-//         >
-//           {item?.name}
-//         </Typography>
-
-//         {/* <Box
-//           component="img"
-//           src={`https://api.dev.egora.pk/v1/images/${item?.photoURL}`}
-//           alt={item?.name}
-//           style={{
-//             maxWidth: '300px',
-//             height:"300px",
-//             objectFit: 'contain',
-//           }}
-//         /> */}
-//         <Box
-//           sx={{
-//             width: "100%",
-//             height: "250px",
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "center",
-//             backgroundColor: "#f5f5f5",
-//             overflow: "hidden",
-//           }}
-//         >
-//           {item?.photoURL ? (
-//             <Box
-//               component="img"
-//               src={`https://api.dev.egora.pk/v1/images/${item.photoURL}`}
-//               alt={item?.name || "No Image"}
-//               loading="lazy"
-//               onError={(e) => {
-//                 e.target.onerror = null;
-//                 e.target.style.display = "none";
-//               }}
-//               sx={{
-//                 maxHeight: "100%",
-//                 maxWidth: "100%",
-//                 objectFit: "contain",
-//               }}
-//             />
-//           ) : (
-//             <Typography variant="caption" color="text.secondary">
-//               No Image
-//             </Typography>
-//           )}
-//         </Box>
-
-//         <Box
-//           style={{
-//             position: "absolute",
-//             bottom: 12,
-//             right: 12,
-//             backgroundColor: "#fff",
-//             padding: "4px 12px",
-//             borderRadius: 20,
-//             fontWeight: 600,
-//             fontSize: 14,
-//             boxShadow: "rgba(0, 0, 0, 0.14) 0px 1px 4px",
-//           }}
-//         >
-//           Rs {item?.price}
-//         </Box>
-//       </Card>
-//       <ItemDetailModal
-//         open={open}
-//         onClose={handleClose}
-//         item={item}
-//         selectedQty={selectedQty}
-//         setSelectedQty={setSelectedQty}
-//         instructions={instructions}
-//         setInstructions={setInstructions}
-//       />
-//     </>
-//   );
-// }
-
-
-import React, { useState } from "react";
-import { Card, Typography, Box } from "@mui/material";
-import ItemDetailModal from "../categories/ItemDetailModal";
-
-export default function ItemCard({ item }) {
+const ItemCard = ({ item }) => {
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState("5");
   const [instructions, setInstructions] = useState("");
@@ -131,19 +13,41 @@ export default function ItemCard({ item }) {
     <>
       <Card
         style={{
-          minHeight: "360px",
+          position: "relative",
           borderRadius: 24,
           overflow: "hidden",
           textAlign: "center",
           boxShadow: "rgba(0, 0, 0, 0.2) 0px 4px 8px",
+          cursor: "pointer",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          position: "relative",
-          cursor: "pointer",
+          height: "100%",
         }}
         onClick={handleOpen}
       >
+        <Box
+          component="img"
+          src={
+            item?.photoURL
+              ? `https://api.dev.egora.pk/v1/images/${item.photoURL}`
+              : fallbackImage
+          }
+          alt={item?.name || "Menu Item"}
+          loading="lazy"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = fallbackImage;
+          }}
+          sx={{
+            width: "100%",
+            objectFit: "cover",
+            aspectRatio: "1 / 1",
+            height: {
+              sm:"270px",
+            },
+          }}
+        />
+
         <Typography
           variant="subtitle1"
           style={{
@@ -153,42 +57,11 @@ export default function ItemCard({ item }) {
             zIndex: 2,
             fontWeight: "bold",
             color: "#fff",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            padding: "4px 8px",
-            borderRadius: 4,
+            textShadow: "0 1px 3px rgba(0,0,0,0.6)",
           }}
         >
           {item?.name}
         </Typography>
-
-        <Box
-          style={{
-            width: "100%",
-            height: 250,
-            backgroundColor: "#f9f9f9",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            overflow: "hidden",
-            borderRadius: 8,
-            marginTop: 40, // push image below title text area
-          }}
-        >
-          <img
-            src={item?.photoURL ? `https://api.dev.egora.pk/v1/images/${item.photoURL}` : fallbackImage}
-            alt={item?.name || "No Image"}
-            loading="lazy"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = fallbackImage;
-            }}
-            style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
-              objectFit: "contain",
-            }}
-          />
-        </Box>
 
         <Box
           style={{
@@ -218,4 +91,4 @@ export default function ItemCard({ item }) {
       />
     </>
   );
-}
+};

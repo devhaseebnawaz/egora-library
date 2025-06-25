@@ -66,19 +66,15 @@ function PopularMenuSection(_ref) {
     }
   }, "No items found.") : /*#__PURE__*/_react["default"].createElement(_material.Grid, {
     container: true,
-    spacing: 2,
-    wrap: "wrap",
-    justifyContent: "center"
+    spacing: 3
   }, products.map(function (item) {
     return /*#__PURE__*/_react["default"].createElement(_material.Grid, {
-      item: true,
       key: item.id || item.name,
-      style: {
-        minWidth: "250px",
-        maxWidth: "300px",
-        flexGrow: 1,
-        flexBasis: 0
-      }
+      item: true,
+      xs: 12,
+      sm: 6,
+      md: 4,
+      lg: 3
     }, /*#__PURE__*/_react["default"].createElement(_ItemCard["default"], {
       item: item
     }));

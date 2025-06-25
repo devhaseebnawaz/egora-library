@@ -5,7 +5,7 @@ import locationIcon from "@iconify-icons/mdi/map-marker";
 import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
-import Image from 'next/image';
+// import Image from 'next/image';
 import UniversalImage from '../../../UniversalImage'
 
 export default function CustomNavbar({ prop }) {
