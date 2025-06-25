@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputBase, IconButton, Paper } from '@mui/material';
-import Iconify from 'src/components/iconify';
+import Iconify from '../iconify';
 
 export default function SearchBar ({ prop, searchTerm, setSearchTerm }) {
   

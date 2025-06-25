@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = SearchBar;
 var _react = _interopRequireDefault(require("react"));
 var _material = require("@mui/material");
-var _iconify = _interopRequireDefault(require("src/components/iconify"));
+var _iconify = _interopRequireDefault(require("../iconify"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function SearchBar(_ref) {
   var prop = _ref.prop,

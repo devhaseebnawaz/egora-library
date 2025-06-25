@@ -3,7 +3,8 @@ import { Card, Typography, Box } from '@mui/material';
 import ItemDetailModal from 'src/sections/store/BRGR-Theme/categories/ItemDetailModal';
 
 
-const ItemCard = ({item}) => {
+export default function ItemCard  ({item}) {
+  
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState('5');
   const [instructions, setInstructions] = useState('');
@@ -77,5 +78,3 @@ const ItemCard = ({item}) => {
     </>
   );
 };
-
-export default ItemCard;
