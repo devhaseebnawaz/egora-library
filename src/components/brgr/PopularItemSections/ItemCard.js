@@ -1,4 +1,8 @@
-const ItemCard = ({ item }) => {
+import React, { useState } from "react";
+import { Card, Typography, Box } from "@mui/material";
+import ItemDetailModal from "../categories/ItemDetailModal";
+
+export default function ItemCard ({ item }) {
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState("5");
   const [instructions, setInstructions] = useState("");
