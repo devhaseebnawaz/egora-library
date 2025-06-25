@@ -19,6 +19,8 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
     }
   }, [query, prop.static.displayitems]);
 
+  
+
   return (
      <Container style={{ marginTop: '30px' }}>
       <Box mb={4} mt={4}>

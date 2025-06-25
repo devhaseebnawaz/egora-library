@@ -42,7 +42,7 @@ export default function ItemCard  ({item}) {
 
         <Box
           component="img"
-          src={item?.image}
+          src={`https://api.dev.egora.pk/v1/images/${item?.photoURL}`}
           alt={item?.name}
           style={{
             maxWidth: '100%',

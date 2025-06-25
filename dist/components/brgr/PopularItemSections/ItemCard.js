@@ -60,7 +60,7 @@ function ItemCard(_ref) {
     }
   }, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     component: "img",
-    src: item === null || item === void 0 ? void 0 : item.image,
+    src: "https://api.dev.egora.pk/v1/images/".concat(item === null || item === void 0 ? void 0 : item.photoURL),
     alt: item === null || item === void 0 ? void 0 : item.name,
     style: {
       maxWidth: '100%',
