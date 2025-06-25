@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 
-const HeroCarousel = ({prop}) => {
+export default function HeroCarousel({ prop }) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const slideInterval = useRef(null);
@@ -175,5 +175,3 @@ const HeroCarousel = ({prop}) => {
     </Box>
   );
 };
-
-export default HeroCarousel;
