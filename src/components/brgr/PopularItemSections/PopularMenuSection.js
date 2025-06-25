@@ -5,7 +5,7 @@ import ItemCard from "./ItemCard";
 export default function PopularMenuSection({ items }) {
   
   return (
-    <Box>
+    <>
       <Box mb={4} mt={4}>
         <Typography
           variant="h4"
@@ -28,7 +28,7 @@ export default function PopularMenuSection({ items }) {
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </>
   );
 };
 
