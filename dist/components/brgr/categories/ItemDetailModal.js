@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = ItemDetailModal;
 var _react = _interopRequireDefault(require("react"));
 var _material = require("@mui/material");
-var _Iconify = _interopRequireDefault(require("src/components/iconify/Iconify"));
+var _iconify = _interopRequireDefault(require("../iconify"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -100,7 +100,7 @@ function ItemDetailModal(_ref) {
     onMouseLeave: function onMouseLeave(e) {
       return e.currentTarget.style.backgroundColor = '#121212';
     }
-  }, /*#__PURE__*/_react["default"].createElement(_Iconify["default"], {
+  }, /*#__PURE__*/_react["default"].createElement(_iconify["default"], {
     icon: "mdi:close",
     width: 20,
     height: 20

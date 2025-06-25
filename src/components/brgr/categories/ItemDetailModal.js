@@ -10,7 +10,7 @@ import {
     IconButton,
     Button,
 } from '@mui/material';
-import Iconify from "src/components/iconify/Iconify";
+import Iconify from '../iconify';
 
 export default function ItemDetailModal({
     open,
