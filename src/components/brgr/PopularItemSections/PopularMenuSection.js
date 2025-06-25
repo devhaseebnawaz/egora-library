@@ -2,8 +2,23 @@ import React from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import ItemCard from "./ItemCard";
 
-export default function PopularMenuSection({ items }) {
-  
+export default function PopularMenuSection({ prop, actions, styles, states }) {
+
+  const [products, setProducts] = useState(prop.displayitems || []);
+
+  const { query } = states ?? {}
+
+  useEffect(() => {
+    if (query && query.trim() !== "") {
+      const filtered = prop.displayitems.filter((p) =>
+        p.name.toLowerCase().includes(states.query.toLowerCase())
+      );
+      setProducts(filtered);
+    } else {
+      setProducts(prop.displayitems || []);
+    }
+  }, [states.query, prop.displayitems]);
+
   return (
     <>
       <Box mb={4} mt={4}>
@@ -21,9 +36,9 @@ export default function PopularMenuSection({ items }) {
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
-        {items?.map((item, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+      <Grid container spacing={2}>
+        {products.map((item) => (
+          <Grid item xs={12} sm={6} md={3} key={item.id}>
             <ItemCard item={item} />
           </Grid>
         ))}

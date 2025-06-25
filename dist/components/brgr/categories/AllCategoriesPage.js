@@ -3,9 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = PopularMenuSection;
+exports["default"] = AllCategoriesPage;
 var _react = _interopRequireDefault(require("react"));
 var _material = require("@mui/material");
+var _categories = require("../data/categories");
+var _Banner = _interopRequireDefault(require("./Banner"));
+var _CategoryLayout = _interopRequireDefault(require("./CategoryLayout"));
 var _ItemCard = _interopRequireDefault(require("./ItemCard"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
@@ -14,7 +17,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-function PopularMenuSection(_ref) {
+function AllCategoriesPage(_ref) {
   var prop = _ref.prop,
     actions = _ref.actions,
     styles = _ref.styles,
@@ -35,31 +38,32 @@ function PopularMenuSection(_ref) {
       setProducts(prop.displayitems || []);
     }
   }, [states.query, prop.displayitems]);
-  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, /*#__PURE__*/_react["default"].createElement(_material.Box, {
-    mb: 4,
-    mt: 4
-  }, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
-    variant: "h4",
-    fontWeight: "bold",
-    display: "flex",
-    alignItems: "center",
-    gap: 1
-  }, "Popular Items"), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
-    variant: "subtitle1",
-    color: "text.secondary"
-  }, "Most ordered right now")), /*#__PURE__*/_react["default"].createElement(_material.Grid, {
-    container: true,
-    spacing: 2
-  }, products.map(function (item) {
-    return /*#__PURE__*/_react["default"].createElement(_material.Grid, {
-      item: true,
-      xs: 12,
-      sm: 6,
-      md: 3,
-      key: item.id
-    }, /*#__PURE__*/_react["default"].createElement(_ItemCard["default"], {
-      item: item
-    }));
-  })));
+  return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, products.map(function (category) {
+    return /*#__PURE__*/_react["default"].createElement(_material.Box, {
+      key: category.id,
+      style: {
+        margin: "48px 0px"
+      }
+    }, /*#__PURE__*/_react["default"].createElement(_CategoryLayout["default"]
+    // banner={<Banner img={category.bannerImg} />}
+    , null, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
+      variant: "h3",
+      style: {
+        marginBottom: "16px"
+      }
+    }, category.title), /*#__PURE__*/_react["default"].createElement(_material.Grid, {
+      container: true,
+      spacing: 2
+    }, category.items.map(function (item) {
+      return /*#__PURE__*/_react["default"].createElement(_material.Grid, {
+        item: true,
+        xs: 12,
+        sm: 6,
+        md: 3,
+        key: item.id
+      }, /*#__PURE__*/_react["default"].createElement(_ItemCard["default"], {
+        item: item
+      }));
+    }))));
+  }));
 }
-;

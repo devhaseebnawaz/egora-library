@@ -9,8 +9,11 @@ var _material = require("@mui/material");
 var _iconify = _interopRequireDefault(require("../iconify"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function SearchBar(_ref) {
-  var query = _ref.query,
-    setQuery = _ref.setQuery;
+  var prop = _ref.prop,
+    states = _ref.states;
+  var _ref2 = states !== null && states !== void 0 ? states : {},
+    query = _ref2.query,
+    setQuery = _ref2.setQuery;
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     // You can trigger a search action here if needed (e.g. analytics or navigation)

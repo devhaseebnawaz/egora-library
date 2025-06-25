@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography , Container} from '@mui/material';
 import SearchBar from '../search/SearchBar';
 import PopularMenuSection from '../PopularItemSections/PopularMenuSection';
-import AllCategoriesPage from '../categories';
+import AllCategoriesPage from '../categories/AllCategoriesPage';
 import { categories } from '../data/categories';
 import { popularItems } from '../data/categories';
 

@@ -1,6 +1,8 @@
 import Header from './components/brgr/header/Header'
 import HeroCarousel from './components/brgr/header/HeroCarousel';
-import SearchableMenuSection from './components/brgr/SearchableMenuSection/SearchableMenuSection';
+import SearchBar from './components/brgr/search/SearchBar';
+import PopularMenuSection from './components/brgr/PopularItemSections/PopularMenuSection';
+import AllCategoriesPage from './components/brgr/categories/AllCategoriesPage';
 
 
-export { Header,HeroCarousel,SearchableMenuSection };
+export { Header,HeroCarousel,SearchBar,PopularMenuSection,AllCategoriesPage };

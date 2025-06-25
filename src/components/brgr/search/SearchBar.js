@@ -2,8 +2,12 @@ import React from 'react';
 import { InputBase, IconButton, Paper } from '@mui/material';
 import Iconify from '../iconify';
 
-export default function SearchBar ({ query ,setQuery }) {
-  
+export default function SearchBar({ prop, states }) {
+
+  let { query, setQuery } = states ?? {}
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // You can trigger a search action here if needed (e.g. analytics or navigation)
