@@ -29,7 +29,7 @@ function PopularMenuSection(_ref) {
     query = _ref2.query;
   (0, _react.useEffect)(function () {
     if (query && query.trim() !== "") {
-      var filtered = prop.displayitems.filter(function (p) {
+      var filtered = prop["static"].displayitems.filter(function (p) {
         return p.name.toLowerCase().includes(states.query.toLowerCase());
       });
       setProducts(filtered);

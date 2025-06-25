@@ -10,7 +10,7 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
 
   useEffect(() => {
     if (query && query.trim() !== "") {
-      const filtered = prop.displayitems.filter((p) =>
+      const filtered = prop.static.displayitems.filter((p) =>
         p.name.toLowerCase().includes(states.query.toLowerCase())
       );
       setProducts(filtered);
