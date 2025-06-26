@@ -14,8 +14,8 @@ export default function HeroCarousel({ prop }) {
   let {editable} = prop ?? {}
   let {carouselImages} = editable ?? {}
 
-  const totalSlides = carouselImages.length;
-  const fullSlides = [carouselImages[totalSlides - 1], ...carouselImages, carouselImages[0]];
+  const totalSlides = carouselImages.value.length;
+  const fullSlides = [carouselImages.value[totalSlides - 1], ...carouselImages.value, carouselImages.value[0]];
 
   const goToIndex = (index) => {
     setCurrentIndex(index + 1);
@@ -156,7 +156,7 @@ export default function HeroCarousel({ prop }) {
           zIndex: 2,
         }}
       >
-        {carouselImages?.map((_, index) => (
+        {carouselImages?.value?.map((_, index) => (
           <Box
             key={index}
             onClick={() => goToIndex(index)}

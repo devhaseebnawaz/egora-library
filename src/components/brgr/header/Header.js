@@ -51,7 +51,7 @@ export default function CustomNavbar({ prop, themeColors, styles }) {
                                 Change Location
                             </Typography>
                             <Typography variant="caption" style={{ color: themeColors?.AppBarAddressColor ? themeColors?.AppBarAddressColor :  styles?.AppBarAddressColor != "" ?  styles?.AppBarAddressColor : "#f6e6d6" }}>
-                                {prop.editable.address}
+                                {prop.editable.address.value}
                             </Typography>
                         </Box>
                     </Box>
@@ -65,7 +65,7 @@ export default function CustomNavbar({ prop, themeColors, styles }) {
                     >
                         <Icon icon={phoneIcon} width="20" height="20" color={themeColors?.AppBarPhoneIconColor ? themeColors?.AppBarPhoneIconColor :  styles?.AppBarPhoneIconColor != "" ?  styles?.AppBarPhoneIconColor : "#f6e6d6" } />
                         <Typography variant="body2" fontWeight="bold" style={{ color: themeColors?.AppBarPhoneColor ? themeColors?.AppBarPhoneColor :  styles?.AppBarPhoneColor != "" ?  styles?.AppBarPhoneColor : "#f6e6d6" }}>
-                            {prop.editable.phone}
+                            {prop.editable.phone.value}
                         </Typography>
                     </Box>
                 </Box>
