@@ -22,7 +22,9 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; } // import Image from 'next/image';
 function CustomNavbar(_ref) {
-  var prop = _ref.prop;
+  var prop = _ref.prop,
+    themeColors = _ref.themeColors,
+    styles = _ref.styles;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     cartOpen = _useState2[0],
@@ -30,7 +32,7 @@ function CustomNavbar(_ref) {
   return /*#__PURE__*/_react["default"].createElement(_material.AppBar, {
     position: "static",
     style: {
-      backgroundColor: "#121212",
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.AppBarBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarBackgroundColor : "#121212",
       boxShadow: "none",
       position: "relative",
       zIndex: 10,
@@ -60,17 +62,17 @@ function CustomNavbar(_ref) {
     icon: _mapMarker["default"],
     width: "20",
     height: "20",
-    color: "#f6e6d6"
+    color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarLocationIconColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarLocationIconColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarLocationIconColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarLocationIconColor : "#f6e6d6"
   }), /*#__PURE__*/_react["default"].createElement(_material.Box, null, /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "body2",
     fontWeight: "bold",
     style: {
-      color: "#f6e6d6"
+      color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarChangeLocationColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarChangeLocationColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarChangeLocationColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarChangeLocationColor : "#f6e6d6"
     }
   }, "Change Location"), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "caption",
     style: {
-      color: "#f6e6d6"
+      color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarAddressColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarAddressColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarAddressColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarAddressColor : "#f6e6d6"
     }
   }, prop.editable.address))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
@@ -82,12 +84,12 @@ function CustomNavbar(_ref) {
     icon: _phone["default"],
     width: "20",
     height: "20",
-    color: "#f6e6d6"
+    color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarPhoneIconColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarPhoneIconColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarPhoneIconColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarPhoneIconColor : "#f6e6d6"
   }), /*#__PURE__*/_react["default"].createElement(_material.Typography, {
     variant: "body2",
     fontWeight: "bold",
     style: {
-      color: "#f6e6d6"
+      color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarPhoneColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarPhoneColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarPhoneColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarPhoneColor : "#f6e6d6"
     }
   }, prop.editable.phone))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
@@ -101,7 +103,7 @@ function CustomNavbar(_ref) {
     icon: _cart["default"],
     width: 24,
     height: 24,
-    color: "#f6e6d6"
+    color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarCartIconColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarCartIconColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarCartIconColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarCartIconColor : "#f6e6d6"
   })), /*#__PURE__*/_react["default"].createElement(_CartDrawer["default"], {
     open: cartOpen,
     onClose: function onClose() {
@@ -124,7 +126,7 @@ function CustomNavbar(_ref) {
       alignItems: "center",
       justifyContent: "center"
     }
-  }, "0"))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, "2"))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       position: "absolute",
       top: "100%",

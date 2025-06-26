@@ -8,14 +8,14 @@ import CartDrawer from "./CartDrawer";
 // import Image from 'next/image';
 import UniversalImage from '../../../UniversalImage'
 
-export default function CustomNavbar({ prop }) {
+export default function CustomNavbar({ prop, themeColors, styles }) {
     const [cartOpen, setCartOpen] = useState(false);
 
     return (
         <AppBar
             position="static"
             style={{
-                backgroundColor: "#121212",
+                backgroundColor: themeColors?.AppBarBackgroundColor ? themeColors?.AppBarBackgroundColor :  styles?.AppBarBackgroundColor != "" ?  styles?.AppBarBackgroundColor : "#121212",
                 boxShadow: "none",
                 position: "relative",
                 zIndex: 10,
@@ -45,12 +45,12 @@ export default function CustomNavbar({ prop }) {
                             gap: "8px",
                         }}
                     >
-                        <Icon icon={locationIcon} width="20" height="20" color="#f6e6d6" />
+                        <Icon icon={locationIcon} width="20" height="20" color={ themeColors?.AppBarLocationIconColor ? themeColors?.AppBarLocationIconColor :  styles?.AppBarLocationIconColor != "" ?  styles?.AppBarLocationIconColor : "#f6e6d6" } />
                         <Box>
-                            <Typography variant="body2" fontWeight="bold" style={{ color: "#f6e6d6" }}>
+                            <Typography variant="body2" fontWeight="bold" style={{ color: themeColors?.AppBarChangeLocationColor ? themeColors?.AppBarChangeLocationColor :  styles?.AppBarChangeLocationColor != "" ?  styles?.AppBarChangeLocationColor : "#f6e6d6" }}>
                                 Change Location
                             </Typography>
-                            <Typography variant="caption" style={{ color: "#f6e6d6" }}>
+                            <Typography variant="caption" style={{ color: themeColors?.AppBarAddressColor ? themeColors?.AppBarAddressColor :  styles?.AppBarAddressColor != "" ?  styles?.AppBarAddressColor : "#f6e6d6" }}>
                                 {prop.editable.address}
                             </Typography>
                         </Box>
@@ -63,8 +63,8 @@ export default function CustomNavbar({ prop }) {
                             gap: "8px",
                         }}
                     >
-                        <Icon icon={phoneIcon} width="20" height="20" color="#f6e6d6" />
-                        <Typography variant="body2" fontWeight="bold" style={{ color: "#f6e6d6" }}>
+                        <Icon icon={phoneIcon} width="20" height="20" color={themeColors?.AppBarPhoneIconColor ? themeColors?.AppBarPhoneIconColor :  styles?.AppBarPhoneIconColor != "" ?  styles?.AppBarPhoneIconColor : "#f6e6d6" } />
+                        <Typography variant="body2" fontWeight="bold" style={{ color: themeColors?.AppBarPhoneColor ? themeColors?.AppBarPhoneColor :  styles?.AppBarPhoneColor != "" ?  styles?.AppBarPhoneColor : "#f6e6d6" }}>
                             {prop.editable.phone}
                         </Typography>
                     </Box>
@@ -72,7 +72,7 @@ export default function CustomNavbar({ prop }) {
 
                 <Box style={{ position: "relative" }}>
                     <IconButton onClick={() => setCartOpen(true)}>
-                        <Icon icon={cartIcon} width={24} height={24} color="#f6e6d6" />
+                        <Icon icon={cartIcon} width={24} height={24} color={ themeColors?.AppBarCartIconColor ? themeColors?.AppBarCartIconColor :  styles?.AppBarCartIconColor != "" ?  styles?.AppBarCartIconColor : "#f6e6d6"} />
                     </IconButton>
 
                     <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
@@ -94,7 +94,7 @@ export default function CustomNavbar({ prop }) {
                             justifyContent: "center",
                         }}
                     >
-                        0
+                        2
                     </Box>
                 </Box>
             </Toolbar>
