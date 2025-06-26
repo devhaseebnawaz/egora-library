@@ -23,7 +23,10 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function HeroCarousel(_ref) {
-  var prop = _ref.prop;
+  var _carouselImages$value;
+  var prop = _ref.prop,
+    themeColors = _ref.themeColors,
+    styles = _ref.styles;
   var _useState = (0, _react.useState)(1),
     _useState2 = _slicedToArray(_useState, 2),
     currentIndex = _useState2[0],
@@ -39,8 +42,8 @@ function HeroCarousel(_ref) {
     editable = _ref2.editable;
   var _ref3 = editable !== null && editable !== void 0 ? editable : {},
     carouselImages = _ref3.carouselImages;
-  var totalSlides = carouselImages.length;
-  var fullSlides = [carouselImages[totalSlides - 1]].concat(_toConsumableArray(carouselImages), [carouselImages[0]]);
+  var totalSlides = carouselImages.value.length;
+  var fullSlides = [carouselImages.value[totalSlides - 1]].concat(_toConsumableArray(carouselImages.value), [carouselImages.value[0]]);
   var goToIndex = function goToIndex(index) {
     setCurrentIndex(index + 1);
   };
@@ -97,6 +100,25 @@ function HeroCarousel(_ref) {
       setTransitionEnabled(true);
     }
   }, [currentIndex, totalSlides]);
+  var getCarouselDotColor = function getCarouselDotColor(index) {
+    if (index === realIndex) {
+      var color = "#fff";
+      if (themeColors !== null && themeColors !== void 0 && themeColors.HeroCarouselDisplayedImageBackgroundColor) {
+        color = themeColors === null || themeColors === void 0 ? void 0 : themeColors.HeroCarouselDisplayedImageBackgroundColor;
+      } else if ((styles === null || styles === void 0 ? void 0 : styles.HeroCarouselDisplayedImageBackgroundColor) !== "") {
+        color = styles === null || styles === void 0 ? void 0 : styles.HeroCarouselDisplayedImageBackgroundColor;
+      }
+      return color;
+    } else {
+      var _color = "rgba(255,255,255,0.5)";
+      if (themeColors !== null && themeColors !== void 0 && themeColors.HeroCarouselNotDisplayedImageBackgroundColor) {
+        _color = themeColors === null || themeColors === void 0 ? void 0 : themeColors.HeroCarouselNotDisplayedImageBackgroundColor;
+      } else if ((styles === null || styles === void 0 ? void 0 : styles.HeroCarouselNotDisplayedImageBackgroundColor) !== "") {
+        _color = styles === null || styles === void 0 ? void 0 : styles.HeroCarouselNotDisplayedImageBackgroundColor;
+      }
+      return _color;
+    }
+  };
   return /*#__PURE__*/_react["default"].createElement(_material.Box, {
     onMouseEnter: stopSlide,
     onMouseLeave: startSlide,
@@ -134,7 +156,7 @@ function HeroCarousel(_ref) {
       top: "50%",
       left: "20px",
       transform: "translateY(-50%)",
-      backgroundColor: "rgba(0,0,0,0.5)",
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.HeroCarouselGoPrevBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.HeroCarouselGoPrevBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.HeroCarouselGoPrevBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.HeroCarouselGoPrevBackgroundColor : "rgba(0,0,0,0.5)",
       color: "#fff",
       zIndex: 2
     }
@@ -149,7 +171,7 @@ function HeroCarousel(_ref) {
       top: "50%",
       right: "20px",
       transform: "translateY(-50%)",
-      backgroundColor: "rgba(0,0,0,0.5)",
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.HeroCarouselGoNextBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.HeroCarouselGoNextBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.HeroCarouselGoNextBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.HeroCarouselGoNextBackgroundColor : "rgba(0,0,0,0.5)",
       color: "#fff",
       zIndex: 2
     }
@@ -167,7 +189,7 @@ function HeroCarousel(_ref) {
       gap: "8px",
       zIndex: 2
     }
-  }, carouselImages === null || carouselImages === void 0 ? void 0 : carouselImages.map(function (_, index) {
+  }, carouselImages === null || carouselImages === void 0 || (_carouselImages$value = carouselImages.value) === null || _carouselImages$value === void 0 ? void 0 : _carouselImages$value.map(function (_, index) {
     return /*#__PURE__*/_react["default"].createElement(_material.Box, {
       key: index,
       onClick: function onClick() {
@@ -177,7 +199,7 @@ function HeroCarousel(_ref) {
         width: 10,
         height: 10,
         borderRadius: "50%",
-        backgroundColor: index === realIndex ? "#fff" : "rgba(255,255,255,0.5)",
+        backgroundColor: getCarouselDotColor(index),
         cursor: "pointer",
         transition: "background-color 0.3s ease"
       }

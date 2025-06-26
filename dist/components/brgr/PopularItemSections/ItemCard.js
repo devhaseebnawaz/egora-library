@@ -17,7 +17,9 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function ItemCard(_ref) {
-  var item = _ref.item;
+  var item = _ref.item,
+    themeColors = _ref.themeColors,
+    styles = _ref.styles;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
@@ -75,7 +77,7 @@ function ItemCard(_ref) {
       left: 16,
       zIndex: 2,
       fontWeight: "bold",
-      color: "#fff",
+      color: themeColors !== null && themeColors !== void 0 && themeColors.ItemCardItemNameColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemCardItemNameColor : (styles === null || styles === void 0 ? void 0 : styles.ItemCardItemNameColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemCardItemNameColor : "#fff",
       textShadow: "0 1px 3px rgba(0,0,0,0.6)"
     }
   }, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react["default"].createElement(_material.Box, {
@@ -83,7 +85,7 @@ function ItemCard(_ref) {
       position: "absolute",
       bottom: 12,
       right: 12,
-      backgroundColor: "#fff",
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.ItemCardItemPriceBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemCardItemPriceBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.ItemCardItemPriceBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemCardItemPriceBackgroundColor : "#fff",
       padding: "4px 12px",
       borderRadius: 20,
       fontWeight: 600,
@@ -91,6 +93,8 @@ function ItemCard(_ref) {
       boxShadow: "rgba(0, 0, 0, 0.14) 0px 1px 4px"
     }
   }, "Rs. ", item === null || item === void 0 ? void 0 : item.price)), /*#__PURE__*/_react["default"].createElement(_ItemDetailModal["default"], {
+    styles: styles,
+    themeColors: themeColors,
     open: open,
     onClose: handleClose,
     item: item,

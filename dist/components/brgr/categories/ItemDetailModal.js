@@ -15,7 +15,9 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function ItemDetailModal(_ref) {
-  var open = _ref.open,
+  var themeColors = _ref.themeColors,
+    styles = _ref.styles,
+    open = _ref.open,
     onClose = _ref.onClose,
     item = _ref.item,
     selectedQty = _ref.selectedQty,
@@ -36,12 +38,12 @@ function ItemDetailModal(_ref) {
     style: {
       display: 'flex',
       height: '90vh',
-      backgroundColor: '#fff'
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.ItemDetailModalBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemDetailModalBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalBackgroundColor : '#fff'
     }
   }, /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       width: '45%',
-      backgroundColor: '#f4f4f4',
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.ItemDetailModalImageDivBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemDetailModalImageDivBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalImageDivBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalImageDivBackgroundColor : '#f4f4f4',
       display: 'flex',
       alignItems: 'flex-start',
       justifyContent: 'center',
@@ -113,7 +115,7 @@ function ItemDetailModal(_ref) {
     style: {
       marginBottom: 24
     }
-  }, item.description || 'Crispy Golden Nuggets Made With Muscle Meat Served With Any 1 OF Our House Sauce.'), /*#__PURE__*/_react["default"].createElement(_material.RadioGroup, {
+  }, item.description || ''), /*#__PURE__*/_react["default"].createElement(_material.RadioGroup, {
     value: selectedQty,
     onChange: function onChange(e) {
       return setSelectedQty(e.target.value);
@@ -171,8 +173,8 @@ function ItemDetailModal(_ref) {
       minWidth: 36,
       height: 36,
       borderRadius: 12,
-      backgroundColor: '#ccc',
-      color: '#fff',
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.ItemDetailModalQtyDecreseBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemDetailModalQtyDecreseBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyDecreseBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyDecreseBackgroundColor : '#ccc',
+      color: themeColors !== null && themeColors !== void 0 && themeColors.ItemDetailModalQtyDecreseColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemDetailModalQtyDecreseColor : (styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyDecreseColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyDecreseColor : '#fff',
       fontWeight: 'bold',
       fontSize: 20,
       lineHeight: '20px',
@@ -196,8 +198,8 @@ function ItemDetailModal(_ref) {
       minWidth: 36,
       height: 36,
       borderRadius: 12,
-      backgroundColor: '#121212',
-      color: '#fff',
+      backgroundColor: themeColors !== null && themeColors !== void 0 && themeColors.ItemDetailModalQtyIncreaseBackgroundColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemDetailModalQtyIncreaseBackgroundColor : (styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyIncreaseBackgroundColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyIncreaseBackgroundColor : '#121212',
+      color: themeColors !== null && themeColors !== void 0 && themeColors.ItemDetailModalQtyIncreaseColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.ItemDetailModalQtyIncreaseColor : (styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyIncreaseColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.ItemDetailModalQtyIncreaseColor : '#fff',
       fontWeight: 'bold',
       fontSize: 20,
       lineHeight: '20px',

@@ -115,7 +115,7 @@ export default function CustomNavbar({ prop, themeColors, styles }) {
                 {prop.editable.logoImage ? (
 
                     <UniversalImage
-                        src={prop.editable.logoImage}
+                        src={prop.editable.logoImage.value}
                         alt="BRGR Logo"
                         layout="fill"
                         objectFit="contain"

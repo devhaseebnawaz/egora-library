@@ -13,6 +13,8 @@ import {
 import Iconify from '../iconify';
 
 export default function ItemDetailModal({
+    themeColors,
+    styles,
     open,
     onClose,
     item,
@@ -30,13 +32,13 @@ export default function ItemDetailModal({
                 style={{
                     display: 'flex',
                     height: '90vh',
-                    backgroundColor: '#fff',
+                    backgroundColor: themeColors?.ItemDetailModalBackgroundColor ? themeColors?.ItemDetailModalBackgroundColor : styles?.ItemDetailModalBackgroundColor != "" ? styles?.ItemDetailModalBackgroundColor : '#fff',
                 }}
             >
                 <Box
                     style={{
                         width: '45%',
-                        backgroundColor: '#f4f4f4',
+                        backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor ? themeColors?.ItemDetailModalImageDivBackgroundColor : styles?.ItemDetailModalImageDivBackgroundColor != "" ? styles?.ItemDetailModalImageDivBackgroundColor : '#f4f4f4',
                         display: 'flex',
                         alignItems: 'flex-start',
                         justifyContent: 'center',
@@ -102,8 +104,7 @@ export default function ItemDetailModal({
                     </Typography>
 
                     <Typography color="gray" style={{ marginBottom: 24 }}>
-                        {item.description ||
-                            'Crispy Golden Nuggets Made With Muscle Meat Served With Any 1 OF Our House Sauce.'}
+                        {item.description || ''}
                     </Typography>
 
                     <RadioGroup
@@ -155,8 +156,8 @@ export default function ItemDetailModal({
                                     minWidth: 36,
                                     height: 36,
                                     borderRadius: 12,
-                                    backgroundColor: '#ccc',
-                                    color: '#fff',
+                                    backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor ? themeColors?.ItemDetailModalQtyDecreseBackgroundColor : styles?.ItemDetailModalQtyDecreseBackgroundColor != "" ? styles?.ItemDetailModalQtyDecreseBackgroundColor : '#ccc',
+                                    color: themeColors?.ItemDetailModalQtyDecreseColor ? themeColors?.ItemDetailModalQtyDecreseColor : styles?.ItemDetailModalQtyDecreseColor != "" ? styles?.ItemDetailModalQtyDecreseColor : '#fff',
                                     fontWeight: 'bold',
                                     fontSize: 20,
                                     lineHeight: '20px',
@@ -174,8 +175,8 @@ export default function ItemDetailModal({
                                     minWidth: 36,
                                     height: 36,
                                     borderRadius: 12,
-                                    backgroundColor: '#121212',
-                                    color: '#fff',
+                                    backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor ? themeColors?.ItemDetailModalQtyIncreaseBackgroundColor : styles?.ItemDetailModalQtyIncreaseBackgroundColor != "" ? styles?.ItemDetailModalQtyIncreaseBackgroundColor : '#121212',
+                                    color: themeColors?.ItemDetailModalQtyIncreaseColor ? themeColors?.ItemDetailModalQtyIncreaseColor : styles?.ItemDetailModalQtyIncreaseColor != "" ? styles?.ItemDetailModalQtyIncreaseColor : '#fff',
                                     fontWeight: 'bold',
                                     fontSize: 20,
                                     lineHeight: '20px',

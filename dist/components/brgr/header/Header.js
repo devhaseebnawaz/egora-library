@@ -74,7 +74,7 @@ function CustomNavbar(_ref) {
     style: {
       color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarAddressColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarAddressColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarAddressColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarAddressColor : "#f6e6d6"
     }
-  }, prop.editable.address))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, prop.editable.address.value))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       display: "flex",
       alignItems: "center",
@@ -91,7 +91,7 @@ function CustomNavbar(_ref) {
     style: {
       color: themeColors !== null && themeColors !== void 0 && themeColors.AppBarPhoneColor ? themeColors === null || themeColors === void 0 ? void 0 : themeColors.AppBarPhoneColor : (styles === null || styles === void 0 ? void 0 : styles.AppBarPhoneColor) != "" ? styles === null || styles === void 0 ? void 0 : styles.AppBarPhoneColor : "#f6e6d6"
     }
-  }, prop.editable.phone))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
+  }, prop.editable.phone.value))), /*#__PURE__*/_react["default"].createElement(_material.Box, {
     style: {
       position: "relative"
     }
@@ -139,7 +139,7 @@ function CustomNavbar(_ref) {
       backgroundColor: "#121212"
     }
   }, prop.editable.logoImage ? /*#__PURE__*/_react["default"].createElement(_UniversalImage["default"], {
-    src: prop.editable.logoImage,
+    src: prop.editable.logoImage.value,
     alt: "BRGR Logo",
     layout: "fill",
     objectFit: "contain",
