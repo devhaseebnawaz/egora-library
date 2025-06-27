@@ -6,7 +6,7 @@ import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 // import Image from 'next/image';
-import UniversalImage from '../../../UniversalImage'
+import UniversalImage from "../../../UniversalImage";
 
 export default function CustomNavbar({ prop, themeColors, styles }) {
     const [cartOpen, setCartOpen] = useState(false);
