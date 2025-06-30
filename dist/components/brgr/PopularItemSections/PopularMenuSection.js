@@ -73,7 +73,7 @@ function PopularMenuSection(_ref) {
       item: true,
       xs: 12,
       sm: 6,
-      md: 4,
+      md: 3,
       lg: 3
     }, /*#__PURE__*/_react["default"].createElement(_ItemCard["default"], {
       item: item
