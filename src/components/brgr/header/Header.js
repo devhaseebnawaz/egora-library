@@ -43,7 +43,9 @@ export default function CustomNavbar({ themeColors, actions, prop, styles, state
                             display: "flex",
                             alignItems: "center",
                             gap: "8px",
+                            cursor: "pointer",
                         }}
+                         onClick={actions.handleOpenLocationModal}
                     >
                         <Icon icon={locationIcon} width="20" height="20" color={ themeColors?.AppBarLocationIconColor ? themeColors?.AppBarLocationIconColor :  styles?.AppBarLocationIconColor != "" ?  styles?.AppBarLocationIconColor : "#f6e6d6" } />
                         <Box>
