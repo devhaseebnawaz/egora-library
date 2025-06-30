@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Typography, Box } from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
 
-export default function ItemCard ({ item }) {
+export default function ItemCard ({ item, themeColors, styles }) {
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState("5");
   const [instructions, setInstructions] = useState("");
@@ -60,7 +60,7 @@ export default function ItemCard ({ item }) {
             left: 16,
             zIndex: 2,
             fontWeight: "bold",
-            color: "#fff",
+            color: themeColors?.ItemCardItemNameColor ? themeColors?.ItemCardItemNameColor : styles?.ItemCardItemNameColor != "" ? styles?.ItemCardItemNameColor : "#fff",
             textShadow: "0 1px 3px rgba(0,0,0,0.6)",
           }}
         >
@@ -72,7 +72,7 @@ export default function ItemCard ({ item }) {
             position: "absolute",
             bottom: 12,
             right: 12,
-            backgroundColor: "#fff",
+            backgroundColor: themeColors?.ItemCardItemPriceBackgroundColor ? themeColors?.ItemCardItemPriceBackgroundColor : styles?.ItemCardItemPriceBackgroundColor != "" ? styles?.ItemCardItemPriceBackgroundColor : "#fff",
             padding: "4px 12px",
             borderRadius: 20,
             fontWeight: 600,
@@ -85,6 +85,8 @@ export default function ItemCard ({ item }) {
       </Card>
 
       <ItemDetailModal
+        styles={styles}
+        themeColors={themeColors}
         open={open}
         onClose={handleClose}
         item={item}

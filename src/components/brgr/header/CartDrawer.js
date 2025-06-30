@@ -1,47 +1,12 @@
-'use client';
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
 import { Drawer, Box, Typography, Button, IconButton, Divider, Avatar } from '@mui/material';
 import { Icon } from '@iconify/react';
 import arrowRightIcon from '@iconify-icons/mdi/arrow-right';
 import deleteIcon from '@iconify-icons/mdi/delete';
 import plusIcon from '@iconify-icons/mdi/plus';
 import closeIcon from '@iconify-icons/mdi/close';
-import { useRouter } from 'next/navigation';
-import useSession from 'src/utils/useSession';
-import { useDispatch, useSelector } from 'src/redux/store';
-import { getCartByCustomerId } from 'src/redux/slices/cardSlice';
 
-const CartDrawer = ({ open, onClose }) => {
-  const [orderType, setOrderType] = useState('delivery');
-  const navigate = useRouter();
-  let dispatch = useDispatch();
-  const { cardItems } = useSelector((state) => state.cardSlice);
-  const sessionInfo = useSession();
-
-  const getCartItem = useCallback(async () => {
-    try {
-      if (!sessionInfo?.sessionId) {
-        console.warn('Session ID does not exist. Skipping API calls.');
-        return;
-      }
-      const response = await dispatch(getCartByCustomerId(sessionInfo?.sessionId));
-      if (response?.response?.data?.message == 'Venue is InActive') {
-        let orderType = localStorage.getItem('mode');
-        await selectedVenue(dispatch, orderType, true);
-        localStorage.setItem('VenueNotAvailableMessageSeen', false);
-        const errorMessage = 'Venue Not Available';
-        navigate(`/venue`, { replace: true, state: { errorMessage } });
-        return;
-      }
-      // await dispatch(getActiveOrders(sessionInfo?.sessionId, user?.id));
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }, [cardItems]);
-
-  useEffect(() => {
-    getCartItem();
-  }, []);
+const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
   return (
     <Drawer
@@ -83,7 +48,7 @@ const CartDrawer = ({ open, onClose }) => {
           </IconButton>
         </Box>
 
-        {cardItems.length === 0 ? (
+        {states.cardItems.length === 0 ? (
           <Box
             style={{
               display: 'flex',
@@ -121,7 +86,7 @@ const CartDrawer = ({ open, onClose }) => {
           </Box>
         ) : (
           <>
-            {cardItems.map((item) => (
+            {states.cardItems.map((item) => (
               <Box
                 key={item.id}
                 style={{
@@ -229,7 +194,7 @@ const CartDrawer = ({ open, onClose }) => {
             <Button
               variant="contained"
               fullWidth
-              onClick={() => navigate('/checkout')}
+              onClick={actions.naviagateCheckout}
               endIcon={<Icon icon={arrowRightIcon} width={20} height={20} />}
               style={{
                 textTransform: 'none',
@@ -266,14 +231,14 @@ const CartDrawer = ({ open, onClose }) => {
               {['delivery', 'pickup'].map((type) => (
                 <Button
                   key={type}
-                  onClick={() => setOrderType(type)}
+                  onClick={() => states.setOrderType(type)}
                   size="small"
                   disableElevation
                   style={{
                     textTransform: 'uppercase',
                     fontWeight: 'bold',
-                    backgroundColor: orderType === type ? '#000' : 'transparent',
-                    color: orderType === type ? '#fff' : '#000',
+                    backgroundColor: states.orderType === type ? '#000' : 'transparent',
+                    color: states.orderType === type ? '#fff' : '#000',
                     borderRadius: 20,
                     padding: '4px 8px',
                     fontSize: 12,

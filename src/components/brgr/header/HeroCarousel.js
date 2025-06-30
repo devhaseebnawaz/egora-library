@@ -4,18 +4,18 @@ import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 
-export default function HeroCarousel({ prop }) {
+export default function HeroCarousel({ prop, themeColors, styles }) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const slideInterval = useRef(null);
   const isJumpingRef = useRef(false);
   const hasMountedRef = useRef(false);
 
-  let {editable} = prop ?? {}
-  let {carouselImages} = editable ?? {}
+  let { editable } = prop ?? {}
+  let { carouselImages } = editable ?? {}
 
-  const totalSlides = carouselImages.length;
-  const fullSlides = [carouselImages[totalSlides - 1], ...carouselImages, carouselImages[0]];
+  const totalSlides = carouselImages.value.length;
+  const fullSlides = [carouselImages.value[totalSlides - 1], ...carouselImages.value, carouselImages.value[0]];
 
   const goToIndex = (index) => {
     setCurrentIndex(index + 1);
@@ -33,8 +33,8 @@ export default function HeroCarousel({ prop }) {
     currentIndex === 0
       ? totalSlides - 1
       : currentIndex === totalSlides + 1
-      ? 0
-      : currentIndex - 1;
+        ? 0
+        : currentIndex - 1;
 
   useEffect(() => {
     startSlide();
@@ -79,6 +79,27 @@ export default function HeroCarousel({ prop }) {
     }
   }, [currentIndex, totalSlides]);
 
+
+  const getCarouselDotColor = (index) => {
+    if (index === realIndex) {
+      let color = "#fff";
+      if (themeColors?.HeroCarouselDisplayedImageBackgroundColor) {
+        color = themeColors?.HeroCarouselDisplayedImageBackgroundColor;
+      } else if (styles?.HeroCarouselDisplayedImageBackgroundColor !== "") {
+        color = styles?.HeroCarouselDisplayedImageBackgroundColor;
+      }
+      return color
+    } else {
+      let color = "rgba(255,255,255,0.5)";
+      if (themeColors?.HeroCarouselNotDisplayedImageBackgroundColor) {
+        color = themeColors?.HeroCarouselNotDisplayedImageBackgroundColor;
+      } else if (styles?.HeroCarouselNotDisplayedImageBackgroundColor !== "") {
+        color = styles?.HeroCarouselNotDisplayedImageBackgroundColor;
+      }
+      return color
+    }
+  };
+
   return (
     <Box
       onMouseEnter={stopSlide}
@@ -122,7 +143,7 @@ export default function HeroCarousel({ prop }) {
           top: "50%",
           left: "20px",
           transform: "translateY(-50%)",
-          backgroundColor: "rgba(0,0,0,0.5)",
+          backgroundColor: themeColors?.HeroCarouselGoPrevBackgroundColor ? themeColors?.HeroCarouselGoPrevBackgroundColor : styles?.HeroCarouselGoPrevBackgroundColor != "" ? styles?.HeroCarouselGoPrevBackgroundColor : "rgba(0,0,0,0.5)",
           color: "#fff",
           zIndex: 2,
         }}
@@ -137,7 +158,7 @@ export default function HeroCarousel({ prop }) {
           top: "50%",
           right: "20px",
           transform: "translateY(-50%)",
-          backgroundColor: "rgba(0,0,0,0.5)",
+          backgroundColor: themeColors?.HeroCarouselGoNextBackgroundColor ? themeColors?.HeroCarouselGoNextBackgroundColor : styles?.HeroCarouselGoNextBackgroundColor != "" ? styles?.HeroCarouselGoNextBackgroundColor : "rgba(0,0,0,0.5)",
           color: "#fff",
           zIndex: 2,
         }}
@@ -156,7 +177,7 @@ export default function HeroCarousel({ prop }) {
           zIndex: 2,
         }}
       >
-        {carouselImages?.map((_, index) => (
+        {carouselImages?.value?.map((_, index) => (
           <Box
             key={index}
             onClick={() => goToIndex(index)}
@@ -164,8 +185,7 @@ export default function HeroCarousel({ prop }) {
               width: 10,
               height: 10,
               borderRadius: "50%",
-              backgroundColor:
-                index === realIndex ? "#fff" : "rgba(255,255,255,0.5)",
+              backgroundColor: getCarouselDotColor(index),
               cursor: "pointer",
               transition: "background-color 0.3s ease",
             }}

@@ -2,8 +2,7 @@ import React from 'react';
 import { InputBase, IconButton, Paper,Container } from '@mui/material';
 import Iconify from '../iconify';
 
-export default function SearchBar({ prop, states }) {
-
+const SearchBar = ( { prop, states } ) => {
   let { query, setQuery } = states ?? {}
 
   const handleSubmit = (e) => {
@@ -51,3 +50,5 @@ export default function SearchBar({ prop, states }) {
     </Container>
   );
 };
+
+export default SearchBar;
