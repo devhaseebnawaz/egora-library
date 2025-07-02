@@ -60,7 +60,7 @@ export default function ItemCard ({ item, themeColors, styles }) {
             left: 16,
             zIndex: 2,
             fontWeight: "bold",
-            color: themeColors?.ItemCardItemNameColor ? themeColors?.ItemCardItemNameColor : styles?.ItemCardItemNameColor != "" ? styles?.ItemCardItemNameColor : "#fff",
+            color: themeColors?.ItemCardItemNameColor?.value ? themeColors?.ItemCardItemNameColor?.value  : styles?.ItemCardItemNameColor?.value  != "" ? styles?.ItemCardItemNameColor?.value : "#fff",
             textShadow: "0 1px 3px rgba(0,0,0,0.6)",
           }}
         >
@@ -72,7 +72,7 @@ export default function ItemCard ({ item, themeColors, styles }) {
             position: "absolute",
             bottom: 12,
             right: 12,
-            backgroundColor: themeColors?.ItemCardItemPriceBackgroundColor ? themeColors?.ItemCardItemPriceBackgroundColor : styles?.ItemCardItemPriceBackgroundColor != "" ? styles?.ItemCardItemPriceBackgroundColor : "#fff",
+            backgroundColor: themeColors?.ItemCardItemPriceBackgroundColor?.value  ? themeColors?.ItemCardItemPriceBackgroundColor?.value  : styles?.ItemCardItemPriceBackgroundColor?.value  != "" ? styles?.ItemCardItemPriceBackgroundColor?.value  : "#fff",
             padding: "4px 12px",
             borderRadius: 20,
             fontWeight: 600,

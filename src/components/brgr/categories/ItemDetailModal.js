@@ -32,13 +32,13 @@ export default function ItemDetailModal({
                 style={{
                     display: 'flex',
                     height: '90vh',
-                    backgroundColor: themeColors?.ItemDetailModalBackgroundColor ? themeColors?.ItemDetailModalBackgroundColor : styles?.ItemDetailModalBackgroundColor != "" ? styles?.ItemDetailModalBackgroundColor : '#fff',
+                    backgroundColor: themeColors?.ItemDetailModalBackgroundColor?.value  ? themeColors?.ItemDetailModalBackgroundColor?.value  : styles?.ItemDetailModalBackgroundColor?.value  != "" ? styles?.ItemDetailModalBackgroundColor?.value  : '#fff',
                 }}
             >
                 <Box
                     style={{
                         width: '45%',
-                        backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor ? themeColors?.ItemDetailModalImageDivBackgroundColor : styles?.ItemDetailModalImageDivBackgroundColor != "" ? styles?.ItemDetailModalImageDivBackgroundColor : '#f4f4f4',
+                        backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor?.value  ? themeColors?.ItemDetailModalImageDivBackgroundColor?.value  : styles?.ItemDetailModalImageDivBackgroundColor?.value  != "" ? styles?.ItemDetailModalImageDivBackgroundColor?.value  : '#f4f4f4',
                         display: 'flex',
                         alignItems: 'flex-start',
                         justifyContent: 'center',
@@ -156,8 +156,8 @@ export default function ItemDetailModal({
                                     minWidth: 36,
                                     height: 36,
                                     borderRadius: 12,
-                                    backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor ? themeColors?.ItemDetailModalQtyDecreseBackgroundColor : styles?.ItemDetailModalQtyDecreseBackgroundColor != "" ? styles?.ItemDetailModalQtyDecreseBackgroundColor : '#ccc',
-                                    color: themeColors?.ItemDetailModalQtyDecreseColor ? themeColors?.ItemDetailModalQtyDecreseColor : styles?.ItemDetailModalQtyDecreseColor != "" ? styles?.ItemDetailModalQtyDecreseColor : '#fff',
+                                    backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor?.value  ? themeColors?.ItemDetailModalQtyDecreseBackgroundColor?.value  : styles?.ItemDetailModalQtyDecreseBackgroundColor?.value  != "" ? styles?.ItemDetailModalQtyDecreseBackgroundColor?.value  : '#ccc',
+                                    color: themeColors?.ItemDetailModalQtyDecreseColor?.value  ? themeColors?.ItemDetailModalQtyDecreseColor?.value  : styles?.ItemDetailModalQtyDecreseColor?.value  != "" ? styles?.ItemDetailModalQtyDecreseColor?.value  : '#fff',
                                     fontWeight: 'bold',
                                     fontSize: 20,
                                     lineHeight: '20px',
@@ -175,8 +175,8 @@ export default function ItemDetailModal({
                                     minWidth: 36,
                                     height: 36,
                                     borderRadius: 12,
-                                    backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor ? themeColors?.ItemDetailModalQtyIncreaseBackgroundColor : styles?.ItemDetailModalQtyIncreaseBackgroundColor != "" ? styles?.ItemDetailModalQtyIncreaseBackgroundColor : '#121212',
-                                    color: themeColors?.ItemDetailModalQtyIncreaseColor ? themeColors?.ItemDetailModalQtyIncreaseColor : styles?.ItemDetailModalQtyIncreaseColor != "" ? styles?.ItemDetailModalQtyIncreaseColor : '#fff',
+                                    backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor?.value  ? themeColors?.ItemDetailModalQtyIncreaseBackgroundColor?.value  : styles?.ItemDetailModalQtyIncreaseBackgroundColor?.value  != "" ? styles?.ItemDetailModalQtyIncreaseBackgroundColor?.value  : '#121212',
+                                    color: themeColors?.ItemDetailModalQtyIncreaseColor?.value ? themeColors?.ItemDetailModalQtyIncreaseColor?.value : styles?.ItemDetailModalQtyIncreaseColor?.value  != "" ? styles?.ItemDetailModalQtyIncreaseColor?.value  : '#fff',
                                     fontWeight: 'bold',
                                     fontSize: 20,
                                     lineHeight: '20px',

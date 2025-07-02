@@ -83,18 +83,18 @@ export default function HeroCarousel({ prop, themeColors, styles }) {
   const getCarouselDotColor = (index) => {
     if (index === realIndex) {
       let color = "#fff";
-      if (themeColors?.HeroCarouselDisplayedImageBackgroundColor) {
-        color = themeColors?.HeroCarouselDisplayedImageBackgroundColor;
-      } else if (styles?.HeroCarouselDisplayedImageBackgroundColor !== "") {
-        color = styles?.HeroCarouselDisplayedImageBackgroundColor;
+      if (themeColors?.HeroCarouselDisplayedImageBackgroundColor?.value ) {
+        color = themeColors?.HeroCarouselDisplayedImageBackgroundColor?.value ;
+      } else if (styles?.HeroCarouselDisplayedImageBackgroundColor?.value  !== "") {
+        color = styles?.HeroCarouselDisplayedImageBackgroundColor?.value ;
       }
       return color
     } else {
       let color = "rgba(255,255,255,0.5)";
-      if (themeColors?.HeroCarouselNotDisplayedImageBackgroundColor) {
-        color = themeColors?.HeroCarouselNotDisplayedImageBackgroundColor;
-      } else if (styles?.HeroCarouselNotDisplayedImageBackgroundColor !== "") {
-        color = styles?.HeroCarouselNotDisplayedImageBackgroundColor;
+      if (themeColors?.HeroCarouselNotDisplayedImageBackgroundColor?.value ) {
+        color = themeColors?.HeroCarouselNotDisplayedImageBackgroundColor?.value ;
+      } else if (styles?.HeroCarouselNotDisplayedImageBackgroundColor?.value  !== "") {
+        color = styles?.HeroCarouselNotDisplayedImageBackgroundColor?.value ;
       }
       return color
     }
@@ -143,7 +143,7 @@ export default function HeroCarousel({ prop, themeColors, styles }) {
           top: "50%",
           left: "20px",
           transform: "translateY(-50%)",
-          backgroundColor: themeColors?.HeroCarouselGoPrevBackgroundColor ? themeColors?.HeroCarouselGoPrevBackgroundColor : styles?.HeroCarouselGoPrevBackgroundColor != "" ? styles?.HeroCarouselGoPrevBackgroundColor : "rgba(0,0,0,0.5)",
+          backgroundColor: themeColors?.HeroCarouselGoPrevBackgroundColor?.value  ? themeColors?.HeroCarouselGoPrevBackgroundColor?.value  : styles?.HeroCarouselGoPrevBackgroundColor?.value  != "" ? styles?.HeroCarouselGoPrevBackgroundColor?.value  : "rgba(0,0,0,0.5)",
           color: "#fff",
           zIndex: 2,
         }}
@@ -158,7 +158,7 @@ export default function HeroCarousel({ prop, themeColors, styles }) {
           top: "50%",
           right: "20px",
           transform: "translateY(-50%)",
-          backgroundColor: themeColors?.HeroCarouselGoNextBackgroundColor ? themeColors?.HeroCarouselGoNextBackgroundColor : styles?.HeroCarouselGoNextBackgroundColor != "" ? styles?.HeroCarouselGoNextBackgroundColor : "rgba(0,0,0,0.5)",
+          backgroundColor: themeColors?.HeroCarouselGoNextBackgroundColor?.value  ? themeColors?.HeroCarouselGoNextBackgroundColor?.value  : styles?.HeroCarouselGoNextBackgroundColor?.value  != "" ? styles?.HeroCarouselGoNextBackgroundColor?.value  : "rgba(0,0,0,0.5)",
           color: "#fff",
           zIndex: 2,
         }}
