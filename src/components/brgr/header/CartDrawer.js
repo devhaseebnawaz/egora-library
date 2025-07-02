@@ -48,7 +48,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
           </IconButton>
         </Box>
 
-        {states.cardItems.length === 0 ? (
+        {states?.cardItems?.length === 0 ? (
           <Box
             style={{
               display: 'flex',
@@ -86,7 +86,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
           </Box>
         ) : (
           <>
-            {states.cardItems.map((item) => (
+            {states?.cardItems?.map((item) => (
               <Box
                 key={item.id}
                 style={{
