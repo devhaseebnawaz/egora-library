@@ -180,7 +180,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
               </Box>
               <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>Delivery Fee</Typography>
-                <Typography>Rs. {deliveryFee}</Typography>
+                <Typography>Rs. 40</Typography>
               </Box>
               <Box
                 style={{
