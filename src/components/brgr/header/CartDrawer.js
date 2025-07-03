@@ -9,9 +9,6 @@ import closeIcon from '@iconify-icons/mdi/close';
 const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
    const {cardItems} = states ?? []
-
-
-
    console.log('states',states);
    
 
@@ -179,7 +176,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
             <Box style={{ marginBottom: 8 }}>
               <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>Total</Typography>
-                <Typography>Rs. {total}</Typography>
+                <Typography>Rs. 10</Typography>
               </Box>
               <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>Delivery Fee</Typography>
@@ -194,7 +191,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 }}
               >
                 <Typography>Grand Total</Typography>
-                <Typography>Rs. {grandTotal}</Typography>
+                <Typography>Rs. 20</Typography>
               </Box>
             </Box>
 
