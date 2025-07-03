@@ -27,6 +27,9 @@ const modalStyle = {
 
 export default function LocationModal({ open, handleClose, themeColors, actions, prop, styles, states }) {
 
+    console.log('states',states);
+
+
     useEffect(() => {
         if (states.citySearch) {
             states.setFilteredCities(
