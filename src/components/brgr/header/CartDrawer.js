@@ -8,6 +8,13 @@ import closeIcon from '@iconify-icons/mdi/close';
 
 const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
+   const {cardItems} = states ?? []
+
+
+
+   console.log('states',states);
+   
+
   return (
     <Drawer
       anchor="right"
@@ -48,7 +55,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
           </IconButton>
         </Box>
 
-        {states?.cardItems?.length === 0 ? (
+        {cardItems?.length === 0 ? (
           <Box
             style={{
               display: 'flex',
@@ -86,7 +93,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
           </Box>
         ) : (
           <>
-            {states?.cardItems?.map((item) => (
+            {cardItems?.map((item) => (
               <Box
                 key={item.id}
                 style={{
