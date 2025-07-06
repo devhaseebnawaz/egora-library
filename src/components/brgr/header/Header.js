@@ -49,9 +49,9 @@ export default function CustomNavbar({ themeColors, actions, prop, styles, state
                     >
                         <Icon icon={locationIcon} width="20" height="20" color={ themeColors?.AppBarLocationIconColor?.value ? themeColors?.AppBarLocationIconColor?.value :  styles?.AppBarLocationIconColor?.value != "" ?  styles?.AppBarLocationIconColor?.value : "#f6e6d6" } />
                         <Box>
-                            <Typography variant="body2" fontWeight="bold" style={{ color: themeColors?.AppBarChangeLocationColor?.value ? themeColors?.AppBarChangeLocationColor?.value :  styles?.AppBarChangeLocationColor?.value != "" ?  styles?.AppBarChangeLocationColor?.value : "#f6e6d6" }}>
+                            {/* <Typography variant="body2" fontWeight="bold" style={{ color: themeColors?.AppBarChangeLocationColor?.value ? themeColors?.AppBarChangeLocationColor?.value :  styles?.AppBarChangeLocationColor?.value != "" ?  styles?.AppBarChangeLocationColor?.value : "#f6e6d6" }}>
                                 Change Location
-                            </Typography>
+                            </Typography> */}
                             <Typography variant="caption" style={{ color: themeColors?.AppBarAddressColor?.value ? themeColors?.AppBarAddressColor?.value :  styles?.AppBarAddressColor?.value != "" ?  styles?.AppBarAddressColor?.value : "#f6e6d6" }}>
                                 {prop.editable.address.value}
                             </Typography>
