@@ -15,7 +15,7 @@ export default function CustomNavbar({ themeColors, actions, prop, styles, state
         <AppBar
             position="static"
             style={{
-                backgroundColor:  styles?.AppBarBackgroundColor?.value != "" ?  styles?.AppBarBackgroundColor?.value : themeColors?.AppBarBackgroundColor?.value ? themeColors?.AppBarBackgroundColor?.value : "#121212",
+                backgroundColor:  styles?.AppBarBackgroundColor?.value != "" ?  styles?.AppBarBackgroundColor?.value : themeColors?.AppBarBackgroundColor?.value,
                 boxShadow: "none",
                 position: "relative",
                 zIndex: 10,
