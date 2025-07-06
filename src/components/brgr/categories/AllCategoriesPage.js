@@ -7,20 +7,20 @@ import ItemCard from "./ItemCard";
 
 export default function AllCategoriesPage({ prop, actions, styles, states  }) {
 
-  const [products, setProducts] = useState(prop.displayitems || []);
+  const [products, setProducts] = useState(prop.static.displaycategories || []);
 
   const { query } = states ?? {}
 
   useEffect(() => {
     if (query && query.trim() !== "") {
-      const filtered = prop.displayitems.filter((p) =>
+      const filtered = prop.static.displaycategories.filter((p) =>
         p.name.toLowerCase().includes(states.query.toLowerCase())
       );
       setProducts(filtered);
     } else {
-      setProducts(prop.displayitems || []);
+      setProducts(prop.static.displaycategories || []);
     }
-  }, [states.query, prop.displayitems]);
+  }, [states.query, prop.static.displaycategories]);
 
 
   return (
