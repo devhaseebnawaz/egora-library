@@ -26,7 +26,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states }) {
   return (
     <>
       {products.map((category) => (
-        <Container style={{ marginTop: "30px" }}>
+        <Container style={{ marginTop: "30px" }} >
           <Box key={category.id} style={{ margin: "48px 0px" }}>
             <CategoryLayout
             // banner={<Banner img={category.bannerImg} />}
