@@ -15,6 +15,7 @@ import Iconify from '../iconify';
 export default function ItemDetailModal({
     themeColors,
     styles,
+    actions,
     open,
     onClose,
     item,

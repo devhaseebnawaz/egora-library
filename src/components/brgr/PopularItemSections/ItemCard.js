@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Typography, Box } from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
 
-export default function ItemCard ({ item, themeColors, styles }) {
+export default function ItemCard ({ item, themeColors, styles, actions }) {
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState("5");
   const [instructions, setInstructions] = useState("");
@@ -87,6 +87,7 @@ export default function ItemCard ({ item, themeColors, styles }) {
       <ItemDetailModal
         styles={styles}
         themeColors={themeColors}
+        actions={actions}
         open={open}
         onClose={handleClose}
         item={item}
