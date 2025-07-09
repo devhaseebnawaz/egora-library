@@ -1,4 +1,7 @@
+import React, { useState } from "react";
 import { Typography, Box,Link } from "@mui/material";
+// import Image from 'next/image';
+import UniversalImage from "../../../UniversalImage";
 
 export default function CustomFooter({ themeColors, actions, prop, styles, states }) {
     return (
