@@ -206,6 +206,7 @@ export default function ItemDetailModal({
                             }}
                             onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
+                            onClick={actions.handleAddToCart}
                         >
                             <span>Rs. {price * quantity}</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
