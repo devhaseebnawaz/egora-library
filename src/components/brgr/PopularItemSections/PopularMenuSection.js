@@ -46,9 +46,9 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
         </Typography>
       ) : (
         <Grid container spacing={3}>
-          {products.map((item) => (
+          {products.map((item, index) => (
             <Grid key={item.id || item.name} item xs={12} sm={6} md={3} lg={3}>
-              <ItemCard item={item} actions={actions} styles={styles} states={states}/>
+              <ItemCard key={`popularItem${index}`} item={item} actions={actions} styles={styles} states={states}/>
             </Grid>
           ))}
         </Grid>

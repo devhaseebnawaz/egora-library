@@ -64,6 +64,7 @@ export default function ItemCard({ item, actions, states }) {
       </Card>
 
       <ItemDetailModal
+        key={`categoryItem${item}`}
         open={states.openCard}
         onClose={actions.handleOpenCard}
         item={item}

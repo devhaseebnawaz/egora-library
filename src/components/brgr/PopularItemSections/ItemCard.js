@@ -82,6 +82,7 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
       </Card>
 
       <ItemDetailModal
+        key={`popularItem${item}`}
         open={states.openCard}
         onClose={actions.handleOpenCard}
         item={item}
