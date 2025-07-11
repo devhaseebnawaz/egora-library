@@ -24,7 +24,7 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
           flexDirection: "column",
           height: "100%",
         }}
-        onClick={handleOpen}
+        onClick={actions.handleOpenCard}
       >
         <Box
           component="img"
@@ -82,7 +82,6 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
       </Card>
 
       <ItemDetailModal
-
         open={states.openCard}
         onClose={actions.handleOpenCard}
         item={item}
@@ -91,7 +90,6 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
         instructions={instructions}
         setInstructions={setInstructions}
         actions={actions}
-
         styles={styles}
         themeColors={themeColors}
       />
