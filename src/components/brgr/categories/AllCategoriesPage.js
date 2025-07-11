@@ -32,7 +32,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states }) {
             // banner={<Banner img={category.bannerImg} />}
             >
               <Typography variant="h3" style={{ marginBottom: "16px" }}>
-                {category.title}
+                {category.name}
               </Typography>
 
               <Grid container spacing={2}>
