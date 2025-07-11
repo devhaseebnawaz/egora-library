@@ -104,7 +104,7 @@ export default function CustomNavbar({ themeColors, actions, prop, styles, state
                             justifyContent: "center",
                         }}
                     >
-                        2
+                        {states?.cardItems?.length || 0}
                     </Box>
                 </Box>
             </Toolbar>
