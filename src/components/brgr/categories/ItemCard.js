@@ -4,8 +4,7 @@ import {
 } from '@mui/material';
 import ItemDetailModal from './ItemDetailModal';
 
-export default function ItemCard({ item ,actions}) {
-  const [open, setOpen] = useState(false);
+export default function ItemCard({ item, actions, states }) {
   const [selectedQty, setSelectedQty] = useState('5');
   const [instructions, setInstructions] = useState('');
 
@@ -21,7 +20,7 @@ export default function ItemCard({ item ,actions}) {
           boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
           padding: '0',
         }}
-        onClick={handleOpen}
+        onClick={actions.handleOpenCard}
 
       >
         <CardMedia
@@ -68,8 +67,8 @@ export default function ItemCard({ item ,actions}) {
       </Card>
 
       <ItemDetailModal
-        open={open}
-        onClose={handleClose}
+        open={states.openCard}
+        onClose={actions.handleOpenCard}
         item={item}
         selectedQty={selectedQty}
         setSelectedQty={setSelectedQty}
