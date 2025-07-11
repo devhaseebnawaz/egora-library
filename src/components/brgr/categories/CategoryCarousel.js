@@ -1,48 +1,19 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, IconButton, Button } from "@mui/material";
 import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 
-const categories = [
-    "SMASH BRGR", "SWISS MUSHROOM", "CRISPY ZING BRGR", "NUGGETS", "CHKN TENDERS",
-    "FILLET BRGR", "CHAMP CHKN BRGR", "LOADED FRIES", "FISH & CHIPS", "WRAP",
-    "SANDWICH", "ADD ONS", "MARGARITA", "ICE CREAM SHAKES", "JUICES", "FIZZY DRINKS", "BEVERAGES"
-];
-
-export default function ScrollCategoryBar() {
-    const scrollRef = useRef(null);
-    const [showLeft, setShowLeft] = useState(false);
-    const [showRight, setShowRight] = useState(true);
-
-    const scrollAmount = 300;
-
-    const handleScroll = (direction) => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollBy({
-                left: direction === "left" ? -scrollAmount : scrollAmount,
-                behavior: "smooth",
-            });
-        }
-    };
-
-    const updateArrows = () => {
-        const el = scrollRef.current;
-        if (el) {
-            const { scrollLeft, scrollWidth, clientWidth } = el;
-            setShowLeft(scrollLeft > 0);
-            setShowRight(scrollLeft + clientWidth < scrollWidth - 1);
-        }
-    };
+export default function CategoryCarousel({ themeColors, actions, prop, styles, states }) {
 
     useEffect(() => {
-        const el = scrollRef.current;
+        const el = states.scrollRef.current;
         if (el) {
-            el.addEventListener("scroll", updateArrows);
-            updateArrows();
+            el.addEventListener("scroll", actions.updateArrows);
+            actions.updateArrows();
         }
         return () => {
-            if (el) el.removeEventListener("scroll", updateArrows);
+            if (el) el.removeEventListener("scroll", actions.updateArrows);
         };
     }, []);
 
@@ -65,9 +36,9 @@ export default function ScrollCategoryBar() {
                     overflow: "hidden",
                 }}
             >
-                {showLeft && (
+                {states.showLeft && (
                     <IconButton
-                        onClick={() => handleScroll("left")}
+                        onClick={() => actions.handleScroll("left")}
                         style={{
                             color: "#fff",
                             position: "absolute",
@@ -83,7 +54,7 @@ export default function ScrollCategoryBar() {
                 )}
 
                 <Box
-                    ref={scrollRef}
+                    ref={states.scrollRef}
                     style={{
                         display: "flex",
                         flexWrap: "nowrap",
@@ -100,7 +71,7 @@ export default function ScrollCategoryBar() {
             }
           `}</style>
 
-                    {categories.map((cat, idx) => (
+                    {states.categoryCarousel.map((cat, idx) => (
                         <Button
                             key={idx}
                             style={{
@@ -124,9 +95,9 @@ export default function ScrollCategoryBar() {
                     ))}
                 </Box>
 
-                {showRight && (
+                {states.showRight && (
                     <IconButton
-                        onClick={() => handleScroll("right")}
+                        onClick={() => actions.handleScroll("right")}
                         style={{
                             color: "#fff",
                             position: "absolute",
