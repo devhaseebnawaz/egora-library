@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import ItemDetailModal from './ItemDetailModal';
 
-export default function ItemCard({ item }) {
+export default function ItemCard({ item ,actions}) {
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState('5');
   const [instructions, setInstructions] = useState('');
@@ -75,6 +75,7 @@ export default function ItemCard({ item }) {
         setSelectedQty={setSelectedQty}
         instructions={instructions}
         setInstructions={setInstructions}
+        actions={actions}
       />
     </>
   );
