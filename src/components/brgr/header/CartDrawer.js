@@ -8,9 +8,7 @@ import closeIcon from '@iconify-icons/mdi/close';
 
 const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
-   const {cardItems} = states ?? []
-   console.log('states',states);
-   
+  const { cardItems } = states ?? []
 
   return (
     <Drawer
