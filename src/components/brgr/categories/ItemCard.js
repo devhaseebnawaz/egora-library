@@ -5,11 +5,8 @@ import {
 import ItemDetailModal from './ItemDetailModal';
 
 export default function ItemCard({ item, actions, states }) {
-  const [selectedQty, setSelectedQty] = useState('5');
+  const [selectedQty, setSelectedQty] = useState('0');
   const [instructions, setInstructions] = useState('');
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <>

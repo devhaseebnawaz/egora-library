@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { Card, Typography, Box } from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
 
-export default function ItemCard ({ item, themeColors, styles, actions }) {
-  const [open, setOpen] = useState(false);
-  const [selectedQty, setSelectedQty] = useState("5");
+export default function ItemCard ({ item, themeColors, styles, actions, states }) {
+  const [selectedQty, setSelectedQty] = useState('0');
   const [instructions, setInstructions] = useState("");
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const fallbackImage =
     "https://brgr.pk/_next/image?url=https%3A%2F%2Fassets.indolj.io%2Fimages%2F1743256920-smashsingle.jpeg%3Fq%3D10&w=640&q=75";
@@ -85,16 +82,18 @@ export default function ItemCard ({ item, themeColors, styles, actions }) {
       </Card>
 
       <ItemDetailModal
-        styles={styles}
-        themeColors={themeColors}
-        actions={actions}
-        open={open}
-        onClose={handleClose}
+
+        open={states.openCard}
+        onClose={actions.handleOpenCard}
         item={item}
         selectedQty={selectedQty}
         setSelectedQty={setSelectedQty}
         instructions={instructions}
         setInstructions={setInstructions}
+        actions={actions}
+
+        styles={styles}
+        themeColors={themeColors}
       />
     </>
   );
