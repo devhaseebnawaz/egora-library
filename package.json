@@ -20,7 +20,8 @@
   "dependencies": {
     "@iconify-icons/mdi": "^1.2.48",
     "@iconify/react": "^6.0.0",
-    "@mui/material": "^5.15.0"
+    "@mui/material": "^5.15.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
