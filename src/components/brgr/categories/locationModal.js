@@ -26,10 +26,6 @@ const modalStyle = {
 
 
 export default function LocationModal({ open, handleClose, themeColors, actions, prop, styles, states }) {
-
-    console.log('states',states);
-
-
     useEffect(() => {
         if (states.citySearch) {
             states.setFilteredCities(
@@ -242,11 +238,11 @@ export default function LocationModal({ open, handleClose, themeColors, actions,
                                         getOptionLabel={(option) => option.name}
                                         value={filteredOutlets.find(outlet => outlet.name === states.selectedOutlet) || null}
                                         onChange={(event, newValue) => {
-                                            setSelectedOutlet(newValue ? newValue.name : "");
+                                            states.setSelectedOutlet(newValue ? newValue.name : "");
                                         }}
                                         inputValue={states.searchQuery}
                                         onInputChange={(event, newInputValue) => {
-                                            setSearchQuery(newInputValue);
+                                            states.setSearchQuery(newInputValue);
                                         }}
                                         renderInput={(params) => (
                                             <TextField

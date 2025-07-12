@@ -6,7 +6,7 @@ import AllCategoriesPage from '../categories/AllCategoriesPage';
 import { categories } from '../data/categories';
 import { popularItems } from '../data/categories';
 
-export default function SearchableMenuSection ({ prop, states }) {
+export default function SearchableMenuSection ({ prop, states, actions , styles }) {
 
   const { query,setQuery } = states ?? {}
 
@@ -37,8 +37,8 @@ export default function SearchableMenuSection ({ prop, states }) {
           </Typography>
         ) : (
           <>
-            <PopularMenuSection items={filteredPopularItems} />
-            <AllCategoriesPage categories={filteredCategories} />
+            <PopularMenuSection items={filteredPopularItems}  states={states} prop={prop} actions={actions} />
+            <AllCategoriesPage categories={filteredCategories} states={states} prop={prop} actions={actions}/>
           </>
         )}
       </Box>

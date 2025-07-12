@@ -73,6 +73,7 @@ export default function ItemCard({ item, actions, states }) {
         instructions={instructions}
         setInstructions={setInstructions}
         actions={actions}
+        states={states}
       />
     </>
   );

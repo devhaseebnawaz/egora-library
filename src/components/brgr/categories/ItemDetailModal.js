@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Dialog,
     Box,
@@ -9,8 +9,22 @@ import {
     TextField,
     IconButton,
     Button,
+    Card,
+    Stack,
+    DialogTitle,
+    CardContent,
+    DialogActions,
+    DialogContent,
+    Grid,
+    Divider,
+
 } from '@mui/material';
 import Iconify from '../iconify';
+import FormProvider, { RHFTextField } from "../../hook-form";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Variant  from '../options/Variant';
+import Group from '../options/Group';
 
 export default function ItemDetailModal({
     themeColors,
@@ -20,14 +34,139 @@ export default function ItemDetailModal({
     states,
     onClose,
     item,
-    selectedQty,
-    setSelectedQty,
-    instructions,
-    setInstructions,
+    setItem
 }) {
-    const price = selectedQty === '5' ? item?.price : item?.price * 2;
+    const methods = useForm();
+    const [choiceGroups, setChoiceGroups] = useState(states.choiceGroups);
+    const [notes, setNotes] = useState(item?.notes ? item?.notes : "");
+    const [selectedVariant, setSelectedVariant] = useState(
+        item.variants
+          ? item.variants.find((item) => item.defaultVariant == true)
+          : ""
+      );
+
+    useEffect(() => {
+        if (
+          item?.hasVariant &&
+          selectedVariant &&
+          item?.associateChoiceGroupWithPriceVariant
+        ) {
+          const selectedVariantChoiceGroupIds = selectedVariant.choiceGroup || [];
+          const filteredGroups = choiceGroups
+            .map((choiceGroup) => {
+              if (selectedVariantChoiceGroupIds.includes(choiceGroup.id)) {
+                return JSON.parse(JSON.stringify(choiceGroup));
+              }
+              return null;
+            })
+            .filter(Boolean);
+    
+          setFilteredChoiceGroups(filteredGroups);
+        } else if (item?.choiceGroup && choiceGroups) {
+          const filteredGroups = choiceGroups
+            .filter((choiceGroup) => item.choiceGroup.includes(choiceGroup.id))
+            .map((group) => JSON.parse(JSON.stringify(group)));
+    
+          setFilteredChoiceGroups(filteredGroups);
+        }
+    }, [choiceGroups, item, selectedVariant]);
+  
+
+    const toggleSauce = (elem, sauce) => {  
+        let updatedItems = [...selectedSauces.items];
+        const itemIndex = updatedItems.findIndex((item) => item.id === elem.id);
+        if (itemIndex !== -1) {
+          const sauceIndex = updatedItems[itemIndex].items.findIndex(
+            (selected) => selected.id === sauce.id
+          );
+          if (sauceIndex !== -1) {
+            updatedItems[itemIndex].items.splice(sauceIndex, 1);
+          } else {
+            if (updatedItems[itemIndex].items.length < elem?.quantity) {
+              updatedItems[itemIndex].items.push({
+                ...sauce,
+                price: sauce.price,
+              });
+            } else {
+              updatedItems[itemIndex].items.shift()
+              updatedItems[itemIndex].items.push({
+                ...sauce,
+                price: sauce.price,
+              });
+            }
+          }
+          if (updatedItems[itemIndex].items.length === 0) {
+            updatedItems.splice(itemIndex, 1);
+          }
+        } else {
+          updatedItems.push({
+            ...elem,
+            items: [
+              {
+                ...sauce,
+                price:  sauce.price,
+              },
+            ],
+          });
+        }
+      
+        const isEmpty = updatedItems.length === 0;
+        setSelectedSauces(isEmpty ? { items: [] } : { items: updatedItems });
+      };
+
+  
+
+    const toggleVariantSelect = (variant) => {
+        setSelectedVariant(variant);
+        setSelectedSauces({ items: [] });
+      };
+
+      const [filteredChoiceGroups, setFilteredChoiceGroups] = useState([]);
+
+      const [selectedSauces, setSelectedSauces] = useState({
+        items: [],
+      });
+
     const [quantity, setQuantity] = React.useState(1);
 
+
+    const handleAddItemToCart = (item, quantity, notes) => {
+        let price = 0;
+        
+        if (selectedSauces?.items.length > 0) {
+          price = selectedSauces.items.reduce((sum, elem) => {
+            const elemTotal = elem.items
+              ? elem.items.reduce((innerSum, item) => {
+                const itemPrice = Number(item.price);
+                return innerSum + itemPrice;
+              }, 0)
+              : 0;
+            return sum + elemTotal;
+          }, 0);
+    
+          price = Math.round(price).toFixed(0);
+        }
+    
+        try {
+          const newItem = {
+            ...item,
+            ...(item.hasVariant ? { selectedVariant: selectedVariant } : {}),
+            isPrepared: false,
+            isComplimentary: false,
+            price: item.hasVariant
+                  ? selectedVariant.price
+                  : item.price,
+            priceBeforeCompliment: Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
+            priceWithChoiceGroup:  Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
+          };
+          actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes)
+        } catch (error) {
+          console.log("error is", error)
+        } finally {
+        }
+      };
+
+      
     return (
         <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
             <Box
@@ -37,6 +176,25 @@ export default function ItemDetailModal({
                     backgroundColor: themeColors?.ItemDetailModalBackgroundColor ? themeColors?.ItemDetailModalBackgroundColor : styles?.ItemDetailModalBackgroundColor != "" ? styles?.ItemDetailModalBackgroundColor : '#fff',
                 }}
             >
+                  <Box style={{ display: 'flex', gap: 8 }}>
+                            <IconButton
+                                onClick={onClose}
+                                style={{
+                                    backgroundColor: '#121212',
+                                    color: '#fff',
+                                    width: 36,
+                                    height: 36,
+                                    position: 'absolute',
+                                    right: '20px', 
+                                    top: '20px',
+                                    zIndex: 9999
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
+                                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
+                            >
+                                <Iconify icon="mdi:close" width={20} height={20} />
+                            </IconButton>
+                        </Box>
                 <Box
                     style={{
                         width: '45%',
@@ -77,68 +235,60 @@ export default function ItemDetailModal({
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            marginBottom: 24,
+                            marginBottom: 5,
                         }}
                     >
                         <Typography variant="h6" fontWeight="bold">
                             {item.name}
                         </Typography>
-
-                        <Box style={{ display: 'flex', gap: 8 }}>
-                            <IconButton
-                                onClick={onClose}
-                                style={{
-                                    backgroundColor: '#121212',
-                                    color: '#fff',
-                                    width: 36,
-                                    height: 36,
-                                }}
-                                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
-                                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-                            >
-                                <Iconify icon="mdi:close" width={20} height={20} />
-                            </IconButton>
-                        </Box>
                     </Box>
-
-                    <Typography variant="h6" color="text.secondary" gutterBottom>
-                        Rs. {price}
-                    </Typography>
-
-                    <Typography color="gray" style={{ marginBottom: 24 }}>
+                    <Typography color="gray" style={{ marginBottom: 15 }}>
                         {item.description || ''}
                     </Typography>
 
-                    <RadioGroup
-                        value={selectedQty}
-                        onChange={(e) => setSelectedQty(e.target.value)}
-                        style={{ marginBottom: 24 }}
-                    >
-                        <FormControlLabel
-                            value="5"
-                            control={<Radio />}
-                            label={`5 Pcs - Rs. ${item?.price}`}
-                        />
-                        <FormControlLabel
-                            value="10"
-                            control={<Radio />}
-                            label={`10 Pcs - Rs. ${item?.price * 2}`}
-                        />
-                    </RadioGroup>
-
-                    <Typography fontWeight="bold" gutterBottom>
-                        Special Instructions
+                    <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }} >
+                        Rs. {item.price}
                     </Typography>
-                    <TextField
-                        fullWidth
-                        multiline
-                        rows={3}
-                        variant="outlined"
-                        placeholder="Please enter instructions about this item"
-                        value={instructions}
-                        onChange={(e) => setInstructions(e.target.value)}
-                        style={{ marginBottom: 24 }}
-                    />
+
+
+                    <CardContent sx={{ padding: "0" }}>
+                        <FormProvider methods={methods} >
+                            <Stack spacing={1}>
+                                {item.hasVariant && (
+                                    <Variant
+                                        variants={item.variants}
+                                        hanldeSelectOption={toggleVariantSelect}
+                                        selectedVariant={selectedVariant}
+                                    />
+                                )}
+                                <Divider />
+                                {filteredChoiceGroups.map((cg, index) => (
+                                    <Group
+                                        key={index}
+                                        choiceGroup={cg}
+                                        // hanldeSelectOption={hanldeSelectOption}
+                                        hanldeSelectOption={toggleSauce}
+                                        selectedSauces={selectedSauces}
+                                        selectedVariant={selectedVariant}
+                                    />
+                                ))}
+
+                                <Stack direction="row" justifyContent="left">
+                                    <RHFTextField
+                                        sx={{ mt: 3 }}
+                                        name="description"
+                                        label="Kitchen Notes"
+                                        multiline
+                                        rows={2}
+                                        value={notes}
+                                        onChange={(e) => {
+                                            setNotes(e.target.value);
+                                        }}
+                                    />
+                                </Stack>
+                            </Stack>
+                        </FormProvider>
+                    </CardContent>
 
                     <Box
                         style={{
@@ -208,12 +358,11 @@ export default function ItemDetailModal({
                             }}
                             onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-                            onClick={() => actions.handleAddToCart(item)}
+                            onClick={() =>  { handleAddItemToCart(item, quantity, notes); onClose()}}
                         >
-                            <span>Rs. {price * quantity}</span>
+                            <span>Rs. {item.price * quantity}</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                                 Add to Cart
-                                <span style={{ transform: 'rotate(-45deg)', display: 'inline-block' }}>➜</span>
                             </span>
                         </Button>
                     </Box>

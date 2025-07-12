@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box, Typography, Container } from "@mui/material";
 import ItemCard from "./ItemCard";
+import ItemDetailModal from "../categories/ItemDetailModal";
 
 export default function PopularMenuSection({ prop, actions, styles, states }) {
   const displayItems = prop?.static?.displayitems || [];
   const [products, setProducts] = useState(displayItems);
+  const [item, setItem] = useState(null);
   const { query } = states ?? {};
 
   useEffect(() => {
@@ -48,11 +50,23 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
         <Grid container spacing={3}>
           {products.map((item, index) => (
             <Grid key={item.id || item.name} item xs={12} sm={6} md={3} lg={3}>
-              <ItemCard key={`popularItem${index}`} item={item} actions={actions} styles={styles} states={states}/>
+              <ItemCard key={`popularItem${index}`} item={item} actions={actions} styles={styles} states={states}  setItem={setItem}/>
             </Grid>
           ))}
         </Grid>
       )}
+
+      { states.openCard &&  item && <ItemDetailModal
+        key={`popularItem${item}`}
+        open={states.openCard}
+        onClose={actions.handleOpenCard}
+        item={item}
+        actions={actions}
+        styles={styles}
+        // themeColors={themeColors}
+        states={states}
+      /> }
+
     </Container>
   );
 }
