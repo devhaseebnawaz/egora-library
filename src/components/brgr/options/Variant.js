@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Typography, Box, Button } from "@mui/material";
-import { fNumber } from "src/utils/formatNumber";
+import { fNumber } from "../../../utils/formatNumber";
 
 export default function Variant({
     variants,
