@@ -23,9 +23,8 @@ const modalStyle = {
     overflow: "hidden",
 };
 
-
-
 export default function LocationModal({ open, handleClose, themeColors, actions, prop, styles, states }) {
+    
     useEffect(() => {
         if (states.citySearch) {
             states.setFilteredCities(
@@ -42,7 +41,11 @@ export default function LocationModal({ open, handleClose, themeColors, actions,
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase()) || []);
 
     return (
-        <Modal open={open} onClose={handleClose}>
+        <Modal open={open} onClose={() => {
+            if (states.selectedOutlet) {
+                handleClose()
+            }
+        }}>
             <Box style={modalStyle}>
                 <Box
                     style={{
@@ -144,167 +147,68 @@ export default function LocationModal({ open, handleClose, themeColors, actions,
                             </Box>
                         </Box>
 
-                        {states.orderType === "delivery" ? (
-                            <>
-                                <Typography variant="body2" style={{ marginBottom: "8px", textAlign: "center", fontWeight: "600" }}>
-                                    Please select your location
-                                </Typography>
+                        <>
+                            <Typography variant="body2" style={{ marginBottom: "16px", textAlign: "center", fontWeight: "600" }}>
+                                Which outlet would you like to pick-up from?
+                            </Typography>
 
-                                <Box
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        border: "1px solid #ccc",
-                                        borderRadius: "8px",
-                                        paddingLeft: "16px",
-                                        paddingRight: "16px",
-                                        paddingTop: "12px",
-                                        paddingBottom: "12px",
-                                        marginBottom: "16px",
+
+
+                            <Box style={{ marginBottom: "16px" }}>
+                                <Autocomplete
+                                    options={filteredOutlets}
+                                    getOptionLabel={(option) => option.name}
+                                    value={states.selectedOutlet}
+                                    onChange={(event, newValue) => {
+                                        states.setSelectedOutlet(newValue);
                                     }}
-                                >
-                                    <TextField
-                                        fullWidth
-                                        placeholder="Search Location"
-                                        variant="standard"
-                                        InputProps={{
-                                            disableUnderline: true,
-                                            style: {
-                                                color: "#555",
-                                                fontSize: "0.95rem",
-                                            },
-                                        }}
-                                    />
-                                    <Typography style={{ marginLeft: "8px" }}>→</Typography>
-                                </Box>
+                                    inputValue={states.searchQuery}
+                                    onInputChange={(event, newInputValue) => {
+                                        states.setSearchQuery(newInputValue);
+                                    }}
+                                    renderInput={(params) => (
+                                        <TextField
+                                            {...params}
+                                            placeholder="Search outlet"
+                                            variant="outlined"
+                                            fullWidth
+                                            InputProps={{
+                                                ...params.InputProps,
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <Typography>🔍</Typography>
+                                                    </InputAdornment>
+                                                ),
+                                                style: {
+                                                    borderRadius: "8px",
+                                                    height: "48px",
+                                                },
+                                            }}
+                                        />
+                                    )}
+                                    renderOption={(props, option) => (
+                                        <li {...props}>
+                                            <Box>
+                                                <Typography fontWeight="bold">{option.name}</Typography>
+                                                <Typography variant="body2" color="textSecondary">
+                                                    {option.location}
+                                                </Typography>
+                                            </Box>
+                                        </li>
+                                    )}
+                                    noOptionsText="No outlets found"
+                                    style={{ width: "100%" }}
+                                />
+                            </Box>
 
-                                <Divider style={{ marginBottom: "16px" }} />
 
-                                <Typography variant="body2" style={{ fontWeight: "bold", marginBottom: "4px" }}>
-                                    📍 Use Current Location
-                                </Typography>
-                                <Typography variant="caption">
-                                    DHA Phase 5, Rehman Villas, Chung Khurad, Lahore, Lahore...
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    style={{ color: "blue", textAlign: "right", marginTop: "8px", marginBottom: "16px" }}
-                                >
-                                    change
-                                </Typography>
-                            </>
-                        ) : (
-                            <>
-                                <Typography variant="body2" style={{ marginBottom: "16px", textAlign: "center", fontWeight: "600" }}>
-                                    Which outlet would you like to pick-up from?
-                                </Typography>
 
-                                <Box style={{ marginBottom: "16px" }}>
-                                    <Autocomplete
-                                        options={states.filteredCities}
-                                        getOptionLabel={(option) => option.name}
-                                        value={states.cities.find(city => city.name === states.selectedCity) || null}
-                                        onChange={(event, newValue) => {
-                                            states.setSelectedCity(newValue ? newValue.name : "");
-                                            states.setSelectedOutlet("");
-                                        }}
-                                        inputValue={states.citySearch}
-                                        onInputChange={(event, newInputValue) => {
-                                            states.setCitySearch(newInputValue);
-                                        }}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                placeholder="Search city"
-                                                variant="outlined"
-                                                fullWidth
-                                                InputProps={{
-                                                    ...params.InputProps,
-                                                    style: {
-                                                        borderRadius: "8px",
-                                                        height: "48px",
-                                                    },
-                                                }}
-                                            />
-                                        )}
-                                        noOptionsText="No cities found"
-                                        style={{ width: "100%" }}
-                                    />
-                                </Box>
-
-                                <Box style={{ marginBottom: "16px" }}>
-                                    <Autocomplete
-                                        options={filteredOutlets}
-                                        getOptionLabel={(option) => option.name}
-                                        value={filteredOutlets.find(outlet => outlet.name === states.selectedOutlet) || null}
-                                        onChange={(event, newValue) => {
-                                            states.setSelectedOutlet(newValue ? newValue.name : "");
-                                        }}
-                                        inputValue={states.searchQuery}
-                                        onInputChange={(event, newInputValue) => {
-                                            states.setSearchQuery(newInputValue);
-                                        }}
-                                        renderInput={(params) => (
-                                            <TextField
-                                                {...params}
-                                                placeholder="Search outlet"
-                                                variant="outlined"
-                                                fullWidth
-                                                InputProps={{
-                                                    ...params.InputProps,
-                                                    startAdornment: (
-                                                        <InputAdornment position="start">
-                                                            <Typography>🔍</Typography>
-                                                        </InputAdornment>
-                                                    ),
-                                                    style: {
-                                                        borderRadius: "8px",
-                                                        height: "48px",
-                                                    },
-                                                }}
-                                            />
-                                        )}
-                                        renderOption={(props, option) => (
-                                            <li {...props}>
-                                                <Box>
-                                                    <Typography fontWeight="bold">{option.name}</Typography>
-                                                    <Typography variant="body2" color="textSecondary">
-                                                        {option.location}
-                                                    </Typography>
-                                                </Box>
-                                            </li>
-                                        )}
-                                        noOptionsText="No outlets found"
-                                        style={{ width: "100%" }}
-                                    />
-                                </Box>
-
-                                {states.selectedOutlet && (
-                                    <Box style={{
-                                        backgroundColor: "#f5f5f5",
-                                        borderRadius: "8px",
-                                        padding: "16px",
-                                        marginBottom: "16px"
-                                    }}>
-                                        <Typography fontWeight="bold">{states.selectedOutlet}</Typography>
-                                        <Typography variant="body2" color="textSecondary" style={{ marginTop: "4px" }}>
-                                            {states.outlets[states.selectedCity]?.find(o => o.name === states.selectedOutlet)?.location}
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            color="primary"
-                                            style={{ marginTop: "8px", cursor: "pointer" }}
-                                        >
-                                            Get Directions
-                                        </Typography>
-                                    </Box>
-                                )}
-                            </>
-                        )}
+                        </>
 
                         <Button
                             variant="contained"
                             fullWidth
+                            onClick={() => { }}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",
@@ -315,9 +219,9 @@ export default function LocationModal({ open, handleClose, themeColors, actions,
                                 paddingBottom: "12px",
                                 marginTop: "16px",
                             }}
-                            disabled={states.orderType === "pickup" && !states.selectedOutlet}
+                            disabled={!states.selectedOutlet}
                         >
-                            {states.orderType === "delivery" ? "Confirm Selection" : "Select"}
+                            Select
                         </Button>
                     </Box>
                 </Box>
