@@ -24,9 +24,9 @@ const modalStyle = {
 };
 
 export default function LocationModal({ themeColors, actions, prop, styles, states }) {
-    
+
     const filteredOutlets = states.outlets?.filter(outlet =>
-        outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase()) || []);
+        outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase()) || '');
 
     return (
         <Modal open={states.locationModalOpen} onClose={() => {
@@ -144,12 +144,11 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
                             <Box style={{ marginBottom: "16px" }}>
                                 <Autocomplete
-                                    options={filteredOutlets}
-                                    getOptionLabel={(option) => option.name}
-                                    value={states.selectedOutlet}
-                                    onChange={(event, newValue) => {
-                                        states.setSelectedOutlet(newValue);
-                                    }}
+                                    options={outletOptions}
+                                    value={selectedOutlet}
+                                    onChange={(event, newValue) => setSelectedOutlet(newValue)}
+                                    getOptionLabel={(option) => option.name || ''}
+                                    isOptionEqualToValue={(option, value) => option.name === value.name}
                                     inputValue={states.searchQuery}
                                     onInputChange={(event, newInputValue) => {
                                         states.setSearchQuery(newInputValue);
