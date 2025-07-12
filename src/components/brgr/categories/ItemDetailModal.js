@@ -30,7 +30,6 @@ export default function ItemDetailModal({
     themeColors,
     styles,
     actions,
-    open,
     states,
     onClose,
     item,
@@ -168,7 +167,7 @@ export default function ItemDetailModal({
 
       
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="lg" fullWidth>
+        <Dialog open={states.openCard} onClose={actions.handleOpenCard} maxWidth="lg" fullWidth>
             <Box
                 style={{
                     display: 'flex',
@@ -178,7 +177,7 @@ export default function ItemDetailModal({
             >
                   <Box style={{ display: 'flex', gap: 8 }}>
                             <IconButton
-                                onClick={onClose}
+                                onClick={actions.handleOpenCard}
                                 style={{
                                     backgroundColor: '#121212',
                                     color: '#fff',
@@ -358,7 +357,7 @@ export default function ItemDetailModal({
                             }}
                             onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-                            onClick={() =>  { handleAddItemToCart(item, quantity, notes); onClose()}}
+                            onClick={() =>  { handleAddItemToCart(item, quantity, notes); actions.handleOpenCard()}}
                         >
                             <span>Rs. {item.price * quantity}</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>

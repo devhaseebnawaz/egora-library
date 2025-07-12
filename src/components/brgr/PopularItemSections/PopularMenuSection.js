@@ -56,16 +56,14 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
         </Grid>
       )}
 
-      { states.openCard &&  item && <ItemDetailModal
+      {/* { states.openCard &&  item && <ItemDetailModal
         key={`popularItem${item}`}
-        open={states.openCard}
-        onClose={actions.handleOpenCard}
         item={item}
         actions={actions}
         styles={styles}
         // themeColors={themeColors}
         states={states}
-      /> }
+      /> } */}
 
     </Container>
   );
