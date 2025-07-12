@@ -23,7 +23,7 @@ const modalStyle = {
     overflow: "hidden",
 };
 
-export default function LocationModal({ open, handleClose, themeColors, actions, prop, styles, states }) {
+export default function LocationModal({ themeColors, actions, prop, styles, states }) {
     
     useEffect(() => {
         if (states.citySearch) {
@@ -41,9 +41,9 @@ export default function LocationModal({ open, handleClose, themeColors, actions,
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase()) || []);
 
     return (
-        <Modal open={open} onClose={() => {
+        <Modal open={states.locationModalOpen} onClose={() => {
             if (states.selectedOutlet) {
-                handleClose()
+                actions.handleOpenLocationModal()
             }
         }}>
             <Box style={modalStyle}>
