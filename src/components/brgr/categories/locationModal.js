@@ -144,7 +144,8 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
                             <Box style={{ marginBottom: "16px" }}>
                                 <Autocomplete
-                                    options={outletOptions}
+
+                                    options={filteredOutlets}
                                     value={selectedOutlet}
                                     onChange={(event, newValue) => setSelectedOutlet(newValue)}
                                     getOptionLabel={(option) => option.name || ''}
