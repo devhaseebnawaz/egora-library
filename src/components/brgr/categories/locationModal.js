@@ -25,19 +25,7 @@ const modalStyle = {
 
 export default function LocationModal({ themeColors, actions, prop, styles, states }) {
     
-    useEffect(() => {
-        if (states.citySearch) {
-            states.setFilteredCities(
-                states.cities?.filter(city =>
-                    city.name.toLowerCase().includes(states.citySearch.toLowerCase())
-                )
-            );
-        } else {
-            states.setFilteredCities(states.cities);
-        }
-    }, [states.citySearch])
-
-    const filteredOutlets = states.outlets[states.selectedCity]?.filter(outlet =>
+    const filteredOutlets = states.outlets?.filter(outlet =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase()) || []);
 
     return (
