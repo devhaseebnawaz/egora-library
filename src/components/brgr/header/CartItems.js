@@ -17,7 +17,7 @@ import { useState } from "react";
 // import useSession from "src/utils/useSession";
 import { fNumber } from "src/utils/formatNumber";
 // import { fetchImage } from "src/utils/fetchImage";
-import capitalizeWords from "src/utils/capitalizeWords";
+// import capitalizeWords from "src/utils/capitalizeWords";
 
 
 const CartItems = ({ showButtons=true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick }) => {

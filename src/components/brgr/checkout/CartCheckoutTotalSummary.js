@@ -4,7 +4,7 @@ import {
   Box, Card, Stack, Typography, CardContent,
 } from "@mui/material";
 import { fNumber } from "src/utils/formatNumber";
-import { calculateAndRoundTax } from 'src/utils/tax';
+// import { calculateAndRoundTax } from 'src/utils/tax';
 
 const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData }) => {
   const { selectedVenue, cardItems } = states ?? {};
@@ -15,6 +15,13 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   const [discount, setDiscount] = useState(0);
   const [total, setTotal] = useState(0);
   const [selectedTip, setSelectedTip] = useState(cardItems?.tip || 0);
+
+  const calculateAndRoundTax = (total, taxRate, discount) => {
+    let t = total - discount
+    const taxAmount = t * taxRate;
+    const roundedTax = Math.round(taxAmount * 100) / 100;
+    return roundedTax;
+  };
 
   const isApplicable = (applicable) => applicable === "true" || applicable === true;
   
