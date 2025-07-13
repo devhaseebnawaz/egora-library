@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import {
   Box, Card, Stack, Typography, CardContent,
 } from "@mui/material";
-import { fNumber } from "src/utils/formatNumber";
+import { fNumber } from "../../../utils/formatNumber";
 // import { calculateAndRoundTax } from 'src/utils/tax';
 
 const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData }) => {
