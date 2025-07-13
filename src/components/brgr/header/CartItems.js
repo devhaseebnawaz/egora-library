@@ -10,7 +10,7 @@ import {
     Typography,
     IconButton
 } from "@mui/material";
-import Iconify from "src/components/iconify/iconify";
+import Iconify from "../iconify";
 import { useState } from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import { updateItemsToCard,} from "src/redux/slices/cardSlice";
