@@ -14,7 +14,6 @@ import Iconify from "../iconify";
 import { useState } from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import { updateItemsToCard,} from "src/redux/slices/cardSlice";
-import Image from "src/components/image/image";
 // import useSession from "src/utils/useSession";
 import { fNumber } from "src/utils/formatNumber";
 // import { fetchImage } from "src/utils/fetchImage";
