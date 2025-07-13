@@ -1,12 +1,10 @@
+'use state'
 import React, { useState } from 'react';
 import {
   Card, CardMedia, CardContent, Typography, Box, Button
 } from '@mui/material';
-import ItemDetailModal from './ItemDetailModal';
 
 export default function ItemCard({ item, actions, states }) {
-  const [selectedQty, setSelectedQty] = useState('0');
-  const [instructions, setInstructions] = useState('');
 
   return (
     <>
@@ -17,7 +15,7 @@ export default function ItemCard({ item, actions, states }) {
           boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
           padding: '0',
         }}
-        onClick={actions.handleOpenCard}
+        onClick={()=>{ actions.handleOpenCard(); states.setItemForDetailedModal(item) }}
 
       >
         <CardMedia
@@ -63,7 +61,7 @@ export default function ItemCard({ item, actions, states }) {
         </CardContent>
       </Card>
 
-      <ItemDetailModal
+      {/* <ItemDetailModal
         key={`categoryItem${item}`}
         open={states.openCard}
         onClose={actions.handleOpenCard}
@@ -74,7 +72,7 @@ export default function ItemCard({ item, actions, states }) {
         setInstructions={setInstructions}
         actions={actions}
         states={states}
-      />
+      /> */}
     </>
   );
 }

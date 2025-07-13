@@ -36,6 +36,7 @@ export default function ItemDetailModal({
     setItem
 }) {
     const methods = useForm();
+    console.log("the state choicegroups are", states.choiceGroups)
     const [choiceGroups, setChoiceGroups] = useState(states.choiceGroups);
     const [notes, setNotes] = useState(item?.notes ? item?.notes : "");
     const [selectedVariant, setSelectedVariant] = useState(
@@ -60,6 +61,7 @@ export default function ItemDetailModal({
             })
             .filter(Boolean);
     
+            console.log("the filtered groups are", filteredChoiceGroups)
           setFilteredChoiceGroups(filteredGroups);
         } else if (item?.choiceGroup && choiceGroups) {
           const filteredGroups = choiceGroups
@@ -129,6 +131,16 @@ export default function ItemDetailModal({
     const [quantity, setQuantity] = React.useState(1);
 
 
+    function generateRandomHexString(length) {
+      let result = "";
+      const characters = "0123456789abcdef";
+      const charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
+
     const handleAddItemToCart = (item, quantity, notes) => {
         let price = 0;
         
@@ -152,6 +164,8 @@ export default function ItemDetailModal({
             ...(item.hasVariant ? { selectedVariant: selectedVariant } : {}),
             isPrepared: false,
             isComplimentary: false,
+            isVoidItem: false,
+            cartItemId: generateRandomHexString(24),
             price: item.hasVariant
                   ? selectedVariant.price
                   : item.price,
@@ -167,7 +181,7 @@ export default function ItemDetailModal({
 
       
     return (
-        <Dialog open={states.openCard} onClose={actions.handleOpenCard} maxWidth="lg" fullWidth>
+        <Dialog open={states.openCard} onClose={()=>{actions.handleOpenCard(); states.setItemForDetailedModal(null) }} maxWidth="lg" fullWidth>
             <Box
                 style={{
                     display: 'flex',
@@ -357,7 +371,7 @@ export default function ItemDetailModal({
                             }}
                             onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
                             onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-                            onClick={() =>  { handleAddItemToCart(item, quantity, notes); actions.handleOpenCard()}}
+                            onClick={() =>  { handleAddItemToCart(item, quantity, notes); actions.handleOpenCard(); states.setItemForDetailedModal(null) }}
                         >
                             <span>Rs. {item.price * quantity}</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>

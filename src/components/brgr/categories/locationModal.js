@@ -24,9 +24,9 @@ const modalStyle = {
 };
 
 export default function LocationModal({ themeColors, actions, prop, styles, states }) {
-
     const filteredOutlets = states.outlets?.filter(outlet =>
-        outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase()) || '');
+        outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
+    ) || [];
 
     return (
         <Modal open={states.locationModalOpen} onClose={() => {
@@ -99,7 +99,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 }}
                             >
                                 <Button
-                                    onClick={() => states.setOrderType("delivery")}
+                                    onClick={() => actions.handleSetOrderType("delivery")}
                                     style={{
                                         borderRadius: "999px",
                                         paddingLeft: "24px",
@@ -116,7 +116,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                     DELIVERY
                                 </Button>
                                 <Button
-                                    onClick={() => states.setOrderType("pickup")}
+                                    onClick={() => actions.handleSetOrderType("pickup")}
                                     style={{
                                         borderRadius: "999px",
                                         paddingLeft: "24px",
@@ -143,13 +143,19 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
 
                             <Box style={{ marginBottom: "16px" }}>
-                                <Autocomplete
-
+                            <Autocomplete
                                     options={filteredOutlets}
-                                    value={selectedOutlet}
-                                    onChange={(event, newValue) => setSelectedOutlet(newValue)}
-                                    getOptionLabel={(option) => option.name || ''}
-                                    isOptionEqualToValue={(option, value) => option.name === value.name}
+                                    getOptionLabel={(option) => {
+                                        if (typeof option === 'string') return option;
+                                        if (option && typeof option.name === 'string') return option.name;
+                                        return '';
+                                      }}
+                                    value={states.selectedOutlet}
+                                    onChange={(event, newValue) => {
+                                        console.log("here mahum see")
+                                        actions.handleSetSelectedVenue(newValue)
+                                        states.setSelectedOutlet(newValue);
+                                    }}
                                     inputValue={states.searchQuery}
                                     onInputChange={(event, newInputValue) => {
                                         states.setSearchQuery(newInputValue);
@@ -175,7 +181,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                         />
                                     )}
                                     renderOption={(props, option) => (
-                                        <li {...props}>
+                                        <li  {...props} key={option._id} >
                                             <Box>
                                                 <Typography fontWeight="bold">{option.name}</Typography>
                                                 <Typography variant="body2" color="textSecondary">
@@ -196,7 +202,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         <Button
                             variant="contained"
                             fullWidth
-                            onClick={() => { }}
+                            onClick={() => { states.setGetNewData(true);  actions.handleOpenLocationModal() }}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",

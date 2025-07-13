@@ -38,7 +38,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states }) {
               <Grid container spacing={2}>
                 {category.items.map((item, index) => (
                   <Grid item xs={12} sm={6} md={3} key={`categoryItem${item.id}`}>
-                    {/* <ItemCard key={`categoryItem${index}item`} item={item} actions={actions} states={states}/> */}
+                    <ItemCard key={`categoryItem${index}item`} item={item} actions={actions} states={states}/>
                   </Grid>
                 ))}
               </Grid>

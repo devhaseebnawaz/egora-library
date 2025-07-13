@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Typography, Box } from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
 
-export default function ItemCard ({ item, themeColors, styles, actions, states,  setItem }) {
+export default function ItemCard ({ item, themeColors, styles, actions, states }) {
  
   const fallbackImage =
     "https://brgr.pk/_next/image?url=https%3A%2F%2Fassets.indolj.io%2Fimages%2F1743256920-smashsingle.jpeg%3Fq%3D10&w=640&q=75";
@@ -21,7 +21,7 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
           flexDirection: "column",
           height: "100%",
         }}
-        onClick={()=>{ actions.handleOpenCard(); setItem(item) }}
+        onClick={()=>{ actions.handleOpenCard(); states.setItemForDetailedModal(item) }}
       >
         <Box
           component="img"

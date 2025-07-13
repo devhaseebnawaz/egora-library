@@ -5,11 +5,13 @@ import arrowRightIcon from '@iconify-icons/mdi/arrow-right';
 import deleteIcon from '@iconify-icons/mdi/delete';
 import plusIcon from '@iconify-icons/mdi/plus';
 import closeIcon from '@iconify-icons/mdi/close';
+import CartItems from './CartItems';
 
 const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
-  const { cardItems } = states ?? []
-
+  const { items } = states.cardItems ?? []
+  const cardItems = items
+  console.log("the card iotems are", cardItems)
   return (
     <Drawer
       anchor="right"
@@ -88,64 +90,17 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
           </Box>
         ) : (
           <>
-            {cardItems?.map((item) => (
-              <Box
-                key={item.id}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom: 16,
-                }}
-              >
-                <Avatar
-                  variant="rounded"
-                  src={item.image}
-                  alt={item.name}
-                  style={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: 8,
-                    marginRight: 16,
-                  }}
-                />
-                <Box style={{ flex: 1 }}>
-                  <Typography style={{ fontSize: 15, fontWeight: 500 }}>{item.name}</Typography>
-                  <Typography style={{ fontSize: 13, color: '#888' }}>(Single)</Typography>
-                  <Typography style={{ fontSize: 15, fontWeight: 'bold' }}>
-                    Rs. {item.price}
-                  </Typography>
-                </Box>
-                <Box
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    border: '1px solid #ccc',
-                    borderRadius: 30,
-                    paddingLeft: 8,
-                    paddingRight: 8,
-                    paddingTop: 4,
-                    paddingBottom: 4,
-                    minWidth: 110,
-                    justifyContent: 'space-between',
-                    marginLeft: 8,
-                  }}
-                >
-                  <IconButton
-                    size="small"
-                    onClick={() => removeFromCart(item.id)}
-                    style={{ color: '#f44336' }}
-                  >
-                    <Icon icon={deleteIcon} width={18} height={18} />
-                  </IconButton>
-
-                  <Typography style={{ fontWeight: 500, fontSize: 14 }}>{item.quantity}</Typography>
-
-                  <IconButton size="small">
-                    <Icon icon={plusIcon} width={18} height={18} />
-                  </IconButton>
-                </Box>
-              </Box>
+            {cardItems?.map((cartItem, index) => (
+              <CartItems
+                key={index}
+                cartItem={cartItem}
+                actions={actions}
+                index={index}
+                showDeleteIndex={states.showDeleteIndex}
+                setShowDeleteIndex={states.setShowDeleteIndex}
+                handleRemoveFromCart={actions.handleRemoveFromCart}
+                handleMenuItemClick={actions.handleMenuItemClick}
+              />
             ))}
 
             <Divider style={{ margin: '16px 0' }} />
@@ -154,8 +109,10 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
               fullWidth
               disableRipple
               disableElevation
+              onClick={()=>{ onClose() }}
               startIcon={<Icon icon="mdi:plus" width={18} height={18} style={{ marginRight: 4 }} />}
               style={{
+                
                 color: '#888',
                 fontWeight: 500,
                 textTransform: 'none',
@@ -233,7 +190,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
               {['delivery', 'pickup'].map((type) => (
                 <Button
                   key={type}
-                  onClick={() => states.setOrderType(type)}
+                  onClick={() => actions.handleSetOrderType(type)}
                   size="small"
                   disableElevation
                   style={{
