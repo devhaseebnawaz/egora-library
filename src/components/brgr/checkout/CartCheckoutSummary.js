@@ -125,7 +125,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states }) => 
                                 </Button>
 
                                 <Box textAlign="center" mt={2}>
-                                    <Link href="/?6837efe718df444714f8e5bc" underline="hover" fontSize={14} >
+                                    <Link href="/" underline="hover" fontSize={14} >
                                         ← continue to add more items
                                     </Link>
                                 </Box>
