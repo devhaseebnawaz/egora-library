@@ -7,65 +7,61 @@ import plusIcon from '@iconify-icons/mdi/plus';
 import closeIcon from '@iconify-icons/mdi/close';
 import CartItems from './CartItems';
 import { fNumber } from '../../../utils/formatNumber';
+import { calculateAndRoundTax, } from '../../../utils/tax';
+import { calculateSubTotal, isApplicable, calculateServiceFee ,calculateFinalTotal} from '../../../utils/cart';
 
 const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
   const { items } = states.cardItems ?? []
   const cardItems = items
+
+  const { selectedVenue, orderType } = states ?? {}
+  const { serviceFeesObject, configurations, taxOnCash } = selectedVenue ?? {}
+  const { isServiceFeesOnWeb, isPayingTax } = configurations ?? {}
+
   console.log("the card iotems are", cardItems)
 
+  console.log('states ', states);
 
-  console.log('states ',states);
-  
+  const taxRate = isPayingTax ? taxOnCash / 100 : 0;
 
-  // const calculateSubTotal = (cart) => {
-  //   const grandTotal = cart.reduce((total, cartItem) => {
-  //     const itemQuantity = cartItem.qty;
-  //     let itemTotal =
-  //       parseFloat(
-  //         cartItem.priceWithChoiceGroup
-  //           ? cartItem.priceWithChoiceGroup
-  //           : cartItem.price
-  //       ) * itemQuantity;
-  //     if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
-  //       cartItem.selectedAddOns.forEach((addon) => {
-  //         itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
-  //       });
-  //     }
-  //     return total + itemTotal;
-  //   }, 0);
-  //   return `${grandTotal.toFixed(0)}`;
-  // };
+  let discount = 0;
+
+  let paymentOption = "cash"
+
+  let subTotal = calculateSubTotal(cardItems);
+  const taxAmount = calculateAndRoundTax(subTotal, taxRate, discount);
+
+  const serviceFee = useMemo(
+    () =>
+      cardItems?.length > 0 &&
+        (isServiceFeesOnWeb && (isApplicable(serviceFeesObject?.[orderType]?.cash?.applicable)))
+        ? calculateServiceFee(states, orderType, paymentOption, subTotal, discount)
+        : 0,
+    [cardItems, subTotal, taxAmount]
+  );
+
+  console.log('serviceFee', serviceFee);
 
 
-  const calculateSubTotal = (cart) => {
-  if (!Array.isArray(cart) || cart.length === 0) return '0';
 
-  const grandTotal = cart.reduce((total, cartItem) => {
-    const itemQuantity = cartItem.qty;
-    let itemTotal =
-      parseFloat(
-        cartItem.priceWithChoiceGroup
-          ? cartItem.priceWithChoiceGroup
-          : cartItem.price
-      ) * itemQuantity;
+  let selectedTip = 0
 
-    if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
-      cartItem.selectedAddOns.forEach((addon) => {
-        itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
-      });
+
+
+  const renderServiceFee = () => {
+    if (
+      isServiceFeesOnWeb &&
+      isApplicable(serviceFeesObject?.[orderType]?.cash?.applicable) && serviceFee > 0) {
+      return (
+        <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Typography>Service Fee</Typography>
+          <Typography>Rs. {fNumber(serviceFee)}</Typography>
+        </Box>
+      );
     }
-
-    return total + itemTotal;
-  }, 0);
-
-  return `${grandTotal.toFixed(0)}`;
-};
-
-
-
-
-
+    return null;
+  };
 
   return (
     <Drawer
@@ -165,10 +161,10 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
               fullWidth
               disableRipple
               disableElevation
-              onClick={()=>{ onClose() }}
+              onClick={() => { onClose() }}
               startIcon={<Icon icon="mdi:plus" width={18} height={18} style={{ marginRight: 4 }} />}
               style={{
-                
+
                 color: '#888',
                 fontWeight: 500,
                 textTransform: 'none',
@@ -193,6 +189,14 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 <Typography>Platform Fee</Typography>
                 <Typography>Rs. 9.9</Typography>
               </Box>
+              {renderServiceFee()}
+
+              {isPayingTax && (
+                <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography>Tax </Typography>
+                  <Typography> Rs. {taxAmount ? fNumber(taxAmount) : 0}</Typography>
+                </Box>
+              )}
               <Box
                 style={{
                   display: 'flex',
@@ -201,9 +205,20 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                   marginTop: 8,
                 }}
               >
-                <Typography>Grand Total</Typography>
-                <Typography>Rs. 20</Typography>
+                <Typography>
+                  Grand Total
+                </Typography>
+                <Typography>
+                  Rs.{" "}
+                  {fNumber((
+                    Number(calculateFinalTotal(cardItems, selectedTip, discount)) +
+                    Number(taxAmount) +
+                    Number(serviceFee) +
+                    9.9
+                  ).toFixed(2))}
+                </Typography>
               </Box>
+
             </Box>
 
             <Button
