@@ -53,7 +53,7 @@ export default function CustomNavbar({ themeColors, actions, prop, styles, state
                                 Change Location
                             </Typography>
                             <Typography variant="caption" style={{ color: themeColors?.AppBarAddressColor?.value ? themeColors?.AppBarAddressColor?.value :  styles?.AppBarAddressColor?.value != "" ?  styles?.AppBarAddressColor?.value : "#f6e6d6" }}>
-                                {prop.editable.address.value}
+                                {states?.selectedOutlet ? `${states?.selectedOutlet?.venueAddressOne} ${states?.selectedOutlet?.venueAddressOne}` : prop.editable.address.value}
                             </Typography>
                         </Box>
                     </Box>
@@ -67,7 +67,7 @@ export default function CustomNavbar({ themeColors, actions, prop, styles, state
                     >
                         <Icon icon={phoneIcon} width="20" height="20" color={themeColors?.AppBarPhoneIconColor?.value ? themeColors?.AppBarPhoneIconColor?.value :  styles?.AppBarPhoneIconColor?.value != "" ?  styles?.AppBarPhoneIconColor?.value : "#f6e6d6" } />
                         <Typography variant="body2" fontWeight="bold" style={{ color: themeColors?.AppBarPhoneColor?.value ? themeColors?.AppBarPhoneColor?.value :  styles?.AppBarPhoneColor?.value != "" ?  styles?.AppBarPhoneColor?.value : "#f6e6d6" }}>
-                            {prop.editable.phone.value}
+                            {states?.selectedOutlet ? states?.selectedOutlet?.venuePhoneNumber : prop.editable.phone.value}
                         </Typography>
                     </Box>
                 </Box>
