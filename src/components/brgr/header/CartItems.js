@@ -143,7 +143,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                                     src={cartItem?.photoURL ? `${states.storeImagesBaseUrl}/${cartItem.photoURL}`
                                         : '/assets/placeholder.png'
                                     }
-                                    alt={item.name}
+                                    alt={cartItem.name}
                                     style={{
                                         width: 64,
                                         height: 64,
