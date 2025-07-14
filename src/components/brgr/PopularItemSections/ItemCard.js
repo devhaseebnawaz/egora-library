@@ -4,9 +4,6 @@ import ItemDetailModal from "../categories/ItemDetailModal";
 
 export default function ItemCard ({ item, themeColors, styles, actions, states }) {
  
-  const fallbackImage =
-    "https://brgr.pk/_next/image?url=https%3A%2F%2Fassets.indolj.io%2Fimages%2F1743256920-smashsingle.jpeg%3Fq%3D10&w=640&q=75";
-
   return (
     <>
       <Card
@@ -27,14 +24,14 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
           component="img"
           src={
             item?.photoURL
-              ? `https://api.dev.egora.pk/v1/images/${item.photoURL}`
-              : fallbackImage
+              ? `${states.storeImagesBaseUrl}/${item.photoURL}`
+              : '/assets/placeholder.png'
           }
           alt={item?.name || "Menu Item"}
           loading="lazy"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = fallbackImage;
+            e.target.src = '/assets/placeholder.png'
           }}
           sx={{
             width: "100%",
