@@ -8,4 +8,6 @@ import Footer from './components/brgr/footer/Footer';
 import CategoryCarousel from './components/brgr/categories/CategoryCarousel';
 import LocationModal from './components/brgr/categories/locationModal';
 import ItemDetailModal from './components/brgr/categories/ItemDetailModal';
-export { ItemDetailModal, Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock };
+import CartCheckoutSummary from './components/brgr/checkout/CartCheckoutSummary';
+
+export { ItemDetailModal,CartCheckoutSummary,  Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock };
