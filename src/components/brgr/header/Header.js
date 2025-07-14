@@ -89,9 +89,9 @@ export default function CustomNavbar({
                         : themeColors?.AppBarAddressColor?.value,
                   }}
                 >
-                  {states?.selectedOutlet
-                    ? `${states?.selectedOutlet?.venueAddressOne} ${states?.selectedOutlet?.venueAddressOne}`
-                    : prop.editable.address.value}
+                  {states?.selectedVenue
+                    ? `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`
+                    : "XYZ"}
                 </Typography>
               </Box>
             </Box>
@@ -123,9 +123,9 @@ export default function CustomNavbar({
                       : themeColors?.AppBarPhoneColor?.value,
                 }}
               >
-                {states?.selectedOutlet
-                  ? states?.selectedOutlet?.venuePhoneNumber
-                  : prop.editable.phone.value}
+                {states?.selectedVenue
+                  ? states?.selectedVenue?.venuePhoneNumber
+                  : "03XX-XXXXXXX"}
               </Typography>
             </Box>
           </Box>
@@ -189,9 +189,9 @@ export default function CustomNavbar({
             backgroundColor: "#121212",
           }}
         >
-          {prop.editable.logoImage ? (
+          {prop?.editable?.logoImage ? (
             <UniversalImage
-              src={prop.editable.logoImage.value}
+              src={prop?.editable?.logoImage?.value}
               alt="BRGR Logo"
               layout="fill"
               objectFit="contain"
