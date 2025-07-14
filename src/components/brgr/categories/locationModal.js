@@ -31,7 +31,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
     return (
         <Modal open={states.locationModalOpen} onClose={() => {
-            if (states.selectedOutlet) {
+            if (!states.selectedOutlet) {
                 actions.handleOpenLocationModal()
             }
         }}>
