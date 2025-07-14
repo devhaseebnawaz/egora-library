@@ -8,7 +8,8 @@ import {
     Divider,
     Stack,
     Typography,
-    IconButton
+    IconButton,
+    Avatar
 } from "@mui/material";
 import Iconify from "../iconify";
 import { useState } from "react";
@@ -20,7 +21,7 @@ import { fNumber } from "../../../utils/formatNumber";
 // import capitalizeWords from "src/utils/capitalizeWords";
 
 
-const CartItems = ({ showButtons=true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick }) => {
+const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick,states }) => {
 
     console.log("the cart item sis", cartItem)
     // const sessionInfo = useSession();
@@ -71,18 +72,18 @@ const CartItems = ({ showButtons=true, actions, cartItem, index, showDeleteIndex
     const calculateMenuItemTotal = (cartItem) => {
         const itemQuantity = cartItem.qty;
         let p =
-          cartItem?.choiceGroup?.length > 0 || cartItem?.variants?.length > 0
-            ? cartItem?.priceWithChoiceGroup
-            : cartItem?.price;
+            cartItem?.choiceGroup?.length > 0 || cartItem?.variants?.length > 0
+                ? cartItem?.priceWithChoiceGroup
+                : cartItem?.price;
         let itemTotal = p * itemQuantity;
         if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
-          cartItem.selectedAddOns.forEach((addon) => {
-            itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
-          });
+            cartItem.selectedAddOns.forEach((addon) => {
+                itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
+            });
         }
         itemTotal = itemTotal.toFixed(0);
         return `Rs. ${fNumber(itemTotal)}`;
-      };
+    };
 
 
     return (
@@ -137,6 +138,19 @@ const CartItems = ({ showButtons=true, actions, cartItem, index, showDeleteIndex
                                         },
                                     }}
                                 /> */}
+                                <Avatar
+                                    variant="rounded"
+                                    src={cartItem?.photoURL ? `${states.storeImagesBaseUrl}/${cartItem.photoURL}`
+                                        : '/assets/placeholder.png'
+                                    }
+                                    alt={item.name}
+                                    style={{
+                                        width: 64,
+                                        height: 64,
+                                        borderRadius: 8,
+                                        marginRight: 16,
+                                    }}
+                                />
                             </Box>
 
                             <Stack>
@@ -153,7 +167,7 @@ const CartItems = ({ showButtons=true, actions, cartItem, index, showDeleteIndex
                                             fontWeight: 400,
                                             fontSize: "14px",
                                             marginLeft: "9px",
-                                            cursor: showButtons? "pointer" : "",
+                                            cursor: showButtons ? "pointer" : "",
                                             "@media (max-width: 600px)": {
                                                 whiteSpace: "nowrap",
                                                 overflow: "hidden",
@@ -302,53 +316,53 @@ const CartItems = ({ showButtons=true, actions, cartItem, index, showDeleteIndex
                             flexWrap: "nowrap",
                         }}
                     >
-                       {!showButtons && 
-                        <Typography sx={{ fontSize: "16px", color: "#F08203" }}>
-                                {cartItem.qty}
-                            </Typography>}
-                       {
-                        showButtons &&
-                        <Box
-                            sx={{
-                                height: "40px",
-                                width: "130px",
-                                borderRadius: "20px",
-                                border: "2px solid #F08203",
-                                marginRight: "10px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                px: 1,
-                            }}
-                        >
-                            {cartItem.qty > 1 ? (
-                                <IconButton
-                                    onClick={() => { console.log("coming here mahum"); actions.updateItemFromCardDecByOne(cartItem)}}
-                                    sx={{ color: "#F08203", p: 0 }}
-                                >
-                                    <Iconify icon={"ic:baseline-minus"} />
-                                </IconButton>
-                            ) : (
-                                <IconButton
-                                    onClick={() => { console.log("coming here mahum as well");  actions.handleRemoveFromCart(cartItem)}}
-                                    sx={{ color: "#F08203", p: 0 }}
-                                >
-                                    <Iconify icon={"mdi:trash-outline"} />
-                                </IconButton>
-                            )}
-
+                        {!showButtons &&
                             <Typography sx={{ fontSize: "16px", color: "#F08203" }}>
                                 {cartItem.qty}
-                            </Typography>
-
-                            <IconButton
-                                onClick={() => actions.updateItemFromCardAddByOne(cartItem)}
-                                sx={{ color: "#F08203", p: 0 }}
+                            </Typography>}
+                        {
+                            showButtons &&
+                            <Box
+                                sx={{
+                                    height: "40px",
+                                    width: "130px",
+                                    borderRadius: "20px",
+                                    border: "2px solid #F08203",
+                                    marginRight: "10px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    px: 1,
+                                }}
                             >
-                                <Iconify icon={"ic:baseline-plus"} />
-                            </IconButton>
-                        </Box>
-                       }
+                                {cartItem.qty > 1 ? (
+                                    <IconButton
+                                        onClick={() => { console.log("coming here mahum"); actions.updateItemFromCardDecByOne(cartItem) }}
+                                        sx={{ color: "#F08203", p: 0 }}
+                                    >
+                                        <Iconify icon={"ic:baseline-minus"} />
+                                    </IconButton>
+                                ) : (
+                                    <IconButton
+                                        onClick={() => { console.log("coming here mahum as well"); actions.handleRemoveFromCart(cartItem) }}
+                                        sx={{ color: "#F08203", p: 0 }}
+                                    >
+                                        <Iconify icon={"mdi:trash-outline"} />
+                                    </IconButton>
+                                )}
+
+                                <Typography sx={{ fontSize: "16px", color: "#F08203" }}>
+                                    {cartItem.qty}
+                                </Typography>
+
+                                <IconButton
+                                    onClick={() => actions.updateItemFromCardAddByOne(cartItem)}
+                                    sx={{ color: "#F08203", p: 0 }}
+                                >
+                                    <Iconify icon={"ic:baseline-plus"} />
+                                </IconButton>
+                            </Box>
+                        }
 
 
                         {(showDeleteIndex === index && cartItem.qty > 1) && (
