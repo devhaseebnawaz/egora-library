@@ -9,6 +9,7 @@ import {
     InputAdornment,
     Autocomplete
 } from "@mui/material";
+import UniversalImage from "../../../UniversalImage";
 
 const modalStyle = {
     position: "absolute",
@@ -38,27 +39,25 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 <Box
                     style={{
                         position: "absolute",
-                        top: 9,
+                        top: "12%",
                         left: "50%",
-                        transform: "translateX(-50%)",
-                        width: 80,
-                        height: 80,
+                        transform: "translate(-50%, -50%)",
+                        width: 100,
+                        height: 100,
                         borderRadius: "50%",
-                        backgroundColor: "black",
-                        zIndex: 10,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        overflow: "hidden",
+                        backgroundColor: "#121212",
+                        marginTop: "8px",
                     }}
                 >
-                    <img
-                        src="/brgr/logo/logo.webp"
-                        alt="BRGR"
-                        style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "contain",
-                        }}
+                    <UniversalImage
+                        src={prop.editable.logoImage.value}
+                        alt="BRGR Logo"
+                        layout="fill"
+                        objectFit="contain"
+                        onError={() => console.log("Image failed to load")}
+                        width="100%"
+                        height="100%"
                     />
                 </Box>
 
@@ -68,7 +67,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                             flex: 1,
                             padding: "32px",
                             paddingTop: "48px",
-                            marginTop: "40px",
+                            marginTop: "60px",
                         }}
                     >
                         <Typography
