@@ -102,6 +102,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states }) => 
                                         setShowDeleteIndex={states.setShowDeleteIndex}
                                         handleRemoveFromCart={actions.handleRemoveFromCart}
                                         handleMenuItemClick={actions.handleMenuItemClick}
+                                        states={states}
                                     />
                                 ))}
                                 <CartCheckoutTotalSummary
