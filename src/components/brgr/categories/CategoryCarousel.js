@@ -71,7 +71,7 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
             }
           `}</style>
 
-                    {states.categoryCarousel.map((cat, idx) => (
+                    {states?.categoryCarousel?.map((cat, idx) => (
                         <Button
                             key={idx}
                             style={{
