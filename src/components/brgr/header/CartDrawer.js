@@ -6,12 +6,42 @@ import deleteIcon from '@iconify-icons/mdi/delete';
 import plusIcon from '@iconify-icons/mdi/plus';
 import closeIcon from '@iconify-icons/mdi/close';
 import CartItems from './CartItems';
+import { fNumber } from '../../../utils/formatNumber';
 
 const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states }) => {
 
   const { items } = states.cardItems ?? []
   const cardItems = items
   console.log("the card iotems are", cardItems)
+
+
+  console.log('states ',states);
+  
+
+  const calculateSubTotal = (cart) => {
+    const grandTotal = cart.reduce((total, cartItem) => {
+      const itemQuantity = cartItem.qty;
+      let itemTotal =
+        parseFloat(
+          cartItem.priceWithChoiceGroup
+            ? cartItem.priceWithChoiceGroup
+            : cartItem.price
+        ) * itemQuantity;
+      if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
+        cartItem.selectedAddOns.forEach((addon) => {
+          itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
+        });
+      }
+      return total + itemTotal;
+    }, 0);
+    return `${grandTotal.toFixed(0)}`;
+  };
+
+
+
+
+
+
   return (
     <Drawer
       anchor="right"
@@ -100,6 +130,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 setShowDeleteIndex={states.setShowDeleteIndex}
                 handleRemoveFromCart={actions.handleRemoveFromCart}
                 handleMenuItemClick={actions.handleMenuItemClick}
+                states={states}
               />
             ))}
 
@@ -130,12 +161,12 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
 
             <Box style={{ marginBottom: 8 }}>
               <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography>Total</Typography>
-                <Typography>Rs. 10</Typography>
+                <Typography>Sub Total</Typography>
+                <Typography>Rs. {fNumber(calculateSubTotal(cardItems))}</Typography>
               </Box>
               <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography>Delivery Fee</Typography>
-                <Typography>Rs. 40</Typography>
+                <Typography>Platform Fee</Typography>
+                <Typography>Rs. 9.9</Typography>
               </Box>
               <Box
                 style={{
