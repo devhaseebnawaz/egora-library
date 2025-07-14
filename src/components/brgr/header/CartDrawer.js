@@ -18,24 +18,49 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
   console.log('states ',states);
   
 
+  // const calculateSubTotal = (cart) => {
+  //   const grandTotal = cart.reduce((total, cartItem) => {
+  //     const itemQuantity = cartItem.qty;
+  //     let itemTotal =
+  //       parseFloat(
+  //         cartItem.priceWithChoiceGroup
+  //           ? cartItem.priceWithChoiceGroup
+  //           : cartItem.price
+  //       ) * itemQuantity;
+  //     if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
+  //       cartItem.selectedAddOns.forEach((addon) => {
+  //         itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
+  //       });
+  //     }
+  //     return total + itemTotal;
+  //   }, 0);
+  //   return `${grandTotal.toFixed(0)}`;
+  // };
+
+
   const calculateSubTotal = (cart) => {
-    const grandTotal = cart.reduce((total, cartItem) => {
-      const itemQuantity = cartItem.qty;
-      let itemTotal =
-        parseFloat(
-          cartItem.priceWithChoiceGroup
-            ? cartItem.priceWithChoiceGroup
-            : cartItem.price
-        ) * itemQuantity;
-      if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
-        cartItem.selectedAddOns.forEach((addon) => {
-          itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
-        });
-      }
-      return total + itemTotal;
-    }, 0);
-    return `${grandTotal.toFixed(0)}`;
-  };
+  if (!Array.isArray(cart) || cart.length === 0) return '0';
+
+  const grandTotal = cart.reduce((total, cartItem) => {
+    const itemQuantity = cartItem.qty;
+    let itemTotal =
+      parseFloat(
+        cartItem.priceWithChoiceGroup
+          ? cartItem.priceWithChoiceGroup
+          : cartItem.price
+      ) * itemQuantity;
+
+    if (cartItem.selectedAddOns && cartItem.selectedAddOns.length > 0) {
+      cartItem.selectedAddOns.forEach((addon) => {
+        itemTotal += parseFloat(addon.price.replace("Rs. ", ""));
+      });
+    }
+
+    return total + itemTotal;
+  }, 0);
+
+  return `${grandTotal.toFixed(0)}`;
+};
 
 
 
