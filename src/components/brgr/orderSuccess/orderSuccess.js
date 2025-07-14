@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Box, Typography, Stack, Card, CardContent, Divider, Button, Chip } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import RoomIcon from '@mui/icons-material/Room';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 export default function OrderSuccessPage(open, onClose, themeColors, actions, prop, styles, states) {
 
@@ -22,7 +19,7 @@ export default function OrderSuccessPage(open, onClose, themeColors, actions, pr
     return (
         <Box px={2} py={4} sx={{ backgroundColor: "#f5f6f7", minHeight: "100vh" }}>
             <Stack alignItems="center" spacing={2} mb={4}>
-                <CheckCircleIcon color="success" sx={{ fontSize: 64 }} />
+           
                 <Typography variant="h5" fontWeight={700}>Thank You!</Typography>
                 <Typography color="text.secondary">Your order has been placed successfully</Typography>
             </Stack>
@@ -56,7 +53,7 @@ export default function OrderSuccessPage(open, onClose, themeColors, actions, pr
                     style={{ color: '#f44336', textDecoration: 'none', fontSize: '14px' }}
                 >
                     <Stack direction="row" alignItems="center" spacing={0.5}>
-                        <RoomIcon fontSize="small" />
+                      
                         <span>View Location</span>
                     </Stack>
                 </a>
@@ -80,7 +77,7 @@ export default function OrderSuccessPage(open, onClose, themeColors, actions, pr
                     <Card sx={{ minWidth: 220, mt: { xs: 2, md: 0 } }}>
                         <CardContent>
                             <Stack direction="row" alignItems="center" spacing={1}>
-                                <CreditCardIcon fontSize="small" />
+                             
                                 <Typography fontWeight={600}>Payment</Typography>
                             </Stack>
                             <Divider sx={{ my: 1 }} />
