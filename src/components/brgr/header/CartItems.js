@@ -163,6 +163,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                                 >
                                     <Typography
                                         // onClick={() => handleMenuItemClick(cartItem)}
+                                         onClick={()=>{ actions.handleOpenCard(); actions.handleItemEditOpen(), states.setItemForDetailedModal(cartItem) }}
                                         sx={{
                                             fontWeight: 400,
                                             fontSize: "14px",
