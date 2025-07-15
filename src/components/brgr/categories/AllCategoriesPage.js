@@ -11,6 +11,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states }) {
 
   const { query } = states ?? {}
 
+  
   useEffect(() => {
     if (query && query.trim() !== "") {
       const filtered = prop.static.displaycategories.filter((p) =>
