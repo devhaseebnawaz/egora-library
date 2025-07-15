@@ -36,7 +36,6 @@ export default function ItemDetailModal({
     setItem
 }) {
     const methods = useForm();
-    console.log("the state choicegroups are", states.choiceGroups)
     const [choiceGroups, setChoiceGroups] = useState(states.choiceGroups);
     const [notes, setNotes] = useState(item?.notes ? item?.notes : "");
     const [selectedVariant, setSelectedVariant] = useState(
