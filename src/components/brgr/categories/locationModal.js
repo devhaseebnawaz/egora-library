@@ -201,7 +201,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         <Button
                             variant="contained"
                             fullWidth
-                            onClick={() => { states.setGetNewData(true);  actions.handleOpenLocationModal() }}
+                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(); actions.handleDeleteCartBySessionId();}}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",

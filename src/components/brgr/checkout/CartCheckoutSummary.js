@@ -42,9 +42,12 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states }) => 
 
     const onSubmit = async (data) => {
         states.setCustomerInfo(data)
-        actions.handlePlaceOrder({ ...orderData, customer: { ...data } });
-        actions.naviagateOrderSuccess()
+        const response = await actions.handlePlaceOrder({ ...orderData, customer: { ...data } });
+        if(response){
+            actions.naviagateOrderSuccess()
+        }
     };
+
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
