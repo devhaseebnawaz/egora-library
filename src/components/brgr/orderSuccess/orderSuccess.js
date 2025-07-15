@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { Box, Typography, Stack, Card, CardContent, Divider, Button, Chip } from '@mui/material';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states }) {
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (!states?.orderData || Object.keys(states?.orderData).length === 0) {
-            actions.navigateToHome()
-        }
-        
-    }, [actions, states ]);
+    //     // if (!states?.orderData || Object.keys(states?.orderData).length === 0) {
+    //     //     actions.navigateToHome()
+    //     // }
+
+    // }, [actions, states ]);
     const orderId = states?.orderData?.billNumber;
     const venue = states?.selectedVenue?.name;
     const location = `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressTwo}`
