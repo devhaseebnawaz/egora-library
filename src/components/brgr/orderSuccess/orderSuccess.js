@@ -3,9 +3,11 @@ import { Box, Typography, Stack, Card, CardContent, Divider, Button, Chip } from
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states }) {
     useEffect(() => {
+
         if (!states?.orderData || Object.keys(states?.orderData).length === 0) {
             actions.navigateToHome()
         }
+        
     }, [actions, states ]);
     const orderId = states?.orderData?.billNumber;
     const venue = states?.selectedVenue?.name;
