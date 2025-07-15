@@ -91,7 +91,7 @@ export default function CustomNavbar({
                 >
                   {states?.selectedVenue
                     ? `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`
-                    : "XYZ"}
+                    : "Address"}
                 </Typography>
               </Box>
             </Box>

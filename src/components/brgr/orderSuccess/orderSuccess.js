@@ -1,20 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, Stack, Card, CardContent, Divider, Button, Chip } from '@mui/material';
 
-export default function OrderSuccessPage(open, onClose, themeColors, actions, prop, styles, states) {
-
+export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states }) {
     useEffect(() => {
-        if (!states?.orderData || Object.keys(states.orderData).length === 0) {
+        if (!states?.orderData || Object.keys(states?.orderData).length === 0) {
             actions.navigateToHome()
         }
-    }, []);
-    
-    const orderId = states.orderData.billNumber;
-    const venue = states.selectedVenue.name;
+    }, [actions, states ]);
+    const orderId = states?.orderData?.billNumber;
+    const venue = states?.selectedVenue?.name;
     const location = `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressTwo}`
     const phone = states?.selectedVenue?.venuePhoneNumber;
-    const total = states.orderData.total;
-    const customerName = `${states.orderData.customer.firstName} ${states.orderData.customer.lastName}`;
+    const total = states?.orderData?.total;
+    const customerName = `${states?.orderData?.customer?.firstName} ${states?.orderData?.customer?.lastName}`;
 
     return (
         <Box px={2} py={4} sx={{ backgroundColor: "#f5f6f7", minHeight: "100vh" }}>
@@ -88,5 +86,6 @@ export default function OrderSuccessPage(open, onClose, themeColors, actions, pr
                 </Stack>
             </Box>
         </Box>
+        
     );
 }
