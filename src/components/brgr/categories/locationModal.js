@@ -151,7 +151,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                       }}
                                     value={states.selectedOutlet}
                                     onChange={(event, newValue) => {
-                                        console.log("here mahum see")
                                         actions.handleSetSelectedVenue(newValue)
                                         states.setSelectedOutlet(newValue);
                                     }}
@@ -201,7 +200,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         <Button
                             variant="contained"
                             fullWidth
-                            onClick={() => { states.setGetNewData(true);  actions.handleOpenLocationModal() }}
+                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(); actions.handleDeleteCartBySessionId();}}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",
