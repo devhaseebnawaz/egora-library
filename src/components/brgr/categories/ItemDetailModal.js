@@ -219,9 +219,14 @@ export default function ItemDetailModal({
                     }}
                 >
                     <Box
-                        component="img"
-                        src={item.img || item.image}
-                        alt={item.name}
+                     component="img"
+                     src={item?.photoURL ? `${states.storeImagesBaseUrl}/${item.photoURL}` : '/assets/placeholder.png'}
+                     alt={item?.name || "Menu Item"}
+                     loading="lazy"
+                     onError={(e) => {
+                     e.target.onerror = null;
+                     e.target.src = '/assets/placeholder.png'
+                      }}
                         style={{
                             maxWidth: '100%',
                             maxHeight: '100%',
