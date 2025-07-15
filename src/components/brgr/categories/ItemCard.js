@@ -20,7 +20,11 @@ export default function ItemCard({ item, actions, states }) {
       >
         <CardMedia
           component="img"
-          image={item.img}
+          image={
+            item?.photoURL
+              ? `${states.storeImagesBaseUrl}/${item.photoURL}`
+              : '/assets/placeholder.png'
+          }
           alt={item.name}
           style={{ height: '250px', objectFit: 'cover' }}
         />

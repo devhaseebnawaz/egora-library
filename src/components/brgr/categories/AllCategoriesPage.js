@@ -11,17 +11,29 @@ export default function AllCategoriesPage({ prop, actions, styles, states }) {
 
   const { query } = states ?? {}
 
-  
   useEffect(() => {
-    if (query && query.trim() !== "") {
-      const filtered = prop.static.displaycategories.filter((p) =>
-        p.name.toLowerCase().includes(states.query.toLowerCase())
+  if (query && query.trim() !== "") {
+    const filtered = (prop.static.displaycategories || []).map((category) => {
+      const filteredItems = category.items?.filter((item) =>
+        item.name.toLowerCase().includes(query.toLowerCase())
       );
-      setProducts(filtered);
-    } else {
-      setProducts(prop.static.displaycategories || []);
-    }
-  }, [states.query, prop.static.displaycategories]);
+      const isCategoryMatch = category.name.toLowerCase().includes(query.toLowerCase());
+
+      if (isCategoryMatch || filteredItems.length > 0) {
+        return {
+          ...category,
+          items: filteredItems.length > 0 ? filteredItems : category.items
+        };
+      }
+
+      return null;
+    }).filter(Boolean); 
+
+    setProducts(filtered);
+  } else {
+    setProducts(prop.static.displaycategories || []);
+  }
+}, [states.query, prop.static.displaycategories]);
 
 
   return (
