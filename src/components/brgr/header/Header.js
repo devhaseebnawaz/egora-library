@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState } from "react";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify-icons/mdi/map-marker";
@@ -16,6 +16,13 @@ export default function CustomNavbar({
   styles,
   states,
 }) {
+
+  useEffect(() => {
+    if (states.selectedVenue) {
+      states.setGetNewData(true);
+    }
+  }, [])
+
   return (
     <>
       <AppBar
