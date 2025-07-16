@@ -30,7 +30,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
     ) || [];
 
     return (
-        <Modal open={!states.selectedVenue || states.locationModalOpen} onClose={() => {
+        <Modal open={!states.selectedVenue && states.locationModalOpen} onClose={() => {
             if (!states.selectedVenue) {
                 actions.handleOpenLocationModal()
             }
