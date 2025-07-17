@@ -28,9 +28,11 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
     const filteredOutlets = states.outlets?.filter(outlet =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];
+       const openModal = (!states.selectedVenue && states.locationModalOpen) || states.locationModalOnClick;
+
 
     return (
-        <Modal open={!states.selectedVenue && states.locationModalOpen} onClose={() => {
+        <Modal open={openModal} onClose={() => {
             if (!states.selectedVenue) {
                 actions.handleOpenLocationModal()
             }
@@ -201,7 +203,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         <Button
                             variant="contained"
                             fullWidth
-                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(); actions.handleDeleteCartBySessionId();}}
+                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(); actions.handleOpenLocationModalOnClick(false); actions.handleDeleteCartBySessionId(); }}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",
