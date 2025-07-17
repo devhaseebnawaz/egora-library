@@ -81,9 +81,19 @@ export default function ItemCard({
                 //   ? globalComponentStyles.Button.backgroundColor.value
                 //   : themeColors?.ItemButtonColor?.value,
 
-                styles?.ItemButtonColor?.value?.trim() ||
-                globalComponentStyles?.Button?.backgroundColor?.value?.trim() ||
-                themeColors.ItemButtonColor.value,
+                // styles?.ItemButtonColor?.value?.trim() ||
+                // globalComponentStyles?.Button?.backgroundColor?.value?.trim() ||
+                // themeColors.ItemButtonColor.value,
+
+
+                 styles?.ItemButtonColor?.value != ""
+                        ? styles?.ItemButtonColor?.value
+                        :  globalComponentStyles?.Button?.backgroundColor?.value != ""
+                        ?  globalComponentStyles?.Button?.backgroundColor?.value
+                        : themeColors?.ItemButtonColor?.value,
+
+
+
               color: "#fff",
               borderRadius: "20px",
               padding: "8px 32px",
