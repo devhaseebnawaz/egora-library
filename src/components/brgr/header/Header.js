@@ -17,12 +17,6 @@ export default function CustomNavbar({
   states,
 }) {
 
-  useEffect(() => {
-    if (states.selectedVenue) {
-      states.setGetNewData(true);
-    }
-  }, [])
-
   return (
     <>
       <AppBar
