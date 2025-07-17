@@ -11,11 +11,10 @@ export default function HeroCarousel({ prop, themeColors, styles }) {
   const isJumpingRef = useRef(false);
   const hasMountedRef = useRef(false);
 
-  let { editable } = prop ?? {}
-  let { carouselImages } = editable ?? {}
+  let  carouselImages  = states.carouselImages ?? {}
 
-  const totalSlides = carouselImages.value.length;
-  const fullSlides = [carouselImages.value[totalSlides - 1], ...carouselImages.value, carouselImages.value[0]];
+  const totalSlides = carouselImages.length;
+  const fullSlides = [carouselImages[totalSlides - 1], ...carouselImages, carouselImages[0]];
 
   const goToIndex = (index) => {
     setCurrentIndex(index + 1);
