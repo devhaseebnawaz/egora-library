@@ -55,7 +55,7 @@ export default function CustomNavbar({
                 gap: "8px",
                 cursor: "pointer",
               }}
-              onClick={actions.handleOpenLocationModal}
+              onClick={()=>actions.handleOpenLocationModal(true)}
             >
               <Icon
                 icon={locationIcon}
