@@ -27,7 +27,7 @@ const SearchBar = ( { prop, states } ) => {
       >
         <InputBase
           sx={{ ml: 2, flex: 1 }}
-          placeholder={states.searchPlaceHolder.placeholder}
+          placeholder="Search for item by title..."
           inputProps={{ 'aria-label': 'search items' }}
           value={query}
           onChange={(e) => setQuery(e.target.value)}

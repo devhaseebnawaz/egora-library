@@ -190,9 +190,9 @@ export default function CustomNavbar({
             backgroundColor: "#121212",
           }}
         >
-          {states.headerLogo ? (
+          {prop?.editable?.logoImage ? (
             <UniversalImage
-              src={states.headerLogo[0].image}
+              src={prop?.editable?.logoImage?.value}
               alt="BRGR Logo"
               layout="fill"
               objectFit="contain"
