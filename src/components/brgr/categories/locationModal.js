@@ -34,7 +34,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
     return (
         <Modal open={openModal} onClose={() => {
             if (!states.selectedVenue) {
-                actions.handleOpenLocationModal()
+                actions.handleOpenLocationModal(false)
             }
         }}>
             <Box style={modalStyle}>
@@ -203,7 +203,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         <Button
                             variant="contained"
                             fullWidth
-                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(); actions.handleOpenLocationModalOnClick(false); actions.handleDeleteCartBySessionId(); }}
+                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(false); actions.handleOpenLocationModalOnClick(false); actions.handleDeleteCartBySessionId(); }}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",
