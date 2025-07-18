@@ -4,14 +4,14 @@ import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 
-export default function HeroCarousel({ prop, themeColors, styles }) {
+export default function HeroCarousel({ prop, themeColors, styles, states }) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const slideInterval = useRef(null);
   const isJumpingRef = useRef(false);
   const hasMountedRef = useRef(false);
 
-  let  carouselImages  = states.carouselImages ?? {}
+  let carouselImages = states.carouselImages ?? {}
 
   const totalSlides = carouselImages.length;
   const fullSlides = [carouselImages[totalSlides - 1], ...carouselImages, carouselImages[0]];
