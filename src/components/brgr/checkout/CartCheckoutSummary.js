@@ -126,9 +126,8 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     prop={prop}
                                     styles={styles}
                                     states={states}
-                                    // PaymentComponent={PaymentComponent}
+                                    PaymentComponent={PaymentComponent}
                                     />
-                                    <PaymentComponent/>
                                 {states.selectedPaymentMethod === "cash" &&
                                     <Button
                                         variant="contained"
