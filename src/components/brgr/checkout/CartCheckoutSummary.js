@@ -9,7 +9,7 @@ import FormProvider from "../../../components/hook-form";
 import * as Yup from "yup";
 import CartItems from '../header/CartItems';
 import CartCheckoutTotalSummary from './CartCheckoutTotalSummary';
-// import PaymentMethods from './PaymentMethods';
+import PaymentMethods from './PaymentMethods';
 
 const UserSchema = Yup.object().shape({
     firstName: Yup.string().required("First name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
@@ -121,13 +121,13 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     states={states}
                                     setOrderData={setOrderData}
                                 />
-                                {/* <PaymentMethods
+                                <PaymentMethods
                                     actions={actions}
                                     prop={prop}
                                     styles={styles}
                                     states={states}
                                     PaymentComponent={PaymentComponent}
-                                /> */}
+                                />
                                 {/* {states.selectedPaymentMethod === "cash" && */}
                                     <Button
                                         variant="contained"
