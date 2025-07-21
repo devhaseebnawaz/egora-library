@@ -28,7 +28,7 @@ export default function PaymentMethods({
   prop,
   styles,
   states,
-  // PaymentComponent
+  PaymentComponent
 }) {
 
   return (
@@ -48,7 +48,7 @@ export default function PaymentMethods({
             <PaymentOption
               key={option.title}
               option={option}
-              isSelected={selectedPaymentMethod === option.value}
+              isSelected={states.selectedPaymentMethod === option.value}
               hasChild={option.value === "card"}
               isCreditMethod={option.value === "card" && states.selectedPaymentMethod === "card"}
             />
@@ -56,14 +56,14 @@ export default function PaymentMethods({
         </Stack>
       </RadioGroup>
 
-      {/* {states.selectedPaymentMethod === "card" && states.openPaymentCard && (
+      {states.selectedPaymentMethod === "card" && states.openPaymentCard && (
         <PaymentComponent
           actions={actions}
           prop={prop}
           styles={styles}
           states={states}
         />
-      )} */}
+      )} 
     </>
   );
 }

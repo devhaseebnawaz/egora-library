@@ -128,7 +128,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     states={states}
                                     PaymentComponent={PaymentComponent}
                                 />
-                                {/* {states.selectedPaymentMethod === "cash" && */}
+                                {states.selectedPaymentMethod === "cash" &&
                                     <Button
                                         variant="contained"
                                         fullWidth
@@ -137,7 +137,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     >
                                         {isSubmitting ? "Placing Order..." : "Place Order"}
                                     </Button>
-                                {/* } */}
+                                 } 
                                 <Box textAlign="center" mt={2}>
                                     <Link href="/" underline="hover" fontSize={14} >
                                         ← continue to add more items
