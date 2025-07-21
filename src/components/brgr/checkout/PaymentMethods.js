@@ -56,7 +56,7 @@ export default function PaymentMethods({
         </Stack>
       </RadioGroup>
 
-      {/* {states.method === "card" && states.openPaymentCard && (
+      {/* {states.selectedPaymentMethod === "card" && states.openPaymentCard && (
         <PaymentComponent
           actions={actions}
           prop={prop}
