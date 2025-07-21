@@ -28,7 +28,7 @@ export default function PaymentMethods({
   prop,
   styles,
   states,
-  PaymentComponent
+  // PaymentComponent
 }) {
 
   return (
@@ -56,14 +56,14 @@ export default function PaymentMethods({
         </Stack>
       </RadioGroup>
 
-      {states.method === "card" && states.openPaymentCard && (
+      {/* {states.method === "card" && states.openPaymentCard && (
         <PaymentComponent
           actions={actions}
           prop={prop}
           styles={styles}
           states={states}
         />
-      )}
+      )} */}
     </>
   );
 }
