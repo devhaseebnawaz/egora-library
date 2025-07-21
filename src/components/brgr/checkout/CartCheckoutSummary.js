@@ -9,6 +9,7 @@ import FormProvider from "../../../components/hook-form";
 import * as Yup from "yup";
 import CartItems from '../header/CartItems';
 import CartCheckoutTotalSummary from './CartCheckoutTotalSummary';
+import PaymentMethods from './PaymentMethods';
 
 const UserSchema = Yup.object().shape({
     firstName: Yup.string().required("First name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
@@ -108,14 +109,6 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                         states={states}
                                     />
                                 ))}
-                                {PaymentComponent && (
-                                    <PaymentComponent
-                                        actions={actions}
-                                        prop={prop}
-                                        styles={styles}
-                                        states={states}
-                                    />
-                                )}
                                 <CartCheckoutTotalSummary
                                     open={states.locationModalOpen}
                                     handleClose={actions.handleOpenLocationModal}
@@ -126,16 +119,23 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     states={states}
                                     setOrderData={setOrderData}
                                 />
-
-                                <Button
-                                    variant="contained"
-                                    fullWidth
-                                    type="submit"
-                                    sx={{ mt: 2, backgroundColor: 'black', color: 'white', fontWeight: 'bold' }}
-                                >
-                                    {isSubmitting ? "Placing Order..." : "Place Order"}
-                                </Button>
-
+                                <PaymentMethods
+                                    actions={actions}
+                                    prop={prop}
+                                    styles={styles}
+                                    states={states}
+                                    PaymentComponent={PaymentComponent}
+                                />
+                                {states.methods === "cash" &&
+                                    <Button
+                                        variant="contained"
+                                        fullWidth
+                                        type="submit"
+                                        sx={{ mt: 2, backgroundColor: 'black', color: 'white', fontWeight: 'bold' }}
+                                    >
+                                        {isSubmitting ? "Placing Order..." : "Place Order"}
+                                    </Button>
+                                }
                                 <Box textAlign="center" mt={2}>
                                     <Link href="/" underline="hover" fontSize={14} >
                                         ← continue to add more items
