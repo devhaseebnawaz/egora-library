@@ -34,7 +34,7 @@ export default function PaymentMethods({
   return (
     <>
       <RadioGroup
-        value={states.method}
+        value={states.selectedPaymentMethod}
         onChange={actions.handleChangeMethod}
         sx={{ marginTop: 0 }}
       >
@@ -48,9 +48,9 @@ export default function PaymentMethods({
             <PaymentOption
               key={option.title}
               option={option}
-              isSelected={method === option.value}
+              isSelected={selectedPaymentMethod === option.value}
               hasChild={option.value === "card"}
-              isCreditMethod={option.value === "card" && states.method === "card"}
+              isCreditMethod={option.value === "card" && states.selectedPaymentMethod === "card"}
             />
           ))}
         </Stack>
