@@ -28,15 +28,34 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
     const filteredOutlets = states.outlets?.filter(outlet =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];
-       const openModal = (!states.selectedVenue && states.locationModalOpen) || states.locationModalOnClick;
+
+    let openModal
+
+    if (states.locationModalOnClick) {
+        openModal = true
+    } else {
+
+        if (states.locationModalOpen) {
+            if (states.selectedVenue) {
+                openModal = false
+            }
+            else {
+                openModal = true
+            }
+        }
+    }
+
+    const handleOutletSelection = () => {
+        states.setGetNewData(true);
+        actions.handleOpenLocationModal(false);
+        actions.handleOpenLocationModalOnClick(false);
+        actions.handleDeleteCartBySessionId();
+        actions.handleSetSelectedVenue(states.selectedOutlet)
+    };
 
 
     return (
-        <Modal open={openModal} onClose={() => {
-            if (!states.selectedVenue) {
-                actions.handleOpenLocationModal(false)
-            }
-        }}>
+        <Modal open={openModal} >
             <Box style={modalStyle}>
                 <Box
                     style={{
@@ -140,21 +159,18 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                             <Typography variant="body2" style={{ marginBottom: "16px", textAlign: "center", fontWeight: "600" }}>
                                 Which outlet would you like to pick-up from?
                             </Typography>
-
-
-
                             <Box style={{ marginBottom: "16px" }}>
-                            <Autocomplete
+                                <Autocomplete
                                     options={filteredOutlets}
                                     getOptionLabel={(option) => {
                                         if (typeof option === 'string') return option;
                                         if (option && typeof option.name === 'string') return option.name;
                                         return '';
-                                      }}
+                                    }}
                                     value={states.selectedOutlet}
                                     onChange={(event, newValue) => {
                                         console.log("here mahum see")
-                                        actions.handleSetSelectedVenue(newValue)
+                                        // actions.handleSetSelectedVenue(newValue)
                                         states.setSelectedOutlet(newValue);
                                     }}
                                     inputValue={states.searchQuery}
@@ -195,15 +211,12 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                     style={{ width: "100%" }}
                                 />
                             </Box>
-
-
-
                         </>
 
                         <Button
                             variant="contained"
                             fullWidth
-                            onClick={() => { states.setGetNewData(true); actions.handleOpenLocationModal(false); actions.handleOpenLocationModalOnClick(false); actions.handleDeleteCartBySessionId(); }}
+                            onClick={handleOutletSelection}
                             style={{
                                 backgroundColor: "#000",
                                 color: "#fff",
