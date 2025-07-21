@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box, Typography, Grid, Paper, Divider, Button, Link
 } from '@mui/material';
@@ -24,11 +24,11 @@ const defaultValues = {
     email: "",
 };
 
-const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states }) => {
+const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, PaymentComponent }) => {
     const { items } = states.cardItems ?? []
     const cartItems = items
     const [orderData, setOrderData] = useState({})
-   
+
 
     const methods = useForm({
         resolver: yupResolver(UserSchema),
@@ -43,7 +43,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states }) => 
     const onSubmit = async (data) => {
         states.setCustomerInfo(data)
         const response = await actions.handlePlaceOrder({ ...orderData, customer: { ...data } });
-        if(response){
+        if (response) {
             actions.naviagateOrderSuccess()
         }
     };
@@ -108,6 +108,14 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states }) => 
                                         states={states}
                                     />
                                 ))}
+                                {PaymentComponent && (
+                                    <PaymentComponent
+                                        actions={actions}
+                                        prop={prop}
+                                        styles={styles}
+                                        states={states}
+                                    />
+                                )}
                                 <CartCheckoutTotalSummary
                                     open={states.locationModalOpen}
                                     handleClose={actions.handleOpenLocationModal}
