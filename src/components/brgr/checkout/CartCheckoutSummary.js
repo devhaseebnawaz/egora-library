@@ -48,13 +48,16 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                     customer: { ...data },
                 });
                 if (response) {
-                    actions.navigateOrderSuccess();
+                    actions.naviagateOrderSuccess();
                 }
             } else {
                 let response = await actions.handlePlaceOrderFromCard({
                     ...orderData,
                     customer: { ...data },
                 });
+                 if (response) {
+                    actions.naviagateOrderSuccess();
+                }
             }
         } catch (error) {
             console.error("Order placement failed:", error);
