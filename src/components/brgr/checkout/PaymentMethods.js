@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  Stack,
-  Paper,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { Stack, Paper, Radio, RadioGroup, FormControlLabel } from "@mui/material";
 import Iconify from "../iconify";
+
 const PAYMENT_OPTIONS = [
   {
     value: "cash",
@@ -23,19 +18,13 @@ const PAYMENT_OPTIONS = [
   },
 ];
 
-export default function PaymentMethods({
-  actions,
-  prop,
-  styles,
-  states,
-  PaymentComponent
-}) {
+export default function PaymentMethods({actions,prop,styles,states,PaymentComponent }) {
 
   return (
     <>
       <RadioGroup
-        value={states.selectedPaymentMethod}
-        onChange={actions.handleChangeMethod}
+        value={states.paymentMethod}
+        onChange={(event) => actions.handleSetPaymentMethod(event.target.value)}
         sx={{ marginTop: 0 }}
       >
         <Stack spacing={3}>
@@ -48,15 +37,15 @@ export default function PaymentMethods({
             <PaymentOption
               key={option.title}
               option={option}
-              isSelected={states.selectedPaymentMethod === option.value}
+              isSelected={states.paymentMethod === option.value}
               hasChild={option.value === "card"}
-              isCreditMethod={option.value === "card" && states.selectedPaymentMethod === "card"}
+              isCreditMethod={option.value === "card" && states.paymentMethod === "card"}
             />
           ))}
         </Stack>
       </RadioGroup>
 
-      {PaymentComponent && states.selectedPaymentMethod === "card" && states.openPaymentCard && (
+      {PaymentComponent && states.paymentMethod === "card" && states.openPaymentCard && (
         <PaymentComponent
           actions={actions}
           prop={prop}
