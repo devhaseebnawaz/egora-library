@@ -26,8 +26,7 @@ const defaultValues = {
 };
 
 const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, PaymentComponent }) => {
-    console.log('states',states);
-    
+
     const { items } = states.cardItems ?? []
     const cartItems = items
     const [orderData, setOrderData] = useState({})
@@ -38,18 +37,31 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
         defaultValues,
     });
 
-    const {
-        handleSubmit,
-        formState: { isSubmitting },
-    } = methods;
+    const { handleSubmit, formState: { isSubmitting } } = methods;
 
     const onSubmit = async (data) => {
-        states.setCustomerInfo(data)
-        const response = await actions.handlePlaceOrder({ ...orderData, customer: { ...data } });
-        if (response) {
-            actions.naviagateOrderSuccess()
+        try {
+            states.setCustomerInfo(data);
+            if (states.paymentMethod === "cash") {
+                let response = await actions.handlePlaceOrder({
+                    ...orderData,
+                    customer: { ...data },
+                });
+                if (response) {
+                    actions.navigateOrderSuccess();
+                }
+            } else {
+                let response = await actions.handlePlaceOrderFromCard({
+                    ...orderData,
+                    customer: { ...data },
+                });
+            }
+        } catch (error) {
+            console.error("Order placement failed:", error);
         }
     };
+
+
 
 
     return (
@@ -127,7 +139,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     styles={styles}
                                     states={states}
                                     PaymentComponent={PaymentComponent}
-                                    />
+                                />
                                 {states.selectedPaymentMethod === "cash" &&
                                     <Button
                                         variant="contained"
@@ -137,7 +149,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     >
                                         {isSubmitting ? "Placing Order..." : "Place Order"}
                                     </Button>
-                                 } 
+                                }
                                 <Box textAlign="center" mt={2}>
                                     <Link href="/" underline="hover" fontSize={14} >
                                         ← continue to add more items
