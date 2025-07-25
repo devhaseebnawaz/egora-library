@@ -7,9 +7,9 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
   return (
     <>
       <Card
-        style={{
+        sx={{
           position: "relative",
-          borderRadius: 24,
+          borderRadius: 3,
           overflow: "hidden",
           textAlign: "center",
           boxShadow: "rgba(0, 0, 0, 0.2) 0px 4px 8px",
@@ -17,8 +17,16 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
           display: "flex",
           flexDirection: "column",
           height: "100%",
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          "&:hover": {
+            transform: "scale(1.03)",
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.3)",
+          },
         }}
-        onClick={()=>{ actions.handleOpenCard(); states.setItemForDetailedModal(item) }}
+        onClick={() => {
+          actions.handleOpenCard();
+          states.setItemForDetailedModal(item);
+        }}
       >
         <Box
           component="img"
