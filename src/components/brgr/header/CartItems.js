@@ -338,14 +338,14 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                             >
                                 {cartItem.qty > 1 ? (
                                     <IconButton
-                                        onClick={() => { console.log("coming here mahum"); actions.updateItemFromCardDecByOne(cartItem) }}
+                                        onClick={() => { actions.updateItemFromCardDecByOne(cartItem) }}
                                         sx={{ color: "#F08203", p: 0 }}
                                     >
                                         <Iconify icon={"ic:baseline-minus"} />
                                     </IconButton>
                                 ) : (
                                     <IconButton
-                                        onClick={() => { console.log("coming here mahum as well"); actions.handleRemoveFromCart(cartItem) }}
+                                        onClick={() => { actions.handleRemoveFromCart(cartItem) }}
                                         sx={{ color: "#F08203", p: 0 }}
                                     >
                                         <Iconify icon={"mdi:trash-outline"} />

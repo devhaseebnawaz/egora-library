@@ -19,10 +19,6 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
   const { serviceFeesObject, configurations, taxOnCash } = selectedVenue ?? {}
   const { isServiceFeesOnWeb, isPayingTax } = configurations ?? {}
 
-  console.log("the card iotems are", cardItems)
-
-  console.log('states ', states);
-
   const taxRate = isPayingTax ? taxOnCash / 100 : 0;
 
   let discount = 0;
@@ -40,14 +36,10 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
         : 0,
     [cardItems, subTotal, taxAmount]
   );
-
-  console.log('serviceFee', serviceFee);
-
-
-
+  const totalCartQuantity = useMemo(() => {
+    return cardItems?.reduce((acc, item) => acc + item.qty, 0) || 0;
+  }, [cardItems]);
   let selectedTip = 0
-
-
 
   const renderServiceFee = () => {
     if (
@@ -103,7 +95,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
           </IconButton>
         </Box>
 
-        {cardItems?.length === 0 ? (
+        {totalCartQuantity === 0 ? (
           <Box
             style={{
               display: 'flex',
