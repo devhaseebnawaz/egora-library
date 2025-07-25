@@ -2,6 +2,7 @@ import React, {useEffect, useState } from "react";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify-icons/mdi/map-marker";
+import { useMediaQuery } from "@mui/material";
 import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
@@ -16,6 +17,8 @@ export default function CustomNavbar({
   styles,
   states,
 }) {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const truncateLength = isMobile ? 10 : 25;
 
   return (
     <>
@@ -91,7 +94,7 @@ export default function CustomNavbar({
                   }}
                 >
                   {states?.selectedVenue
-                    ? `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`
+                    ? actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`,truncateLength)
                     : "Address"}
                 </Typography>
               </Box>
