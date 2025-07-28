@@ -9,9 +9,9 @@ import {
     Autocomplete,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import UniversalImage from "src/components/brgr/UniversalImage";
+import UniversalImage from "../../../UniversalImage";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import RefineLocationModal from "src/components/brgr/categories/RefineLocationModal";
+import RefineLocationModal from "./RefineLocationModal";
 
 const modalStyle = {
     position: "absolute",
