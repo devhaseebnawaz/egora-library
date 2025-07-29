@@ -2,7 +2,7 @@ import React from 'react';
 import { InputBase, IconButton, Paper,Container } from '@mui/material';
 import Iconify from '../iconify';
 
-const SearchBar = ({ prop, states, styles, themeColors }) => {
+const SearchBar = ({ prop, states, styles, themeColors, globalComponentStyles }) => {
   let { query, setQuery } = states ?? {}
 
   const handleSubmit = (e) => {
@@ -17,12 +17,14 @@ const SearchBar = ({ prop, states, styles, themeColors }) => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          border: `1px solid ${
-            styles?.SearchBarOutlineColor?.value !== ""
-              ? styles?.SearchBarOutlineColor?.value
-              : themeColors?.SearchBarOutlineColor?.value
-          }`,
-          borderRadius: '999px',
+          border: `1px solid ${styles?.SearchBarOutlineColor?.value !== ""
+            ? styles?.SearchBarOutlineColor?.value
+            : themeColors?.SearchBarOutlineColor?.value
+            }`,
+          borderRadius:
+            styles?.SearchBarBorderRadius?.value !== ""
+              ? `${styles?.SearchBarBorderRadius?.value}px`
+              : `${themeColors?.SearchBarBorderRadius?.value || 0}px`,
           padding: '6px 12px',
           width: '100%',
           boxShadow: 'none',
@@ -30,7 +32,16 @@ const SearchBar = ({ prop, states, styles, themeColors }) => {
         }}
       >
         <InputBase
-          sx={{ ml: 2, flex: 1 }}
+          sx={{
+            ml: 2, flex: 1,
+            color:
+              styles?.SearchBarTextColor?.value != ""
+                ? styles?.SearchBarTextColor?.value
+                : globalComponentStyles.Text.color.value != ""
+                  ? globalComponentStyles.Text.color.value
+                  : themeColors?.SearchBarTextColor?.value,
+            
+          }}
           placeholder={prop.editable.SearchBarBackgroundText.value}
           inputProps={{ 'aria-label': 'search items' }}
           value={query}
@@ -55,7 +66,18 @@ const SearchBar = ({ prop, states, styles, themeColors }) => {
           }}
           aria-label="search"
         >
-          <Iconify icon="eva:arrow-forward-fill" width={14} height={14} color="#eac7aa" />
+          <Iconify icon="eva:arrow-forward-fill" 
+          width={
+             styles?.SearchBarIconSize?.value != ""
+             ? styles?.SearchBarIconSize?.value
+             : themeColors?.SearchBarIconSize?.value
+          } 
+          height={
+            styles?.SearchBarIconSize?.value != ""
+            ? styles?.SearchBarIconSize?.value
+            : themeColors?.SearchBarIconSize?.value
+          } 
+          color="#eac7aa" />
         </IconButton>
       </Paper>
     </Container>
