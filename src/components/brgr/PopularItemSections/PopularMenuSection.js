@@ -29,11 +29,63 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
             display: "flex",
             alignItems: "center",
             gap: 8,
+
+
+            color: styles?.PopularMenuSectionHeadingTextColor?.value != ""
+              ? styles?.PopularMenuSectionHeadingTextColor?.value
+              : globalComponentStyles.Text.color.value != ""
+                ? globalComponentStyles.Text.color.value :
+                themeColors?.PopularMenuSectionHeadingTextColor?.value,
+
+            fontSize: styles?.PopularMenuSectionHeadingTextSize?.value != ""
+              ? styles?.PopularMenuSectionHeadingTextSize?.value
+              : globalComponentStyles.Text.size.value != ""
+                ? globalComponentStyles.Text.size.value :
+                themeColors?.PopularMenuSectionHeadingTextSize?.value,
+
+            fontFamily: styles?.PopularMenuSectionHeadingTextFont?.value != ""
+              ? styles?.PopularMenuSectionHeadingTextFont?.value
+              : globalComponentStyles.Text.fontFamily.value != ""
+                ? globalComponentStyles.Text.fontFamily.value :
+                themeColors?.PopularMenuSectionHeadingTextFont?.value,
+
+            fontStyle: styles?.PopularMenuSectionHeadingTextStyle?.value != ""
+              ? styles?.PopularMenuSectionHeadingTextStyle?.value
+              : globalComponentStyles.Text.fontWeight.value != ""
+                ? globalComponentStyles.Text.fontWeight.value :
+                themeColors?.PopularMenuSectionHeadingTextStyle?.value,
+
           }}
         >
           {prop?.editable?.title?.value}
         </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
+        <Typography variant="subtitle1"  style={{
+
+           color: styles?.PopularMenuSectionDescriptionTextColor?.value != ""
+           ? styles?.PopularMenuSectionDescriptionTextColor?.value
+           : globalComponentStyles.Text.color.value != ""
+             ? globalComponentStyles.Text.color.value :
+             themeColors?.PopularMenuSectionDescriptionTextColor?.value,
+
+         fontSize: styles?.PopularMenuSectionDescriptionTextSize?.value != ""
+           ? styles?.PopularMenuSectionDescriptionTextSize?.value
+           : globalComponentStyles.Text.size.value != ""
+             ? globalComponentStyles.Text.size.value :
+             themeColors?.PopularMenuSectionDescriptionTextSize?.value,
+
+         fontFamily: styles?.PopularMenuSectionDescriptionTextFont?.value != ""
+           ? styles?.PopularMenuSectionDescriptionTextFont?.value
+           : globalComponentStyles.Text.fontFamily.value != ""
+             ? globalComponentStyles.Text.fontFamily.value :
+             themeColors?.PopularMenuSectionDescriptionTextFont?.value,
+
+         fontStyle: styles?.PopularMenuSectionDescriptionTextStyle?.value != ""
+           ? styles?.PopularMenuSectionDescriptionTextStyle?.value
+           : globalComponentStyles.Text.fontWeight.value != ""
+             ? globalComponentStyles.Text.fontWeight.value :
+             themeColors?.PopularMenuSectionDescriptionTextStyle?.value,
+
+        }}>
           {prop?.editable?.description?.value}
         </Typography>
       </Box>
@@ -41,7 +93,32 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
       {products.length === 0 ? (
         <Typography
           variant="body1"
-          style={{ textAlign: "center", marginTop: 40, color: "#666" }}
+          style={{ textAlign: "center", marginTop: 40, 
+          
+          color: styles?.PopularMenuSectionDescriptionTextColor?.value != ""
+          ? styles?.PopularMenuSectionDescriptionTextColor?.value
+          : globalComponentStyles.Text.color.value != ""
+            ? globalComponentStyles.Text.color.value :
+            themeColors?.PopularMenuSectionDescriptionTextColor?.value,
+
+        fontSize: styles?.PopularMenuSectionDescriptionTextSize?.value != ""
+          ? styles?.PopularMenuSectionDescriptionTextSize?.value
+          : globalComponentStyles.Text.size.value != ""
+            ? globalComponentStyles.Text.size.value :
+            themeColors?.PopularMenuSectionDescriptionTextSize?.value,
+
+        fontFamily: styles?.PopularMenuSectionDescriptionTextFont?.value != ""
+          ? styles?.PopularMenuSectionDescriptionTextFont?.value
+          : globalComponentStyles.Text.fontFamily.value != ""
+            ? globalComponentStyles.Text.fontFamily.value :
+            themeColors?.PopularMenuSectionDescriptionTextFont?.value,
+
+        fontStyle: styles?.PopularMenuSectionDescriptionTextStyle?.value != ""
+          ? styles?.PopularMenuSectionDescriptionTextStyle?.value
+          : globalComponentStyles.Text.fontWeight.value != ""
+            ? globalComponentStyles.Text.fontWeight.value :
+            themeColors?.PopularMenuSectionDescriptionTextStyle?.value,
+        }}
         >
           No items found.
         </Typography>
@@ -54,16 +131,6 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
           ))}
         </Grid>
       )}
-
-      {/* { states.openCard &&  item && <ItemDetailModal
-        key={`popularItem${item}`}
-        item={item}
-        actions={actions}
-        styles={styles}
-        // themeColors={themeColors}
-        states={states}
-      /> } */}
-
     </Container>
   );
 }

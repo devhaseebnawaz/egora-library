@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 
-export default function CategoryCarousel({ themeColors, actions, prop, styles, states }) {
+export default function CategoryCarousel({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
     useEffect(() => {
         const el = states.scrollRef.current;
@@ -23,7 +23,10 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                 position: "sticky",
                 top: 0,
                 zIndex: 1100,
-                backgroundColor: "#000",
+                backgroundColor:  styles?.CategoryCarouselBackgroundColor?.value != ""
+                ? styles?.CategoryCarouselBackgroundColor?.value
+                : themeColors?.CategoryCarouselBackgroundColor?.value,
+
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
             }}
         >
@@ -71,15 +74,37 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
             }
           `}</style>
 
-                    {states?.categoryCarousel?.map((cat, idx) => (
+                    {states.categoryCarousel.map((cat, idx) => (
                         <Button
                             key={idx}
                             style={{
                                 flex: "0 0 auto",
                                 whiteSpace: "nowrap",
-                                color: "#fff",
+                                color: styles?.CategoryCarouselTextColor?.value != ""
+                                ? styles?.CategoryCarouselTextColor?.value 
+                                : globalComponentStyles.Text.color.value != "" 
+                                ? globalComponentStyles.Text.color.value : 
+                                  themeColors?.CategoryCarouselTextColor?.value,
+
+                                fontSize: styles?.CategoryCarouselTextSize?.value != ""
+                                    ? styles?.CategoryCarouselTextSize?.value
+                                    : globalComponentStyles.Text.size.value != "" 
+                                    ? globalComponentStyles.Text.size.value : 
+                                      themeColors?.CategoryCarouselTextSize?.value,
+
+                                fontFamily: styles?.CategoryCarouselTextFont?.value != ""
+                                    ? styles?.CategoryCarouselTextFont?.value
+                                    : globalComponentStyles.Text.fontFamily.value != "" 
+                                    ? globalComponentStyles.Text.fontFamily.value : 
+                                      themeColors?.CategoryCarouselTextFont?.value,
+
+                                fontStyle: styles?.CategoryCarouselTextStyle?.value != ""
+                                    ? styles?.CategoryCarouselTextStyle?.value
+                                    : globalComponentStyles.Text.fontWeight.value != "" 
+                                    ? globalComponentStyles.Text.fontWeight.value : 
+                                      themeColors?.CategoryCarouselTextStyle?.value,
+
                                 fontWeight: 600,
-                                fontSize: "0.9rem",
                                 padding: "8px 16px",
                                 minWidth: "120px",
                                 maxWidth: "160px",
