@@ -112,9 +112,7 @@ export default function CustomNavbar({
                       styles?.AppBarAddressColor?.value != ""
                         ? styles?.AppBarAddressColor?.value
                         : themeColors?.AppBarAddressColor?.value,
-
-
-
+                      
                     fontSize: styles?.AppBarAddressTextSize?.value != ""
                       ? styles?.AppBarAddressTextSize?.value
                       : themeColors?.AppBarAddressTextSize?.value,
