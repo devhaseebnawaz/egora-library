@@ -271,21 +271,6 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 </Button>
               ))}
             </Box>
-
-            <Box
-              style={{
-                backgroundColor: '#f1f8ff',
-                padding: 16,
-                marginTop: 16,
-                borderRadius: 8,
-                textAlign: 'center',
-              }}
-            >
-              <Typography style={{ fontSize: 14 }}>
-                Your order will be delivered approximately in 45 minutes on{' '}
-                <strong style={{ color: '#0071f8' }}>June 25, 2025 at 12:10 PM</strong>
-              </Typography>
-            </Box>
           </>
         )}
       </Box>

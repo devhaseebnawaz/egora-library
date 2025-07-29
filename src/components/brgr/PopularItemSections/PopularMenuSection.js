@@ -31,10 +31,10 @@ export default function PopularMenuSection({ prop, actions, styles, states }) {
             gap: 8,
           }}
         >
-          Popular Items
+          {prop?.editable?.title?.value}
         </Typography>
         <Typography variant="subtitle1" color="textSecondary">
-          Most ordered right now
+          {prop?.editable?.description?.value}
         </Typography>
       </Box>
 
