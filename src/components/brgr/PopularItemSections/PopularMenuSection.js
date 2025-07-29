@@ -3,7 +3,7 @@ import { Grid, Box, Typography, Container } from "@mui/material";
 import ItemCard from "./ItemCard";
 import ItemDetailModal from "../categories/ItemDetailModal";
 
-export default function PopularMenuSection({ prop, actions, styles, states }) {
+export default function PopularMenuSection({ prop, actions, styles, states, globalComponentStyles }) {
   const displayItems = prop?.static?.displayitems || [];
   const [products, setProducts] = useState(displayItems);
   const { query } = states ?? {};
