@@ -8,7 +8,6 @@ import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
 import Script from "next/script";
-import Script from "next/script";
 // import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
