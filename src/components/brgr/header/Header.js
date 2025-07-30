@@ -181,26 +181,26 @@ export default function CustomNavbar({
                 fontWeight="bold"
                 style={{
                   color:
-                      styles?.AppBarPhoneColor?.value != ""
-                          ? styles?.AppBarPhoneColor?.value
-                          : globalComponentStyles?.Text?.color?.value != "" 
-                          ? globalComponentStyles?.Text?.color?.value : 
-                          themeColors?.AppBarPhoneColor?.value,
+                    styles?.AppBarPhoneColor?.value != ""
+                      ? styles?.AppBarPhoneColor?.value
+                      : globalComponentStyles?.Text?.color?.value != ""
+                        ? globalComponentStyles?.Text?.color?.value :
+                        themeColors?.AppBarPhoneColor?.value,
 
 
                   fontSize: styles?.AppBarPhoneTextSize?.value != ""
-                      ? styles?.AppBarPhoneTextSize?.value
-                      : themeColors?.AppBarPhoneTextSize?.value,
+                    ? styles?.AppBarPhoneTextSize?.value
+                    : themeColors?.AppBarPhoneTextSize?.value,
 
                   fontFamily: styles?.AppBarPhoneTextFont?.value != ""
-                      ? styles?.AppBarPhoneTextFont?.value
-                      : themeColors?.AppBarPhoneTextFont?.value,
+                    ? styles?.AppBarPhoneTextFont?.value
+                    : themeColors?.AppBarPhoneTextFont?.value,
 
                   fontStyle: styles?.AppBarPhoneTextStyle?.value != ""
-                      ? styles?.AppBarPhoneTextStyle?.value
-                      : themeColors?.AppBarPhoneTextStyle?.value,
+                    ? styles?.AppBarPhoneTextStyle?.value
+                    : themeColors?.AppBarPhoneTextStyle?.value,
 
-              }}
+                }}
               >
                 {states?.selectedVenue
                   ? states?.selectedVenue?.venuePhoneNumber
