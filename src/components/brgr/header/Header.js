@@ -87,8 +87,8 @@ export default function CustomNavbar({
                                     color:
                                         styles?.AppBarChangeLocationColor?.value != ""
                                             ? styles?.AppBarChangeLocationColor?.value
-                                            : globalComponentStyles.Text.color.value != "" 
-                                            ? globalComponentStyles.Text.color.value : 
+                                            : globalComponentStyles?.Text?.color?.value != "" 
+                                            ? globalComponentStyles?.Text?.color?.value : 
                                               themeColors?.AppBarChangeLocationColor?.value,
 
                                     fontSize: styles?.AppBarChangeLocationTextSize?.value != ""
@@ -114,8 +114,8 @@ export default function CustomNavbar({
                                     color:
                                         styles?.AppBarAddressColor?.value != ""
                                             ? styles?.AppBarAddressColor?.value 
-                                            : globalComponentStyles.Text.color.value != "" 
-                                            ? globalComponentStyles.Text.color.value : 
+                                            : globalComponentStyles?.Text?.color?.value != "" 
+                                            ? globalComponentStyles?.Text?.color?.value : 
                                             themeColors?.AppBarAddressColor?.value,
 
                                     fontSize: styles?.AppBarAddressTextSize?.value != ""
@@ -172,8 +172,8 @@ export default function CustomNavbar({
                                 color:
                                     styles?.AppBarPhoneColor?.value != ""
                                         ? styles?.AppBarPhoneColor?.value
-                                        : globalComponentStyles.Text.color.value != "" 
-                                        ? globalComponentStyles.Text.color.value : 
+                                        : globalComponentStyles?.Text?.color?.value != "" 
+                                        ? globalComponentStyles?.Text?.color?.value : 
                                         themeColors?.AppBarPhoneColor?.value,
 
 

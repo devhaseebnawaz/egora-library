@@ -37,8 +37,8 @@ const SearchBar = ({ prop, states, styles, themeColors, globalComponentStyles })
             color:
               styles?.SearchBarTextColor?.value != ""
                 ? styles?.SearchBarTextColor?.value
-                : globalComponentStyles.Text.color.value != ""
-                  ? globalComponentStyles.Text.color.value
+                : globalComponentStyles?.Text?.color?.value != ""
+                  ? globalComponentStyles?.Text?.color?.value
                   : themeColors?.SearchBarTextColor?.value,
             
           }}
