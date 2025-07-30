@@ -7,6 +7,7 @@ import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
+import Script from "next/script";
 // import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
@@ -23,121 +24,94 @@ export default function CustomNavbar({
 
   return (
     <>
-        <AppBar
-            position="static"
-            style={{
-                backgroundColor:
-                    styles?.AppBarBackgroundColor?.value != ""
-                        ? styles?.AppBarBackgroundColor?.value
-                        : themeColors?.AppBarBackgroundColor?.value,
-                boxShadow: "none",
-                position: "relative",
-                zIndex: 10,
-                paddingLeft: "14px",
-                paddingRight: "14px",
-                paddingTop: "4px",
-                paddingBottom: "4px",
-            }}
+          <Script
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL9J82iDhcUWdQiuIvBYa0t5asrtz3Swk&libraries=places"
+              strategy="afterInteractive"
+              onLoad={() => {
+                  console.log("✅ Google Maps script loaded");
+                  states?.setIsGoogleMapsLoaded(true);
+              }}
+              onError={(e) => {
+                  console.error("❌ Failed to load Google Maps script", e);
+              }}
+          />
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor:
+            styles?.AppBarBackgroundColor?.value != ""
+              ? styles?.AppBarBackgroundColor?.value
+              : themeColors?.AppBarBackgroundColor?.value,
+          boxShadow: "none",
+          position: "relative",
+          zIndex: 10,
+          paddingLeft: "14px",
+          paddingRight: "14px",
+          paddingTop: "4px",
+          paddingBottom: "4px",
+        }}
+      >
+        <Toolbar
+          style={{
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-            <Toolbar
-                style={{
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                }}
+          <Box
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "24px",
+            }}
+          >
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                cursor: "pointer",
+              }}
+              onClick={()=>actions.handleOpenLocationModalOnClick(true)}
             >
-                <Box
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "24px",
-                    }}
+              <Icon
+                icon={locationIcon}
+                width="20"
+                height="20"
+                color={
+                  styles?.AppBarLocationIconColor?.value != ""
+                    ? styles?.AppBarLocationIconColor?.value
+                    : themeColors?.AppBarLocationIconColor?.value
+                }
+              />
+              <Box>
+                <Typography
+                  variant="body2"
+                  fontWeight="bold"
+                  style={{
+                    color:
+                      styles?.AppBarChangeLocationColor?.value != ""
+                        ? styles?.AppBarChangeLocationColor?.value
+                        : themeColors?.AppBarChangeLocationColor?.value,
+                  }}
                 >
-                    <Box
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "8px",
-                            cursor: "pointer",
-                        }}
-                        onClick={() => actions.handleOpenLocationModalOnClick(true)}
-                    >
-                        <Icon
-                            icon={locationIcon}
-                            width={
-                                styles?.AppBarLocationIconHeightWidth?.value != ""
-                                    ? styles?.AppBarLocationIconHeightWidth?.value
-                                    : themeColors?.AppBarLocationIconHeightWidth?.value
-                            }
-                            height={
-                                styles?.AppBarLocationIconHeightWidth?.value != ""
-                                    ? styles?.AppBarLocationIconHeightWidth?.value
-                                    : themeColors?.AppBarLocationIconHeightWidth?.value
-                            }
-                            color={
-                                styles?.AppBarLocationIconColor?.value != ""
-                                    ? styles?.AppBarLocationIconColor?.value
-                                    : themeColors?.AppBarLocationIconColor?.value
-                            }
-                        />
-                        <Box>
-                            <Typography
-                                variant="body2"
-                                //   fontWeight="bold"
-                                style={{
-                                    color:
-                                        styles?.AppBarChangeLocationColor?.value != ""
-                                            ? styles?.AppBarChangeLocationColor?.value
-                                            : globalComponentStyles.Text.color.value != "" 
-                                            ? globalComponentStyles.Text.color.value : 
-                                              themeColors?.AppBarChangeLocationColor?.value,
-
-                                    fontSize: styles?.AppBarChangeLocationTextSize?.value != ""
-                                        ? styles?.AppBarChangeLocationTextSize?.value
-                                        : themeColors?.AppBarChangeLocationTextSize?.value,
-
-                                    fontFamily: styles?.AppBarChangeLocationTextFont?.value != ""
-                                        ? styles?.AppBarChangeLocationTextFont?.value
-                                        : themeColors?.AppBarChangeLocationTextFont?.value,
-
-                                    fontStyle: styles?.AppBarChangeLocationTextStyle?.value != ""
-                                        ? styles?.AppBarChangeLocationTextStyle?.value
-                                        : themeColors?.AppBarChangeLocationTextStyle?.value,
-                                }}
-
-                            >
-                                Change Location
-
-                            </Typography>
-                            <Typography
-                                variant="caption"
-                                style={{
-                                    color:
-                                        styles?.AppBarAddressColor?.value != ""
-                                            ? styles?.AppBarAddressColor?.value 
-                                            : globalComponentStyles.Text.color.value != "" 
-                                            ? globalComponentStyles.Text.color.value : 
-                                            themeColors?.AppBarAddressColor?.value,
-
-                                    fontSize: styles?.AppBarAddressTextSize?.value != ""
-                                        ? styles?.AppBarAddressTextSize?.value
-                                        : themeColors?.AppBarAddressTextSize?.value,
-
-                                    fontFamily: styles?.AppBarAddressTextFont?.value != ""
-                                        ? styles?.AppBarAddressTextFont?.value
-                                        : themeColors?.AppBarAddressTextFont?.value,
-
-                                    fontStyle: styles?.AppBarAddressTextStyle?.value != ""
-                                        ? styles?.AppBarAddressTextStyle?.value
-                                        : themeColors?.AppBarAddressTextStyle?.value,
-
-                                }}
-                            >
-                                {states?.selectedVenue
-                                    ? actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`, truncateLength)
-                                    : "Address"}
-                            </Typography>
-                        </Box>
-                    </Box>
+                  Change Location
+                  
+                </Typography>
+                <Typography
+                  variant="caption"
+                  style={{
+                    color:
+                      styles?.AppBarAddressColor?.value != ""
+                        ? styles?.AppBarAddressColor?.value
+                        : themeColors?.AppBarAddressColor?.value,
+                  }}
+                >
+                  {states?.selectedVenue
+                    ? actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`,truncateLength)
+                    : "Address"}
+                </Typography>
+              </Box>
+            </Box>
 
                     <Box
                         style={{
@@ -254,43 +228,44 @@ export default function CustomNavbar({
                 </Box>
             </Toolbar>
 
-            <Box
-                style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    width: 100,
-                    height: 100,
-                    borderRadius: "50%",
-                    overflow: "hidden",
-                    backgroundColor: "#121212",
-                }}
-            >
-                {prop?.editable?.logoImage ? (
-                    <UniversalImage
-                        src={prop?.editable?.logoImage?.value}
-                        alt="BRGR Logo"
-                        layout="fill"
-                        objectFit="contain"
-                        onError={() => console.log("Image failed to load")}
-                        width="100%"
-                        height="100%"
-                    />
-                ) : (
-                    <div>No logo found</div>
-                )}
-            </Box>
-        </AppBar>
-        <LocationModal
-            open={states.locationModalOpen}
-            handleClose={actions.handleOpenLocationModal}
-            themeColors={themeColors}
-            actions={actions}
-            prop={prop}
-            styles={styles}
-            states={states}
-        />
+        <Box
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 100,
+            height: 100,
+            borderRadius: "50%",
+            overflow: "hidden",
+            backgroundColor: "#121212",
+          }}
+        >
+          {prop?.editable?.logoImage ? (
+            <UniversalImage
+              src={prop?.editable?.logoImage?.value}
+              alt="BRGR Logo"
+              layout="fill"
+              objectFit="contain"
+              onError={() => console.log("Image failed to load")}
+              width="100%"
+              height="100%"
+            />
+          ) : (
+            <div>No logo found</div>
+          )}
+        </Box>
+      </AppBar>
+      <LocationModal
+        open={states.locationModalOpen}
+        handleClose={actions.handleOpenLocationModal}
+        themeColors={themeColors}
+        actions={actions}
+        prop={prop}
+        styles={styles}
+        states={states}
+        isGoogleMapsLoaded={states?.isGoogleMapsLoaded}
+      />
     </>
 );
 }
