@@ -8,6 +8,7 @@ import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
 import Script from "next/script";
+import Script from "next/script";
 // import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
@@ -293,6 +294,44 @@ export default function CustomNavbar({
           )}
         </Box>
       </AppBar>
+      <LocationModal
+        open={states.locationModalOpen}
+        handleClose={actions.handleOpenLocationModal}
+        themeColors={themeColors}
+        actions={actions}
+        prop={prop}
+        styles={styles}
+        states={states}
+        isGoogleMapsLoaded={states?.isGoogleMapsLoaded}
+      />
+      <Box
+        style={{
+          position: "absolute",
+          top: "100%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 100,
+          height: 100,
+          borderRadius: "50%",
+          overflow: "hidden",
+          backgroundColor: "#121212",
+        }}
+      >
+        {prop?.editable?.logoImage ? (
+          <UniversalImage
+            src={prop?.editable?.logoImage?.value}
+            alt="BRGR Logo"
+            layout="fill"
+            objectFit="contain"
+            onError={() => console.log("Image failed to load")}
+            width="100%"
+            height="100%"
+          />
+        ) : (
+          <div>No logo found</div>
+        )}
+      </Box>
+
       <LocationModal
         open={states.locationModalOpen}
         handleClose={actions.handleOpenLocationModal}
