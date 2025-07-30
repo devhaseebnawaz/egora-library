@@ -9,6 +9,7 @@ import {
     Autocomplete,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import SearchMenuModal from "./SearchMenuModal";
 import UniversalImage from "../../../UniversalImage";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import RefineLocationModal from "./RefineLocationModal";
@@ -25,7 +26,7 @@ const modalStyle = {
     padding: "32px 24px 24px",
 };
 
-export default function LocationModal({ themeColors, actions, prop, styles, states }) {
+export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded}) {
     const filteredOutlets = states.outlets?.filter((outlet) =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];
@@ -211,8 +212,9 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         <TextField
                             placeholder="Search Location"
                             variant="outlined"
-                            // value={states.searchQuery}
-                            // onChange={(e) => states.setSearchQuery(e.target.value)}
+                            value={states?.value}
+                            onChange={(e) => actions?.handleInput(e)}
+                            autoComplete="off"
                             fullWidth
                             onClick={console.log("Search input clicked")}
                             InputProps={{
@@ -338,8 +340,15 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 currentCoords={states?.userCoordinates}
                 onSave={({ coords, address }) => {
                     states?.setUserCoordinates(coords);
-                    states?.setCurrentAddress(address); // <-- use your state setter
+                    states?.setCurrentAddress(address);
                 }}
+            />
+            <SearchMenuModal
+                actions={actions}
+                open={states?.searchMenuOpen}
+                onClose={() => states?.setSearchMenuOpen(false)}
+                data={states?.data}
+                onSelect={(e) => actions?.handleSelect(e)}
             />
         </>
     );
