@@ -82,26 +82,26 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                 whiteSpace: "nowrap",
                                 color: styles?.CategoryCarouselTextColor?.value != ""
                                 ? styles?.CategoryCarouselTextColor?.value 
-                                : globalComponentStyles.Text.color.value != "" 
-                                ? globalComponentStyles.Text.color.value : 
+                                : globalComponentStyles?.Text?.color?.value != "" 
+                                ? globalComponentStyles?.Text?.color?.value : 
                                   themeColors?.CategoryCarouselTextColor?.value,
 
                                 fontSize: styles?.CategoryCarouselTextSize?.value != ""
                                     ? styles?.CategoryCarouselTextSize?.value
-                                    : globalComponentStyles.Text.size.value != "" 
-                                    ? globalComponentStyles.Text.size.value : 
+                                    : globalComponentStyles?.Text?.size?.value != "" 
+                                    ? globalComponentStyles?.Text?.size?.value : 
                                       themeColors?.CategoryCarouselTextSize?.value,
 
                                 fontFamily: styles?.CategoryCarouselTextFont?.value != ""
                                     ? styles?.CategoryCarouselTextFont?.value
-                                    : globalComponentStyles.Text.fontFamily.value != "" 
-                                    ? globalComponentStyles.Text.fontFamily.value : 
+                                    : globalComponentStyles?.Text?.fontFamily?.value != "" 
+                                    ? globalComponentStyles?.Text?.fontFamily?.value : 
                                       themeColors?.CategoryCarouselTextFont?.value,
 
                                 fontStyle: styles?.CategoryCarouselTextStyle?.value != ""
                                     ? styles?.CategoryCarouselTextStyle?.value
-                                    : globalComponentStyles.Text.fontWeight.value != "" 
-                                    ? globalComponentStyles.Text.fontWeight.value : 
+                                    : globalComponentStyles?.Text?.fontWeight?.value != "" 
+                                    ? globalComponentStyles?.Text?.fontWeight?.value : 
                                       themeColors?.CategoryCarouselTextStyle?.value,
 
                                 fontWeight: 600,
