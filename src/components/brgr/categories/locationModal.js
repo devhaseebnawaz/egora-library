@@ -9,7 +9,7 @@ import {
     Autocomplete,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import SearchMenuModal from "./SearchMenuModal";
+import SearchMenuList from "./SearchMenuList";
 import UniversalImage from "../../../UniversalImage";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import RefineLocationModal from "./RefineLocationModal";
@@ -26,7 +26,7 @@ const modalStyle = {
     padding: "32px 24px 24px",
 };
 
-export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded}) {
+export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded }) {
     const filteredOutlets = states.outlets?.filter((outlet) =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];
@@ -198,44 +198,53 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         noOptionsText="No outlets found"
                         sx={{ mb: 2 }}
                     />}
-                    {states?.orderType === "delivery" && <Box
-                        sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            backgroundColor: "#f5f5f5",
-                            // px: 2,
-                            // py: 1.5,
-                            borderRadius: "12px",
-                            mb: 2,
-                        }}
-                    >
-                        <TextField
-                            placeholder="Search Location"
-                            variant="outlined"
-                            value={states?.value}
-                            onChange={(e) => actions?.handleInput(e)}
-                            autoComplete="off"
-                            fullWidth
-                            onClick={console.log("Search input clicked")}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <ArrowForwardIcon sx={{ color: "#333" }} />
-                                    </InputAdornment>
-                                ),
-                                sx: {
+                    {states?.orderType === "delivery" && (
+                        <>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
                                     backgroundColor: "#f5f5f5",
                                     borderRadius: "12px",
-                                    height: "44px",
-                                    "& .MuiOutlinedInput-notchedOutline": {
-                                        border: "none",
-                                    },
-                                    fontSize: "14px",
-                                    color: "#555",
-                                },
-                            }}
-                        />
-                    </Box>}
+                                    mb: 1,
+                                }}
+                            >
+                                <TextField
+                                    placeholder="Search Location"
+                                    variant="outlined"
+                                    value={states?.value}
+                                    onChange={(e) => actions?.handleInput(e)}
+                                    autoComplete="off"
+                                    fullWidth
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <ArrowForwardIcon sx={{ color: "#333" }} />
+                                            </InputAdornment>
+                                        ),
+                                        sx: {
+                                            backgroundColor: "#f5f5f5",
+                                            borderRadius: "12px",
+                                            height: "44px",
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                border: "none",
+                                            },
+                                            fontSize: "14px",
+                                            color: "#555",
+                                        },
+                                    }}
+                                />
+                            </Box>
+
+                            {states.value?.length > 0 && states.data?.length > 0 && (
+                                <SearchMenuList
+                                    data={states.data}
+                                    actions={actions}
+                                    onSelect={(e) => actions?.handleSelect(e)}
+                                />
+                            )}
+                        </>
+                    )}
 
                     {states?.orderType === "delivery" && (<Box
                         onClick={() => states?.setRefineModalOpen(true)}
@@ -342,13 +351,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                     states?.setUserCoordinates(coords);
                     states?.setCurrentAddress(address);
                 }}
-            />
-            <SearchMenuModal
-                actions={actions}
-                open={states?.searchMenuOpen}
-                onClose={() => states?.setSearchMenuOpen(false)}
-                data={states?.data}
-                onSelect={(e) => actions?.handleSelect(e)}
             />
         </>
     );

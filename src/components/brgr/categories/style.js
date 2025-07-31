@@ -6,19 +6,13 @@ export const StyledBox = styled(Box)({
     borderRadius: "8px",
     backgroundColor: "#fff",
     padding: "12px",
-    width: "850px",
+    width: "100%",
     marginBottom:'10px',
-    "@media (max-width: 1000px)": {
-      width: "80vw",
-    },
-    "@media (max-width: 768px)": {
-      width: "80vw",
-    },
   });
  export const StyledMenuItem = styled(Typography)({
-    fontSize: "16px",
+    fontSize: "14px",
     textAlign:'left',
-    padding:'10px',
+    padding:'6px',
     cursor:'pointer',
     fontFamily: "Arial, sans-serif",
     width:"100%",
