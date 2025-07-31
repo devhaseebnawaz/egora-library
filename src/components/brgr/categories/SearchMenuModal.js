@@ -13,9 +13,9 @@ const SearchMenuModal = ({ actions, open, onClose, data, onSelect }) => {
   return (
     <Modal open={open} onClose={onClose} sx={modalStyle}>
       <Box>
-        {data.length > 0 && (
+        {data?.length > 0 && (
           <StyledBox>
-            {data.map(({ description }, index) => (
+            {data?.map(({ description }, index) => (
               <StyledMenuItem
                 key={index}
                 onClick={() => {
