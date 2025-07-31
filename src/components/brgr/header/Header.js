@@ -7,8 +7,6 @@ import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
-import Script from "next/script";
-// import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
 export default function CustomNavbar({
@@ -24,17 +22,6 @@ export default function CustomNavbar({
 
   return (
     <>
-      <Script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL9J82iDhcUWdQiuIvBYa0t5asrtz3Swk&libraries=places"
-        strategy="afterInteractive"
-        onLoad={() => {
-          console.log("✅ Google Maps script loaded");
-          states?.setIsGoogleMapsLoaded(true);
-        }}
-        onError={(e) => {
-          console.error("❌ Failed to load Google Maps script", e);
-        }}
-      />
       <AppBar
         position="static"
         style={{
