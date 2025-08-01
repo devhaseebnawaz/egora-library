@@ -1,12 +1,12 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Box, Typography, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
 import locationIcon from "@iconify-icons/mdi/map-marker";
+import { useMediaQuery } from "@mui/material";
 import phoneIcon from "@iconify-icons/mdi/phone";
 import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
-// import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
 export default function CustomNavbar({
@@ -15,7 +15,10 @@ export default function CustomNavbar({
   prop,
   styles,
   states,
+  globalComponentStyles
 }) {
+  const isMobile = useMediaQuery('(max-width:600px)');
+  const truncateLength = isMobile ? 10 : 25;
 
   return (
     <>
@@ -55,12 +58,20 @@ export default function CustomNavbar({
                 gap: "8px",
                 cursor: "pointer",
               }}
-              onClick={()=>actions.handleOpenLocationModalOnClick(true)}
+              onClick={() => actions.handleOpenLocationModalOnClick(true)}
             >
               <Icon
                 icon={locationIcon}
-                width="20"
-                height="20"
+                width={
+                  styles?.AppBarLocationIconHeightWidth?.value != ""
+                    ? styles?.AppBarLocationIconHeightWidth?.value
+                    : themeColors?.AppBarLocationIconHeightWidth?.value
+                }
+                height={
+                  styles?.AppBarLocationIconHeightWidth?.value != ""
+                    ? styles?.AppBarLocationIconHeightWidth?.value
+                    : themeColors?.AppBarLocationIconHeightWidth?.value
+                }
                 color={
                   styles?.AppBarLocationIconColor?.value != ""
                     ? styles?.AppBarLocationIconColor?.value
@@ -75,11 +86,25 @@ export default function CustomNavbar({
                     color:
                       styles?.AppBarChangeLocationColor?.value != ""
                         ? styles?.AppBarChangeLocationColor?.value
-                        : themeColors?.AppBarChangeLocationColor?.value,
+                        : globalComponentStyles?.Text?.color?.value != ""
+                          ? globalComponentStyles?.Text?.color?.value :
+                          themeColors?.AppBarChangeLocationColor?.value,
+
+                    fontSize: styles?.AppBarChangeLocationTextSize?.value != ""
+                      ? styles?.AppBarChangeLocationTextSize?.value
+                      : themeColors?.AppBarChangeLocationTextSize?.value,
+
+                    fontFamily: styles?.AppBarChangeLocationTextFont?.value != ""
+                      ? styles?.AppBarChangeLocationTextFont?.value
+                      : themeColors?.AppBarChangeLocationTextFont?.value,
+
+                    fontStyle: styles?.AppBarChangeLocationTextStyle?.value != ""
+                      ? styles?.AppBarChangeLocationTextStyle?.value
+                      : themeColors?.AppBarChangeLocationTextStyle?.value,
                   }}
                 >
                   Change Location
-                  
+
                 </Typography>
                 <Typography
                   variant="caption"
@@ -87,11 +112,26 @@ export default function CustomNavbar({
                     color:
                       styles?.AppBarAddressColor?.value != ""
                         ? styles?.AppBarAddressColor?.value
-                        : themeColors?.AppBarAddressColor?.value,
+                        : globalComponentStyles?.Text?.color?.value != ""
+                          ? globalComponentStyles?.Text?.color?.value :
+                          themeColors?.AppBarAddressColor?.value,
+
+                    fontSize: styles?.AppBarAddressTextSize?.value != ""
+                      ? styles?.AppBarAddressTextSize?.value
+                      : themeColors?.AppBarAddressTextSize?.value,
+
+                    fontFamily: styles?.AppBarAddressTextFont?.value != ""
+                      ? styles?.AppBarAddressTextFont?.value
+                      : themeColors?.AppBarAddressTextFont?.value,
+
+                    fontStyle: styles?.AppBarAddressTextStyle?.value != ""
+                      ? styles?.AppBarAddressTextStyle?.value
+                      : themeColors?.AppBarAddressTextStyle?.value,
+
                   }}
                 >
                   {states?.selectedVenue
-                    ? `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`
+                    ? actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`, truncateLength)
                     : "Address"}
                 </Typography>
               </Box>
@@ -106,8 +146,17 @@ export default function CustomNavbar({
             >
               <Icon
                 icon={phoneIcon}
-                width="20"
-                height="20"
+
+                width={
+                  styles?.AppBarPhoneIconHeightWidth?.value != ""
+                    ? styles?.AppBarPhoneIconHeightWidth?.value
+                    : themeColors?.AppBarPhoneIconHeightWidth?.value
+                }
+                height={
+                  styles?.AppBarPhoneIconHeightWidth?.value != ""
+                    ? styles?.AppBarPhoneIconHeightWidth?.value
+                    : themeColors?.AppBarPhoneIconHeightWidth?.value
+                }
                 color={
                   styles?.AppBarPhoneIconColor?.value != ""
                     ? styles?.AppBarPhoneIconColor?.value
@@ -121,7 +170,23 @@ export default function CustomNavbar({
                   color:
                     styles?.AppBarPhoneColor?.value != ""
                       ? styles?.AppBarPhoneColor?.value
-                      : themeColors?.AppBarPhoneColor?.value,
+                      : globalComponentStyles?.Text?.color?.value != ""
+                        ? globalComponentStyles?.Text?.color?.value :
+                        themeColors?.AppBarPhoneColor?.value,
+
+
+                  fontSize: styles?.AppBarPhoneTextSize?.value != ""
+                    ? styles?.AppBarPhoneTextSize?.value
+                    : themeColors?.AppBarPhoneTextSize?.value,
+
+                  fontFamily: styles?.AppBarPhoneTextFont?.value != ""
+                    ? styles?.AppBarPhoneTextFont?.value
+                    : themeColors?.AppBarPhoneTextFont?.value,
+
+                  fontStyle: styles?.AppBarPhoneTextStyle?.value != ""
+                    ? styles?.AppBarPhoneTextStyle?.value
+                    : themeColors?.AppBarPhoneTextStyle?.value,
+
                 }}
               >
                 {states?.selectedVenue
@@ -135,8 +200,17 @@ export default function CustomNavbar({
             <IconButton onClick={actions.handleOpenCart}>
               <Icon
                 icon={cartIcon}
-                width={24}
-                height={24}
+
+                width={
+                  styles?.AppBarCartIconHeightWidth?.value != ""
+                    ? styles?.AppBarCartIconHeightWidth?.value
+                    : themeColors?.AppBarCartIconHeightWidth?.value
+                }
+                height={
+                  styles?.AppBarCartIconHeightWidth?.value != ""
+                    ? styles?.AppBarCartIconHeightWidth?.value
+                    : themeColors?.AppBarCartIconHeightWidth?.value
+                }
                 color={
                   styles?.AppBarCartIconColor?.value != ""
                     ? styles?.AppBarCartIconColor?.value
@@ -171,6 +245,7 @@ export default function CustomNavbar({
                 alignItems: "center",
                 justifyContent: "center",
               }}
+              onClick={actions.handleOpenCart}
             >
               {states?.cardItems?.items?.length || 0}
             </Box>
@@ -213,7 +288,9 @@ export default function CustomNavbar({
         prop={prop}
         styles={styles}
         states={states}
+        isGoogleMapsLoaded={states?.isGoogleMapsLoaded}
       />
+    
     </>
   );
 }

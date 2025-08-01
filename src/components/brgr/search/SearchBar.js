@@ -2,7 +2,7 @@ import React from 'react';
 import { InputBase, IconButton, Paper,Container } from '@mui/material';
 import Iconify from '../iconify';
 
-const SearchBar = ( { prop, states } ) => {
+const SearchBar = ({ prop, states, styles, themeColors, globalComponentStyles }) => {
   let { query, setQuery } = states ?? {}
 
   const handleSubmit = (e) => {
@@ -17,8 +17,14 @@ const SearchBar = ( { prop, states } ) => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          border: '1px solid black',
-          borderRadius: '999px',
+          border: `1px solid ${styles?.SearchBarOutlineColor?.value !== ""
+            ? styles?.SearchBarOutlineColor?.value
+            : themeColors?.SearchBarOutlineColor?.value
+            }`,
+          borderRadius:
+            styles?.SearchBarBorderRadius?.value !== ""
+              ? `${styles?.SearchBarBorderRadius?.value}px`
+              : `${themeColors?.SearchBarBorderRadius?.value || 0}px`,
           padding: '6px 12px',
           width: '100%',
           boxShadow: 'none',
@@ -26,8 +32,17 @@ const SearchBar = ( { prop, states } ) => {
         }}
       >
         <InputBase
-          sx={{ ml: 2, flex: 1 }}
-          placeholder="Search for item by title..."
+          sx={{
+            ml: 2, flex: 1,
+            color:
+              styles?.SearchBarTextColor?.value != ""
+                ? styles?.SearchBarTextColor?.value
+                : globalComponentStyles?.Text?.color?.value != ""
+                  ? globalComponentStyles?.Text?.color?.value
+                  : themeColors?.SearchBarTextColor?.value,
+            
+          }}
+          placeholder={prop.editable.SearchBarBackgroundText.value}
           inputProps={{ 'aria-label': 'search items' }}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -35,8 +50,15 @@ const SearchBar = ( { prop, states } ) => {
         <IconButton
           type="submit"
           sx={{
-            backgroundColor: 'black',
-            color: 'white',
+            backgroundColor:
+              styles?.SearchBarIconBackgroundColor?.value != ""
+                ? styles?.SearchBarIconBackgroundColor?.value
+                : themeColors?.SearchBarIconBackgroundColor?.value
+            ,
+            color:
+              styles?.SearchBarIconColor?.value != ""
+                ? styles?.SearchBarIconColor?.value
+                : themeColors?.SearchBarIconColor?.value,
             p: 1,
             '&:hover': {
               backgroundColor: '#333',
@@ -44,7 +66,18 @@ const SearchBar = ( { prop, states } ) => {
           }}
           aria-label="search"
         >
-          <Iconify icon="eva:arrow-forward-fill" width={14} height={14} color="#eac7aa" />
+          <Iconify icon="eva:arrow-forward-fill" 
+          width={
+             styles?.SearchBarIconSize?.value != ""
+             ? styles?.SearchBarIconSize?.value
+             : themeColors?.SearchBarIconSize?.value
+          } 
+          height={
+            styles?.SearchBarIconSize?.value != ""
+            ? styles?.SearchBarIconSize?.value
+            : themeColors?.SearchBarIconSize?.value
+          } 
+          color="#eac7aa" />
         </IconButton>
       </Paper>
     </Container>
