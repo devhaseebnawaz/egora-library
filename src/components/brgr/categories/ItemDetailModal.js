@@ -232,7 +232,7 @@ export default function ItemDetailModal({
     <Box
       style={{
         display: 'flex',
-        height: '90vh',
+        height: previewMode ? 'auto' : '90vh',
         backgroundColor: themeColors?.ItemDetailModalBackgroundColor 
           || styles?.ItemDetailModalBackgroundColor 
           || '#fff',
@@ -243,8 +243,10 @@ export default function ItemDetailModal({
         <Box style={{ display: 'flex', gap: 8 }}>
           <IconButton
             onClick={() => {
-              actions.handleOpenCard();
-              isItemEdit && actions?.handleItemEditClose();
+              if(!previewMode){
+                actions.handleOpenCard();
+                isItemEdit && actions?.handleItemEditClose();
+              }
             }}
             style={{
               backgroundColor: '#121212',
