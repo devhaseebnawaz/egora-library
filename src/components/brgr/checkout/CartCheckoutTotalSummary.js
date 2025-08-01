@@ -1,15 +1,13 @@
-'use client';
 import React, { useState, useMemo, useEffect, useCallback } from "react";
 import {
   Box, Card, Stack, Typography, CardContent,
 } from "@mui/material";
 import { fNumber } from "../../../utils/formatNumber";
-// import { calculateAndRoundTax } from 'src/utils/tax';
 
 const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData }) => {
-  const { selectedVenue, cardItems } = states ?? {};
-  const { serviceFeesObject, configurations } = selectedVenue ?? {};
-  const { isServiceFeesOnWeb } = configurations ?? {};
+  const {  cardItems,franchise } = states ?? {};
+  const { serviceFeesObject, configurations,storeTaxOnCash,storeTaxOnCard,platformFees } = franchise ?? {};
+  const { isServiceFeesApplicableOnStore,isTaxApplicableOnStore,isPlatformFeeApplicableOnStore,isCashAvailableOnPickUp,isCashAvailableOnDelivery } = configurations ?? {};
 
   const [subTotal, setSubTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -46,11 +44,11 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     setSubTotal(subTotalOfItems);
   }, [subTotalOfItems]);
 
-  const taxRate = states?.selectedVenue?.configurations?.isPayingTax
+  const taxRate = isTaxApplicableOnStore
     ? (states.paymentMethod === "cash"
-      ? selectedVenue?.taxOnCash / 100
+      ? storeTaxOnCash / 100
       : states.paymentMethod=== "card"
-        ? selectedVenue?.taxOnCard / 100
+        ? storeTaxOnCard / 100
         : 0)
     : 0;
   
@@ -59,13 +57,11 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   ), [subTotal, taxRate, discount]);
 
   const calculateServiceFee = () => {
-    if (!isServiceFeesOnWeb) return 0;
+    if (!isServiceFeesApplicableOnStore) return 0;
 
     const modeCashAvailability = {
-      storePickUp: configurations?.isCashAvailableOnPickUp,
-      QrDineIn: configurations?.isCashAvailableOnTableScan,
-      QrPickUp: configurations?.isCashAvailableOnVenueScan,
-      carHop: configurations?.isCashAvailableOnCarHop,
+      storePickUp: isCashAvailableOnPickUp,
+      storeDelivery:isCashAvailableOnDelivery,
     };
 
     if (!modeCashAvailability[states.orderType] && states.paymentMethod === "cash") {
@@ -92,13 +88,13 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   useEffect(() => {
     let updatedTotal = Number(subTotal);
     if (
-      isServiceFeesOnWeb &&
+      isServiceFeesApplicableOnStore &&
       isApplicable(serviceFeesObject?.[states.orderType]?.[states.method]?.applicable)
     ) {
       updatedTotal += Number(serviceFee);
     }
-    const platformFee = 9.9;
-    const grandTotal = updatedTotal + platformFee + taxAmount + Number(selectedTip);
+    const platformFee = isPlatformFeeApplicableOnStore ? platformFees:0;
+    const grandTotal = serviceFee + updatedTotal + platformFee + taxAmount + Number(selectedTip);
     setTotal(grandTotal);
   }, [
     subTotal,
@@ -108,13 +104,13 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     selectedTip,
     states.method,
     serviceFeesObject,
-    isServiceFeesOnWeb,
+    isServiceFeesApplicableOnStore,
     states.orderType,
   ]);
 
   const renderServiceFee = () => {
     const service = serviceFeesObject?.[states.orderType]?.[states.paymentMethod];
-    if (isServiceFeesOnWeb && isApplicable(service?.applicable) && serviceFee > 0) {
+    if (isServiceFeesApplicableOnStore && isApplicable(service?.applicable) && serviceFee > 0) {
       return (
         <Stack direction="row" justifyContent="space-between">
           <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>
@@ -139,7 +135,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     let serviceFeesObj = {};
   
     if (
-      isServiceFeesOnWeb &&
+      isServiceFeesApplicableOnStore &&
       isApplicable(serviceFeesObject?.[mode]?.[method]?.applicable)
     ) {
       totalServiceValue = Number(serviceFee);
@@ -162,12 +158,12 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       tip: selectedTip === null ? 0 : fNumber(selectedTip),
       serviceFees: fNumber(totalServiceValue),
       location: "2,2",
-      platformFees: 9.9,
+      platformFees: isPlatformFeeApplicableOnStore ? platformFees:0,
       serviceFeesObject: serviceFeesObj,
     };
   
     setOrderData(orderData);
-  }, [ cardItems, total, selectedTip, serviceFee, taxAmount, subTotal, states.method, states.orderType, isServiceFeesOnWeb, serviceFeesObject,
+  }, [ cardItems, total, selectedTip, serviceFee, taxAmount, subTotal, states.method, states.orderType, isServiceFeesApplicableOnStore, serviceFeesObject,
   ]);
 
   
@@ -186,11 +182,12 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
               <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Sub Total</Typography>
               <Typography variant="subtitle2">Rs. {fNumber(subTotal)}</Typography>
             </Stack>
-
+           {isPlatformFeeApplicableOnStore && (
             <Stack direction="row" justifyContent="space-between">
               <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Platform Fee</Typography>
-              <Typography variant="subtitle2">Rs. 9.9</Typography>
+              <Typography variant="subtitle2">Rs. {platformFees}</Typography>
             </Stack>
+           )}
 
             {renderServiceFee()}
 
@@ -206,7 +203,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
               <Typography variant="subtitle2">Rs. {fNumber(selectedTip || 0)}</Typography>
             </Stack>
 
-            {selectedVenue?.configurations?.isPayingTax && (
+            {isTaxApplicableOnStore && (
               <Stack direction="row" justifyContent="space-between">
                 <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Tax</Typography>
                 <Typography variant="subtitle2">Rs. {fNumber(taxAmount)}</Typography>
