@@ -31,7 +31,7 @@ export default function ItemDetailModal({
   actions,
   states,
   onClose,
-  item,
+  // item,
   setItem
 }) {
   const methods = useForm();
