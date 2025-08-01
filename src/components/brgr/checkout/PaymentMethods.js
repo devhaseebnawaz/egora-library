@@ -20,7 +20,8 @@ const PAYMENT_OPTIONS = [
 
 export default function PaymentMethods({ actions, prop, styles, states, PaymentComponent }) {
   const { franchise, orderType } = states ?? {}
-  const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = franchise ?? {}
+  const {configurations} = franchise ?? {}
+  const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = configurations ?? {}
 
   const isCashAvailable = () => {
     if (!isCashAvailableOnStore) return false;
