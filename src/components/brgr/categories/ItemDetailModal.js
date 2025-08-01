@@ -40,15 +40,15 @@ export default function ItemDetailModal({
   const [filteredChoiceGroups, setFilteredChoiceGroups] = useState([]);
   const [selectedSauces, setSelectedSauces] = useState({ items: [] });
   const [quantity, setQuantity] = React.useState(1);
-  const [notes, setNotes] = useState(item?.notes ? item?.notes : "");
+  const [notes, setNotes] = useState(states.itemForDetailedModal?.notes ? states.itemForDetailedModal?.notes : "");
   const [selectedVariant, setSelectedVariant] = useState(
     isItemEdit ?
-      item.variants
-        ? item.variants.find((i) => i.id == item?.selectedVariant?.id)
+    states.itemForDetailedModal.variants
+        ? states.itemForDetailedModal.variants.find((i) => i.id == states.itemForDetailedModal?.selectedVariant?.id)
         : ""
       :
-      item.variants
-        ? item.variants.find((i) => i.defaultVariant == true)
+      states.itemForDetailedModal.variants
+        ? states.itemForDetailedModal.variants.find((i) => i.defaultVariant == true)
         : ""
   );
 
@@ -58,9 +58,9 @@ export default function ItemDetailModal({
 
     if (isItemEdit) {
       if (
-        item?.hasVariant &&
+        states.itemForDetailedModal?.hasVariant &&
         selectedVariant &&
-        item?.associateChoiceGroupWithPriceVariant
+        states.itemForDetailedModal?.associateChoiceGroupWithPriceVariant
       ) {
         const selectedVariantChoiceGroupIds = selectedVariant.choiceGroup || [];
 
@@ -74,15 +74,15 @@ export default function ItemDetailModal({
           .filter(Boolean);
 
         setFilteredChoiceGroups(filteredGroups);
-      } else if (item?.choiceGroup && choiceGroups) {
+      } else if (states.itemForDetailedModal?.choiceGroup && choiceGroups) {
         const filteredGroups = choiceGroups
-          .filter((choiceGroup) => item.choiceGroup.includes(choiceGroup.id))
+          .filter((choiceGroup) => states.itemForDetailedModal.choiceGroup.includes(choiceGroup.id))
           .map((group) => JSON.parse(JSON.stringify(group)));
 
         setFilteredChoiceGroups(filteredGroups);
       }
-      if (!hasSetInitialSauces.current && item?.groups) {
-        const initialSelectedSauces = item.groups;
+      if (!hasSetInitialSauces.current && states.itemForDetailedModal?.groups) {
+        const initialSelectedSauces = states.itemForDetailedModal.groups;
         setSelectedSauces({ items: initialSelectedSauces });
         hasSetInitialSauces.current = true;
       }
@@ -91,9 +91,9 @@ export default function ItemDetailModal({
 
     else {
       if (
-        item?.hasVariant &&
+        states.itemForDetailedModal?.hasVariant &&
         selectedVariant &&
-        item?.associateChoiceGroupWithPriceVariant
+        states.itemForDetailedModal?.associateChoiceGroupWithPriceVariant
       ) {
         const selectedVariantChoiceGroupIds = selectedVariant.choiceGroup || [];
         const filteredGroups = choiceGroups
@@ -107,9 +107,9 @@ export default function ItemDetailModal({
 
         console.log("the filtered groups are", filteredChoiceGroups)
         setFilteredChoiceGroups(filteredGroups);
-      } else if (item?.choiceGroup && choiceGroups) {
+      } else if (states.itemForDetailedModal?.choiceGroup && choiceGroups) {
         const filteredGroups = choiceGroups
-          .filter((choiceGroup) => item.choiceGroup.includes(choiceGroup.id))
+          .filter((choiceGroup) => states.itemForDetailedModal.choiceGroup.includes(choiceGroup.id))
           .map((group) => JSON.parse(JSON.stringify(group)));
 
         setFilteredChoiceGroups(filteredGroups);
@@ -117,7 +117,7 @@ export default function ItemDetailModal({
 
     }
 
-  }, [choiceGroups, item, selectedVariant]);
+  }, [choiceGroups, states.itemForDetailedModal, selectedVariant]);
 
 
   const toggleSauce = (elem, sauce) => {
@@ -267,8 +267,8 @@ export default function ItemDetailModal({
         >
           <Box
             component="img"
-            src={item?.photoURL ? `${states.storeImagesBaseUrl}/${item.photoURL}` : '/assets/placeholder.png'}
-            alt={item?.name || "Menu Item"}
+            src={states.itemForDetailedModal?.photoURL ? `${states.storeImagesBaseUrl}/${states.itemForDetailedModal.photoURL}` : '/assets/placeholder.png'}
+            alt={states.itemForDetailedModal?.name || "Menu Item"}
             loading="lazy"
             onError={(e) => {
               e.target.onerror = null;
@@ -304,24 +304,24 @@ export default function ItemDetailModal({
             }}
           >
             <Typography variant="h6" fontWeight="bold">
-              {item.name}
+              {states.itemForDetailedModal.name}
             </Typography>
           </Box>
           <Typography color="gray" style={{ marginBottom: 15 }}>
-            {item.description || ''}
+            {states.itemForDetailedModal.description || ''}
           </Typography>
 
           <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }} >
-            Rs. {item.price}
+            Rs. {states.itemForDetailedModal.price}
           </Typography>
 
 
           <CardContent sx={{ padding: "0" }}>
             <FormProvider methods={methods} >
               <Stack spacing={1}>
-                {item.hasVariant && (
+                {states.itemForDetailedModal.hasVariant && (
                   <Variant
-                    variants={item.variants}
+                    variants={states.itemForDetailedModal.variants}
                     hanldeSelectOption={toggleVariantSelect}
                     selectedVariant={selectedVariant}
                   />
@@ -424,9 +424,9 @@ export default function ItemDetailModal({
               disabled={!isOnline || !areAllRequiredGroupsSelected}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-              onClick={() => { handleAddItemToCart(item, quantity, notes); actions.handleOpenCard(); states.setItemForDetailedModal(null) }}
+              onClick={() => { handleAddItemToCart(states.itemForDetailedModal, quantity, notes); actions.handleOpenCard(); states.setItemForDetailedModal(null) }}
             >
-              <span>Rs. {item.price * quantity}</span>
+              <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 {isItemEdit ? "Update cart" : "Add to Cart"}
               </span>
