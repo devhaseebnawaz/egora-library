@@ -31,6 +31,19 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
     const cartItems = items
     const [orderData, setOrderData] = useState({})
 
+    const { orderType } = states;
+    const { franchise } = states ?? {}
+    const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = franchise ?? {};
+
+    const isCashAllowed = isCashAvailableOnStore &&
+        ((orderType === "delivery" && isCashAvailableOnDelivery) ||
+            (orderType === "pickup" && isCashAvailableOnPickUp));
+
+    const isCardAllowed = isCardAvailableOnStore &&
+        ((orderType === "delivery" && isCardAvailableOnDelivery) ||
+            (orderType === "pickup" && isCardAvailableOnPickUp));
+
+    const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 
     const methods = useForm({
         resolver: yupResolver(UserSchema),
@@ -55,7 +68,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                     ...orderData,
                     customer: { ...data },
                 });
-                 if (response) {
+                if (response) {
                     actions.naviagateOrderSuccess();
                 }
             }
@@ -63,8 +76,6 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
             console.error("Order placement failed:", error);
         }
     };
-
-
 
 
     return (
@@ -136,28 +147,37 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     states={states}
                                     setOrderData={setOrderData}
                                 />
-                                <PaymentMethods
-                                    actions={actions}
-                                    prop={prop}
-                                    styles={styles}
-                                    states={states}
-                                    PaymentComponent={PaymentComponent}
-                                />
-                                {states.paymentMethod === "cash" &&
-                                    <Button
-                                        variant="contained"
-                                        fullWidth
-                                        type="submit"
-                                        sx={{ mt: 2, backgroundColor: 'black', color: 'white', fontWeight: 'bold' }}
-                                    >
-                                        {isSubmitting ? "Placing Order..." : "Place Order"}
-                                    </Button>
+                                {canShowPaymentMethods ? (
+                                    <>
+                                        <PaymentMethods
+                                            actions={actions}
+                                            prop={prop}
+                                            styles={styles}
+                                            states={states}
+                                            PaymentComponent={PaymentComponent}
+                                        />
+                                        {states.paymentMethod === "cash" &&
+                                            <Button
+                                                variant="contained"
+                                                fullWidth
+                                                type="submit"
+                                                sx={{ mt: 2, backgroundColor: 'black', color: 'white', fontWeight: 'bold' }}
+                                            >
+                                                {isSubmitting ? "Placing Order..." : "Place Order"}
+                                            </Button>
+                                        }
+                                        <Box textAlign="center" mt={2}>
+                                            <Link href="/" underline="hover" fontSize={14} >
+                                                ← continue to add more items
+                                            </Link>
+                                        </Box>
+                                    </>
+                                )
+                                    :
+                                    <Typography fontWeight="bold">
+                                        You can't place the order.
+                                    </Typography>
                                 }
-                                <Box textAlign="center" mt={2}>
-                                    <Link href="/" underline="hover" fontSize={14} >
-                                        ← continue to add more items
-                                    </Link>
-                                </Box>
                             </Paper>
                         </Grid>
                     </Grid>

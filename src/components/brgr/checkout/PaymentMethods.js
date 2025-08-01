@@ -18,7 +18,24 @@ const PAYMENT_OPTIONS = [
   },
 ];
 
-export default function PaymentMethods({actions,prop,styles,states,PaymentComponent }) {
+export default function PaymentMethods({ actions, prop, styles, states, PaymentComponent }) {
+  const { franchise, orderType } = states ?? {}
+  const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = franchise ?? {}
+
+  const isCashAvailable = () => {
+    if (!isCashAvailableOnStore) return false;
+    if (orderType === "delivery" && isCashAvailableOnDelivery) return true;
+    if (orderType === "pickup" && isCashAvailableOnPickUp) return true
+    return false;
+  };
+
+  const isCardAvailable = () => {
+    if (!isCardAvailableOnStore) return false;
+    if (orderType === "delivery" && isCardAvailableOnDelivery) return true;
+    if (orderType === "pickup" && isCardAvailableOnPickUp) return true;
+    return false;
+  };
+
 
   return (
     <>
@@ -29,10 +46,9 @@ export default function PaymentMethods({actions,prop,styles,states,PaymentCompon
       >
         <Stack spacing={3}>
           {PAYMENT_OPTIONS.filter((option) => {
-            // if ((option.value === "cash" && !cashAvailable) || (option.value === "card" && !cardAvailableOnWeb)) {
-            //   return false;
-            // }
-            return true;
+            if (option.value === "cash") return isCashAvailable();
+            if (option.value === "card") return isCardAvailable();
+            return false;
           }).map((option) => (
             <PaymentOption
               key={option.title}
@@ -44,7 +60,6 @@ export default function PaymentMethods({actions,prop,styles,states,PaymentCompon
           ))}
         </Stack>
       </RadioGroup>
-
       {PaymentComponent && states.paymentMethod === "card" && states.openPaymentCard && (
         <PaymentComponent
           actions={actions}
