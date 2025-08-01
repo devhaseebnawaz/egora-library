@@ -33,7 +33,8 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
 
     const { orderType } = states;
     const { franchise } = states ?? {}
-    const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = franchise ?? {};
+    const {configurations} = franchise ?? {}
+    const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = configurations ?? {};
 
     const isCashAllowed = isCashAvailableOnStore &&
         ((orderType === "delivery" && isCashAvailableOnDelivery) ||
@@ -44,6 +45,11 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
             (orderType === "pickup" && isCardAvailableOnPickUp));
 
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
+
+    console.log('states sufi',franchise);
+
+    console.log('canShowPaymentMethods',canShowPaymentMethods)
+    
 
     const methods = useForm({
         resolver: yupResolver(UserSchema),
