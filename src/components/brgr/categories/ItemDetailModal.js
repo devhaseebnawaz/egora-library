@@ -44,7 +44,7 @@ export default function ItemDetailModal({
   const [notes, setNotes] = useState(states.itemForDetailedModal?.notes ? states.itemForDetailedModal?.notes : "");
   const [selectedVariant, setSelectedVariant] = useState(
     isItemEdit ?
-    states.itemForDetailedModal.variants
+      states.itemForDetailedModal.variants
         ? states.itemForDetailedModal.variants.find((i) => i.id == states.itemForDetailedModal?.selectedVariant?.id)
         : ""
       :
@@ -232,46 +232,46 @@ export default function ItemDetailModal({
     <Box
       style={{
         display: 'flex',
-        height: previewMode ? 'auto' : '90vh',
-        backgroundColor: themeColors?.ItemDetailModalBackgroundColor 
-          || styles?.ItemDetailModalBackgroundColor 
+        height: previewMode ? '70vh' : '90vh',
+        backgroundColor: themeColors?.ItemDetailModalBackgroundColor
+          || styles?.ItemDetailModalBackgroundColor
           || '#fff',
       }}
     >
       {/* Close Button */}
-      {!previewMode && (
-        <Box style={{ display: 'flex', gap: 8 }}>
-          <IconButton
-            onClick={() => {
-              if(!previewMode){
-                actions.handleOpenCard();
-                isItemEdit && actions?.handleItemEditClose();
-              }
-            }}
-            style={{
-              backgroundColor: '#121212',
-              color: '#fff',
-              width: 36,
-              height: 36,
-              position: 'absolute',
-              right: '20px',
-              top: '20px',
-              zIndex: 9999,
-            }}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-          >
-            <Iconify icon="mdi:close" width={20} height={20} />
-          </IconButton>
-        </Box>
-      )}
-  
+
+      <Box style={{ display: 'flex', gap: 8 }}>
+        <IconButton
+          onClick={() => {
+            if (!previewMode) {
+              actions.handleOpenCard();
+              isItemEdit && actions?.handleItemEditClose();
+            }
+          }}
+          style={{
+            backgroundColor: '#121212',
+            color: '#fff',
+            width: 36,
+            height: 36,
+            position: 'absolute',
+            right: '20px',
+            top: '20px',
+            zIndex: 9999,
+          }}
+          onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
+          onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
+        >
+          <Iconify icon="mdi:close" width={20} height={20} />
+        </IconButton>
+      </Box>
+
+
       {/* Left Image Section */}
       <Box
         style={{
           width: '45%',
-          backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor 
-            || styles?.ItemDetailModalImageDivBackgroundColor 
+          backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor
+            || styles?.ItemDetailModalImageDivBackgroundColor
             || '#f4f4f4',
           display: 'flex',
           alignItems: 'flex-start',
@@ -281,8 +281,8 @@ export default function ItemDetailModal({
       >
         <Box
           component="img"
-          src={states.itemForDetailedModal?.photoURL 
-            ? `${states.storeImagesBaseUrl}/${states.itemForDetailedModal.photoURL}` 
+          src={states.itemForDetailedModal?.photoURL
+            ? `${states.storeImagesBaseUrl}/${states.itemForDetailedModal.photoURL}`
             : '/assets/placeholder.png'}
           alt={states.itemForDetailedModal?.name || "Menu Item"}
           loading="lazy"
@@ -298,10 +298,10 @@ export default function ItemDetailModal({
           }}
         />
       </Box>
-  
+
       {/* Divider */}
       <Box style={{ width: '1px', backgroundColor: '#e0e0e0' }} />
-  
+
       {/* Right Detail Section */}
       <Box
         style={{
@@ -326,15 +326,15 @@ export default function ItemDetailModal({
             {states.itemForDetailedModal.name}
           </Typography>
         </Box>
-  
+
         <Typography color="gray" style={{ marginBottom: 15 }}>
           {states.itemForDetailedModal.description || ''}
         </Typography>
-  
+
         <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }}>
           Rs. {states.itemForDetailedModal.price}
         </Typography>
-  
+
         {/* Variants & Options */}
         <CardContent sx={{ padding: "0" }}>
           <FormProvider methods={methods}>
@@ -372,99 +372,99 @@ export default function ItemDetailModal({
             </Stack>
           </FormProvider>
         </CardContent>
-  
+
         {/* Quantity & Add to Cart */}
-        {!previewMode && (
-          <Box
+
+        <Box
+          style={{
+            marginTop: 'auto',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderTop: '1px solid #eee',
+            paddingTop: 16,
+            gap: 16,
+          }}
+        >
+          <Box style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <Button
+              onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+              style={{
+                minWidth: 36,
+                height: 36,
+                borderRadius: 12,
+                backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor
+                  || styles?.ItemDetailModalQtyDecreseBackgroundColor
+                  || '#ccc',
+                color: themeColors?.ItemDetailModalQtyDecreseColor
+                  || styles?.ItemDetailModalQtyDecreseColor
+                  || '#fff',
+                fontWeight: 'bold',
+                fontSize: 20,
+              }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = '#b0b0b0'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = '#ccc'}
+            >
+              –
+            </Button>
+            <Typography fontWeight="bold">{quantity}</Typography>
+            <Button
+              onClick={() => setQuantity((prev) => prev + 1)}
+              style={{
+                minWidth: 36,
+                height: 36,
+                borderRadius: 12,
+                backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor
+                  || styles?.ItemDetailModalQtyIncreaseBackgroundColor
+                  || '#121212',
+                color: themeColors?.ItemDetailModalQtyIncreaseColor
+                  || styles?.ItemDetailModalQtyIncreaseColor
+                  || '#fff',
+                fontWeight: 'bold',
+                fontSize: 20,
+              }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
+            >
+              +
+            </Button>
+          </Box>
+
+          <Button
+            fullWidth
             style={{
-              marginTop: 'auto',
+              flex: 1,
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderTop: '1px solid #eee',
-              paddingTop: 16,
-              gap: 16,
+              borderRadius: 12,
+              padding: '12px 24px',
+              fontWeight: 'bold',
+              fontSize: 16,
+              backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
+              color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
+            }}
+            disabled={!isOnline || !areAllRequiredGroupsSelected}
+            onClick={() => {
+              handleAddItemToCart(states.itemForDetailedModal, quantity, notes);
+              actions.handleOpenCard();
+              states.setItemForDetailedModal(null);
             }}
           >
-            <Box style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Button
-                onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                style={{
-                  minWidth: 36,
-                  height: 36,
-                  borderRadius: 12,
-                  backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor 
-                    || styles?.ItemDetailModalQtyDecreseBackgroundColor 
-                    || '#ccc',
-                  color: themeColors?.ItemDetailModalQtyDecreseColor 
-                    || styles?.ItemDetailModalQtyDecreseColor 
-                    || '#fff',
-                  fontWeight: 'bold',
-                  fontSize: 20,
-                }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#b0b0b0'}
-                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#ccc'}
-              >
-                –
-              </Button>
-              <Typography fontWeight="bold">{quantity}</Typography>
-              <Button
-                onClick={() => setQuantity((prev) => prev + 1)}
-                style={{
-                  minWidth: 36,
-                  height: 36,
-                  borderRadius: 12,
-                  backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor 
-                    || styles?.ItemDetailModalQtyIncreaseBackgroundColor 
-                    || '#121212',
-                  color: themeColors?.ItemDetailModalQtyIncreaseColor 
-                    || styles?.ItemDetailModalQtyIncreaseColor 
-                    || '#fff',
-                  fontWeight: 'bold',
-                  fontSize: 20,
-                }}
-                onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
-                onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-              >
-                +
-              </Button>
-            </Box>
-  
-            <Button
-              fullWidth
-              style={{
-                flex: 1,
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRadius: 12,
-                padding: '12px 24px',
-                fontWeight: 'bold',
-                fontSize: 16,
-                backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
-                color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
-              }}
-              disabled={!isOnline || !areAllRequiredGroupsSelected}
-              onClick={() => {
-                handleAddItemToCart(states.itemForDetailedModal, quantity, notes);
-                actions.handleOpenCard();
-                states.setItemForDetailedModal(null);
-              }}
-            >
-              <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                {isItemEdit ? "Update cart" : "Add to Cart"}
-              </span>
-            </Button>
-          </Box>
-        )}
+            <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              {isItemEdit ? "Update cart" : "Add to Cart"}
+            </span>
+          </Button>
+        </Box>
+
       </Box>
     </Box>
   );
 
-  
+
   return previewMode ? (
-    <Box>{content}</Box> 
+    <Box>{content}</Box>
   ) : (
     <Dialog open={states.openCard} onClose={() => {
       actions.handleOpenCard();
