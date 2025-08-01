@@ -15,11 +15,11 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
   const { items } = states.cardItems ?? []
   const cardItems = items
 
-  const { selectedVenue, orderType } = states ?? {}
-  const { serviceFeesObject, configurations, taxOnCash } = selectedVenue ?? {}
-  const { isServiceFeesOnWeb, isPayingTax } = configurations ?? {}
+  const { orderType,franchise } = states ?? {}
+  const { serviceFeesObject, configurations, storeTaxOnCash } = franchise ?? {}
+  const { isServiceFeesApplicableOnStore, isTaxApplicableOnStore } = configurations ?? {}
 
-  const taxRate = isPayingTax ? taxOnCash / 100 : 0;
+  const taxRate = isTaxApplicableOnStore ? storeTaxOnCash / 100 : 0;
 
   let discount = 0;
 
@@ -31,7 +31,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
   const serviceFee = useMemo(
     () =>
       cardItems?.length > 0 &&
-        (isServiceFeesOnWeb && (isApplicable(serviceFeesObject?.[orderType]?.cash?.applicable)))
+        (isServiceFeesApplicableOnStore && (isApplicable(serviceFeesObject?.[orderType]?.cash?.applicable)))
         ? calculateServiceFee(states, orderType, paymentOption, subTotal, discount)
         : 0,
     [cardItems, subTotal, taxAmount]
@@ -43,7 +43,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
 
   const renderServiceFee = () => {
     if (
-      isServiceFeesOnWeb &&
+      isServiceFeesApplicableOnStore &&
       isApplicable(serviceFeesObject?.[orderType]?.cash?.applicable) && serviceFee > 0) {
       return (
         <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -183,7 +183,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
               </Box>
               {renderServiceFee()}
 
-              {isPayingTax && (
+              {isTaxApplicableOnStore && (
                 <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Typography>Tax </Typography>
                   <Typography> Rs. {taxAmount ? fNumber(taxAmount) : 0}</Typography>
@@ -250,26 +250,6 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 padding: '4px 8px',
               }}
             >
-              {['delivery', 'pickup'].map((type) => (
-                <Button
-                  key={type}
-                  onClick={() => actions.handleSetOrderType(type)}
-                  size="small"
-                  disableElevation
-                  style={{
-                    textTransform: 'uppercase',
-                    fontWeight: 'bold',
-                    backgroundColor: states.orderType === type ? '#000' : 'transparent',
-                    color: states.orderType === type ? '#fff' : '#000',
-                    borderRadius: 20,
-                    padding: '4px 8px',
-                    fontSize: 12,
-                    minWidth: 'auto',
-                  }}
-                >
-                  {type}
-                </Button>
-              ))}
             </Box>
           </>
         )}

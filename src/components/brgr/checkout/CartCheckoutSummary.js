@@ -37,12 +37,12 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
     const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = configurations ?? {};
 
     const isCashAllowed = isCashAvailableOnStore &&
-        ((orderType === "delivery" && isCashAvailableOnDelivery) ||
-            (orderType === "pickup" && isCashAvailableOnPickUp));
+        ((orderType === "storeDelivery" && isCashAvailableOnDelivery) ||
+            (orderType === "storePickUp" && isCashAvailableOnPickUp));
 
     const isCardAllowed = isCardAvailableOnStore &&
-        ((orderType === "delivery" && isCardAvailableOnDelivery) ||
-            (orderType === "pickup" && isCardAvailableOnPickUp));
+        ((orderType === "storeDelivery" && isCardAvailableOnDelivery) ||
+            (orderType === "storePickUp" && isCardAvailableOnPickUp));
 
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 

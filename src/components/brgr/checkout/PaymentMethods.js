@@ -25,15 +25,15 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
 
   const isCashAvailable = () => {
     if (!isCashAvailableOnStore) return false;
-    if (orderType === "delivery" && isCashAvailableOnDelivery) return true;
-    if (orderType === "pickup" && isCashAvailableOnPickUp) return true
+    if (orderType === "storeDelivery" && isCashAvailableOnDelivery) return true;
+    if (orderType === "storePickUp" && isCashAvailableOnPickUp) return true
     return false;
   };
 
   const isCardAvailable = () => {
     if (!isCardAvailableOnStore) return false;
-    if (orderType === "delivery" && isCardAvailableOnDelivery) return true;
-    if (orderType === "pickup" && isCardAvailableOnPickUp) return true;
+    if (orderType === "storeDelivery" && isCardAvailableOnDelivery) return true;
+    if (orderType === "storePickUp" && isCardAvailableOnPickUp) return true;
     return false;
   };
 

@@ -62,7 +62,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     if (!isServiceFeesOnWeb) return 0;
 
     const modeCashAvailability = {
-      pickUp: configurations?.isCashAvailableOnPickUp,
+      storePickUp: configurations?.isCashAvailableOnPickUp,
       QrDineIn: configurations?.isCashAvailableOnTableScan,
       QrPickUp: configurations?.isCashAvailableOnVenueScan,
       carHop: configurations?.isCashAvailableOnCarHop,

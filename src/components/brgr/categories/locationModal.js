@@ -106,15 +106,15 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                             }}
                         >
                             <Button
-                                onClick={() => actions.handleSetOrderType("delivery")}
+                                onClick={() => actions.handleSetOrderType("storeDelivery")}
                                 sx={{
                                     borderRadius: "999px",
                                     px: 3,
                                     py: 1,
                                     fontSize: "12px",
                                     fontWeight: "bold",
-                                    bgcolor: states.orderType === "delivery" ? "#000" : "transparent",
-                                    color: states.orderType === "delivery" ? "#fff" : "#333",
+                                    bgcolor: states.orderType === "storeDelivery" ? "#000" : "transparent",
+                                    color: states.orderType === "storeDelivery" ? "#fff" : "#333",
                                     boxShadow: "none",
                                     minWidth: "100px",
                                 }}
@@ -122,39 +122,39 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 DELIVERY
                             </Button>
                             <Button
-                                onClick={() => actions.handleSetOrderType("pickup")}
+                                onClick={() => actions.handleSetOrderType("storePickUp")}
                                 sx={{
                                     borderRadius: "999px",
                                     px: 3,
                                     py: 1,
                                     fontSize: "12px",
                                     fontWeight: "bold",
-                                    bgcolor: states.orderType === "pickup" ? "#000" : "transparent",
-                                    color: states.orderType === "pickup" ? "#fff" : "#333",
+                                    bgcolor: states.orderType === "storePickUp" ? "#000" : "transparent",
+                                    color: states.orderType === "storePickUp" ? "#fff" : "#333",
                                     boxShadow: "none",
                                     minWidth: "100px",
                                 }}
                             >
-                                PICKUP
+                                  PICKUP
                             </Button>
                         </Box>
                     </Box>
 
                     {/* Search Location Field */}
-                    {states.orderType === "delivery" && <Typography
+                    {states.orderType === "storeDelivery" && <Typography
                         variant="body2"
                         sx={{ marginBottom: "12px", textAlign: "center", fontWeight: 600 }}
                     >
                         Please select your location
                     </Typography>}
-                    {states.orderType === "pickup" && <Typography
+                    {states.orderType === "storePickUp" && <Typography
                         variant="body2"
                         sx={{ marginBottom: "12px", textAlign: "center", fontWeight: 600 }}
                     >
                         Which outlet would you like to pick-up from?
                     </Typography>}
 
-                    {states?.orderType === "pickup" && (
+                    {states?.orderType === "storePickUp" && (
                         <Autocomplete
                             options={filteredOutlets}
                             getOptionLabel={(option) => {
@@ -211,7 +211,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         />
                     )}
 
-                    {states?.orderType === "delivery" && (
+                    {states?.orderType === "storeDelivery" && (
                         <>
                             <Box
                                 sx={{
@@ -259,7 +259,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         </>
                     )}
 
-                    {states?.orderType === "delivery" && (<Box
+                    {states?.orderType === "storeDelivery" && (<Box
                         onClick={() => states?.setRefineModalOpen(true)}
                         sx={{
                             display: "flex",
@@ -284,7 +284,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         </Typography>
                     </Box>)}
 
-                    {states?.currentAddress && states?.orderType === "delivery" && <Box
+                    {states?.currentAddress && states?.orderType === "storeDelivery" && <Box
                         sx={{
                             // backgroundColor: "#f9f9f9",
                             p: 2,
@@ -313,7 +313,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
 
                     {/* Confirm Button */}
-                    {states?.orderType === 'delivery' && <Button
+                    {states?.orderType === 'storeDelivery' && <Button
                         fullWidth
                         // onClick={handleOutletSelection}
                         sx={{
@@ -332,7 +332,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                     >
                         Confirm Selection
                     </Button>}
-                    {states?.orderType === 'pickup' && <Button
+                    {states?.orderType === 'storePickUp' && <Button
                         fullWidth
                         onClick={handleOutletSelection}
                         sx={{
