@@ -26,30 +26,26 @@ export const isApplicable = (applicable) => {
 };
 
 export const calculateServiceFee = (
-    cardItems,
+    states,
     mode,
     paymentOption,
     subTotal,
     discount,
 ) => {
-    
-    const { selectedVenue } = cardItems ?? {};    
-    const { serviceFeesObject, configurations } = selectedVenue ?? {};
-    const { isServiceFeesOnWeb, isCashAvailableOnPickUp, isCashAvailableOnCarHop, isCashAvailableOnTableScan, isCashAvailableOnVenueScan,
-   isDeliveryAvailableInPos } = configurations ?? {};
 
-    if (!isServiceFeesOnWeb) return 0;
+    const { franchise } = states ?? {};  
+    console.log('states in service fee',states);
+      
+    const { serviceFeesObject, configurations } = franchise ?? {};
+    const { isServiceFeesApplicableOnStore, isCashAvailableOnPickUp, isCashAvailableOnDelivery } = configurations ?? {};
+
+    if (!isServiceFeesApplicableOnStore) return 0
     const modeCashAvailability = {
         storePickUp: isCashAvailableOnPickUp,
-        QrDineIn: isCashAvailableOnTableScan,
-        QrPickUp: isCashAvailableOnVenueScan,
-        carHop: isCashAvailableOnCarHop,
-        storeDelivery:isDeliveryAvailableInPos
+        storeDelivery:isCashAvailableOnDelivery
     };
 
-    if (!modeCashAvailability[mode] && paymentOption === "cash") {
-        return 0;
-    }
+    if (!modeCashAvailability[mode] && paymentOption === "cash") return 0 
     const modeData = serviceFeesObject?.[mode];
     if (!modeData) return 0;
     const paymentData = modeData[paymentOption];
