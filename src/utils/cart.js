@@ -40,11 +40,11 @@ export const calculateServiceFee = (
 
     if (!isServiceFeesOnWeb) return 0;
     const modeCashAvailability = {
-        pickUp: isCashAvailableOnPickUp,
+        storePickUp: isCashAvailableOnPickUp,
         QrDineIn: isCashAvailableOnTableScan,
         QrPickUp: isCashAvailableOnVenueScan,
         carHop: isCashAvailableOnCarHop,
-        delivery:isDeliveryAvailableInPos
+        storeDelivery:isDeliveryAvailableInPos
     };
 
     if (!modeCashAvailability[mode] && paymentOption === "cash") {
