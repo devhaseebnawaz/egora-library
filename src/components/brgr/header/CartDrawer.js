@@ -16,15 +16,12 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
   const cardItems = items
 
   const { orderType,franchise } = states ?? {}
-  const { serviceFeesObject, configurations, storeTaxOnCash } = franchise ?? {}
-  const { isServiceFeesApplicableOnStore, isTaxApplicableOnStore } = configurations ?? {}
-
+  const { serviceFeesObject, configurations, storeTaxOnCash,platformFees } = franchise ?? {}
+  const { isServiceFeesApplicableOnStore, isTaxApplicableOnStore,isPlatformFeeApplicableOnStore } = configurations ?? {}
   const taxRate = isTaxApplicableOnStore ? storeTaxOnCash / 100 : 0;
 
   let discount = 0;
-
   let paymentOption = "cash"
-
   let subTotal = calculateSubTotal(cardItems);
   const taxAmount = calculateAndRoundTax(subTotal, taxRate, discount);
 
@@ -39,7 +36,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
   const totalCartQuantity = useMemo(() => {
     return cardItems?.reduce((acc, item) => acc + item.qty, 0) || 0;
   }, [cardItems]);
-  let selectedTip = 0
+  let selectedTip = 0  
 
   const renderServiceFee = () => {
     if (
@@ -177,10 +174,12 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 <Typography>Sub Total</Typography>
                 <Typography>Rs. {fNumber(calculateSubTotal(cardItems))}</Typography>
               </Box>
+              {isPlatformFeeApplicableOnStore && (
               <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography>Platform Fee</Typography>
-                <Typography>Rs. 9.9</Typography>
+                <Typography>Rs. {platformFees}</Typography>
               </Box>
+              )}
               {renderServiceFee()}
 
               {isTaxApplicableOnStore && (
@@ -206,7 +205,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                     Number(calculateFinalTotal(cardItems, selectedTip, discount)) +
                     Number(taxAmount) +
                     Number(serviceFee) +
-                    9.9
+                    (isPlatformFeeApplicableOnStore ? Number(platformFees) : 0)
                   ).toFixed(2))}
                 </Typography>
               </Box>

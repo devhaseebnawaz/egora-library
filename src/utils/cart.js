@@ -33,9 +33,7 @@ export const calculateServiceFee = (
     discount,
 ) => {
 
-    const { franchise } = states ?? {};  
-    console.log('states in service fee',states);
-      
+    const { franchise } = states ?? {};        
     const { serviceFeesObject, configurations } = franchise ?? {};
     const { isServiceFeesApplicableOnStore, isCashAvailableOnPickUp, isCashAvailableOnDelivery } = configurations ?? {};
 
