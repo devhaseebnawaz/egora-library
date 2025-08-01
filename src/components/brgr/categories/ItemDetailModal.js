@@ -32,7 +32,8 @@ export default function ItemDetailModal({
   states,
   onClose,
   // item,
-  setItem
+  setItem,
+  previewMode = false,
 }) {
   const methods = useForm();
   const { selectedVenue, choiceGroups, isItemEdit } = states ?? {}
@@ -227,18 +228,24 @@ export default function ItemDetailModal({
 
   const areAllRequiredGroupsSelected = filteredChoiceGroups?.every((group) => !group.required || isRequiredGroupSelected(group.id));
 
-  return (
-    <Dialog open={states.openCard} onClose={() => { actions.handleOpenCard(); states.setItemForDetailedModal(null); isItemEdit && actions?.handleItemEditClose() }} maxWidth="lg" fullWidth>
-      <Box
-        style={{
-          display: 'flex',
-          height: '90vh',
-          backgroundColor: themeColors?.ItemDetailModalBackgroundColor ? themeColors?.ItemDetailModalBackgroundColor : styles?.ItemDetailModalBackgroundColor != "" ? styles?.ItemDetailModalBackgroundColor : '#fff',
-        }}
-      >
+  const content = (
+    <Box
+      style={{
+        display: 'flex',
+        height: '90vh',
+        backgroundColor: themeColors?.ItemDetailModalBackgroundColor 
+          || styles?.ItemDetailModalBackgroundColor 
+          || '#fff',
+      }}
+    >
+      {/* Close Button */}
+      {!previewMode && (
         <Box style={{ display: 'flex', gap: 8 }}>
           <IconButton
-            onClick={() => { actions.handleOpenCard(); isItemEdit && actions?.handleItemEditClose() }}
+            onClick={() => {
+              actions.handleOpenCard();
+              isItemEdit && actions?.handleItemEditClose();
+            }}
             style={{
               backgroundColor: '#121212',
               color: '#fff',
@@ -247,7 +254,7 @@ export default function ItemDetailModal({
               position: 'absolute',
               right: '20px',
               top: '20px',
-              zIndex: 9999
+              zIndex: 9999,
             }}
             onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
             onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
@@ -255,106 +262,117 @@ export default function ItemDetailModal({
             <Iconify icon="mdi:close" width={20} height={20} />
           </IconButton>
         </Box>
+      )}
+  
+      {/* Left Image Section */}
+      <Box
+        style={{
+          width: '45%',
+          backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor 
+            || styles?.ItemDetailModalImageDivBackgroundColor 
+            || '#f4f4f4',
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          padding: 32,
+        }}
+      >
+        <Box
+          component="img"
+          src={states.itemForDetailedModal?.photoURL 
+            ? `${states.storeImagesBaseUrl}/${states.itemForDetailedModal.photoURL}` 
+            : '/assets/placeholder.png'}
+          alt={states.itemForDetailedModal?.name || "Menu Item"}
+          loading="lazy"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/assets/placeholder.png';
+          }}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            borderRadius: 8,
+          }}
+        />
+      </Box>
+  
+      {/* Divider */}
+      <Box style={{ width: '1px', backgroundColor: '#e0e0e0' }} />
+  
+      {/* Right Detail Section */}
+      <Box
+        style={{
+          width: '54%',
+          padding: 32,
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+        }}
+      >
+        {/* Title and Description */}
         <Box
           style={{
-            width: '45%',
-            backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor ? themeColors?.ItemDetailModalImageDivBackgroundColor : styles?.ItemDetailModalImageDivBackgroundColor != "" ? styles?.ItemDetailModalImageDivBackgroundColor : '#f4f4f4',
             display: 'flex',
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            padding: 32,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 5,
           }}
         >
-          <Box
-            component="img"
-            src={states.itemForDetailedModal?.photoURL ? `${states.storeImagesBaseUrl}/${states.itemForDetailedModal.photoURL}` : '/assets/placeholder.png'}
-            alt={states.itemForDetailedModal?.name || "Menu Item"}
-            loading="lazy"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/assets/placeholder.png'
-            }}
-            style={{
-              maxWidth: '100%',
-              maxHeight: '100%',
-              objectFit: 'contain',
-              borderRadius: 8,
-            }}
-          />
+          <Typography variant="h6" fontWeight="bold">
+            {states.itemForDetailedModal.name}
+          </Typography>
         </Box>
-
-        <Box style={{ width: '1px', backgroundColor: '#e0e0e0' }} />
-
-        <Box
-          style={{
-            width: '54%',
-            padding: 32,
-            overflowY: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-          }}
-        >
-          <Box
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: 5,
-            }}
-          >
-            <Typography variant="h6" fontWeight="bold">
-              {states.itemForDetailedModal.name}
-            </Typography>
-          </Box>
-          <Typography color="gray" style={{ marginBottom: 15 }}>
-            {states.itemForDetailedModal.description || ''}
-          </Typography>
-
-          <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }} >
-            Rs. {states.itemForDetailedModal.price}
-          </Typography>
-
-
-          <CardContent sx={{ padding: "0" }}>
-            <FormProvider methods={methods} >
-              <Stack spacing={1}>
-                {states.itemForDetailedModal.hasVariant && (
-                  <Variant
-                    variants={states.itemForDetailedModal.variants}
-                    hanldeSelectOption={toggleVariantSelect}
-                    selectedVariant={selectedVariant}
-                  />
-                )}
-                <Divider />
-                {filteredChoiceGroups.map((cg, index) => (
-                  <Group
-                    key={index}
-                    choiceGroup={cg}
-                    // hanldeSelectOption={hanldeSelectOption}
-                    hanldeSelectOption={toggleSauce}
-                    selectedSauces={selectedSauces}
-                    selectedVariant={selectedVariant}
-                  />
-                ))}
-
-                <Stack direction="row" justifyContent="left">
-                  <RHFTextField
-                    sx={{ mt: 3 }}
-                    name="description"
-                    label="Kitchen Notes"
-                    multiline
-                    rows={2}
-                    value={notes}
-                    onChange={(e) => {
-                      setNotes(e.target.value);
-                    }}
-                  />
-                </Stack>
+  
+        <Typography color="gray" style={{ marginBottom: 15 }}>
+          {states.itemForDetailedModal.description || ''}
+        </Typography>
+  
+        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }}>
+          Rs. {states.itemForDetailedModal.price}
+        </Typography>
+  
+        {/* Variants & Options */}
+        <CardContent sx={{ padding: "0" }}>
+          <FormProvider methods={methods}>
+            <Stack spacing={1}>
+              {states.itemForDetailedModal.hasVariant && (
+                <Variant
+                  variants={states.itemForDetailedModal.variants}
+                  hanldeSelectOption={toggleVariantSelect}
+                  selectedVariant={selectedVariant}
+                />
+              )}
+              <Divider />
+              {filteredChoiceGroups.map((cg, index) => (
+                <Group
+                  key={index}
+                  choiceGroup={cg}
+                  hanldeSelectOption={toggleSauce}
+                  selectedSauces={selectedSauces}
+                  selectedVariant={selectedVariant}
+                />
+              ))}
+              <Stack direction="row" justifyContent="left">
+                <RHFTextField
+                  sx={{ mt: 3 }}
+                  name="description"
+                  label="Kitchen Notes"
+                  multiline
+                  rows={2}
+                  value={notes}
+                  onChange={(e) => {
+                    setNotes(e.target.value);
+                  }}
+                />
               </Stack>
-            </FormProvider>
-          </CardContent>
-
+            </Stack>
+          </FormProvider>
+        </CardContent>
+  
+        {/* Quantity & Add to Cart */}
+        {!previewMode && (
           <Box
             style={{
               marginTop: 'auto',
@@ -373,12 +391,14 @@ export default function ItemDetailModal({
                   minWidth: 36,
                   height: 36,
                   borderRadius: 12,
-                  backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor ? themeColors?.ItemDetailModalQtyDecreseBackgroundColor : styles?.ItemDetailModalQtyDecreseBackgroundColor != "" ? styles?.ItemDetailModalQtyDecreseBackgroundColor : '#ccc',
-                  color: themeColors?.ItemDetailModalQtyDecreseColor ? themeColors?.ItemDetailModalQtyDecreseColor : styles?.ItemDetailModalQtyDecreseColor != "" ? styles?.ItemDetailModalQtyDecreseColor : '#fff',
+                  backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor 
+                    || styles?.ItemDetailModalQtyDecreseBackgroundColor 
+                    || '#ccc',
+                  color: themeColors?.ItemDetailModalQtyDecreseColor 
+                    || styles?.ItemDetailModalQtyDecreseColor 
+                    || '#fff',
                   fontWeight: 'bold',
                   fontSize: 20,
-                  lineHeight: '20px',
-                  padding: 0,
                 }}
                 onMouseEnter={e => e.currentTarget.style.backgroundColor = '#b0b0b0'}
                 onMouseLeave={e => e.currentTarget.style.backgroundColor = '#ccc'}
@@ -392,12 +412,14 @@ export default function ItemDetailModal({
                   minWidth: 36,
                   height: 36,
                   borderRadius: 12,
-                  backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor ? themeColors?.ItemDetailModalQtyIncreaseBackgroundColor : styles?.ItemDetailModalQtyIncreaseBackgroundColor != "" ? styles?.ItemDetailModalQtyIncreaseBackgroundColor : '#121212',
-                  color: themeColors?.ItemDetailModalQtyIncreaseColor ? themeColors?.ItemDetailModalQtyIncreaseColor : styles?.ItemDetailModalQtyIncreaseColor != "" ? styles?.ItemDetailModalQtyIncreaseColor : '#fff',
+                  backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor 
+                    || styles?.ItemDetailModalQtyIncreaseBackgroundColor 
+                    || '#121212',
+                  color: themeColors?.ItemDetailModalQtyIncreaseColor 
+                    || styles?.ItemDetailModalQtyIncreaseColor 
+                    || '#fff',
                   fontWeight: 'bold',
                   fontSize: 20,
-                  lineHeight: '20px',
-                  padding: 0,
                 }}
                 onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
                 onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
@@ -405,7 +427,7 @@ export default function ItemDetailModal({
                 +
               </Button>
             </Box>
-
+  
             <Button
               fullWidth
               style={{
@@ -417,14 +439,15 @@ export default function ItemDetailModal({
                 padding: '12px 24px',
                 fontWeight: 'bold',
                 fontSize: 16,
-                textTransform: 'none',
                 backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
                 color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
               }}
               disabled={!isOnline || !areAllRequiredGroupsSelected}
-              onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
-              onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
-              onClick={() => { handleAddItemToCart(states.itemForDetailedModal, quantity, notes); actions.handleOpenCard(); states.setItemForDetailedModal(null) }}
+              onClick={() => {
+                handleAddItemToCart(states.itemForDetailedModal, quantity, notes);
+                actions.handleOpenCard();
+                states.setItemForDetailedModal(null);
+              }}
             >
               <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -432,8 +455,21 @@ export default function ItemDetailModal({
               </span>
             </Button>
           </Box>
-        </Box>
+        )}
       </Box>
+    </Box>
+  );
+
+  
+  return previewMode ? (
+    <Box>{content}</Box> 
+  ) : (
+    <Dialog open={states.openCard} onClose={() => {
+      actions.handleOpenCard();
+      states.setItemForDetailedModal(null);
+      isItemEdit && actions?.handleItemEditClose();
+    }} maxWidth="lg" fullWidth>
+      {content}
     </Dialog>
   );
 }
