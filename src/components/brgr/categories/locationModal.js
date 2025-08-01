@@ -154,50 +154,63 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         Which outlet would you like to pick-up from?
                     </Typography>}
 
-                    {states?.orderType === "pickup" && <Autocomplete
-                        options={filteredOutlets}
-                        getOptionLabel={(option) => {
-                            if (typeof option === "string") return option;
-                            if (option && typeof option.name === "string") return option.name;
-                            return "";
-                        }}
-                        value={states.selectedOutlet}
-                        onChange={(event, newValue) => {
-                            states.setSelectedOutlet(newValue);
-                        }}
-                        inputValue={states.searchQuery}
-                        onInputChange={(event, newInputValue) => {
-                            states.setSearchQuery(newInputValue);
-                        }}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                placeholder="Select Outlet"
-                                variant="outlined"
-                                fullWidth
-                                InputProps={{
-                                    ...params.InputProps,
-                                    sx: {
-                                        borderRadius: "12px",
-                                        height: "48px",
-                                        backgroundColor: "#f5f5f5",
-                                    },
-                                }}
-                            />
-                        )}
-                        renderOption={(props, option) => (
-                            <li {...props} key={option._id}>
-                                <Box>
-                                    <Typography fontWeight="bold">{option.name}</Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                        {option.location}
-                                    </Typography>
-                                </Box>
-                            </li>
-                        )}
-                        noOptionsText="No outlets found"
-                        sx={{ mb: 2 }}
-                    />}
+                    {states?.orderType === "pickup" && (
+                        <Autocomplete
+                            options={filteredOutlets}
+                            getOptionLabel={(option) => {
+                                if (typeof option === "string") return option;
+                                if (option && typeof option.name === "string") return option.name;
+                                return "";
+                            }}
+                            value={states.selectedOutlet}
+                            onChange={(event, newValue) => {
+                                if (!newValue?.isOnlineForStore) return; // prevent selecting disabled outlet
+                                states.setSelectedOutlet(newValue);
+                            }}
+                            inputValue={states.searchQuery}
+                            onInputChange={(event, newInputValue) => {
+                                states.setSearchQuery(newInputValue);
+                            }}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    placeholder="Select Outlet"
+                                    variant="outlined"
+                                    fullWidth
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        sx: {
+                                            borderRadius: "12px",
+                                            height: "48px",
+                                            backgroundColor: "#f5f5f5",
+                                        },
+                                    }}
+                                />
+                            )}
+                            renderOption={(props, option) => (
+                                <li
+                                    {...props}
+                                    key={option._id}
+                                    style={{
+                                        opacity: option.isOnlineForStore ? 1 : 0.5,
+                                        pointerEvents: option.isOnlineForStore ? 'auto' : 'none',
+                                    }}
+                                >
+                                    <Box>
+                                        <Typography fontWeight="bold">
+                                            {option.name} {!option.isOnlineForStore && "(Offline)"}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary">
+                                            {option.location}
+                                        </Typography>
+                                    </Box>
+                                </li>
+                            )}
+                            noOptionsText="No outlets found"
+                            sx={{ mb: 2 }}
+                        />
+                    )}
+
                     {states?.orderType === "delivery" && (
                         <>
                             <Box
@@ -334,7 +347,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 backgroundColor: "#333",
                             },
                         }}
-                        disabled={!states.selectedOutlet}
+                        disabled={!states.selectedOutlet || !states.selectedOutlet.isOnlineForStore}
                     >
                         Select
                     </Button>}
