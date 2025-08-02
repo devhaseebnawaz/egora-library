@@ -26,7 +26,7 @@ const modalStyle = {
     padding: "32px 24px 24px",
 };
 
-export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded, previewMode = false, }) {
+export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded, previewMode = false, layout }) {
     const filteredOutlets = states.outlets?.filter((outlet) =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];
@@ -63,7 +63,10 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                     transform: "translateX(-50%)",
                     width: "80px",
                     height: "80px",
-                    borderRadius: "50%",
+                    borderRadius:
+                        layout.locationLayout.body[0].styles?.LocationModalBorderRadius?.value !== 0
+                            ? `${layout.locationLayout.body[0].styles?.LocationModalBorderRadius?.value}%`
+                            : `${themeColors?.LocationModalBorderRadius?.value || 0}%`,
                     backgroundColor: "#000",
                     overflow: "hidden",
                     display: "flex",
