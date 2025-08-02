@@ -51,7 +51,10 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
         actions.handleDeleteCartBySessionId();
         actions.handleSetSelectedVenue(states.selectedOutlet);
     };
-
+     const handleSelectedLocation = () => {
+        console.log("Selected Location")
+        actions.handleSelectedLocation(states.location_lat_long)
+    }
     const content = (
         <Box sx={modalStyle}>
             {/* Logo */}
@@ -316,7 +319,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
             {/* Confirm Button */}
             {states?.orderType === 'storeDelivery' && <Button
                 fullWidth
-                // onClick={handleOutletSelection}
+                onClick={handleSelectedLocation(states.value)}
                 sx={{
                     backgroundColor: "#000",
                     color: "#fff",
@@ -329,7 +332,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         backgroundColor: "#333",
                     },
                 }}
-                disabled={!states.selectedOutlet}
+                disabled={!states.value}
             >
                 Confirm Selection
             </Button>}
