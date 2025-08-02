@@ -15,7 +15,8 @@ export default function CustomNavbar({
   prop,
   styles,
   states,
-  globalComponentStyles
+  globalComponentStyles,
+  layout
 }) {
   const isMobile = useMediaQuery('(max-width:600px)');
   const truncateLength = isMobile ? 10 : 25;
@@ -281,6 +282,7 @@ export default function CustomNavbar({
         </Box>
       </AppBar>
       <LocationModal
+        layout={layout}
         open={states.locationModalOpen}
         handleClose={actions.handleOpenLocationModal}
         themeColors={themeColors}
