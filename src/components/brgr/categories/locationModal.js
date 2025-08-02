@@ -52,7 +52,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
         actions.handleSetSelectedVenue(states.selectedOutlet);
     };
      const handleSelectedLocation = () => {
-        console.log("Selected Location")
         actions.handleSelectedLocation(states.location_lat_long)
     }
     const content = (
@@ -67,8 +66,8 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                     width: "80px",
                     height: "80px",
                     borderRadius:
-                        layout.locationLayout.body[0].styles?.LocationModalBorderRadius?.value !== 0
-                            ? `${layout.locationLayout.body[0].styles?.LocationModalBorderRadius?.value}%`
+                        layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value !== 0
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value}%`
                             : `${themeColors?.LocationModalBorderRadius?.value || 0}%`,
                     backgroundColor: "#000",
                     overflow: "hidden",
