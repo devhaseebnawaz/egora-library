@@ -439,7 +439,7 @@ export default function ItemDetailModal({
 
           <Button
             fullWidth
-            startIcon={states.loadingForAddUpdateItemCart ? <CircularProgress size={20} color="inherit" /> : null}
+            startIcon={states.loadingForAddUpdateItemCart ? <CircularProgress size={20} color="inherit" /> : ''}
             style={{
               flex: 1,
               display: 'flex',
