@@ -10,5 +10,6 @@ import LocationModal from './components/brgr/categories/locationModal';
 import ItemDetailModal from './components/brgr/categories/ItemDetailModal';
 import CartCheckoutSummary from './components/brgr/checkout/CartCheckoutSummary';
 import OrderSuccessPage from './components/brgr/orderSuccess/orderSuccess';
+import TextBlock from './components/brgr/TextBlock/textBlock';
 
-export { ItemDetailModal,CartCheckoutSummary, OrderSuccessPage, Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock };
+export { ItemDetailModal,CartCheckoutSummary, TextBlock, OrderSuccessPage, Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock };
