@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Box,Link } from "@mui/material";
+import { Typography, Box, Link } from "@mui/material";
 // import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
@@ -10,7 +10,9 @@ export default function CustomFooter({ themeColors, actions, prop, styles, state
                 width: '100%',
                 paddingBottom: '4rem',
                 paddingTop: '4rem',
-                backgroundColor: styles?.FooterBackgroundColor?.value || themeColors?.FooterBackgroundColor?.value,
+                backgroundColor: styles?.FooterBackgroundColor?.value != ""
+                    ? styles?.FooterBackgroundColor?.value
+                    : themeColors?.FooterBackgroundColor?.value,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-evenly',
@@ -31,7 +33,37 @@ export default function CustomFooter({ themeColors, actions, prop, styles, state
                     fontSize: '14px',
                 }}
             >
-                <Typography variant="body2" component="span">
+                <Typography
+                    variant="body2"
+                    component="span"
+
+                    sx={{
+                        color:
+                            styles?.FooterTextColor?.value != ""
+                                ? styles?.FooterTextColor?.value
+                                : globalComponentStyles?.Text?.color?.value != ""
+                                    ? globalComponentStyles?.Text?.color?.value :
+                                    themeColors?.FooterTextColor?.value,
+
+                        fontSize: styles?.FooterTextSize?.value != 0
+                            ? styles?.FooterTextSize?.value
+                            : globalComponentStyles?.Text?.size?.value != 0
+                                ? globalComponentStyles?.Text?.size?.value
+                                : themeColors?.FooterTextSize?.value,
+
+                        fontFamily: styles?.FooterTextFont?.value != ""
+                            ? styles?.FooterTextFont?.value
+                            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                                ? globalComponentStyles?.Text?.fontFamily?.value
+                                : themeColors?.FooterTextFont?.value,
+
+                        fontStyle: styles?.FooterTextStyle?.value != ""
+                            ? styles?.FooterTextStyle?.value
+                            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                                ? globalComponentStyles?.Text?.fontWeight?.value
+                                : themeColors?.FooterTextStyle?.value,
+                    }}
+                >
                     Powered by
                 </Typography>
                 <Link
