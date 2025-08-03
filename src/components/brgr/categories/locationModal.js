@@ -69,7 +69,10 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value !== 0
                             ? `${layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value}%`
                             : `${themeColors?.LocationModalBorderRadius?.value || 0}%`,
-                    backgroundColor: "#000",
+                    backgroundColor:
+                        layout?.locationLayout?.body[0].styles?.LocationModalImageBackgroundColor?.value !== 0
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalImageBackgroundColor?.value}%`
+                            : `${themeColors?.LocationModalImageBackgroundColor?.value || 0}%`,
                     overflow: "hidden",
                     display: "flex",
                     alignItems: "center",
@@ -89,10 +92,31 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 variant="h6"
                 align="center"
                 sx={{
+
+
+
+                    color:
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value !== 0
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value}%`
+                            : `${themeColors?.LocationModalOrderTypeHeadingColor?.value || 0}%`,
+
+
+                    fontSize:
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}%`
+                            : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value || 0}%`,
+
+                    fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}%`
+                        : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value || 0}%`,
+
+                    fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== 0
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}%`
+                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value || 0}%`,
+
                     fontWeight: 700,
                     marginTop: "60px",
                     marginBottom: "16px",
-                    fontSize: "20px",
                 }}
             >
                 Select your order type

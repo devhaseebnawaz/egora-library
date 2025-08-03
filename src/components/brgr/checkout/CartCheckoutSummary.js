@@ -25,7 +25,7 @@ const defaultValues = {
     email: "",
 };
 
-const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, PaymentComponent }) => {
+const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
 
     const { items } = states.cardItems ?? []
     const cartItems = items
@@ -44,6 +44,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
         ((orderType === "storeDelivery" && isCardAvailableOnDelivery) ||
             (orderType === "storePickUp" && isCardAvailableOnPickUp));
 
+            
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 
     console.log('states sufi', franchise);
