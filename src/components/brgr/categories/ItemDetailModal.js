@@ -435,7 +435,7 @@ export default function ItemDetailModal({
             style={{
               flex: 1,
               display: 'flex',
-              justifyContent: 'center',
+              justifyContent: states.loadingForAddUpdateItemCart ? 'center' : 'space-between',
               alignItems: 'center',
               borderRadius: 12,
               padding: '12px 24px',
