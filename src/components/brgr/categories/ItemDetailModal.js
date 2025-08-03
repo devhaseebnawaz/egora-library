@@ -207,26 +207,14 @@ export default function ItemDetailModal({
         priceBeforeCompliment: Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
         priceWithChoiceGroup: Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
       };
-      let res;
 
-      console.log('resssssssss',res)
-      
       if (isItemEdit) {
-        res = await actions.handleUpdateToCart(newItem, selectedSauces?.items, quantity, notes);
-        actions?.handleItemEditClose();
+        await actions.handleUpdateToCart(newItem, selectedSauces?.items, quantity, notes);
       } else {
-        res = await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
-      }
-      if (res) {
-        actions.handleOpenCard();
-        states.setItemForDetailedModal(null);
-        states.setLoadingForAddUpdateItemCart(false)
+        await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
       }
     } catch (error) {
-      states.setLoadingForAddUpdateItemCart(false)
       console.log("error is", error)
-    } finally {
-      states.setLoadingForAddUpdateItemCart(false)
     }
   };
 
@@ -444,11 +432,10 @@ export default function ItemDetailModal({
 
           <Button
             fullWidth
-            startIcon={states.loadingForAddUpdateItemCart ? <CircularProgress size={20} color="inherit" /> : ''}
             style={{
               flex: 1,
               display: 'flex',
-              justifyContent: 'space-between',
+              justifyContent: states.loadingForAddUpdateItemCart ? 'center' : 'space-between',
               alignItems: 'center',
               borderRadius: 12,
               padding: '12px 24px',
@@ -458,17 +445,21 @@ export default function ItemDetailModal({
               color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
             }}
             disabled={!isOnline || !areAllRequiredGroupsSelected}
-            onClick={() => {
-              handleAddItemToCart(states.itemForDetailedModal, quantity, notes);
-              // actions.handleOpenCard();
-              // states.setItemForDetailedModal(null);
-            }}
+            onClick={() =>
+              handleAddItemToCart(states.itemForDetailedModal, quantity, notes)}
           >
-            <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              {isItemEdit ? "Update cart" : "Add to Cart"}
-            </span>
+            {states.loadingForAddUpdateItemCart ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              <>
+                <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                  {isItemEdit ? "Update cart" : "Add to Cart"}
+                </span>
+              </>
+            )}
           </Button>
+
         </Box>
 
       </Box>
