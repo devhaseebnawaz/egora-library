@@ -26,7 +26,7 @@ const modalStyle = {
     padding: "32px 24px 24px",
 };
 
-export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded, previewMode = false, layout }) {
+export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded, previewMode = false, globalComponentStyles, layout }) {
     const filteredOutlets = states.outlets?.filter((outlet) =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];
@@ -92,27 +92,28 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 variant="h6"
                 align="center"
                 sx={{
-
-
-
                     color:
                         layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value !== ""
                             ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value}`
-                            : `${themeColors?.LocationModalOrderTypeHeadingColor?.value || "#0000"}`,
-
-
+                            : globalComponentStyles?.Text?.color?.value != ""
+                                ? globalComponentStyles?.Text?.color?.value
+                                : `${themeColors?.LocationModalOrderTypeHeadingColor?.value}`,
                     fontSize:
-                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== ""
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
                             ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}`
-                            : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value || 0}`,
+                            : globalComponentStyles?.Text?.size?.value != 0
+                                ? globalComponentStyles?.Text?.size?.value
+                                : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value}`,
 
                     fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
-                        : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value }`,
+                        : globalComponentStyles?.Text?.fontFamily?.value != ""
+                            ? globalComponentStyles?.Text?.fontFamily?.value
+                            : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value}`,
 
                     fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== ""
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}`
-                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value || "normal"}`,
+                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value}`,
 
                     fontWeight: 700,
                     marginTop: "60px",
@@ -170,7 +171,36 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
             {/* Search Location Field */}
             {states.orderType === "storeDelivery" && <Typography
                 variant="body2"
-                sx={{ marginBottom: "12px", textAlign: "center", fontWeight: 600 }}
+                sx={{
+                    marginBottom: "12px",
+                    textAlign: "center",
+                    fontWeight: 600,
+
+
+                    color:
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value !== ""
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value}`
+                            : globalComponentStyles?.Text?.color?.value != ""
+                                ? globalComponentStyles?.Text?.color?.value
+                                : `${themeColors?.LocationModalOrderTypeHeadingColor?.value}`,
+                    fontSize:
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}`
+                            : globalComponentStyles?.Text?.size?.value != 0
+                                ? globalComponentStyles?.Text?.size?.value
+                                : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value}`,
+
+                    fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
+                        : globalComponentStyles?.Text?.fontFamily?.value != ""
+                            ? globalComponentStyles?.Text?.fontFamily?.value
+                            : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value}`,
+
+                    fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== ""
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}`
+                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value}`,
+                        
+                }}
             >
                 Please select your location
             </Typography>}
