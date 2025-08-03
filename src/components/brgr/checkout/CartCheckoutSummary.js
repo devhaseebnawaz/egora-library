@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Box, Typography, Grid, Paper, Divider, Button, Link,Alert
+    Box, Typography, Grid, Paper, Divider, Button, Link, Alert
 } from '@mui/material';
 import UserInfoPage from './UserInfoPage';
 import { useForm } from "react-hook-form";
@@ -173,7 +173,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                             </Button>
                                         }
                                         {states.errorForPlaceOrder && (
-                                            <Alert severity="error" sx={{ mb: 2 }}>
+                                            <Alert severity="error" sx={{ mb: 2, mt: 2 }}>
                                                 {states.errorForPlaceOrder}
                                             </Alert>
                                         )}
@@ -185,7 +185,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     </>
                                 )
                                     :
-                                    <Typography fontWeight="bold">
+                                    <Typography fontWeight="bold" sx={{ mt: 2, mb: 2 }}>
                                         You can't place the order.
                                     </Typography>
                                 }
