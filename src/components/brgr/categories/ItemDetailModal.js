@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Variant from '../options/Variant';
 import Group from '../options/Group';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function ItemDetailModal({
   themeColors,
@@ -176,7 +177,7 @@ export default function ItemDetailModal({
     return result;
   }
 
-  const handleAddItemToCart = (item, quantity, notes) => {
+  const handleAddItemToCart = async (item, quantity, notes) => {
     let price = 0;
 
     if (selectedSauces?.items.length > 0) {
@@ -207,14 +208,21 @@ export default function ItemDetailModal({
         priceBeforeCompliment: Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
         priceWithChoiceGroup: Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
       };
-      isItemEdit ?
-        actions.handleUpdateToCart(newItem, selectedSauces?.items, quantity, notes)
-        :
-        actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes)
-      isItemEdit && actions?.handleItemEditClose()
+      let res;
+      if (isItemEdit) {
+        res = await actions.handleUpdateToCart(newItem, selectedSauces?.items, quantity, notes);
+        actions?.handleItemEditClose();
+      } else {
+        res = await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
+      }
+      if (res) {
+        states.setLoadingForAddUpdateItemCart(false)
+      }
     } catch (error) {
+      states.setLoadingForAddUpdateItemCart(false)
       console.log("error is", error)
     } finally {
+      states.setLoadingForAddUpdateItemCart(false)
     }
   };
 
@@ -432,6 +440,7 @@ export default function ItemDetailModal({
 
           <Button
             fullWidth
+            startIcon={states.loadingForAddUpdateItemCart ? <CircularProgress size={20} color="inherit" /> : null}
             style={{
               flex: 1,
               display: 'flex',
