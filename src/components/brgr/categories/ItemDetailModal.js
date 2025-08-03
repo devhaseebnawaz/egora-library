@@ -107,7 +107,6 @@ export default function ItemDetailModal({
           })
           .filter(Boolean);
 
-        console.log("the filtered groups are", filteredChoiceGroups)
         setFilteredChoiceGroups(filteredGroups);
       } else if (states.itemForDetailedModal?.choiceGroup && choiceGroups) {
         const filteredGroups = choiceGroups
