@@ -218,7 +218,7 @@ export default function ItemDetailModal({
         res = await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
       }
       if (res) {
-           // actions.handleOpenCard();
+        actions.handleOpenCard();
         states.setItemForDetailedModal(null);
         states.setLoadingForAddUpdateItemCart(false)
       }
@@ -461,7 +461,7 @@ export default function ItemDetailModal({
             onClick={() => {
               handleAddItemToCart(states.itemForDetailedModal, quantity, notes);
               // actions.handleOpenCard();
-              states.setItemForDetailedModal(null);
+              // states.setItemForDetailedModal(null);
             }}
           >
             <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
