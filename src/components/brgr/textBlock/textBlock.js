@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-export default function InfoBlock({ themeColors, actions, prop, styles, states }) {
+export default function TextBlock({ themeColors, actions, prop, styles, states }) {
 
     return (
         <Box
