@@ -218,7 +218,7 @@ export default function ItemDetailModal({
         res = await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
       }
       if (res) {
-           // actions.handleOpenCard();
+        actions.handleOpenCard();
         states.setItemForDetailedModal(null);
         states.setLoadingForAddUpdateItemCart(false)
       }
