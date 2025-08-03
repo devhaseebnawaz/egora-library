@@ -70,9 +70,9 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                             ? `${layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value}%`
                             : `${themeColors?.LocationModalBorderRadius?.value || 0}%`,
                     backgroundColor:
-                        layout?.locationLayout?.body[0].styles?.LocationModalImageBackgroundColor?.value !== 0
-                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalImageBackgroundColor?.value}%`
-                            : `${themeColors?.LocationModalImageBackgroundColor?.value || 0}%`,
+                        layout?.locationLayout?.body[0].styles?.LocationModalImageBackgroundColor?.value != ""
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalImageBackgroundColor?.value}`
+                            : `${themeColors?.LocationModalImageBackgroundColor?.value}`,
                     overflow: "hidden",
                     display: "flex",
                     alignItems: "center",
@@ -96,23 +96,23 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
 
                     color:
-                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value !== 0
-                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value}%`
-                            : `${themeColors?.LocationModalOrderTypeHeadingColor?.value || 0}%`,
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value !== ""
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value}`
+                            : `${themeColors?.LocationModalOrderTypeHeadingColor?.value || "#0000"}`,
 
 
                     fontSize:
-                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
-                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}%`
-                            : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value || 0}%`,
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== ""
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}`
+                            : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value || 0}`,
 
                     fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
-                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}%`
-                        : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value || 0}%`,
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
+                        : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value }`,
 
-                    fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== 0
-                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}%`
-                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value || 0}%`,
+                    fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== ""
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}`
+                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value || "normal"}`,
 
                     fontWeight: 700,
                     marginTop: "60px",

@@ -91,7 +91,7 @@ export default function CustomNavbar({
                           ? globalComponentStyles?.Text?.color?.value :
                           themeColors?.AppBarChangeLocationColor?.value,
 
-                    fontSize: styles?.AppBarChangeLocationTextSize?.value != ""
+                    fontSize: styles?.AppBarChangeLocationTextSize?.value != 0
                       ? styles?.AppBarChangeLocationTextSize?.value
                       : themeColors?.AppBarChangeLocationTextSize?.value,
 
