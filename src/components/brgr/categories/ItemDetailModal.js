@@ -208,6 +208,9 @@ export default function ItemDetailModal({
         priceWithChoiceGroup: Number(item.hasVariant ? selectedVariant.price : item.price) + Number(price),
       };
       let res;
+
+      console.log('resssssssss',res)
+      
       if (isItemEdit) {
         res = await actions.handleUpdateToCart(newItem, selectedSauces?.items, quantity, notes);
         actions?.handleItemEditClose();
@@ -215,6 +218,8 @@ export default function ItemDetailModal({
         res = await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
       }
       if (res) {
+           // actions.handleOpenCard();
+        states.setItemForDetailedModal(null);
         states.setLoadingForAddUpdateItemCart(false)
       }
     } catch (error) {
@@ -455,7 +460,7 @@ export default function ItemDetailModal({
             disabled={!isOnline || !areAllRequiredGroupsSelected}
             onClick={() => {
               handleAddItemToCart(states.itemForDetailedModal, quantity, notes);
-              actions.handleOpenCard();
+              // actions.handleOpenCard();
               states.setItemForDetailedModal(null);
             }}
           >
