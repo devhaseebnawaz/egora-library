@@ -210,7 +210,6 @@ export default function ItemDetailModal({
 
       if (isItemEdit) {
         await actions.handleUpdateToCart(newItem, selectedSauces?.items, quantity, notes);
-        // actions?.handleItemEditClose();
       } else {
         await actions.handleAddToCart(newItem, selectedSauces?.items, quantity, notes);
       }
@@ -445,20 +444,9 @@ export default function ItemDetailModal({
               backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
               color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
             }}
-            disabled={!isOnline || !areAllRequiredGroupsSelected || loadingForAddUpdateItemCart}
+            disabled={!isOnline || !areAllRequiredGroupsSelected}
             onClick={() =>
-              handleAddItemToCart({
-                item: states.itemForDetailedModal,
-                quantity,
-                notes,
-                selectedSauces,
-                selectedVariant,
-                isItemEdit,
-                generateRandomHexString,
-                actions,
-                setLoadingForAddUpdateItemCart,
-              })
-            }
+              handleAddItemToCart(states.itemForDetailedModal, quantity, notes)}
           >
             {states.loadingForAddUpdateItemCart ? (
               <CircularProgress size={24} color="inherit" />
