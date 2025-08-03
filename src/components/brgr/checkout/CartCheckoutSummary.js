@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Box, Typography, Grid, Paper, Divider, Button, Link
+    Box, Typography, Grid, Paper, Divider, Button, Link,Alert
 } from '@mui/material';
 import UserInfoPage from './UserInfoPage';
 import { useForm } from "react-hook-form";
@@ -33,7 +33,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
 
     const { orderType } = states;
     const { franchise } = states ?? {}
-    const {configurations} = franchise ?? {}
+    const { configurations } = franchise ?? {}
     const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = configurations ?? {};
 
     const isCashAllowed = isCashAvailableOnStore &&
@@ -46,10 +46,10 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
 
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 
-    console.log('states sufi',franchise);
+    console.log('states sufi', franchise);
 
-    console.log('canShowPaymentMethods',canShowPaymentMethods)
-    
+    console.log('canShowPaymentMethods', canShowPaymentMethods)
+
 
     const methods = useForm({
         resolver: yupResolver(UserSchema),
@@ -172,6 +172,11 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                                 {isSubmitting ? "Placing Order..." : "Place Order"}
                                             </Button>
                                         }
+                                        {states.errorForPlaceOrder && (
+                                            <Alert severity="error" sx={{ mb: 2 }}>
+                                                {states.errorForPlaceOrder}
+                                            </Alert>
+                                        )}
                                         <Box textAlign="center" mt={2}>
                                             <Link href="/" underline="hover" fontSize={14} >
                                                 ← continue to add more items

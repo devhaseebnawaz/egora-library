@@ -232,7 +232,7 @@ const CartDrawer = ({ open, onClose, themeColors, actions, prop, styles, states 
                 paddingRight: 16,
               }}
             >
-              Checkout
+              {states.redirectingLoading.checkout ? 'Redirecting...' : 'Checkout'}
             </Button>
 
             <Box
