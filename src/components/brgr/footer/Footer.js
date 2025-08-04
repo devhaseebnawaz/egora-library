@@ -2,8 +2,24 @@ import React, { useState } from "react";
 import { Typography, Box, Link } from "@mui/material";
 // import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
+import { useRouter } from "next/router";
+import NextLink from "next/link";
 
 export default function CustomFooter({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
+
+    const router = useRouter();
+    const linkData = prop?.editable?.link?.value || {};
+    const faqType = linkData.type;
+    const faqUrl = linkData.url || "";
+    const faqName = linkData.name || "Faqs";
+
+    const handleFaqClick = (e) => {
+        if (faqType === "page" && faqUrl) {
+            e.preventDefault();
+            router.push(faqUrl);
+        }
+    };
+
     const getFooterTypographyStyles = {
         color:
             styles?.FooterTextColor?.value !== ""
@@ -125,14 +141,33 @@ export default function CustomFooter({ themeColors, actions, prop, styles, state
                 <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
                     |
                 </Typography>
-                <Link
+                <NextLink
+                    href={faqType === "url" ? faqUrl || "#" : "#"}
+                    passHref
+                    legacyBehavior
+                >
+                    <Link
+                        sx={{ ...getFooterLinkStyles }}
+                        color="inherit"
+                        underline="hover"
+                        onClick={handleFaqClick}
+                        target={faqType === "url" ? "_blank" : undefined}
+                        rel={faqType === "url" ? "noopener noreferrer" : undefined}
+                    >
+                        {faqName || "Faqs"}
+                    </Link>
+                </NextLink>
+                {/* <Link
                     sx={{ ...getFooterLinkStyles }}
-                    href="#"
+                    href={faqType === "url" ? faqUrl || "#" : faqUrl || "#"}
                     color="inherit"
                     underline="hover"
+                    onClick={handleFaqClick}
+                    target={faqType === "url" ? "_blank" : undefined}
+                    rel={faqType === "url" ? "noopener noreferrer" : undefined}
                 >
-                    Faqs
-                </Link>
+                    {faqName || "Faqs"}
+                </Link> */}
             </Box>
         </Box>
     );
