@@ -1,15 +1,7 @@
 import React from "react";
 import { Typography, Box, Link as MUILink } from "@mui/material";
-
-// Dynamically import Next.js components if available
-let NextLink, useRouter;
-try {
-  NextLink = require("next/link").default;
-  useRouter = require("next/router").useRouter;
-} catch (err) {
-  NextLink = null;
-  useRouter = null;
-}
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 export default function CustomFooter({
   themeColors,
@@ -19,8 +11,7 @@ export default function CustomFooter({
   states,
   globalComponentStyles
 }) {
-  const router =
-    typeof window !== "undefined" && useRouter ? useRouter() : { push: () => {} };
+  const router = typeof window !== "undefined" ? useRouter() : null;
 
   const linkData = prop?.editable?.link?.value || {};
   const faqType = linkData.type;
@@ -28,7 +19,7 @@ export default function CustomFooter({
   const faqName = linkData.name || "Faqs";
 
   const handleFaqClick = (e) => {
-    if (faqType === "page" && faqUrl) {
+    if (faqType === "page" && faqUrl && router) {
       e.preventDefault();
       router.push(faqUrl);
     }
@@ -39,29 +30,29 @@ export default function CustomFooter({
       styles?.FooterTextColor?.value !== ""
         ? styles?.FooterTextColor?.value
         : globalComponentStyles?.Text?.color?.value !== ""
-          ? globalComponentStyles?.Text?.color?.value
-          : themeColors?.FooterTextColor?.value,
+        ? globalComponentStyles?.Text?.color?.value
+        : themeColors?.FooterTextColor?.value,
 
     fontSize:
       styles?.FooterTextSize?.value !== 0
         ? styles?.FooterTextSize?.value
         : globalComponentStyles?.Text?.size?.value !== 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.FooterTextSize?.value,
+        ? globalComponentStyles?.Text?.size?.value
+        : themeColors?.FooterTextSize?.value,
 
     fontFamily:
       styles?.FooterTextFont?.value !== ""
         ? styles?.FooterTextFont?.value
         : globalComponentStyles?.Text?.fontFamily?.value !== ""
-          ? globalComponentStyles?.Text?.fontFamily?.value
-          : themeColors?.FooterTextFont?.value,
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : themeColors?.FooterTextFont?.value,
 
     fontStyle:
       styles?.FooterTextStyle?.value !== ""
         ? styles?.FooterTextStyle?.value
         : globalComponentStyles?.Text?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
-          : themeColors?.FooterTextStyle?.value,
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : themeColors?.FooterTextStyle?.value,
   };
 
   const getFooterLinkStyles = {
@@ -69,29 +60,29 @@ export default function CustomFooter({
       styles?.FooterLinkColor?.value !== ""
         ? styles?.FooterLinkColor?.value
         : globalComponentStyles?.Text?.color?.value !== ""
-          ? globalComponentStyles?.Text?.color?.value
-          : themeColors?.FooterLinkColor?.value,
+        ? globalComponentStyles?.Text?.color?.value
+        : themeColors?.FooterLinkColor?.value,
 
     fontSize:
       styles?.FooterLinkSize?.value !== 0
         ? styles?.FooterLinkSize?.value
         : globalComponentStyles?.Text?.size?.value !== 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.FooterLinkSize?.value,
+        ? globalComponentStyles?.Text?.size?.value
+        : themeColors?.FooterLinkSize?.value,
 
     fontFamily:
       styles?.FooterLinkFont?.value !== ""
         ? styles?.FooterLinkFont?.value
         : globalComponentStyles?.Text?.fontFamily?.value !== ""
-          ? globalComponentStyles?.Text?.fontFamily?.value
-          : themeColors?.FooterLinkFont?.value,
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : themeColors?.FooterLinkFont?.value,
 
     fontStyle:
       styles?.FooterLinkStyle?.value !== ""
         ? styles?.FooterLinkStyle?.value
         : globalComponentStyles?.Text?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
-          : themeColors?.FooterLinkStyle?.value,
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : themeColors?.FooterLinkStyle?.value,
   };
 
   return (
@@ -123,11 +114,7 @@ export default function CustomFooter({
           fontSize: "14px",
         }}
       >
-        <Typography
-          variant="body2"
-          component="span"
-          sx={{ ...getFooterTypographyStyles }}
-        >
+        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
           Powered by
         </Typography>
 
@@ -158,7 +145,7 @@ export default function CustomFooter({
           |
         </Typography>
 
-        {NextLink && faqType === "page" ? (
+        {faqType === "page" ? (
           <NextLink href={faqUrl || "#"} passHref legacyBehavior>
             <MUILink
               sx={{ ...getFooterLinkStyles }}

@@ -7,6 +7,8 @@ export default function Group({
   hanldeSelectOption,
   selectedSauces,
   selectedVariant,
+  getDescriptionStyles,
+  getHeadingStyles,
   ...other
 }) {
 
@@ -14,15 +16,17 @@ export default function Group({
     <>
       {choiceGroup && (
         <>
-          <Typography sx={{ fontSize: 15 }} variant="subtitle2">
-            {choiceGroup.name} 
-            <Typography sx={{ fontSize: 12,ml:1 }} variant="span">
-            ({choiceGroup.quantity} 
+          <Typography sx={{ fontSize: 15, ...getHeadingStyles }} variant="subtitle2">
+            {choiceGroup.name}
+            <Typography sx={{ fontSize: 12, ml: 1, ...getHeadingStyles }} variant="span">
+              ({choiceGroup.quantity}
               {choiceGroup.required ? " Required" : " Optional"})
             </Typography>
           </Typography>
 
           <Options
+            getDescriptionStyles={getDescriptionStyles}
+            getHeadingStyles={getHeadingStyles}
             choiceGroups={choiceGroup}
             choiceGroupId={choiceGroup.id}
             hanldeSelectOption={hanldeSelectOption}

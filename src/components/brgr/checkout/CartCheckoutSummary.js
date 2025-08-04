@@ -25,7 +25,87 @@ const defaultValues = {
     email: "",
 };
 
-const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
+const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
+    const getDescriptionStyles = {
+        color:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextColor?.value !== ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.CartCheckoutSummaryDescriptionTextColor?.value}`,
+        fontSize:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value != 0
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value}`
+                : globalComponentStyles?.Text?.size?.value != 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : `${themeColors?.CartCheckoutSummaryDescriptionTextSize?.value}`,
+
+        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextFont?.value != ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.CartCheckoutSummaryDescriptionTextFont?.value}`,
+
+        fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextStyle?.value !== ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.CartCheckoutSummaryDescriptionTextStyle?.value}`,
+    };
+
+    const getHeadingStyles = {
+        color:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextColor?.value !== ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.CartCheckoutSummaryHeadingTextColor?.value}`,
+        fontSize:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value != 0
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value}`
+                : globalComponentStyles?.Text?.size?.value != 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : `${themeColors?.CartCheckoutSummaryHeadingTextSize?.value}`,
+
+        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value != ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.CartCheckoutSummaryHeadingTextFont?.value}`,
+
+        fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextStyle?.value !== ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.CartCheckoutSummaryHeadingTextStyle?.value}`,
+    };
+
+    const getOrderHeadingStyles = {
+        color:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextColor?.value !== ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextColor?.value}`,
+        fontSize:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value != 0
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value}`
+                : globalComponentStyles?.Text?.size?.value != 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value}`,
+
+        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value != ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`,
+
+        fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextStyle?.value !== ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextStyle?.value}`,
+    };
 
     const { items } = states.cardItems ?? []
     const cartItems = items
@@ -98,21 +178,28 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                     <Grid item xs={12} md={12} container spacing={2}>
                         <Grid item xs={12} md={7}>
                             <Paper sx={{ p: 2 }}>
-                                <Typography fontWeight="bold">
+                                <Typography fontWeight="bold" sx={{ ...getHeadingStyles }}>
                                     This is a <span style={{ fontWeight: 700 }}>{states.orderType} ORDER</span>
                                 </Typography>
-                                <Typography mt={1}>You have to collect your order from</Typography>
+                                <Typography mt={1} sx={{ ...getDescriptionStyles }} >You have to collect your order from</Typography>
                                 <Box mt={2}>
-                                    <Typography fontWeight="bold">{states?.selectedVenue?.name}</Typography>
+                                    <Typography fontWeight="bold" sx={{ ...getHeadingStyles }} >{states?.selectedVenue?.name}</Typography>
                                     <Typography>
-                                        <strong>Location:</strong> {states?.selectedVenue?.venueAddressOne} {states?.selectedVenue?.venueAddressTwo}
+                                       <Box component="strong" sx={{ ...getHeadingStyles }}>
+                                            Location:
+                                        </Box>{' '}
+                                        <Box component="strong" sx={{ ...getDescriptionStyles }}>
+                                        {states?.selectedVenue?.venueAddressOne} {states?.selectedVenue?.venueAddressTwo}
+                                        </Box>{' '}
                                     </Typography>
                                     {/* <Link href="#" underline="hover" sx={{ fontSize: 14 }}>
                                         View Location 📍
                                     </Link> */}
                                     <Typography>
-                                        <strong>Phone:</strong>{' '}
-                                        <Link href="tel:03XX-XXXXXXX" underline="hover">
+                                        <Box component="strong" sx={{ ...getHeadingStyles }}>
+                                            Phone:
+                                        </Box>{' '}
+                                        <Link href="tel:03XX-XXXXXXX" underline="hover" sx={{ ...getDescriptionStyles }}>
                                             {states?.selectedVenue?.venuePhoneNumber}
                                         </Link>
                                     </Typography>
@@ -120,7 +207,7 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                             </Paper>
 
                             <Paper sx={{ p: 2, mt: 3 }}>
-                                <Typography fontWeight="bold" mb={2}>
+                                <Typography fontWeight="bold" mb={2} sx={{ ...getHeadingStyles }}  >
                                     JUST A LAST STEP, PLEASE FILL YOUR INFORMATION BELOW
                                 </Typography>
                                 <UserInfoPage />
@@ -145,6 +232,9 @@ const CartCheckoutSummary = ({ themeColors, actions, prop, styles, states, Payme
                                     />
                                 ))}
                                 <CartCheckoutTotalSummary
+                                    getDescriptionStyles={getDescriptionStyles}
+                                    getHeadingStyles={getHeadingStyles}
+                                    getOrderHeadingStyles={getOrderHeadingStyles}
                                     open={states.locationModalOpen}
                                     handleClose={actions.handleOpenLocationModal}
                                     themeColors={themeColors}
