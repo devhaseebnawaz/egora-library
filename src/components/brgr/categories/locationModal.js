@@ -66,7 +66,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                     width: "80px",
                     height: "80px",
                     borderRadius:
-                        layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value !== 0
+                        layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value !== ""
                             ? `${layout?.locationLayout?.body[0].styles?.LocationModalBorderRadius?.value}%`
                             : `${themeColors?.LocationModalBorderRadius?.value || 0}%`,
                     backgroundColor:

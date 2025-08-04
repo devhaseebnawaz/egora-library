@@ -17,6 +17,117 @@ export default function ItemCard({
   themeColors,
   globalComponentStyles,
 }) {
+
+  const getItemNameStyles = {
+    color:
+      styles?.AllCategoriesItemNameTextColor?.value !== ""
+        ? styles?.AllCategoriesItemNameTextColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.AllCategoriesItemNameTextColor?.value,
+
+    fontSize:
+      styles?.AllCategoriesItemNameTextSize?.value != 0
+        ? styles?.AllCategoriesItemNameTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.AllCategoriesItemNameTextSize?.value,
+
+    fontFamily:
+      styles?.AllCategoriesItemNameTextFont?.value !== ""
+        ? styles?.AllCategoriesItemNameTextFont?.value
+        : globalComponentStyles?.Text?.fontFamily?.value !== ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : themeColors?.AllCategoriesItemNameTextFont?.value,
+
+    fontStyle:
+      styles?.AllCategoriesItemNameTextStyle?.value !== ""
+        ? styles?.AllCategoriesItemNameTextStyle?.value
+        : globalComponentStyles?.Text?.fontWeight?.value !== ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.AllCategoriesItemNameTextStyle?.value,
+  };
+
+  const getPriceTagStyles = {
+    color:
+      styles?.AllCategoriesPriceTagTextColor?.value !== ""
+        ? styles?.AllCategoriesPriceTagTextColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.AllCategoriesPriceTagTextColor?.value,
+
+    fontSize:
+      styles?.AllCategoriesPriceTagTextSize?.value != 0
+        ? styles?.AllCategoriesPriceTagTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.AllCategoriesPriceTagTextSize?.value,
+
+    fontFamily:
+      styles?.AllCategoriesPriceTagTextFont?.value !== ""
+        ? styles?.AllCategoriesPriceTagTextFont?.value
+        : globalComponentStyles?.Text?.fontFamily?.value !== ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : themeColors?.AllCategoriesPriceTagTextFont?.value,
+
+    fontStyle:
+      styles?.AllCategoriesPriceTagTextStyle?.value !== ""
+        ? styles?.AllCategoriesPriceTagTextStyle?.value
+        : globalComponentStyles?.Text?.fontWeight?.value !== ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.AllCategoriesPriceTagTextStyle?.value,
+
+    borderRadius: styles?.AllCategoriesPriceTagBorderRadius?.value !== ""
+    ? styles?.AllCategoriesPriceTagBorderRadius?.value
+     : themeColors?.AllCategoriesPriceTagBorderRadius?.value,
+    
+    backgroundColor:  styles?.AllCategoriesPriceTagTextBackgroundcolor?.value !== ""
+    ? styles?.AllCategoriesPriceTagTextBackgroundcolor?.value
+    : globalComponentStyles?.Text?.backgroundColor?.value !== ""
+      ? globalComponentStyles?.Text?.backgroundColor?.value
+      : themeColors?.AllCategoriesPriceTagTextBackgroundcolor?.value,
+  };
+
+
+  const getCartAddButtonStyles = {
+    color:
+      styles?.AllCategoriesCartAddTextColor?.value !== ""
+        ? styles?.AllCategoriesCartAddTextColor?.value
+        : globalComponentStyles?.Button?.color?.value !== ""
+          ? globalComponentStyles?.Button?.color?.value
+          : themeColors?.AllCategoriesCartAddTextColor?.value,
+
+    fontSize:
+      styles?.AllCategoriesCartAddTextSize?.value != 0
+        ? styles?.AllCategoriesCartAddTextSize?.value
+        : globalComponentStyles?.Button?.size?.value != 0
+          ? globalComponentStyles?.Button?.size?.value
+          : themeColors?.AllCategoriesPriceTagTextSize?.value,
+
+    fontFamily:
+      styles?.AllCategoriesCartAddTextFont?.value !== ""
+        ? styles?.AllCategoriesCartAddTextFont?.value
+        : globalComponentStyles?.Button?.fontFamily?.value !== ""
+          ? globalComponentStyles?.Button?.fontFamily?.value
+          : themeColors?.AllCategoriesCartAddTextFont?.value,
+
+    fontStyle:
+      styles?.AllCategoriesCartAddTagTextStyle?.value !== ""
+        ? styles?.AllCategoriesCartAddTagTextStyle?.value
+        : globalComponentStyles?.Button?.fontWeight?.value !== ""
+          ? globalComponentStyles?.Button?.fontWeight?.value
+          : themeColors?.AllCategoriesCartAddTagTextStyle?.value,
+
+    borderRadius: styles?.AllCategoriesCartAddBorderRadius?.value !== ""
+    ? styles?.AllCategoriesCartAddBorderRadius?.value
+     : themeColors?.AllCategoriesCartAddBorderRadius?.value,
+    
+    backgroundColor:  styles?.AllCategoriesCartAddBackgroundcolor?.value !== ""
+    ? styles?.AllCategoriesCartAddBackgroundcolor?.value
+    : globalComponentStyles?.Button?.backgroundColor?.value !== ""
+      ? globalComponentStyles?.Button?.backgroundColor?.value
+      : themeColors?.AllCategoriesCartAddBackgroundcolor?.value,
+  };
   return (
     <>
       <Card
@@ -49,7 +160,7 @@ export default function ItemCard({
         />
 
         <CardContent style={{ textAlign: "center" }}>
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
+          <Typography variant="h6" style={{ fontWeight: "bold", ...getItemNameStyles }}>
             {item.name}
           </Typography>
           <Typography
@@ -62,13 +173,14 @@ export default function ItemCard({
             <Button
               disableRipple
               style={{
-                backgroundColor: "#f4e3d3",
-                color: "#000",
+                // backgroundColor: "#f4e3d3",
+                // color: "#000",
                 padding: "4px 16px",
-                fontWeight: "bold",
-                borderRadius: "12px",
+                // fontWeight: "bold",
+                // borderRadius: "12px",
                 textTransform: "none",
                 boxShadow: "none",
+                ...getPriceTagStyles
               }}
             >
               Rs. {item.price}
@@ -78,33 +190,12 @@ export default function ItemCard({
           <Button
             variant="contained"
             style={{
-              backgroundColor:
-                // styles?.ItemButtonColor?.value &&
-                // styles?.ItemButtonColor?.value !== ""
-                //   ? styles.ItemButtonColor.value
-                //   : globalComponentStyles?.Button?.backgroundColor?.value &&
-                //     globalComponentStyles.Button.backgroundColor.value !== ""
-                //   ? globalComponentStyles.Button.backgroundColor.value
-                //   : themeColors?.ItemButtonColor?.value,
-
-                // styles?.ItemButtonColor?.value?.trim() ||
-                // globalComponentStyles?.Button?.backgroundColor?.value?.trim() ||
-                // themeColors.ItemButtonColor.value,
-
-
-                 styles?.ItemButtonColor?.value != ""
-                        ? styles?.ItemButtonColor?.value
-                        :  globalComponentStyles?.Button?.backgroundColor?.value != ""
-                        ?  globalComponentStyles?.Button?.backgroundColor?.value
-                        : themeColors?.ItemButtonColor?.value,
-
-
-
-              color: "#fff",
-              borderRadius: "20px",
+              // color: "#fff",
+              // borderRadius: "20px",
               padding: "8px 32px",
               fontWeight: "bold",
               textTransform: "none",
+              ...getCartAddButtonStyles
             }}
           >
             Add to Cart

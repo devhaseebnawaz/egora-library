@@ -2,13 +2,61 @@ import React, { useEffect } from "react";
 import { Box, Typography, Stack, Card, CardContent, Divider, Button, Chip } from '@mui/material';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
-    // useEffect(() => {
 
-    //     // if (!states?.orderData || Object.keys(states?.orderData).length === 0) {
-    //     //     actions.navigateToHome()
-    //     // }
+    const getThankYouStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessThankYouTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value != 0
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value}`
+                : globalComponentStyles?.Text?.size?.value != 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : `${themeColors?.OrderSuccessThankYouTextSize?.value}`,
 
-    // }, [actions, states ]);
+        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value != ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.OrderSuccessThankYouTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessThankYouTextStyle?.value}`,
+    };
+
+    const getOrderPlacedStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessOrderPlacedTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value != 0
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value}`
+                : globalComponentStyles?.Text?.size?.value != 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : `${themeColors?.OrderSuccessOrderPlacedTextSize?.value}`,
+
+        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value != ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.OrderSuccessOrderPlacedTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessOrderPlacedTextStyle?.value}`,
+    };
+
     const orderId = states?.orderData?.billNumber;
     const venue = states?.selectedVenue?.name;
     const location = `${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressTwo}`
@@ -20,35 +68,8 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
         <Box px={2} py={4} sx={{ backgroundColor: "#f5f6f7", minHeight: "100vh" }}>
             <Stack alignItems="center" spacing={2} mb={4}>
 
-                <Typography
-                    sx={{
-                        color:
-                            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextColor?.value !== ""
-                                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextColor?.value}`
-                                : globalComponentStyles?.Text?.color?.value != ""
-                                    ? globalComponentStyles?.Text?.color?.value
-                                    : `${themeColors?.OrderSuccessThankYouTextColor?.value}`,
-                        fontSize:
-                            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value !== 0
-                                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value}`
-                                : globalComponentStyles?.Text?.size?.value != 0
-                                    ? globalComponentStyles?.Text?.size?.value
-                                    : `${themeColors?.OrderSuccessThankYouTextSize?.value}`,
-
-                        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value !== 0
-                            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value}`
-                            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                                ? globalComponentStyles?.Text?.fontFamily?.value
-                                : `${themeColors?.OrderSuccessThankYouTextFont?.value}`,
-
-                        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextStyle?.value !== ""
-                            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextStyle?.value}`
-                            : `${themeColors?.OrderSuccessThankYouTextStyle?.value}`,
-                    }}
-                // variant="h5"
-                // fontWeight={700}
-                >Thank You!</Typography>
-                <Typography color="text.secondary">Your order has been placed successfully</Typography>
+                <Typography sx={{ ...getThankYouStyles }} >Thank You!</Typography>
+                <Typography  sx={{ ...getOrderPlacedStyles }} >Your order has been placed successfully</Typography>
             </Stack>
 
             <Box

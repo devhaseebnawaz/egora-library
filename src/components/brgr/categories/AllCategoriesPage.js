@@ -35,6 +35,37 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
   }
 }, [states.query, prop.static.displaycategories]);
 
+  const getCategoryNameStyles = {
+    color:
+      styles?.AllCategoriesCategoryTextColor?.value !== ""
+        ? styles?.AllCategoriesCategoryTextColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.AllCategoriesCategoryTextColor?.value,
+
+    fontSize:
+      styles?.AllCategoriesCategoryTextSize?.value != 0
+        ? styles?.AllCategoriesCategoryTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.AllCategoriesCategoryTextSize?.value,
+
+    fontFamily:
+      styles?.AllCategoriesCategoryTextFont?.value !== ""
+        ? styles?.AllCategoriesCategoryTextFont?.value
+        : globalComponentStyles?.Text?.fontFamily?.value !== ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : themeColors?.AllCategoriesCategoryTextFont?.value,
+
+    fontStyle:
+      styles?.AllCategoriesCategoryTextStyle?.value !== ""
+        ? styles?.AllCategoriesCategoryTextStyle?.value
+        : globalComponentStyles?.Text?.fontWeight?.value !== ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.AllCategoriesCategoryTextStyle?.value,
+
+    
+  };
 
   return (
     <>
@@ -44,14 +75,14 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
             <CategoryLayout
             // banner={<Banner img={category.bannerImg} />}
             >
-              <Typography variant="h3" style={{ marginBottom: "16px" }}>
+              <Typography variant="h3" style={{ marginBottom: "16px" , ...getCategoryNameStyles }}>
                 {category.name}
               </Typography>
 
               <Grid container spacing={2}>
                 {category.items.map((item, index) => (
                   <Grid item xs={12} sm={6} md={3} key={`categoryItem${item.id}`}>
-                    <ItemCard key={`categoryItem${index}item`} globalComponentStyles={globalComponentStyles} themeColors={themeColors} styles={styles} item={item} actions={actions} states={states}/>
+                    <ItemCard key={`categoryItem${index}item`} globalComponentStyles={globalComponentStyles} themeColors={themeColors} styles={styles} item={item} actions={actions} states={states} />
                   </Grid>
                 ))}
               </Grid>

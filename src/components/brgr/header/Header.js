@@ -176,7 +176,7 @@ export default function CustomNavbar({
                         themeColors?.AppBarPhoneColor?.value,
 
 
-                  fontSize: styles?.AppBarPhoneTextSize?.value != ""
+                  fontSize: styles?.AppBarPhoneTextSize?.value != 0
                     ? styles?.AppBarPhoneTextSize?.value
                     : themeColors?.AppBarPhoneTextSize?.value,
 
@@ -190,7 +190,7 @@ export default function CustomNavbar({
 
                 }}
               >
-                {states?.selectedVenue
+                {states?.selectedVenue?.venuePhoneNumber
                   ? states?.selectedVenue?.venuePhoneNumber
                   : "03XX-XXXXXXX"}
               </Typography>

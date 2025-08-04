@@ -2,8 +2,78 @@ import React, { useState } from "react";
 import { Card, Typography, Box } from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
 
-export default function ItemCard ({ item, themeColors, styles, actions, states }) {
+export default function ItemCard ({ item, themeColors, styles, actions, states, globalComponentStyles }) {
  
+  const getItemNameStyles = {
+    color:
+      styles?.PopularMenuSectionItemNameTextColor?.value !== ""
+        ? styles?.PopularMenuSectionItemNameTextColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.PopularMenuSectionItemNameTextColor?.value,
+
+    fontSize:
+      styles?.PopularMenuSectionItemNameTextSize?.value != 0
+        ? styles?.PopularMenuSectionItemNameTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.PopularMenuSectionItemNameTextSize?.value,
+
+    fontFamily:
+      styles?.PopularMenuSectionItemNameTextFont?.value !== ""
+        ? styles?.PopularMenuSectionItemNameTextFont?.value
+        : globalComponentStyles?.Text?.fontFamily?.value !== ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : themeColors?.PopularMenuSectionItemNameTextFont?.value,
+
+    fontStyle:
+      styles?.PopularMenuSectionItemNameTextStyle?.value !== ""
+        ? styles?.PopularMenuSectionItemNameTextStyle?.value
+        : globalComponentStyles?.Text?.fontWeight?.value !== ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.PopularMenuSectionItemNameTextStyle?.value,
+  };
+
+  const getPriceTagStyles = {
+    color:
+      styles?.PopularMenuSectionPriceTextColor?.value !== ""
+        ? styles?.PopularMenuSectionPriceTextColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.PopularMenuSectionPriceTextColor?.value,
+
+    fontSize:
+      styles?.PopularMenuSectionPriceTextSize?.value != 0
+        ? styles?.PopularMenuSectionPriceTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.PopularMenuSectionPriceTextSize?.value,
+
+    fontFamily:
+      styles?.PopularMenuSectionPriceTextFont?.value !== ""
+        ? styles?.PopularMenuSectionPriceTextFont?.value
+        : globalComponentStyles?.Text?.fontFamily?.value !== ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : themeColors?.PopularMenuSectionPriceTextFont?.value,
+
+    fontStyle:
+      styles?.PopularMenuSectionPriceTextStyle?.value !== ""
+        ? styles?.PopularMenuSectionPriceTextStyle?.value
+        : globalComponentStyles?.Text?.fontWeight?.value !== ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.PopularMenuSectionPriceTextStyle?.value,
+
+    borderRadius: styles?.PopularMenuSectionPriceBorderRadius?.value !== ""
+    ? styles?.PopularMenuSectionPriceBorderRadius?.value
+     : themeColors?.PopularMenuSectionPriceBorderRadius?.value,
+    
+    backgroundColor:  styles?.PopularMenuSectionPriceBackgroundcolor?.value !== ""
+    ? styles?.PopularMenuSectionPriceBackgroundcolor?.value
+    : globalComponentStyles?.Text?.backgroundColor?.value !== ""
+      ? globalComponentStyles?.Text?.backgroundColor?.value
+      : themeColors?.PopularMenuSectionPriceBackgroundcolor?.value,
+  };
+
   return (
     <>
       <Card
@@ -58,9 +128,10 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
             top: 16,
             left: 16,
             zIndex: 2,
-            fontWeight: "bold",
-            color: themeColors?.ItemCardItemNameColor ? themeColors?.ItemCardItemNameColor : styles?.ItemCardItemNameColor != "" ? styles?.ItemCardItemNameColor : "#fff",
+            // fontWeight: "bold",
+            // color: themeColors?.ItemCardItemNameColor ? themeColors?.ItemCardItemNameColor : styles?.ItemCardItemNameColor != "" ? styles?.ItemCardItemNameColor : "#fff",
             textShadow: "0 1px 3px rgba(0,0,0,0.6)",
+            ...getItemNameStyles
           }}
         >
           {item?.name}
@@ -71,12 +142,13 @@ export default function ItemCard ({ item, themeColors, styles, actions, states }
             position: "absolute",
             bottom: 12,
             right: 12,
-            backgroundColor: themeColors?.ItemCardItemPriceBackgroundColor ? themeColors?.ItemCardItemPriceBackgroundColor : styles?.ItemCardItemPriceBackgroundColor != "" ? styles?.ItemCardItemPriceBackgroundColor : "#fff",
+            // backgroundColor: themeColors?.ItemCardItemPriceBackgroundColor ? themeColors?.ItemCardItemPriceBackgroundColor : styles?.ItemCardItemPriceBackgroundColor != "" ? styles?.ItemCardItemPriceBackgroundColor : "#fff",
             padding: "4px 12px",
-            borderRadius: 20,
-            fontWeight: 600,
-            fontSize: 14,
+            // borderRadius: 20,
+            // fontWeight: 600,
+            // fontSize: 14,
             boxShadow: "rgba(0, 0, 0, 0.14) 0px 1px 4px",
+            ...getPriceTagStyles
           }}
         >
           Rs. {item?.price}

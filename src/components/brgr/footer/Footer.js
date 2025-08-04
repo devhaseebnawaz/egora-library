@@ -3,7 +3,68 @@ import { Typography, Box, Link } from "@mui/material";
 // import Image from 'next/image';
 import UniversalImage from "../../../UniversalImage";
 
-export default function CustomFooter({ themeColors, actions, prop, styles, states }) {
+export default function CustomFooter({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
+    const getFooterTypographyStyles = {
+        color:
+            styles?.FooterTextColor?.value !== ""
+                ? styles?.FooterTextColor?.value
+                : globalComponentStyles?.Text?.color?.value !== ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : themeColors?.FooterTextColor?.value,
+
+        fontSize:
+            styles?.FooterTextSize?.value !== 0
+                ? styles?.FooterTextSize?.value
+                : globalComponentStyles?.Text?.size?.value !== 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : themeColors?.FooterTextSize?.value,
+
+        fontFamily:
+            styles?.FooterTextFont?.value !== ""
+                ? styles?.FooterTextFont?.value
+                : globalComponentStyles?.Text?.fontFamily?.value !== ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : themeColors?.FooterTextFont?.value,
+
+        fontStyle:
+            styles?.FooterTextStyle?.value !== ""
+                ? styles?.FooterTextStyle?.value
+                : globalComponentStyles?.Text?.fontWeight?.value !== ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.FooterTextStyle?.value,
+    };
+
+    const getFooterLinkStyles = {
+        color:
+            styles?.FooterLinkColor?.value !== ""
+                ? styles?.FooterLinkColor?.value
+                : globalComponentStyles?.Text?.color?.value !== ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : themeColors?.FooterLinkColor?.value,
+
+        fontSize:
+            styles?.FooterLinkSize?.value !== 0
+                ? styles?.FooterLinkSize?.value
+                : globalComponentStyles?.Text?.size?.value !== 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : themeColors?.FooterLinkSize?.value,
+
+        fontFamily:
+            styles?.FooterLinkFont?.value !== ""
+                ? styles?.FooterLinkFont?.value
+                : globalComponentStyles?.Text?.fontFamily?.value !== ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : themeColors?.FooterLinkFont?.value,
+
+        fontStyle:
+            styles?.FooterLinkStyle?.value !== ""
+                ? styles?.FooterLinkStyle?.value
+                : globalComponentStyles?.Text?.fontWeight?.value !== ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.FooterLinkStyle?.value,
+    };
+
+
     return (
         <Box
             style={{
@@ -37,32 +98,7 @@ export default function CustomFooter({ themeColors, actions, prop, styles, state
                     variant="body2"
                     component="span"
 
-                    sx={{
-                        color:
-                            styles?.FooterTextColor?.value != ""
-                                ? styles?.FooterTextColor?.value
-                                : globalComponentStyles?.Text?.color?.value != ""
-                                    ? globalComponentStyles?.Text?.color?.value :
-                                    themeColors?.FooterTextColor?.value,
-
-                        fontSize: styles?.FooterTextSize?.value != 0
-                            ? styles?.FooterTextSize?.value
-                            : globalComponentStyles?.Text?.size?.value != 0
-                                ? globalComponentStyles?.Text?.size?.value
-                                : themeColors?.FooterTextSize?.value,
-
-                        fontFamily: styles?.FooterTextFont?.value != ""
-                            ? styles?.FooterTextFont?.value
-                            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                                ? globalComponentStyles?.Text?.fontFamily?.value
-                                : themeColors?.FooterTextFont?.value,
-
-                        fontStyle: styles?.FooterTextStyle?.value != ""
-                            ? styles?.FooterTextStyle?.value
-                            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                                ? globalComponentStyles?.Text?.fontWeight?.value
-                                : themeColors?.FooterTextStyle?.value,
-                    }}
+                    sx={{ ...getFooterTypographyStyles }}
                 >
                     Powered by
                 </Typography>
@@ -70,29 +106,30 @@ export default function CustomFooter({ themeColors, actions, prop, styles, state
                     href="#"
                     color="inherit"
                     underline="hover"
-                    style={{ fontWeight: 'bold', color: '#acacab' }}
+                    style={{ fontWeight: 'bold' }}
+                    sx={{ ...getFooterLinkStyles }}
                 >
                     Egora
                 </Link>
-                <Typography variant="body2" component="span">
+                <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
                     |
                 </Typography>
                 <Link
                     href="#"
                     color="inherit"
                     underline="hover"
-                    style={{ color: '#acacab' }}
+                    sx={{ ...getFooterLinkStyles }}
                 >
                     Privacy Policy
                 </Link>
-                <Typography variant="body2" component="span">
+                <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
                     |
                 </Typography>
                 <Link
+                    sx={{ ...getFooterLinkStyles }}
                     href="#"
                     color="inherit"
                     underline="hover"
-                    style={{ color: '#acacab' }}
                 >
                     Faqs
                 </Link>
