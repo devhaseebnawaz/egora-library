@@ -8,7 +8,7 @@ try {
   useRouter = require("next/router").useRouter;
 } catch (err) {
   NextLink = null;
-  useRouter = () => ({ push: () => {} });
+  useRouter = null;
 }
 
 export default function CustomFooter({
@@ -19,7 +19,8 @@ export default function CustomFooter({
   states,
   globalComponentStyles
 }) {
-  const router = useRouter();
+  const router =
+    typeof window !== "undefined" && useRouter ? useRouter() : { push: () => {} };
 
   const linkData = prop?.editable?.link?.value || {};
   const faqType = linkData.type;
@@ -96,30 +97,30 @@ export default function CustomFooter({
   return (
     <Box
       style={{
-        width: '100%',
-        paddingBottom: '4rem',
-        paddingTop: '4rem',
+        width: "100%",
+        paddingBottom: "4rem",
+        paddingTop: "4rem",
         backgroundColor:
           styles?.FooterBackgroundColor?.value !== ""
             ? styles?.FooterBackgroundColor?.value
             : themeColors?.FooterBackgroundColor?.value,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        padding: '25px 15px',
-        minHeight: '280px',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        padding: "25px 15px",
+        minHeight: "280px",
         color: styles?.FooterTextColor?.value || themeColors?.FooterTextColor?.value,
       }}
     >
       <Box
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#acacab',
-          fontSize: '14px',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "8px",
+          color: "#acacab",
+          fontSize: "14px",
         }}
       >
         <Typography
@@ -134,7 +135,7 @@ export default function CustomFooter({
           href="#"
           color="inherit"
           underline="hover"
-          style={{ fontWeight: 'bold' }}
+          style={{ fontWeight: "bold" }}
           sx={{ ...getFooterLinkStyles }}
         >
           Egora
