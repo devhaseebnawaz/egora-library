@@ -4,7 +4,8 @@ import {
 } from "@mui/material";
 import { fNumber } from "../../../utils/formatNumber";
 
-const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData }) => {
+const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData, getDescriptionStyles, getHeadingStyles,  getOrderHeadingStyles }) => {
+
   const {  cardItems,franchise } = states ?? {};
   const { serviceFeesObject, configurations,storeTaxOnCash,storeTaxOnCard,platformFees } = franchise ?? {};
   const { isServiceFeesApplicableOnStore,isTaxApplicableOnStore,isPlatformFeeApplicableOnStore,isCashAvailableOnPickUp,isCashAvailableOnDelivery } = configurations ?? {};
@@ -113,10 +114,10 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     if (isServiceFeesApplicableOnStore && isApplicable(service?.applicable) && serviceFee > 0) {
       return (
         <Stack direction="row" justifyContent="space-between">
-          <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>
+          <Typography sx={{ color: "text.secondary", fontWeight: "600" , ...getHeadingStyles }}>
             Service Fee {service?.type === "Percentage" ? `(${service.amount}%)` : ""}
           </Typography>
-          <Typography variant="subtitle2">
+          <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>
             Rs. {fNumber(serviceFee)}
           </Typography>
         </Stack>
@@ -170,7 +171,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   return (
     <>
       <Box>
-        <Typography variant="h3" sx={{ fontWeight: "700", ml: 2, fontSize: 25, mb: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: "700", ml: 2, fontSize: 25, mb: 1, ...getOrderHeadingStyles }}>
           Order Total
         </Typography>
       </Box>
@@ -179,13 +180,13 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
         <CardContent>
           <Stack spacing={2}>
             <Stack direction="row" justifyContent="space-between">
-              <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Sub Total</Typography>
-              <Typography variant="subtitle2">Rs. {fNumber(subTotal)}</Typography>
+              <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Sub Total</Typography>
+              <Typography variant="subtitle2" sx={{...getDescriptionStyles}}>Rs. {fNumber(subTotal)}</Typography>
             </Stack>
            {isPlatformFeeApplicableOnStore && (
             <Stack direction="row" justifyContent="space-between">
-              <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Platform Fee</Typography>
-              <Typography variant="subtitle2">Rs. {platformFees}</Typography>
+              <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Platform Fee</Typography>
+              <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {platformFees}</Typography>
             </Stack>
            )}
 
@@ -193,26 +194,26 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
 
             {discount > 0 && (
               <Stack direction="row" justifyContent="space-between">
-                <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Discount</Typography>
-                <Typography variant="subtitle2">Rs. {fNumber(discount)}</Typography>
+                <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Discount</Typography>
+                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {fNumber(discount)}</Typography>
               </Stack>
             )}
 
             <Stack direction="row" justifyContent="space-between">
-              <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Tip</Typography>
-              <Typography variant="subtitle2">Rs. {fNumber(selectedTip || 0)}</Typography>
+              <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Tip</Typography>
+              <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {fNumber(selectedTip || 0)}</Typography>
             </Stack>
 
             {isTaxApplicableOnStore && (
               <Stack direction="row" justifyContent="space-between">
-                <Typography sx={{ color: "text.secondary", fontWeight: "600" }}>Tax</Typography>
-                <Typography variant="subtitle2">Rs. {fNumber(taxAmount)}</Typography>
+                <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Tax</Typography>
+                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {fNumber(taxAmount)}</Typography>
               </Stack>
             )}
 
             <Stack direction="row" justifyContent="space-between">
-              <Typography sx={{ color: "#FCA92E", fontWeight: "600" }}>Total Amount</Typography>
-              <Typography variant="subtitle2" sx={{ color: "#FCA92E" }}>
+              <Typography sx={{ color: "#FCA92E", fontWeight: "600", ...getHeadingStyles }}>Total Amount</Typography>
+              <Typography variant="subtitle2" sx={{ color: "#FCA92E", ...getDescriptionStyles }}>
                 Rs. {fNumber(total.toFixed(2))}
               </Typography>
             </Stack>

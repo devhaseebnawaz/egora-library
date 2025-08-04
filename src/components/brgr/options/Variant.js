@@ -6,12 +6,14 @@ export default function Variant({
     variants,
     hanldeSelectOption,
     selectedVariant,
+    getDescriptionStyles,
+    getHeadingStyles
 }) {
     return (
         <>
             {variants && (
                 <>
-                    <Typography sx={{ fontSize: 15, marginLeft: '2px' }} variant="subtitle2">
+                    <Typography sx={{ fontSize: 15, marginLeft: '2px', ...getHeadingStyles }} variant="subtitle2" >
                         Variants
                     </Typography>
 
@@ -39,6 +41,7 @@ export default function Variant({
                                         flexGrow: { xs: 0, sm: 0, md: 0 },
                                         ml: { xs: 0, sm: 0, md: 0 },
                                         mb: 1,
+                                        ...getDescriptionStyles
                                     }}
                                     variant={isSelected ? "contained" : "outlined"}
                                     key={index}

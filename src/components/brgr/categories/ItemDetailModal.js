@@ -35,7 +35,64 @@ export default function ItemDetailModal({
   // item,
   setItem,
   previewMode = false,
+  globalComponentStyles,
+  layout
 }) {
+
+  const getHeadingStyles = {
+    color:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextColor?.value}`
+        : globalComponentStyles?.Text?.color?.value != ""
+          ? globalComponentStyles?.Text?.color?.value
+          : `${themeColors?.ItemDetailModalHeadingsTextColor?.value}`,
+    fontSize:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value != 0
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value}`
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : `${themeColors?.ItemDetailModalHeadingsTextSize?.value}`,
+
+    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value != ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value}`
+      : globalComponentStyles?.Text?.fontFamily?.value != ""
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : `${themeColors?.ItemDetailModalHeadingsTextFont?.value}`,
+
+    fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextStyle?.value !== ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextStyle?.value}`
+      : globalComponentStyles?.Text?.fontWeight?.value != ""
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : `${themeColors?.ItemDetailModalHeadingsTextStyle?.value}`,
+  };
+
+  const getDescriptionStyles = {
+    color:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextColor?.value}`
+        : globalComponentStyles?.Text?.color?.value != ""
+          ? globalComponentStyles?.Text?.color?.value
+          : `${themeColors?.ItemDetailModalDescriptionTextColor?.value}`,
+    fontSize:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value != 0
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value}`
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : `${themeColors?.ItemDetailModalDescriptionTextSize?.value}`,
+
+    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value != ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value}`
+      : globalComponentStyles?.Text?.fontFamily?.value != ""
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : `${themeColors?.ItemDetailModalDescriptionTextFont?.value}`,
+
+    fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextStyle?.value !== ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextStyle?.value}`
+      : globalComponentStyles?.Text?.fontWeight?.value != ""
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : `${themeColors?.ItemDetailModalDescriptionTextStyle?.value}`,
+  };
+
   const methods = useForm();
   const { selectedVenue, choiceGroups, isItemEdit } = states ?? {}
   const { isOnline } = selectedVenue ?? {}
@@ -322,16 +379,16 @@ export default function ItemDetailModal({
             marginBottom: 5,
           }}
         >
-          <Typography variant="h6" fontWeight="bold">
+          <Typography variant="h6" fontWeight="bold" sx={{ ...getHeadingStyles }}>
             {states.itemForDetailedModal.name}
           </Typography>
         </Box>
 
-        <Typography color="gray" style={{ marginBottom: 15 }}>
+        <Typography color="gray" style={{ marginBottom: 15 }} sx={{ ...getDescriptionStyles }} >
           {states.itemForDetailedModal.description || ''}
         </Typography>
 
-        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }}>
+        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }} sx={{ ...getHeadingStyles }} >
           Rs. {states.itemForDetailedModal.price}
         </Typography>
 
@@ -341,6 +398,8 @@ export default function ItemDetailModal({
             <Stack spacing={1}>
               {states.itemForDetailedModal.hasVariant && (
                 <Variant
+                  getDescriptionStyles={getDescriptionStyles}
+                  getHeadingStyles={getHeadingStyles}
                   variants={states.itemForDetailedModal.variants}
                   hanldeSelectOption={toggleVariantSelect}
                   selectedVariant={selectedVariant}
@@ -349,6 +408,8 @@ export default function ItemDetailModal({
               <Divider />
               {filteredChoiceGroups.map((cg, index) => (
                 <Group
+                  getDescriptionStyles={getDescriptionStyles}
+                  getHeadingStyles={getHeadingStyles}
                   key={index}
                   choiceGroup={cg}
                   hanldeSelectOption={toggleSauce}
