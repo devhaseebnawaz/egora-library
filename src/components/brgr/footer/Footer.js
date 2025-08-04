@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box, Link as MUILink } from "@mui/material";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
+// import NextLink from "next/link";
+// import { useRouter } from "next/router";
 
 export default function CustomFooter({
   themeColors,
@@ -11,19 +11,19 @@ export default function CustomFooter({
   states,
   globalComponentStyles
 }) {
-  const router = typeof window !== "undefined" ? useRouter() : null;
+  // const router = typeof window !== "undefined" ? useRouter() : null;
 
   const linkData = prop?.editable?.link?.value || {};
   const faqType = linkData.type;
   const faqUrl = linkData.url || "#";
   const faqName = linkData.name || "Faqs";
 
-  const handleFaqClick = (e) => {
-    if (faqType === "page" && faqUrl && router) {
-      e.preventDefault();
-      router.push(faqUrl);
-    }
-  };
+  // const handleFaqClick = (e) => {
+  //   if (faqType === "page" && faqUrl && router) {
+  //     e.preventDefault();
+  //     router.push(faqUrl);
+  //   }
+  // };
 
   const getFooterTypographyStyles = {
     color:
@@ -145,7 +145,7 @@ export default function CustomFooter({
           |
         </Typography>
 
-        {faqType === "page" ? (
+        {/* {faqType === "page" ? (
           <NextLink href={faqUrl || "#"} passHref legacyBehavior>
             <MUILink
               sx={{ ...getFooterLinkStyles }}
@@ -167,7 +167,7 @@ export default function CustomFooter({
           >
             {faqName}
           </MUILink>
-        )}
+        )} */}
       </Box>
     </Box>
   );
