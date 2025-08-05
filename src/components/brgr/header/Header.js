@@ -228,6 +228,8 @@ export default function CustomNavbar({
               prop={prop}
               styles={styles}
               states={states}
+              layout={layout}
+              globalComponentStyles={globalComponentStyles}
             />
             <Box
               style={{
