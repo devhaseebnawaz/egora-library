@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box, Link as MUILink } from "@mui/material";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
+// import NextLink from "next/link";
+// import { useRouter } from "next/router";
 
 export default function CustomFooter({
   themeColors,
@@ -9,14 +9,21 @@ export default function CustomFooter({
   prop,
   styles,
   states,
-  globalComponentStyles,
+  globalComponentStyles
 }) {
-  const router = useRouter(); // Always call at top level
+  // const router = typeof window !== "undefined" ? useRouter() : null;
 
   const linkData = prop?.editable?.link?.value || {};
   const faqType = linkData.type;
   const faqUrl = linkData.url || "#";
   const faqName = linkData.name || "Faqs";
+
+  // const handleFaqClick = (e) => {
+  //   if (faqType === "page" && faqUrl && router) {
+  //     e.preventDefault();
+  //     router.push(faqUrl);
+  //   }
+  // };
 
   const getFooterTypographyStyles = {
     color:
@@ -94,8 +101,7 @@ export default function CustomFooter({
         alignItems: "center",
         padding: "25px 15px",
         minHeight: "280px",
-        color:
-          styles?.FooterTextColor?.value || themeColors?.FooterTextColor?.value,
+        color: styles?.FooterTextColor?.value || themeColors?.FooterTextColor?.value,
       }}
     >
       <Box
@@ -108,11 +114,7 @@ export default function CustomFooter({
           fontSize: "14px",
         }}
       >
-        <Typography
-          variant="body2"
-          component="span"
-          sx={{ ...getFooterTypographyStyles }}
-        >
+        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
           Powered by
         </Typography>
 
@@ -126,11 +128,7 @@ export default function CustomFooter({
           Egora
         </MUILink>
 
-        <Typography
-          variant="body2"
-          component="span"
-          sx={{ ...getFooterTypographyStyles }}
-        >
+        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
           |
         </Typography>
 
@@ -143,15 +141,11 @@ export default function CustomFooter({
           Privacy Policy
         </MUILink>
 
-        <Typography
-          variant="body2"
-          component="span"
-          sx={{ ...getFooterTypographyStyles }}
-        >
+        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
           |
         </Typography>
 
-        {faqType === "page" ? (
+        {/* {faqType === "page" ? (
           <NextLink href={faqUrl || "#"} passHref legacyBehavior>
             <MUILink
               sx={{ ...getFooterLinkStyles }}
@@ -164,6 +158,7 @@ export default function CustomFooter({
         ) : (
           <MUILink
             href={faqUrl || "#"}
+            onClick={faqType === "page" ? handleFaqClick : undefined}
             sx={{ ...getFooterLinkStyles }}
             color="inherit"
             underline="hover"
@@ -172,7 +167,7 @@ export default function CustomFooter({
           >
             {faqName}
           </MUILink>
-        )}
+        )} */}
       </Box>
     </Box>
   );
