@@ -31,6 +31,8 @@ const CartDrawer = ({
   prop,
   styles,
   states,
+  layout,
+  globalComponentStyles,
 }) => {
   const getHeadingStyles = {
     color:
