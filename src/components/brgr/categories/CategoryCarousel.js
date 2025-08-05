@@ -17,6 +17,10 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
         };
     }, []);
 
+    const handleCategoryClick = (category) => {
+        actions.handleCategoryClick(category);
+    }
+    
     return (
         <Box
             style={{
@@ -110,10 +114,11 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                 maxWidth: "160px",
                                 borderRadius: "8px",
                                 textTransform: "none",
-                                backgroundColor: "transparent",
+                                backgroundColor: states.selectedCategoryItem === cat ? "orange" : "transparent", 
                             }}
-                            onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)"}
-                            onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+                            onMouseOver={(e) => { if (states.selectedCategoryItem !== cat) e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; }}
+                            onMouseOut={(e) => { if (states.selectedCategoryItem !== cat) e.currentTarget.style.backgroundColor = "transparent"; }}
+                            onClick={() => handleCategoryClick(cat)}
                         >
                             {cat}
                         </Button>

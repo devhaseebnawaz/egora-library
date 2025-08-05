@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Grid, Typography, Container, Box } from "@mui/material";
 import { categories } from "../data/categories";
 import Banner from "./Banner";
@@ -10,6 +10,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
   const [products, setProducts] = useState(prop.static.displaycategories || []);
 
   const { query } = states ?? {}
+  const categoryRefs = useRef({});
 
   useEffect(() => {
   if (query && query.trim() !== "") {
@@ -66,12 +67,31 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
 
     
   };
+  
+  useEffect(() => {
+    if (products.length > 0) {
+      products.forEach((category) => {
+        if (!categoryRefs.current[category.name]) {
+          categoryRefs.current[category.name] = React.createRef();
+        }
+      });
+    }
+  }, [products]);
+
+  useEffect(() => {
+    if (states.selectedCategoryItem && categoryRefs.current[states.selectedCategoryItem]) {
+      categoryRefs.current[states.selectedCategoryItem].current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [states.selectedCategoryItem]);
 
   return (
     <>
       <Container style={{ marginTop: "30px" }} >
         {products.map((category) => (
-          <Box key={category.id} style={{ margin: "48px 0px" }}>
+          <Box key={category.id} style={{ margin: "48px 0px" }} ref={categoryRefs.current[category.name]}> 
             <CategoryLayout
             // banner={<Banner img={category.bannerImg} />}
             >
