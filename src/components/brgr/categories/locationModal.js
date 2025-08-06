@@ -370,25 +370,39 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
 
             {/* Confirm Button */}
-            {states?.orderType === 'storeDelivery' && <Button
-                fullWidth
-                onClick={handleSelectedLocation}
-                sx={{
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    borderRadius: "12px",
-                    py: 1.5,
-                    fontWeight: "bold",
-                    textTransform: "none",
-                    fontSize: "16px",
-                    ":hover": {
-                        backgroundColor: "#333",
-                    },
-                }}
-                disabled={!states.value}
-            >
-                Confirm Selection
-            </Button>}
+            {states?.orderType === 'storeDelivery' &&
+                <>
+                    <Button
+                        fullWidth
+                        onClick={handleSelectedLocation}
+                        sx={{
+                            backgroundColor: "#000",
+                            color: "#fff",
+                            borderRadius: "12px",
+                            py: 1.5,
+                            fontWeight: "bold",
+                            textTransform: "none",
+                            fontSize: "16px",
+                            ":hover": {
+                                backgroundColor: "#333",
+                            },
+                        }}
+                        disabled={!states.value}
+                    >
+                        Confirm Selection
+                    </Button>
+                    {states?.noVenueFound && (
+                        <Typography
+                            variant="body2"
+                            color="error"
+                            sx={{ mt: 2, textAlign: "center" }}
+                        >
+                            {states.noVenueFound}
+                        </Typography>
+                    )}
+                </>
+            }
+
             {states?.orderType === 'storePickUp' && <Button
                 fullWidth
                 onClick={handleOutletSelection}
