@@ -15,7 +15,7 @@ export const popularItems = [
     image: 'https://brgr.pk/_next/image?url=https%3A%2F%2Fassets.indolj.io%2Fimages%2F1741604602-Crispy%20Chicken%20Loaded%20Fries.webp%3Fq%3D10&w=828&q=75',
   },
   {
-    name: 'Fries',
+    name: 'Fries with Cheese',
     price: 'Rs. 295',
     image: 'https://assets.indolj.io/images/1741604760-Fries.webp?q=10',
   },
