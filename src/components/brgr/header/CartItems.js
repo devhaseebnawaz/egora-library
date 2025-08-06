@@ -23,7 +23,7 @@ import { fNumber } from "../../../utils/formatNumber";
 
 const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick,states }) => {
 
-    console.log("the cart item sis", cartItem)
+    // console.log("the cart item sis", cartItem)
     // const sessionInfo = useSession();
     // const dispatch = useDispatch();
     // const { cardItems } = useSelector((state) => state.cardSlice);

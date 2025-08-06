@@ -656,9 +656,7 @@ const CartDrawer = ({
                 ...getButtonStyles,
               }}
             >
-              {states.redirectingLoading.checkout
-                ? "Redirecting..."
-                : "Checkout"}
+             Checkout
             </Button>
 
             <Box
