@@ -4,7 +4,7 @@ To Reflect the chnages in Dist File
     ### `rm -rf dist node_modules package-lock.json`
 
  2- Install the dependencies again 
-    ### `npm install`  
+    ### `npm install --force`  
 
  3- Create the build
     ### `npm run build`  

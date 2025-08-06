@@ -110,6 +110,12 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
     const { items } = states.cardItems ?? []
     const cartItems = items
     const [orderData, setOrderData] = useState({})
+    const [franchiseId, setFranchiseId] = useState('');
+
+    useEffect(() => {
+        const id = sessionStorage.getItem('franchiseId');
+        if (id) setFranchiseId(id);
+    }, []);
 
     const { orderType } = states;
     const { franchise } = states ?? {}
@@ -269,7 +275,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                             </Alert>
                                         )}
                                         <Box textAlign="center" mt={2}>
-                                            <Link href="/" underline="hover" fontSize={14} >
+                                            <Link href={`/?${franchiseId}`} underline="hover" fontSize={14} >
                                                 ← continue to add more items
                                             </Link>
                                         </Box>
