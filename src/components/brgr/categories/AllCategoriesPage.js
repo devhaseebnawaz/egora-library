@@ -6,68 +6,37 @@ import CategoryLayout from "./CategoryLayout";
 import ItemCard from "./ItemCard";
 
 export default function AllCategoriesPage({ prop, actions, styles, states, themeColors, globalComponentStyles }) {
+  const categoryRefs = useRef({});
 
   const [products, setProducts] = useState(prop.static.displaycategories || []);
 
   const { query } = states ?? {}
-  const categoryRefs = useRef({});
 
   useEffect(() => {
-  if (query && query.trim() !== "") {
+    if (query && query.trim() !== "") {
     const filtered = (prop.static.displaycategories || []).map((category) => {
-      const filteredItems = category.items?.filter((item) =>
-        item.name.toLowerCase().includes(query.toLowerCase())
-      );
+          const filteredItems = category.items?.filter((item) =>
+            item.name.toLowerCase().includes(query.toLowerCase())
+          );
       const isCategoryMatch = category.name.toLowerCase().includes(query.toLowerCase());
 
-      if (isCategoryMatch || filteredItems.length > 0) {
-        return {
-          ...category,
+          if (isCategoryMatch || filteredItems.length > 0) {
+            return {
+              ...category,
           items: filteredItems.length > 0 ? filteredItems : category.items
-        };
-      }
+            };
+          }
 
-      return null;
+          return null;
     }).filter(Boolean); 
 
-    setProducts(filtered);
-  } else {
-    setProducts(prop.static.displaycategories || []);
-  }
-}, [states.query, prop.static.displaycategories]);
+      setProducts(filtered);
+    } else {
+      setProducts(prop.static.displaycategories || []);
+    }
+  }, [states.query, prop.static.displaycategories]);
 
-  const getCategoryNameStyles = {
-    color:
-      styles?.AllCategoriesCategoryTextColor?.value !== ""
-        ? styles?.AllCategoriesCategoryTextColor?.value
-        : globalComponentStyles?.Text?.color?.value !== ""
-          ? globalComponentStyles?.Text?.color?.value
-          : themeColors?.AllCategoriesCategoryTextColor?.value,
-
-    fontSize:
-      styles?.AllCategoriesCategoryTextSize?.value != 0
-        ? styles?.AllCategoriesCategoryTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.AllCategoriesCategoryTextSize?.value,
-
-    fontFamily:
-      styles?.AllCategoriesCategoryTextFont?.value !== ""
-        ? styles?.AllCategoriesCategoryTextFont?.value
-        : globalComponentStyles?.Text?.fontFamily?.value !== ""
-          ? globalComponentStyles?.Text?.fontFamily?.value
-          : themeColors?.AllCategoriesCategoryTextFont?.value,
-
-    fontStyle:
-      styles?.AllCategoriesCategoryTextStyle?.value !== ""
-        ? styles?.AllCategoriesCategoryTextStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
-          : themeColors?.AllCategoriesCategoryTextStyle?.value,
-
-    
-  };
-  
+  // Setup ref for each category
   useEffect(() => {
     if (products.length > 0) {
       products.forEach((category) => {
@@ -78,8 +47,12 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
     }
   }, [products]);
 
+  // Scroll to section when category is selected
   useEffect(() => {
-    if (states.selectedCategoryItem && categoryRefs.current[states.selectedCategoryItem]) {
+    if (
+      states.selectedCategoryItem &&
+      categoryRefs.current[states.selectedCategoryItem]
+    ) {
       categoryRefs.current[states.selectedCategoryItem].current?.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -87,29 +60,106 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
     }
   }, [states.selectedCategoryItem]);
 
+  // Auto-update selectedCategoryItem when scrolling
+ useEffect(() => {
+  let observer = null;
+
+  const observe = () => {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const visibleCategory = entry.target.getAttribute("data-category-name");
+            if (
+              visibleCategory &&
+              visibleCategory !== states.selectedCategoryItem
+            ) {
+              states.setSelectedCategoryItem(visibleCategory);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.5, // you can tweak this
+      }
+    );
+
+    Object.values(categoryRefs.current).forEach((ref) => {
+      if (ref?.current) {
+        observer.observe(ref.current);
+      }
+    });
+  };
+
+  // Delay observer until after DOM paint and scroll settles
+  const timeout = setTimeout(() => {
+    observe();
+  }, 200); // 200ms is usually safe
+
+  return () => {
+    clearTimeout(timeout);
+    if (observer) observer.disconnect();
+  };
+}, [products]);
+
+
+  const getCategoryNameStyles = {
+    color:
+      styles?.AllCategoriesCategoryTextColor?.value !== ""
+        ? styles?.AllCategoriesCategoryTextColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+        ? globalComponentStyles?.Text?.color?.value
+        : themeColors?.AllCategoriesCategoryTextColor?.value,
+
+    fontSize:
+      styles?.AllCategoriesCategoryTextSize?.value != 0
+        ? styles?.AllCategoriesCategoryTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+        ? globalComponentStyles?.Text?.size?.value
+        : themeColors?.AllCategoriesCategoryTextSize?.value,
+
+    fontFamily:
+      styles?.AllCategoriesCategoryTextFont?.value !== ""
+        ? styles?.AllCategoriesCategoryTextFont?.value
+        : globalComponentStyles?.Text?.fontFamily?.value !== ""
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : themeColors?.AllCategoriesCategoryTextFont?.value,
+
+    fontStyle:
+      styles?.AllCategoriesCategoryTextStyle?.value !== ""
+        ? styles?.AllCategoriesCategoryTextStyle?.value
+        : globalComponentStyles?.Text?.fontWeight?.value !== ""
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : themeColors?.AllCategoriesCategoryTextStyle?.value,
+  };
+
   return (
-    <>
-      <Container style={{ marginTop: "30px" }} >
-        {products.map((category) => (
-          <Box key={category.id} style={{ margin: "48px 0px" }} ref={categoryRefs.current[category.name]}> 
+    <Container style={{ marginTop: "30px" }}>
+      {products.map((category) => (
+        <Box
+          key={category.id}
+          ref={categoryRefs.current[category.name]}
+          data-category-name={category.name}
+          style={{ margin: "48px 0px" }}
+        >
             <CategoryLayout
             // banner={<Banner img={category.bannerImg} />}
             >
               <Typography variant="h3" style={{ marginBottom: "16px" , ...getCategoryNameStyles }}>
-                {category.name}
-              </Typography>
+              {category.name}
+            </Typography>
 
-              <Grid container spacing={2}>
-                {category.items.map((item, index) => (
-                  <Grid item xs={12} sm={6} md={3} key={`categoryItem${item.id}`}>
+            <Grid container spacing={2}>
+              {category.items.map((item, index) => (
+                <Grid item xs={12} sm={6} md={3} key={`categoryItem${item.id}`}>
                     <ItemCard key={`categoryItem${index}item`} globalComponentStyles={globalComponentStyles} themeColors={themeColors} styles={styles} item={item} actions={actions} states={states} />
-                  </Grid>
-                ))}
-              </Grid>
-            </CategoryLayout>
-          </Box>
-        ))}
-      </Container>
-    </>
+                </Grid>
+              ))}
+            </Grid>
+          </CategoryLayout>
+        </Box>
+      ))}
+    </Container>
   );
 }
