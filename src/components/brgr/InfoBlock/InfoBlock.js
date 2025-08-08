@@ -67,7 +67,6 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
         <Box
             style={{
                 width: '100%',
-                maxWidth: '935px',
                 padding: '50px 0',
                 fontWeight: '500 !important',
                 fontSize: '14px',

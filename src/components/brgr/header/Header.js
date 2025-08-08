@@ -16,7 +16,8 @@ export default function CustomNavbar({
   styles,
   states,
   globalComponentStyles,
-  layout
+  layout,
+  previewMode = false,
 }) {
   const isMobile = useMediaQuery('(max-width:600px)');
   const truncateLength = isMobile ? 10 : 25;
@@ -59,7 +60,12 @@ export default function CustomNavbar({
                 gap: "8px",
                 cursor: "pointer",
               }}
-              onClick={() => actions.handleOpenLocationModalOnClick(true)}
+              onClick={() => {
+                if (!previewMode) {
+                  actions.handleOpenLocationModalOnClick(true)
+                }
+              }
+              }
             >
               <Icon
                 icon={locationIcon}
@@ -198,7 +204,12 @@ export default function CustomNavbar({
           </Box>
 
           <Box style={{ position: "relative" }}>
-            <IconButton onClick={actions.handleOpenCart}>
+            <IconButton onClick={() => {
+              if (!previewMode) {
+                actions.handleOpenCart()
+              }
+            }
+            }>
               <Icon
                 icon={cartIcon}
 
@@ -294,7 +305,7 @@ export default function CustomNavbar({
         states={states}
         isGoogleMapsLoaded={states?.isGoogleMapsLoaded}
       />
-    
+
     </>
   );
 }
