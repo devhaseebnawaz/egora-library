@@ -35,10 +35,10 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     : `${themeColors?.CartCheckoutSummaryDescriptionTextColor?.value}`,
         fontSize:
             layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value != 0
-                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value}`
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.CartCheckoutSummaryDescriptionTextSize?.value}`,
+                    : themeColors?.CartCheckoutSummaryDescriptionTextSize?.value,
 
         fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextFont?.value != ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextFont?.value}`
@@ -62,10 +62,10 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     : `${themeColors?.CartCheckoutSummaryHeadingTextColor?.value}`,
         fontSize:
             layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value != 0
-                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value}`
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.CartCheckoutSummaryHeadingTextSize?.value}`,
+                    : themeColors?.CartCheckoutSummaryHeadingTextSize?.value,
 
         fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value != ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value}`
@@ -89,10 +89,10 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextColor?.value}`,
         fontSize:
             layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value != 0
-                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value}`
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value}`,
+                    : themeColors?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value,
 
         fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value != ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`
@@ -198,9 +198,9 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                         {states?.selectedVenue?.venueAddressOne} {states?.selectedVenue?.venueAddressTwo}
                                         </Box>{' '}
                                     </Typography>
-                                    {/* <Link href="#" underline="hover" sx={{ fontSize: 14 }}>
+                                    <Link href="#" underline="hover" sx={{ fontSize: 14 }}>
                                         View Location 📍
-                                    </Link> */}
+                                    </Link>
                                     <Typography>
                                         <Box component="strong" sx={{ ...getHeadingStyles }}>
                                             Phone:

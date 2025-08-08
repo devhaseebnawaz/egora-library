@@ -100,10 +100,10 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 : `${themeColors?.LocationModalOrderTypeHeadingColor?.value}`,
                     fontSize:
                         layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
-                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}`
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value
                             : globalComponentStyles?.Text?.size?.value != 0
                                 ? globalComponentStyles?.Text?.size?.value
-                                : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value}`,
+                                : themeColors?.LocationModalOrderTypeHeadingTextSize?.value,
 
                     fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
@@ -185,10 +185,10 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 : `${themeColors?.LocationModalOrderTypeHeadingColor?.value}`,
                     fontSize:
                         layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
-                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value}`
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value
                             : globalComponentStyles?.Text?.size?.value != 0
                                 ? globalComponentStyles?.Text?.size?.value
-                                : `${themeColors?.LocationModalOrderTypeHeadingTextSize?.value}`,
+                                : themeColors?.LocationModalOrderTypeHeadingTextSize?.value,
 
                     fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
