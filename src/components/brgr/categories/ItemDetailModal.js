@@ -48,10 +48,10 @@ export default function ItemDetailModal({
           : `${themeColors?.ItemDetailModalHeadingsTextColor?.value}`,
     fontSize:
       layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value != 0
-        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value}`
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : `${themeColors?.ItemDetailModalHeadingsTextSize?.value}`,
+          : themeColors?.ItemDetailModalHeadingsTextSize?.value,
 
     fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value != ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value}`
@@ -75,10 +75,10 @@ export default function ItemDetailModal({
           : `${themeColors?.ItemDetailModalDescriptionTextColor?.value}`,
     fontSize:
       layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value != 0
-        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value}`
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : `${themeColors?.ItemDetailModalDescriptionTextSize?.value}`,
+          : themeColors?.ItemDetailModalDescriptionTextSize?.value,
 
     fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value != ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value}`
