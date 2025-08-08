@@ -1,36 +1,36 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-export default function TextBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
+export default function AnnouncementsBanner({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
     const getTextBlockStyles = {
         color:
-            styles?.TextBlockTextColor?.value !== ""
-                ? styles?.TextBlockTextColor?.value
+            styles?.AnnouncementsBannerTextColor?.value !== ""
+                ? styles?.AnnouncementsBannerTextColor?.value
                 : globalComponentStyles?.Text?.color?.value !== ""
                     ? globalComponentStyles?.Text?.color?.value
-                    : themeColors?.TextBlockTextColor?.value,
+                    : themeColors?.AnnouncementsBannerTextColor?.value,
     
         fontSize:
-            styles?.TextBlockTextSize?.value != 0
-                ? styles?.TextBlockTextSize?.value
+            styles?.AnnouncementsBannerTextSize?.value != 0
+                ? styles?.AnnouncementsBannerTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.TextBlockTextSize?.value,
+                    : themeColors?.AnnouncementsBannerTextSize?.value,
     
         fontFamily:
-            styles?.TextBlockTextFont?.value !== ""
-                ? styles?.TextBlockTextFont?.value
+            styles?.AnnouncementsBannerTextFont?.value !== ""
+                ? styles?.AnnouncementsBannerTextFont?.value
                 : globalComponentStyles?.Text?.fontFamily?.value !== ""
                     ? globalComponentStyles?.Text?.fontFamily?.value
-                    : themeColors?.TextBlockTextFont?.value,
+                    : themeColors?.AnnouncementsBannerTextFont?.value,
     
         fontStyle:
-            styles?.TextBlockTextStyle?.value !== ""
-                ? styles?.TextBlockTextStyle?.value
+            styles?.AnnouncementsBannerTextStyle?.value !== ""
+                ? styles?.AnnouncementsBannerTextStyle?.value
                 : globalComponentStyles?.Text?.fontWeight?.value !== ""
                     ? globalComponentStyles?.Text?.fontWeight?.value
-                    : themeColors?.TextBlockTextStyle?.value,
+                    : themeColors?.AnnouncementsBannerTextStyle?.value,
     };
 
     return (

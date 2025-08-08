@@ -9,7 +9,8 @@ export default function CustomFooter({
   prop,
   styles,
   states,
-  globalComponentStyles
+  globalComponentStyles, 
+  previewMode = false,
 }) {
   // const router = typeof window !== "undefined" ? useRouter() : null;
 
