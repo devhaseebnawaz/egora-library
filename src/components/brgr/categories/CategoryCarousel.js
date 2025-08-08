@@ -7,7 +7,7 @@ import arrowRight from "@iconify-icons/mdi/chevron-right";
 export default function CategoryCarousel({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
     useEffect(() => {
-        const el = states.scrollRef.current;
+        const el = states?.scrollRef?.current;
         if (el) {
             el.addEventListener("scroll", actions.updateArrows);
             actions.updateArrows();
@@ -78,7 +78,7 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
             }
           `}</style>
 
-                    {states.categoryCarousel.map((cat, idx) => (
+                    {states?.categoryCarousel?.map((cat, idx) => (
                         <Button
                             key={idx}
                             style={{
