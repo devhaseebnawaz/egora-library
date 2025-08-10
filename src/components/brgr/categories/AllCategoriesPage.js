@@ -37,6 +37,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
   }, [states.query, prop.static.displaycategories]);
 
   // Setup ref for each category
+
   useEffect(() => {
     if (products.length > 0) {
       products.forEach((category) => {
@@ -48,6 +49,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
   }, [products]);
 
   // Scroll to section when category is selected
+
   useEffect(() => {
     if (
       states.selectedCategoryItem &&
@@ -61,6 +63,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
   }, [states.selectedCategoryItem]);
 
   // Auto-update selectedCategoryItem when scrolling
+  
  useEffect(() => {
   let observer = null;
 
