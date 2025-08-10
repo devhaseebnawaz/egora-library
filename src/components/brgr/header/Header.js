@@ -260,7 +260,10 @@ export default function CustomNavbar({
                 alignItems: "center",
                 justifyContent: "center",
               }}
-              onClick={actions.handleOpenCart}
+              onClick={()=> {
+                if(!previewMode){
+                  actions.handleOpenCart
+                }}}
             >
               {states?.cardItems?.items?.length || 0}
             </Box>
