@@ -1,175 +1,107 @@
+'use client';
+
 import React from "react";
-import { Typography, Box, Link as MUILink } from "@mui/material";
-// import NextLink from "next/link";
-// import { useRouter } from "next/router";
+import { Typography, Box, Link } from "@mui/material";
 
 export default function CustomFooter({
   themeColors,
-  actions,
   prop,
   styles,
-  states,
-  globalComponentStyles, 
-  previewMode = false,
+  globalComponentStyles,
+  previewMode, 
+  inFranchise = false
 }) {
-  // const router = typeof window !== "undefined" ? useRouter() : null;
+  const linksArray = prop?.editable?.links?.value || [];
 
-  const linkData = prop?.editable?.link?.value || {};
-  const faqType = linkData.type;
-  const faqUrl = linkData.url || "#";
-  const faqName = linkData.name || "Faqs";
-
-  // const handleFaqClick = (e) => {
-  //   if (faqType === "page" && faqUrl && router) {
-  //     e.preventDefault();
-  //     router.push(faqUrl);
-  //   }
-  // };
-
-  const getFooterTypographyStyles = {
+  const getFooterStyles = (type) => ({
     color:
-      styles?.FooterTextColor?.value !== ""
-        ? styles?.FooterTextColor?.value
-        : globalComponentStyles?.Text?.color?.value !== ""
-        ? globalComponentStyles?.Text?.color?.value
-        : themeColors?.FooterTextColor?.value,
-
+      styles?.[type + "Color"]?.value ||
+      globalComponentStyles?.Text?.color?.value ||
+      themeColors?.[type + "Color"]?.value,
     fontSize:
-      styles?.FooterTextSize?.value !== 0
-        ? styles?.FooterTextSize?.value
-        : globalComponentStyles?.Text?.size?.value !== 0
-        ? globalComponentStyles?.Text?.size?.value
-        : themeColors?.FooterTextSize?.value,
-
+      styles?.[type + "Size"]?.value ||
+      globalComponentStyles?.Text?.size?.value ||
+      themeColors?.[type + "Size"]?.value,
     fontFamily:
-      styles?.FooterTextFont?.value !== ""
-        ? styles?.FooterTextFont?.value
-        : globalComponentStyles?.Text?.fontFamily?.value !== ""
-        ? globalComponentStyles?.Text?.fontFamily?.value
-        : themeColors?.FooterTextFont?.value,
-
+      styles?.[type + "Font"]?.value ||
+      globalComponentStyles?.Text?.fontFamily?.value ||
+      themeColors?.[type + "Font"]?.value,
     fontStyle:
-      styles?.FooterTextStyle?.value !== ""
-        ? styles?.FooterTextStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value !== ""
-        ? globalComponentStyles?.Text?.fontWeight?.value
-        : themeColors?.FooterTextStyle?.value,
-  };
-
-  const getFooterLinkStyles = {
-    color:
-      styles?.FooterLinkColor?.value !== ""
-        ? styles?.FooterLinkColor?.value
-        : globalComponentStyles?.Text?.color?.value !== ""
-        ? globalComponentStyles?.Text?.color?.value
-        : themeColors?.FooterLinkColor?.value,
-
-    fontSize:
-      styles?.FooterLinkSize?.value !== 0
-        ? styles?.FooterLinkSize?.value
-        : globalComponentStyles?.Text?.size?.value !== 0
-        ? globalComponentStyles?.Text?.size?.value
-        : themeColors?.FooterLinkSize?.value,
-
-    fontFamily:
-      styles?.FooterLinkFont?.value !== ""
-        ? styles?.FooterLinkFont?.value
-        : globalComponentStyles?.Text?.fontFamily?.value !== ""
-        ? globalComponentStyles?.Text?.fontFamily?.value
-        : themeColors?.FooterLinkFont?.value,
-
-    fontStyle:
-      styles?.FooterLinkStyle?.value !== ""
-        ? styles?.FooterLinkStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value !== ""
-        ? globalComponentStyles?.Text?.fontWeight?.value
-        : themeColors?.FooterLinkStyle?.value,
-  };
+      styles?.[type + "Style"]?.value ||
+      globalComponentStyles?.Text?.fontWeight?.value ||
+      themeColors?.[type + "Style"]?.value,
+  });
 
   return (
     <Box
       style={{
         width: "100%",
-        paddingBottom: "4rem",
-        paddingTop: "4rem",
+        padding: "4rem 0",
         backgroundColor:
-          styles?.FooterBackgroundColor?.value !== ""
-            ? styles?.FooterBackgroundColor?.value
-            : themeColors?.FooterBackgroundColor?.value,
+          styles?.FooterBackgroundColor?.value ||
+          themeColors?.FooterBackgroundColor?.value,
         display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-evenly",
+        flexDirection: "row",
         alignItems: "center",
-        padding: "25px 15px",
+        flexWrap: "wrap",
+        gap: "8px",
         minHeight: "280px",
-        color: styles?.FooterTextColor?.value || themeColors?.FooterTextColor?.value,
+        padding: "25px 15px",
       }}
     >
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "8px",
-          color: "#acacab",
-          fontSize: "14px",
-        }}
+      <Typography
+        variant="body2"
+        component="span"
+        sx={getFooterStyles("FooterText")}
       >
-        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
-          Powered by
-        </Typography>
+        Powered by
+      </Typography>
 
-        <MUILink
-          href="#"
-          color="inherit"
-          underline="hover"
-          style={{ fontWeight: "bold" }}
-          sx={{ ...getFooterLinkStyles }}
-        >
-          Egora
-        </MUILink>
+      <Link
+        href="#"
+        color="inherit"
+        underline="hover"
+        sx={getFooterStyles("FooterLink")}
+        style={{ fontWeight: "bold" }}
+      >
+        Egora
+      </Link>
 
-        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
-          |
-        </Typography>
+      {/* Render dynamic links */}
+      {linksArray.map((link, index) => (
+  <React.Fragment key={index}>
+    <Typography
+      variant="body2"
+      component="span"
+      sx={getFooterStyles("FooterText")}
+    >
+      |
+    </Typography>
 
-        <MUILink
-          href="#"
-          color="inherit"
-          underline="hover"
-          sx={{ ...getFooterLinkStyles }}
-        >
-          Privacy Policy
-        </MUILink>
-
-        <Typography variant="body2" component="span" sx={{ ...getFooterTypographyStyles }}>
-          |
-        </Typography>
-
-        {/* {faqType === "page" ? (
-          <NextLink href={faqUrl || "#"} passHref legacyBehavior>
-            <MUILink
-              sx={{ ...getFooterLinkStyles }}
-              color="inherit"
-              underline="hover"
-            >
-              {faqName}
-            </MUILink>
-          </NextLink>
-        ) : (
-          <MUILink
-            href={faqUrl || "#"}
-            onClick={faqType === "page" ? handleFaqClick : undefined}
-            sx={{ ...getFooterLinkStyles }}
-            color="inherit"
-            underline="hover"
-            target={faqType === "url" ? "_blank" : undefined}
-            rel={faqType === "url" ? "noopener noreferrer" : undefined}
-          >
-            {faqName}
-          </MUILink>
-        )} */}
-      </Box>
+    {previewMode ? (
+      <Typography
+        variant="body2"
+        component="span"
+        sx={getFooterStyles("FooterLink")}
+        style={{ textDecoration: "underline", cursor: "default" }}
+      >
+        {link.name}
+      </Typography>
+    ) : (
+      <Link
+        href={link.type === "url" ? link.url : `/${link.url}`}
+        color="inherit"
+        underline="hover"
+        sx={getFooterStyles("FooterLink")}
+        target={link.type === "url" ? "_blank" : "_self"}
+        rel={link.type === "url" ? "noopener noreferrer" : undefined}
+      >
+        {link.name}
+      </Link>
+    )}
+  </React.Fragment>
+))}
     </Box>
   );
 }
+
