@@ -241,6 +241,7 @@ export default function CustomNavbar({
               states={states}
               layout={layout}
               globalComponentStyles={globalComponentStyles}
+              previewMode={false}
             />
             <Box
               style={{

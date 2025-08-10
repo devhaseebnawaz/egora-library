@@ -37,11 +37,11 @@ export default function AnnouncementsBanner({ themeColors, actions, prop, styles
         <Box
             style={{
                 width: '100%',
-                padding: '50px 0',
+                padding: '5px 0',
                 fontWeight: '500 !important',
                 fontSize: '14px',
                 margin: '0 auto',
-                height: '345px',
+                height: '30px',
                 overflowY: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',

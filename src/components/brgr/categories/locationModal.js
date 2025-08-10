@@ -55,14 +55,19 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
         actions.handleSelectedLocation(states.latLong)
     }
     const content = (
-        <Box sx={modalStyle}>
-            {/* Logo */}
+        <Box >
             <Box
                 sx={{
-                    position: "absolute",
-                    top: "10px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
+                    ...(!previewMode
+                        ? {
+                            position: "absolute",
+                            top: "10px",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                          }
+                        : {
+                            margin: "0 auto",
+                          }),
                     width: "80px",
                     height: "80px",
                     borderRadius:
@@ -199,7 +204,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                     fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== ""
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}`
                         : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value}`,
-                        
+
                 }}
             >
                 Please select your location
@@ -427,11 +432,34 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
 
     return previewMode ? (
-        <Box>{content}</Box>
+        <Box
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <Box
+                sx={{
+                    width: 500,
+                    backgroundColor: "#fff",
+                    borderRadius: "20px",
+                    boxShadow: 24,
+                    padding: "32px 24px 24px",
+                    border: "2px solid #e0e0e0",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+
+            >{content}</Box>
+        </Box>
     ) : (
         <>
             <Modal open={openModal}>
-                {content}
+                <Box sx={modalStyle}>
+                    {content}
+                </Box>
             </Modal>
             <RefineLocationModal
                 open={states?.refineModalOpen}

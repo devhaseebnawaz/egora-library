@@ -293,11 +293,22 @@ export default function ItemDetailModal({
         backgroundColor: themeColors?.ItemDetailModalBackgroundColor
           || styles?.ItemDetailModalBackgroundColor
           || '#fff',
+        position: 'relative'
       }}
     >
-      {/* Close Button */}
 
-      <Box style={{ display: 'flex', gap: 8 }}>
+      <Box style={{
+        ...(previewMode
+          ? {
+            position: 'absolute',
+            right: '0px',
+            top: '0px',
+          }
+          : {
+
+          }),
+
+      }}>
         <IconButton
           onClick={() => {
             if (!previewMode) {
@@ -310,9 +321,17 @@ export default function ItemDetailModal({
             color: '#fff',
             width: 36,
             height: 36,
-            position: 'absolute',
-            right: '20px',
-            top: '20px',
+            ...(!previewMode
+              ? {
+                position: 'absolute',
+                right: '20px',
+                top: '20px',
+              }
+              : {
+                margin: "0 auto",
+              }),
+
+
             zIndex: 9999,
           }}
           onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
@@ -323,7 +342,6 @@ export default function ItemDetailModal({
       </Box>
 
 
-      {/* Left Image Section */}
       <Box
         style={{
           width: '45%',
@@ -356,10 +374,8 @@ export default function ItemDetailModal({
         />
       </Box>
 
-      {/* Divider */}
       <Box style={{ width: '1px', backgroundColor: '#e0e0e0' }} />
 
-      {/* Right Detail Section */}
       <Box
         style={{
           width: '54%',
@@ -392,7 +408,6 @@ export default function ItemDetailModal({
           Rs. {states.itemForDetailedModal.price}
         </Typography>
 
-        {/* Variants & Options */}
         <CardContent sx={{ padding: "0" }}>
           <FormProvider methods={methods}>
             <Stack spacing={1}>
@@ -434,7 +449,6 @@ export default function ItemDetailModal({
           </FormProvider>
         </CardContent>
 
-        {/* Quantity & Add to Cart */}
 
         <Box
           style={{
@@ -529,7 +543,25 @@ export default function ItemDetailModal({
 
 
   return previewMode ? (
-    <Box>{content}</Box>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: '90%',
+          backgroundColor: "#fff",
+          borderRadius: "20px",
+          boxShadow: 24,
+          padding: "32px 24px 24px",
+          border: "2px solid #e0e0e0",
+        }}
+
+      >{content}</Box>
+    </Box>
   ) : (
     <Dialog open={states.openCard} onClose={() => {
       actions.handleOpenCard();
