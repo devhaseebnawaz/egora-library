@@ -400,11 +400,11 @@ export default function ItemDetailModal({
           </Typography>
         </Box>
 
-        <Typography color="gray" style={{ marginBottom: 15 }} sx={{ ...getDescriptionStyles }} >
+        <Typography color="gray" style={{ marginBottom: 15, ...getDescriptionStyles }}  >
           {states.itemForDetailedModal.description || ''}
         </Typography>
 
-        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 }} sx={{ ...getHeadingStyles }} >
+        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 , ...getHeadingStyles}} >
           Rs. {states.itemForDetailedModal.price}
         </Typography>
 

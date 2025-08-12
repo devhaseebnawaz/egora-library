@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Paper, Radio, RadioGroup, FormControlLabel } from "@mui/material";
+import { Stack, Paper, Radio, RadioGroup, Box,  FormControlLabel } from "@mui/material";
 import Iconify from "../iconify";
 
 const PAYMENT_OPTIONS = [
@@ -39,7 +39,7 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
 
 
   return (
-    <>
+    <Box sx={{ marginTop: '5px'}}>
       <RadioGroup
         value={states.paymentMethod}
         onChange={(event) => actions.handleSetPaymentMethod(event.target.value)}
@@ -69,7 +69,7 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
           states={states}
         />
       )}
-    </>
+    </Box>
   );
 }
 
