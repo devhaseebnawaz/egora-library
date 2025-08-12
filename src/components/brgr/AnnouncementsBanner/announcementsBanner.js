@@ -46,9 +46,9 @@ export default function AnnouncementsBanner({ themeColors, actions, prop, styles
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                backgroundColor: styles?.TextBlockBackgroundColor?.value != ""
-                    ? styles?.TextBlockBackgroundColor?.value
-                    : themeColors?.TextBlockBackgroundColor?.value,
+                backgroundColor: styles?.AnnouncementsBannerBackgroundColor?.value != ""
+                    ? styles?.AnnouncementsBannerBackgroundColor?.value
+                    : themeColors?.AnnouncementsBannerBackgroundColor?.value,
             }}
         >
             <Typography sx={{...getTextBlockStyles}} >

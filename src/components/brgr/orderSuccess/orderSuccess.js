@@ -12,10 +12,10 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     : `${themeColors?.OrderSuccessThankYouTextColor?.value}`,
         fontSize:
             layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value != 0
-                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value}`
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.OrderSuccessThankYouTextSize?.value}`,
+                    : themeColors?.OrderSuccessThankYouTextSize?.value,
 
         fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value != ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value}`
@@ -39,10 +39,10 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     : `${themeColors?.OrderSuccessOrderPlacedTextColor?.value}`,
         fontSize:
             layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value != 0
-                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value}`
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.OrderSuccessOrderPlacedTextSize?.value}`,
+                    : themeColors?.OrderSuccessOrderPlacedTextSize?.value,
 
         fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value != ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value}`
@@ -66,10 +66,10 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     : `${themeColors?.OrderSuccessHeadingsTextColor?.value}`,
         fontSize:
             layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value != 0
-                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value}`
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.OrderSuccessHeadingsTextSize?.value}`,
+                    : themeColors?.OrderSuccessHeadingsTextSize?.value,
 
         fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextFont?.value != ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextFont?.value}`
@@ -94,10 +94,10 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     : `${themeColors?.OrderSuccessDescriptionTextColor?.value}`,
         fontSize:
             layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value != 0
-                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value}`
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : `${themeColors?.OrderSuccessDescriptionTextSize?.value}`,
+                    : themeColors?.OrderSuccessDescriptionTextSize?.value,
 
         fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextFont?.value != ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextFont?.value}`
@@ -140,7 +140,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
 
                 </Stack>
 
-                <Typography variant="h6" fontWeight={700} sx={{ ...getHeadingsStyles }} >Order No:
+                <Typography  sx={{ ...getHeadingsStyles }} >Order No:
                     <Typography component="span" sx={{ ...getDescriptionStyles }}>
                         {orderId}
                     </Typography>
@@ -163,7 +163,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     href="https://maps.google.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: '#f44336', textDecoration: 'none', fontSize: '14px' }}
+                    style={{ color: '#f44336', textDecoration: 'none', ...getHeadingsStyles }}
                 >
                     <Stack direction="row" alignItems="center" spacing={0.5}>
                        <span sx={{ ...getHeadingsStyles }} >View Location</span>

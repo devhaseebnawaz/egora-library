@@ -262,7 +262,7 @@ export default function CustomNavbar({
               }}
               onClick={()=> {
                 if(!previewMode){
-                  actions.handleOpenCart
+                  actions.handleOpenCart()
                 }}}
             >
               {states?.cardItems?.items?.length || 0}

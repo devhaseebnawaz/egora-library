@@ -113,7 +113,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     const service = serviceFeesObject?.[states.orderType]?.[states.paymentMethod];
     if (isServiceFeesApplicableOnStore && isApplicable(service?.applicable) && serviceFee > 0) {
       return (
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" marginBottom='5px'>
           <Typography sx={{ color: "text.secondary", fontWeight: "600" , ...getHeadingStyles }}>
             Service Fee {service?.type === "Percentage" ? `(${service.amount}%)` : ""}
           </Typography>

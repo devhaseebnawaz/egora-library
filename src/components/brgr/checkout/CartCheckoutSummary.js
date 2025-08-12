@@ -185,7 +185,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                         <Grid item xs={12} md={7}>
                             <Paper sx={{ p: 2 }}>
                                 <Typography fontWeight="bold" sx={{ ...getHeadingStyles }}>
-                                    This is a <span style={{ fontWeight: 700 }}>{states.orderType} ORDER</span>
+                                    This is a <span style={{ fontWeight: 700 }}>{"  "}{states.orderType} order</span>
                                 </Typography>
                                 <Typography mt={1} sx={{ ...getDescriptionStyles }} >You have to collect your order from</Typography>
                                 <Box mt={2}>
@@ -274,11 +274,20 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                                 {states.errorForPlaceOrder}
                                             </Alert>
                                         )}
-                                        <Box textAlign="center" mt={2}>
-                                            <Link href={`/?${franchiseId}`} underline="hover" fontSize={14} >
-                                                ← continue to add more items
-                                            </Link>
-                                        </Box>
+                                         {
+                                            previewMode && <Box textAlign="center" mt={2}>
+                                                <Link underline="hover" fontSize={14} >
+                                                    ← continue to add more items
+                                                </Link>
+                                            </Box>
+                                        } {!previewMode &&
+
+                                            <Box textAlign="center" mt={2}>
+                                                <Link href={`/?${franchiseId}`} underline="hover" fontSize={14} >
+                                                    ← continue to add more items
+                                                </Link>
+                                            </Box>
+                                        }
                                     </>
                                 )
                                     :

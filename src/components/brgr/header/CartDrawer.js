@@ -45,13 +45,11 @@ const CartDrawer = ({
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.cartDrawerHeadingsTextColor?.value,
     fontSize:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize
-        ?.value != 0
-        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize
-          ?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.cartDrawerHeadingsTextSize?.value,
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize?.value != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize?.value
+          : globalComponentStyles?.Text?.size?.value != 0
+            ? globalComponentStyles?.Text?.size?.value
+              : themeColors?.cartDrawerHeadingsTextSize?.value,
 
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextFont
@@ -466,7 +464,6 @@ const CartDrawer = ({
         }}
       >
         <Typography
-          style={{ fontWeight: "bold", fontSize: 20 }}
           sx={{ ...getHeadingStyles }}
         >
           Your Cart
@@ -490,9 +487,7 @@ const CartDrawer = ({
         >
           <Icon icon="mdi:bag-personal-outline" width={80} height={80} />
           <Typography
-            style={{ fontWeight: "bold", marginTop: 16 }}
-            variant="h6"
-            sx={{ ...getSubHeadingStyles }}
+            style={{  marginTop: 16, ...getSubHeadingStyles }}
           >
             Your Cart is Empty
           </Typography>
