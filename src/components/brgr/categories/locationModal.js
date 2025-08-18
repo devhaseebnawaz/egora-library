@@ -392,7 +392,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 backgroundColor: "#333",
                             },
                         }}
-                        disabled={!states.value}
+                        disabled={!states.currentAddress}
                     >
                         Confirm Selection
                     </Button>
