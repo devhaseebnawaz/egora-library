@@ -526,12 +526,12 @@ export default function ItemDetailModal({
             {states.loadingForAddUpdateItemCart ? (
               <CircularProgress size={24} color="inherit" />
             ) : (
-              <>
-                <span>Rs. {states.itemForDetailedModal.price * quantity}</span>
-                <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                  {isItemEdit ? "Update cart" : "Add to Cart"}
-                </span>
-              </>
+                <>
+                  <span>Rs. {(selectedVariant?.price ? selectedVariant.price : states.itemForDetailedModal?.price) * quantity}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    {isItemEdit ? "Update cart" : "Add to Cart"}
+                  </span>
+                </>
             )}
           </Button>
 
