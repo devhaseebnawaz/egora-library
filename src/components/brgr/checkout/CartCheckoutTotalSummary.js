@@ -95,7 +95,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       updatedTotal += Number(serviceFee);
     }
     const platformFee = isPlatformFeeApplicableOnStore ? platformFees:0;
-    const grandTotal = serviceFee + updatedTotal + platformFee + taxAmount + Number(selectedTip);
+    const grandTotal = updatedTotal + platformFee + taxAmount + Number(selectedTip);
     setTotal(grandTotal);
   }, [
     subTotal,
@@ -157,7 +157,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       subTotal: fNumber(subTotal),
       tip: selectedTip === null ? 0 : fNumber(selectedTip),
       serviceFees: fNumber(totalServiceValue),
-      location: "2,2",
+      location: states.latLong ? states.latLong : "2,2",
       platformFees: isPlatformFeeApplicableOnStore ? platformFees:0,
       serviceFeesObject: serviceFeesObj,
     };
