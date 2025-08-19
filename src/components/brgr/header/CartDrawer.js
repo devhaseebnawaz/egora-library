@@ -641,21 +641,6 @@ const CartDrawer = ({
           >
             Checkout
           </Button>
-
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 16,
-              borderRadius: 30,
-              backgroundColor: "#e0e0e0",
-              width: "fit-content",
-              marginLeft: "auto",
-              marginRight: "auto",
-              padding: "4px 8px",
-            }}
-          ></Box>
         </>
       )}
     </Box>

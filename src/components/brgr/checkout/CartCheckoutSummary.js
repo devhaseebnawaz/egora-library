@@ -133,11 +133,6 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
             
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 
-    console.log('states sufi', franchise);
-
-    console.log('canShowPaymentMethods', canShowPaymentMethods)
-
-
     const methods = useForm({
         resolver: yupResolver(UserSchema),
         defaultValues,
