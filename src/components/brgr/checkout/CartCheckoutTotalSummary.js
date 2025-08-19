@@ -90,12 +90,12 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     let updatedTotal = Number(subTotal);
     if (
       isServiceFeesApplicableOnStore &&
-      isApplicable(serviceFeesObject?.[states.orderType]?.[states.method]?.applicable)
+      isApplicable(serviceFeesObject?.[states.orderType]?.[states.paymentMethod]?.applicable)
     ) {
       updatedTotal += Number(serviceFee);
     }
     const platformFee = isPlatformFeeApplicableOnStore ? platformFees:0;
-    const grandTotal = serviceFee + updatedTotal + platformFee + taxAmount + Number(selectedTip);
+    const grandTotal = updatedTotal + platformFee + taxAmount + Number(selectedTip);
     setTotal(grandTotal);
   }, [
     subTotal,
@@ -103,7 +103,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     serviceFee,
     taxAmount,
     selectedTip,
-    states.method,
+    states.paymentMethod,
     serviceFeesObject,
     isServiceFeesApplicableOnStore,
     states.orderType,
@@ -130,19 +130,18 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     if (!cardItems || cardItems.items?.length === 0) return;
   
     const mode = states.orderType;
-    const method = states.method;
   
     let totalServiceValue = 0;
     let serviceFeesObj = {};
   
     if (
       isServiceFeesApplicableOnStore &&
-      isApplicable(serviceFeesObject?.[mode]?.[method]?.applicable)
+      isApplicable(serviceFeesObject?.[mode]?.[states.paymentMethod]?.applicable)
     ) {
       totalServiceValue = Number(serviceFee);
       serviceFeesObj = {
         [mode]: {
-          [method]: serviceFeesObject?.[mode]?.[method],
+          [states.paymentMethod]: serviceFeesObject?.[mode]?.[states.paymentMethod],
         },
       };
     }
@@ -153,18 +152,18 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       total: fNumber(total),
       orderType: mode,
       type: "store",
-      paymentType: method,
+      paymentType: states.paymentMethod,
       tax: fNumber(taxAmount),
       subTotal: fNumber(subTotal),
       tip: selectedTip === null ? 0 : fNumber(selectedTip),
       serviceFees: fNumber(totalServiceValue),
-      location: "2,2",
+      location: states.latLong ? states.latLong : "2,2",
       platformFees: isPlatformFeeApplicableOnStore ? platformFees:0,
       serviceFeesObject: serviceFeesObj,
     };
   
     setOrderData(orderData);
-  }, [ cardItems, total, selectedTip, serviceFee, taxAmount, subTotal, states.method, states.orderType, isServiceFeesApplicableOnStore, serviceFeesObject,
+  }, [ cardItems, total, selectedTip, serviceFee, taxAmount, subTotal, states.paymentMethod, states.orderType, isServiceFeesApplicableOnStore, serviceFeesObject,
   ]);
 
   

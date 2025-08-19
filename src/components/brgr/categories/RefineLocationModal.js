@@ -58,7 +58,7 @@ export default function RefineLocationModal({
                     coords:  states?.markerPosition,
                     address: formattedAddress,
                 });
-
+                actions.updateLocation(formattedAddress)
                 onClose();
             } else {
                 onSave({
