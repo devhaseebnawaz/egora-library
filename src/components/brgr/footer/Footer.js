@@ -47,6 +47,7 @@ export default function CustomFooter({
         gap: "8px",
         minHeight: "280px",
         padding: "25px 15px",
+        justifyContent: "center",
       }}
     >
       <Typography
