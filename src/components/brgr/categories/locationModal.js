@@ -94,7 +94,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
             {/* Content */}
             <Typography
-                variant="h6"
                 align="center"
                 sx={{
                     color:
@@ -183,27 +182,27 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
 
 
                     color:
-                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value !== ""
-                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingColor?.value}`
+                        layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingColor?.value !== ""
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingColor?.value}`
                             : globalComponentStyles?.Text?.color?.value != ""
                                 ? globalComponentStyles?.Text?.color?.value
-                                : `${themeColors?.LocationModalOrderTypeHeadingColor?.value}`,
+                                : `${themeColors?.LocationModalSelectLocationHeadingColor?.value}`,
                     fontSize:
-                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
-                            ? layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value
+                        layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextSize?.value !== 0
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextSize?.value
                             : globalComponentStyles?.Text?.size?.value != 0
                                 ? globalComponentStyles?.Text?.size?.value
-                                : themeColors?.LocationModalOrderTypeHeadingTextSize?.value,
+                                : themeColors?.LocationModalSelectLocationHeadingTextSize?.value,
 
-                    fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
-                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
+                    fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextFont?.value !== 0
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextFont?.value}`
                         : globalComponentStyles?.Text?.fontFamily?.value != ""
                             ? globalComponentStyles?.Text?.fontFamily?.value
-                            : `${themeColors?.LocationModalOrderTypeHeadingTextFont?.value}`,
+                            : `${themeColors?.LocationModalSelectLocationHeadingTextFont?.value}`,
 
-                    fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value !== ""
-                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}`
-                        : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value}`,
+                    fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextStyle?.value !== ""
+                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextStyle?.value}`
+                        : `${themeColors?.LocationModalSelectLocationHeadingTextStyle?.value}`,
 
                 }}
             >
