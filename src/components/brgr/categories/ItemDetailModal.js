@@ -95,7 +95,7 @@ export default function ItemDetailModal({
 
   const methods = useForm();
   const { selectedVenue, choiceGroups, isItemEdit } = states ?? {}
-  const { isOnline } = selectedVenue ?? {}
+  const { isOnlineForStore } = selectedVenue ?? {}
   const [filteredChoiceGroups, setFilteredChoiceGroups] = useState([]);
   const [selectedSauces, setSelectedSauces] = useState({ items: [] });
   const [quantity, setQuantity] = React.useState(1);
@@ -519,7 +519,7 @@ export default function ItemDetailModal({
               backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
               color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
             }}
-            disabled={!isOnline || !areAllRequiredGroupsSelected}
+            disabled={!isOnlineForStore || !areAllRequiredGroupsSelected}
             onClick={() =>
               handleAddItemToCart(states.itemForDetailedModal, quantity, notes)}
           >
