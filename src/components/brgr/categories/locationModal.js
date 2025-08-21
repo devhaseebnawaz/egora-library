@@ -52,7 +52,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
         actions.handleSetSelectedVenue(states.selectedOutlet);
     };
     const handleSelectedLocation = () => {
-        actions.handleSelectedLocation(states.latLong)
+        actions.handleSelectedLocation(states.userLocationLatlong)
     }
     const content = (
         <Box >
@@ -345,7 +345,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 </Typography>
             </Box>)}
 
-            {states?.currentAddress && states?.orderType === "storeDelivery" && <Box
+            {states?.currentLocation && states?.orderType === "storeDelivery" && <Box
                 sx={{
                     // backgroundColor: "#f9f9f9",
                     p: 2,
@@ -356,7 +356,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 }}
             >
                 <Typography sx={{ fontSize: "14px", mb: 0.5 }}>
-                    {states?.currentAddress}
+                    {states.currentLocation}
                 </Typography>
                 <Typography
                     component="span"
@@ -391,7 +391,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 backgroundColor: "#333",
                             },
                         }}
-                        disabled={!states.currentAddress}
+                        disabled={!states.currentLocation}
                     >
                         Confirm Selection
                     </Button>
