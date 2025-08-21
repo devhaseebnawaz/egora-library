@@ -10,7 +10,7 @@ import LocationModal from './components/brgr/categories/locationModal';
 import ItemDetailModal from './components/brgr/categories/ItemDetailModal';
 import CartCheckoutSummary from './components/brgr/checkout/CartCheckoutSummary';
 import OrderSuccessPage from './components/brgr/orderSuccess/orderSuccess';
-import TextBlock from './components/brgr/TextBlock/textBlock';
+import TextBlock from './components/brgr/textBlock/textBlock';
 import AnnouncementsBanner from './components/brgr/AnnouncementsBanner/announcementsBanner';
 import CartDrawer from './components/brgr//header/CartDrawer';
 export { AnnouncementsBanner, CartDrawer, ItemDetailModal,CartCheckoutSummary, TextBlock, OrderSuccessPage, Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock };
