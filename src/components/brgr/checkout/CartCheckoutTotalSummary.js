@@ -6,7 +6,7 @@ import { fNumber } from "../../../utils/formatNumber";
 
 const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData, getDescriptionStyles, getHeadingStyles,  getOrderHeadingStyles }) => {
 
-  const {  cardItems,franchise } = states ?? {};
+  const {  cardItems,franchise,orderType } = states ?? {};
   const { serviceFeesObject, configurations,storeTaxOnCash,storeTaxOnCard,platformFees,deliveryFees } = franchise ?? {};
   const { isServiceFeesApplicableOnStore,isTaxApplicableOnStore,isPlatformFeeApplicableOnStore,isCashAvailableOnPickUp,isCashAvailableOnDelivery,isDeliveryFeeApplicableOnStore } = configurations ?? {};
 
