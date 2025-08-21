@@ -468,7 +468,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 currentCoords={states?.userCoordinates}
                 onSave={({ coords, address }) => {
                     states?.setUserCoordinates(coords);
-                    states?.setCurrentAddress(address);
                 }}
             />
         </>
