@@ -137,9 +137,11 @@ export default function CustomNavbar({
 
                   }}
                 >
-                  {states?.selectedVenue
-                    ? actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressOne}`, truncateLength)
-                    : "Address"}
+                  {states.orderType === "storeDelivery" ?
+                    actions?.handleTruncateText(states?.currentLocation, truncateLength) :
+                    states.orderType === "storePickUp" ?
+                      actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressTwo}`, truncateLength)
+                      : "Address"}
                 </Typography>
               </Box>
             </Box>
