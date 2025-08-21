@@ -401,12 +401,12 @@ const CartDrawer = ({
   const cardItems = items;
 
   const { orderType, franchise } = states ?? {};
-  const { serviceFeesObject, configurations, storeTaxOnCash, platformFees } =
-    franchise ?? {};
+  const { serviceFeesObject, configurations, storeTaxOnCash, platformFees, deliveryFees } = franchise ?? {};
   const {
     isServiceFeesApplicableOnStore,
     isTaxApplicableOnStore,
     isPlatformFeeApplicableOnStore,
+    isDeliveryFeeApplicableOnStore
   } = configurations ?? {};
   const taxRate = isTaxApplicableOnStore ? storeTaxOnCash / 100 : 0;
 
@@ -583,6 +583,18 @@ const CartDrawer = ({
               </Box>
             )}
             {renderServiceFee()}
+            {isDeliveryFeeApplicableOnStore && orderType==="storeDelivery" && (
+              <Box
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Typography sx={{ ...getPriceTextStyles }}>
+                  Delivery Fee
+                </Typography>
+                <Typography sx={{ ...getPriceTextStyles }}>
+                  Rs. {deliveryFees}
+                </Typography>
+              </Box>
+            )}
 
             {isTaxApplicableOnStore && (
               <Box
@@ -616,6 +628,9 @@ const CartDrawer = ({
                     Number(serviceFee) +
                     (isPlatformFeeApplicableOnStore
                       ? Number(platformFees)
+                      : 0) +
+                   ((isDeliveryFeeApplicableOnStore && orderType==="storeDelivery")
+                      ? Number(deliveryFees)
                       : 0)
                   ).toFixed(2)
                 )}

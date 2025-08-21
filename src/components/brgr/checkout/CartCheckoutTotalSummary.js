@@ -7,8 +7,8 @@ import { fNumber } from "../../../utils/formatNumber";
 const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData, getDescriptionStyles, getHeadingStyles,  getOrderHeadingStyles }) => {
 
   const {  cardItems,franchise } = states ?? {};
-  const { serviceFeesObject, configurations,storeTaxOnCash,storeTaxOnCard,platformFees } = franchise ?? {};
-  const { isServiceFeesApplicableOnStore,isTaxApplicableOnStore,isPlatformFeeApplicableOnStore,isCashAvailableOnPickUp,isCashAvailableOnDelivery } = configurations ?? {};
+  const { serviceFeesObject, configurations,storeTaxOnCash,storeTaxOnCard,platformFees,deliveryFees } = franchise ?? {};
+  const { isServiceFeesApplicableOnStore,isTaxApplicableOnStore,isPlatformFeeApplicableOnStore,isCashAvailableOnPickUp,isCashAvailableOnDelivery,isDeliveryFeeApplicableOnStore } = configurations ?? {};
 
   const [subTotal, setSubTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -95,7 +95,8 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       updatedTotal += Number(serviceFee);
     }
     const platformFee = isPlatformFeeApplicableOnStore ? platformFees:0;
-    const grandTotal = updatedTotal + platformFee + taxAmount + Number(selectedTip);
+    const deliveryFee = (isDeliveryFeeApplicableOnStore && orderType ==="storeDelivery") ? deliveryFees : 0;
+    const grandTotal = Number(updatedTotal) + Number(platformFee) + Number(deliveryFee) + Number(taxAmount) + Number(selectedTip);
     setTotal(grandTotal);
   }, [
     subTotal,
@@ -107,6 +108,8 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     serviceFeesObject,
     isServiceFeesApplicableOnStore,
     states.orderType,
+    platformFees,
+    deliveryFees
   ]);
 
   const renderServiceFee = () => {
@@ -159,6 +162,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       serviceFees: fNumber(totalServiceValue),
       location: states.latLong ? states.latLong : "2,2",
       platformFees: isPlatformFeeApplicableOnStore ? platformFees:0,
+      deliveryFees: (isDeliveryFeeApplicableOnStore && orderType==="storeDelivery") ? deliveryFees :0,
       serviceFeesObject: serviceFeesObj,
     };
   
@@ -190,6 +194,13 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
            )}
 
             {renderServiceFee()}
+
+          {isDeliveryFeeApplicableOnStore && orderType==="storeDelivery" && (
+            <Stack direction="row" justifyContent="space-between">
+              <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Delivery Fee</Typography>
+              <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {deliveryFees}</Typography>
+            </Stack>
+           )}
 
             {discount > 0 && (
               <Stack direction="row" justifyContent="space-between">
