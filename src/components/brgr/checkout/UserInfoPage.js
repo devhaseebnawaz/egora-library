@@ -5,7 +5,6 @@ import { RHFTextField } from "../../../components/hook-form";
 const CountryCode = process.env.NEXT_PUBLIC_COUNTRY_CODE;
 
 export default function UserInfoPage({states}) {
-
     const { orderType } = states ?? {}
 
     return (
