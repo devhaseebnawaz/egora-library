@@ -11,19 +11,6 @@ import CartItems from '../header/CartItems';
 import CartCheckoutTotalSummary from './CartCheckoutTotalSummary';
 import PaymentMethods from './PaymentMethods';
 
-const UserSchema = Yup.object().shape({
-    firstName: Yup.string().required("First name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
-    lastName: Yup.string().required("Last name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
-    phone: Yup.string().required("Phone is required").matches(/^\d+$/, "Only numbers allowed").length(10, "10 digits required"),
-    email: Yup.string().required("Email is required").email("Invalid email"),
-});
-
-const defaultValues = {
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-};
 
 const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
     const getDescriptionStyles = {
@@ -133,6 +120,38 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
             
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 
+    const UserSchema = Yup.object().shape({
+    firstName: Yup.string().required("First name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
+    lastName: Yup.string().required("Last name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
+    phone: Yup.string().required("Phone is required").matches(/^\d+$/, "Only numbers allowed").length(10, "10 digits required"),
+    email: Yup.string().required("Email is required").email("Invalid email"),
+    address: Yup.object().shape({
+      street: Yup.string().when([], {
+        is: () => orderType === "storeDelivery",
+        then: (schema) => schema.required("Street is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+      area: Yup.string().when([], {
+        is: () => orderType === "storeDelivery",
+        then: (schema) => schema.required("Area is required"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
+      city: Yup.string(),
+    }),
+    });
+
+   const defaultValues = {
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    address: {
+        street: "",
+        area: "",
+        city:  states.selectedVenue?.city ?? "",
+    },   
+    };
+
     const methods = useForm({
         resolver: yupResolver(UserSchema),
         defaultValues,
@@ -211,7 +230,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                 <Typography fontWeight="bold" mb={2} sx={{ ...getHeadingStyles }}  >
                                     JUST A LAST STEP, PLEASE FILL YOUR INFORMATION BELOW
                                 </Typography>
-                                <UserInfoPage />
+                                <UserInfoPage  states={states}/>
                             </Paper>
                         </Grid>
 
