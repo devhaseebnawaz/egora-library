@@ -116,7 +116,15 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                 textTransform: "none",
                                 backgroundColor: states.selectedCategoryItem === cat ? "orange" : "transparent", 
                             }}
-                            onMouseOver={(e) => { if (states.selectedCategoryItem !== cat) e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)"; }}
+                            onMouseOver={(e) => {
+                                if (states.selectedCategoryItem !== cat) {
+                                  const bgColor = styles?.CategoryCarouselHoverColor?.value !== ""
+                                    ? styles.CategoryCarouselHoverColor.value
+                                    : themeColors?.CategoryCarouselHoverColor?.value || "transparent";
+                              
+                                  e.currentTarget.style.backgroundColor = bgColor;
+                                }
+                              }}
                             onMouseOut={(e) => { if (states.selectedCategoryItem !== cat) e.currentTarget.style.backgroundColor = "transparent"; }}
                             onClick={() => handleCategoryClick(cat)}
                         >

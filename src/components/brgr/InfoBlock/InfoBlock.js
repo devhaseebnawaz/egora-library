@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography,Container } from '@mui/material';
 
 export default function InfoBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
@@ -64,6 +64,7 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
     };
 
     return (
+        <Container>
         <Box
             style={{
                 width: '100%',
@@ -89,5 +90,6 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
                 {prop.editable.description.value}
             </Typography>
         </Box>
+        </Container>
     );
 }
