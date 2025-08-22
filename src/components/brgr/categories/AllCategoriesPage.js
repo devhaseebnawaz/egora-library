@@ -64,47 +64,47 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
 
   // Auto-update selectedCategoryItem when scrolling
   
- useEffect(() => {
-  let observer = null;
+//  useEffect(() => {
+//   let observer = null;
 
-  const observe = () => {
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const visibleCategory = entry.target.getAttribute("data-category-name");
-            if (
-              visibleCategory &&
-              visibleCategory !== states.selectedCategoryItem
-            ) {
-              states.setSelectedCategoryItem(visibleCategory);
-            }
-          }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.5, // you can tweak this
-      }
-    );
+//   const observe = () => {
+//     observer = new IntersectionObserver(
+//       (entries) => {
+//         entries.forEach((entry) => {
+//           if (entry.isIntersecting) {
+//             const visibleCategory = entry.target.getAttribute("data-category-name");
+//             if (
+//               visibleCategory &&
+//               visibleCategory !== states.selectedCategoryItem
+//             ) {
+//               states.setSelectedCategoryItem(visibleCategory);
+//             }
+//           }
+//         });
+//       },
+//       {
+//         root: null,
+//         threshold: 0.5, // you can tweak this
+//       }
+//     );
 
-    Object.values(categoryRefs.current).forEach((ref) => {
-      if (ref?.current) {
-        observer.observe(ref.current);
-      }
-    });
-  };
+//     Object.values(categoryRefs.current).forEach((ref) => {
+//       if (ref?.current) {
+//         observer.observe(ref.current);
+//       }
+//     });
+//   };
 
-  // Delay observer until after DOM paint and scroll settles
-  const timeout = setTimeout(() => {
-    observe();
-  }, 200); // 200ms is usually safe
+//   // Delay observer until after DOM paint and scroll settles
+//   const timeout = setTimeout(() => {
+//     observe();
+//   }, 200); // 200ms is usually safe
 
-  return () => {
-    clearTimeout(timeout);
-    if (observer) observer.disconnect();
-  };
-}, [products]);
+//   return () => {
+//     clearTimeout(timeout);
+//     if (observer) observer.disconnect();
+//   };
+// }, [products]);
 
 
   const getCategoryNameStyles = {
