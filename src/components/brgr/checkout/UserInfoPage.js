@@ -9,7 +9,7 @@ export default function UserInfoPage({states}) {
 
     return (
         <Grid container spacing={2} justifyContent="center">
-            <Grid item xs={12} sm={10}>
+            <Grid item xs={12} sm={12}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <RHFTextField name="firstName" label="First Name" fullWidth />
