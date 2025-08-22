@@ -7,7 +7,6 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
 
     const theme = useTheme();
     const isMediumScreen = useMediaQuery(theme.breakpoints.down("md")); 
-
     const getInfoBlockTitleStyles = {
         color:
             styles?.InfoBlockTitleColor?.value !== ""
