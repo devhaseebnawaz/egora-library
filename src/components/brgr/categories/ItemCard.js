@@ -167,7 +167,7 @@ export default function ItemCard({
             variant="body1"
             style={{ color: "#555", marginBottom: "16px" }}
           >
-            {item.type}
+            {item.description}
           </Typography>
           <Box style={{ marginBottom: "16px" }}>
             <Button
