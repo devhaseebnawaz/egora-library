@@ -397,9 +397,8 @@ const CartDrawer = ({
           : themeColors?.cartDrawerBorderRadius?.value,
   };
 
-  const { items } = states.cardItems ?? [];
-  const cardItems = items;
-
+ 
+  const cardItems = states.cardItems?.items ?? [];
   const { orderType, franchise } = states ?? {};
   const { serviceFeesObject, configurations, storeTaxOnCash, platformFees, deliveryFees } = franchise ?? {};
   const {
