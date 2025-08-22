@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Card, Typography, Box } from "@mui/material";
+import { Card, Typography, Box ,useMediaQuery} from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
+import { getFontSize } from "../../../utils/fontsize";
 
 export default function ItemCard ({ item, themeColors, styles, actions, states, globalComponentStyles }) {
- 
+  const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
   const getItemNameStyles = {
     color:
       styles?.PopularMenuSectionItemNameTextColor?.value !== ""
@@ -13,11 +15,11 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
           : themeColors?.PopularMenuSectionItemNameTextColor?.value,
 
     fontSize:
-      styles?.PopularMenuSectionItemNameTextSize?.value != 0
+      getFontSize(styles?.PopularMenuSectionItemNameTextSize?.value != 0
         ? styles?.PopularMenuSectionItemNameTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.PopularMenuSectionItemNameTextSize?.value,
+          : themeColors?.PopularMenuSectionItemNameTextSize?.value,smDown,16),
 
     fontFamily:
       styles?.PopularMenuSectionItemNameTextFont?.value !== ""
@@ -43,11 +45,11 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
           : themeColors?.PopularMenuSectionPriceTextColor?.value,
 
     fontSize:
-      styles?.PopularMenuSectionPriceTextSize?.value != 0
+      getFontSize(styles?.PopularMenuSectionPriceTextSize?.value != 0
         ? styles?.PopularMenuSectionPriceTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.PopularMenuSectionPriceTextSize?.value,
+          : themeColors?.PopularMenuSectionPriceTextSize?.value,smDown,16),
 
     fontFamily:
       styles?.PopularMenuSectionPriceTextFont?.value !== ""

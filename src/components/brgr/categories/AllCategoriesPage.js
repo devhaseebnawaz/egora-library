@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Grid, Typography, Container, Box } from "@mui/material";
+import { Grid, Typography, Container, Box,useMediaQuery } from "@mui/material";
 import { categories } from "../data/categories";
 import Banner from "./Banner";
 import CategoryLayout from "./CategoryLayout";
 import ItemCard from "./ItemCard";
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from "../../../utils/fontsize";
 
 export default function AllCategoriesPage({ prop, actions, styles, states, themeColors, globalComponentStyles }) {
+  const theme = useTheme();
+  const mdDown = useMediaQuery(theme.breakpoints.down("md")); 
   const categoryRefs = useRef({});
 
   const [products, setProducts] = useState(prop.static.displaycategories || []);
@@ -116,11 +120,11 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
         : themeColors?.AllCategoriesCategoryTextColor?.value,
 
     fontSize:
-      styles?.AllCategoriesCategoryTextSize?.value != 0
+      getFontSize(styles?.AllCategoriesCategoryTextSize?.value != 0
         ? styles?.AllCategoriesCategoryTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
         ? globalComponentStyles?.Text?.size?.value
-        : themeColors?.AllCategoriesCategoryTextSize?.value,
+        : themeColors?.AllCategoriesCategoryTextSize?.value,mdDown,20),
 
     fontFamily:
       styles?.AllCategoriesCategoryTextFont?.value !== ""

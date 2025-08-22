@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
-import { Box, IconButton, Button } from "@mui/material";
+import { Box, IconButton, Button,useMediaQuery } from "@mui/material";
 import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from "../../../utils/fontsize";
 
 export default function CategoryCarousel({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
-
+    const theme = useTheme();
+    const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
     useEffect(() => {
         const el = states?.scrollRef?.current;
         if (el) {
@@ -90,11 +93,11 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                 ? globalComponentStyles?.Text?.color?.value : 
                                   themeColors?.CategoryCarouselTextColor?.value,
 
-                                fontSize: styles?.CategoryCarouselTextSize?.value != ""
+                                fontSize: getFontSize(styles?.CategoryCarouselTextSize?.value != ""
                                     ? styles?.CategoryCarouselTextSize?.value
                                     : globalComponentStyles?.Text?.size?.value != "" 
                                     ? globalComponentStyles?.Text?.size?.value : 
-                                      themeColors?.CategoryCarouselTextSize?.value,
+                                      themeColors?.CategoryCarouselTextSize?.value,smDown,16),
 
                                 fontFamily: styles?.CategoryCarouselTextFont?.value != ""
                                     ? styles?.CategoryCarouselTextFont?.value
@@ -110,8 +113,8 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
 
                                 fontWeight: 600,
                                 padding: "8px 16px",
-                                minWidth: "120px",
-                                maxWidth: "160px",
+                                // minWidth: "120px",
+                                // maxWidth: "160px",
                                 borderRadius: "8px",
                                 textTransform: "none",
                                 backgroundColor: states.selectedCategoryItem === cat ? "orange" : "transparent", 
