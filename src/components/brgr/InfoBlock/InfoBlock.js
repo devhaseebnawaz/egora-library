@@ -1,7 +1,12 @@
 import React from 'react';
-import { Box, Typography,Container } from '@mui/material';
+import { Box, Typography,Container,useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from 'src/utils/fontsize';
 
 export default function InfoBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
+
+     const theme = useTheme();
+    const isMediumScreen = useMediaQuery(theme.breakpoints.down("md")); 
 
     const getInfoBlockTitleStyles = {
         color:
@@ -12,11 +17,11 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
                     : themeColors?.InfoBlockTitleColor?.value,
     
         fontSize:
-            styles?.InfoBlockTitleSize?.value != 0
+            getFontSize(styles?.InfoBlockTitleSize?.value != 0
                 ? styles?.InfoBlockTitleSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.InfoBlockTitleSize?.value,
+                    : themeColors?.InfoBlockTitleSize?.value,isMediumScreen,22),
     
         fontFamily:
             styles?.InfoBlockTitleFont?.value !== ""
@@ -42,11 +47,11 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
                     : themeColors?.InfoBlockDescriptionColor?.value,
     
         fontSize:
-            styles?.InfoBlockDescriptionSize?.value != 0
+            getFontSize(styles?.InfoBlockDescriptionSize?.value != 0
                 ? styles?.InfoBlockDescriptionSize?.value
                 : globalComponentStyles?.Text?.size?.value != 0
                     ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.InfoBlockDescriptionSize?.value,
+                    : themeColors?.InfoBlockDescriptionSize?.value,isMediumScreen,14),
     
         fontFamily:
             styles?.InfoBlockDescriptionFont?.value !== ""
