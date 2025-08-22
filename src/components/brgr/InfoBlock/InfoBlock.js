@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography,Container,useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from 'src/utils/fontsize';
+import { getFontSize } from '../../../utils/fontsize';
 
 export default function InfoBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
