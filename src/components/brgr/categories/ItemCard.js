@@ -137,6 +137,9 @@ export default function ItemCard({
           boxShadow: "0 8px 24px rgba(0,0,0,0.1)",
           padding: 0,
           cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           transition: "transform 0.3s ease, box-shadow 0.3s ease",
           "&:hover": {
             transform: "scale(1.03)",
@@ -159,47 +162,68 @@ export default function ItemCard({
           style={{ height: "250px", objectFit: "cover" }}
         />
 
-        <CardContent style={{ textAlign: "center" }}>
-          <Typography variant="h6" style={{ fontWeight: "bold", ...getItemNameStyles }}>
-            {item.name}
-          </Typography>
-          <Typography
-            variant="body1"
-            style={{ color: "#555", marginBottom: "16px" }}
-          >
-            {item.description}
-          </Typography>
-          <Box style={{ marginBottom: "16px" }}>
-            <Button
-              disableRipple
-              style={{
-                // backgroundColor: "#f4e3d3",
-                // color: "#000",
-                padding: "4px 16px",
-                // fontWeight: "bold",
-                // borderRadius: "12px",
-                textTransform: "none",
-                boxShadow: "none",
-                ...getPriceTagStyles
+        <CardContent
+          sx={{
+            textAlign: "center",
+            flexGrow: 1, // equal height maintain
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", ...getItemNameStyles }}
+            >
+              {item.name}
+            </Typography>
+
+            {/* Description with 3-line ellipsis */}
+            <Typography
+              variant="body1"
+              sx={{
+                color: "#555",
+                marginBottom: "16px",
+                display: "-webkit-box",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                minHeight: "4.5em", // ensures height same even if text is short
               }}
             >
-              Rs. {item.price}
-            </Button>
+              {item.description}
+            </Typography>
           </Box>
 
-          <Button
-            variant="contained"
-            style={{
-              // color: "#fff",
-              // borderRadius: "20px",
-              padding: "8px 32px",
-              fontWeight: "bold",
-              textTransform: "none",
-              ...getCartAddButtonStyles
-            }}
-          >
-            Add to Cart
-          </Button>
+          <Box>
+            <Box sx={{ marginBottom: "16px" }}>
+              <Button
+                disableRipple
+                sx={{
+                  padding: "4px 16px",
+                  textTransform: "none",
+                  boxShadow: "none",
+                  ...getPriceTagStyles,
+                }}
+              >
+                Rs. {item.price}
+              </Button>
+            </Box>
+
+            <Button
+              variant="contained"
+              sx={{
+                padding: "8px 32px",
+                fontWeight: "bold",
+                textTransform: "none",
+                ...getCartAddButtonStyles,
+              }}
+            >
+              Add to Cart
+            </Button>
+          </Box>
         </CardContent>
       </Card>
 
