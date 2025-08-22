@@ -5,7 +5,7 @@ import { getFontSize } from 'src/utils/fontsize';
 
 export default function InfoBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
-     const theme = useTheme();
+    const theme = useTheme();
     const isMediumScreen = useMediaQuery(theme.breakpoints.down("md")); 
 
     const getInfoBlockTitleStyles = {
