@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Typography, Stack, Card, CardContent, Divider, Button, Chip } from '@mui/material';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
+     layout = layout?.json ? layout?.json : layout
 
     const getThankYouStyles = {
         color:

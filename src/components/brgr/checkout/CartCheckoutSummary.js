@@ -13,6 +13,7 @@ import PaymentMethods from './PaymentMethods';
 
 
 const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
+    layout = layout?.json ? layout?.json : layout
     const getDescriptionStyles = {
         color:
             layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextColor?.value !== ""

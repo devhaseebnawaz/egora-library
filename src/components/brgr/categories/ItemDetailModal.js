@@ -38,7 +38,7 @@ export default function ItemDetailModal({
   globalComponentStyles,
   layout
 }) {
-
+ layout = layout?.json ? layout?.json : layout
   const getHeadingStyles = {
     color:
       layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextColor?.value !== ""
