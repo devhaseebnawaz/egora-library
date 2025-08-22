@@ -187,7 +187,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Box p={10} sx={{ backgroundColor: '#f5f5f5' }}>
+            <Box sx={{  py: { xs: 10, sm: 10, md: 10 }, px: { xs: 2, sm: 2, md: 10 }, backgroundColor: '#f5f5f5'}} >
                 <Grid container spacing={3} justifyContent="center">
                     {states.logoUrl &&
                         <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
