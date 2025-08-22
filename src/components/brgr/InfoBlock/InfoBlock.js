@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Typography,Container,useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from 'src/utils/fontsize';
+import { getFontSize } from '../../../utils/fontsize';
 
 export default function InfoBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
-     const theme = useTheme();
+    const theme = useTheme();
     const isMediumScreen = useMediaQuery(theme.breakpoints.down("md")); 
-
     const getInfoBlockTitleStyles = {
         color:
             styles?.InfoBlockTitleColor?.value !== ""
@@ -74,6 +73,7 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
             style={{
                 width: '100%',
                 padding: '50px 0',
+                maxWidth:'925px',
                 fontWeight: '500 !important',
                 fontSize: '14px',
                 margin: '0 auto',
