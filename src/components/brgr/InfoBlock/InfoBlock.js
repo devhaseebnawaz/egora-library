@@ -74,6 +74,7 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
             style={{
                 width: '100%',
                 padding: '50px 0',
+                maxWidth:'925px',
                 fontWeight: '500 !important',
                 fontSize: '14px',
                 margin: '0 auto',
