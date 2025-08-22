@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Typography, Container } from "@mui/material";
+import { Grid, Box, Typography, Container ,useMediaQuery} from "@mui/material";
 import ItemCard from "./ItemCard";
 import ItemDetailModal from "../categories/ItemDetailModal";
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from "../../../utils/fontsize";
 
 export default function PopularMenuSection({ prop, actions, styles, states, themeColors, globalComponentStyles }) {
+  const theme = useTheme();
+  const mdDown = useMediaQuery(theme.breakpoints.down("md")); 
   const displayItems = prop?.static?.displayitems || [];
   const [products, setProducts] = useState(displayItems);
   const { query } = states ?? {};
@@ -37,11 +41,11 @@ export default function PopularMenuSection({ prop, actions, styles, states, them
                 ? globalComponentStyles?.Text?.color?.value :
                 themeColors?.PopularMenuSectionHeadingTextColor?.value,
 
-            fontSize: styles?.PopularMenuSectionHeadingTextSize?.value != ""
+            fontSize: getFontSize(styles?.PopularMenuSectionHeadingTextSize?.value != ""
               ? styles?.PopularMenuSectionHeadingTextSize?.value
               : globalComponentStyles?.Text?.size?.value != ""
                 ? globalComponentStyles?.Text?.size?.value :
-                themeColors?.PopularMenuSectionHeadingTextSize?.value,
+                themeColors?.PopularMenuSectionHeadingTextSize?.value,mdDown,20),
 
             fontFamily: styles?.PopularMenuSectionHeadingTextFont?.value != ""
               ? styles?.PopularMenuSectionHeadingTextFont?.value
@@ -67,11 +71,11 @@ export default function PopularMenuSection({ prop, actions, styles, states, them
              ? globalComponentStyles?.Text?.color?.value :
              themeColors?.PopularMenuSectionDescriptionTextColor?.value,
 
-         fontSize: styles?.PopularMenuSectionDescriptionTextSize?.value != ""
+         fontSize:getFontSize(styles?.PopularMenuSectionDescriptionTextSize?.value != ""
            ? styles?.PopularMenuSectionDescriptionTextSize?.value
            : globalComponentStyles?.Text?.size?.value != ""
              ? globalComponentStyles?.Text?.size?.value :
-             themeColors?.PopularMenuSectionDescriptionTextSize?.value,
+             themeColors?.PopularMenuSectionDescriptionTextSize?.value,mdDown,16),
 
          fontFamily: styles?.PopularMenuSectionDescriptionTextFont?.value != ""
            ? styles?.PopularMenuSectionDescriptionTextFont?.value
@@ -101,11 +105,11 @@ export default function PopularMenuSection({ prop, actions, styles, states, them
             ? globalComponentStyles?.Text?.color?.value :
             themeColors?.PopularMenuSectionDescriptionTextColor?.value,
 
-        fontSize: styles?.PopularMenuSectionDescriptionTextSize?.value != ""
+        fontSize: getFontSize(styles?.PopularMenuSectionDescriptionTextSize?.value != ""
           ? styles?.PopularMenuSectionDescriptionTextSize?.value
           : globalComponentStyles?.Text?.size?.value != ""
             ? globalComponentStyles?.Text?.size?.value :
-            themeColors?.PopularMenuSectionDescriptionTextSize?.value,
+            themeColors?.PopularMenuSectionDescriptionTextSize?.value,mdDown,20),
 
         fontFamily: styles?.PopularMenuSectionDescriptionTextFont?.value != ""
           ? styles?.PopularMenuSectionDescriptionTextFont?.value

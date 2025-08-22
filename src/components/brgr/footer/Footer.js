@@ -1,7 +1,9 @@
 'use client';
 
 import React from "react";
-import { Typography, Box, Link } from "@mui/material";
+import { Typography, Box, Link ,useMediaQuery} from "@mui/material";
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from '../../../utils/fontsize';
 
 export default function CustomFooter({
   themeColors,
@@ -11,6 +13,9 @@ export default function CustomFooter({
   previewMode, 
   inFranchise = false
 }) {
+
+   const theme = useTheme();
+  const mdDown = useMediaQuery(theme.breakpoints.down("md")); 
   const linksArray = prop?.editable?.links?.value || [];
 
   const getFooterStyles = (type) => ({
@@ -19,9 +24,9 @@ export default function CustomFooter({
       globalComponentStyles?.Text?.color?.value ||
       themeColors?.[type + "Color"]?.value,
     fontSize:
-      styles?.[type + "Size"]?.value ||
+      getFontSize(styles?.[type + "Size"]?.value ||
       globalComponentStyles?.Text?.size?.value ||
-      themeColors?.[type + "Size"]?.value,
+      themeColors?.[type + "Size"]?.value,mdDown,14),
     fontFamily:
       styles?.[type + "Font"]?.value ||
       globalComponentStyles?.Text?.fontFamily?.value ||

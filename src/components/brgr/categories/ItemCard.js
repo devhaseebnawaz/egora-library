@@ -7,7 +7,10 @@ import {
   Typography,
   Box,
   Button,
+  useMediaQuery
 } from "@mui/material";
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from "../../../utils/fontsize";
 
 export default function ItemCard({
   item,
@@ -17,7 +20,8 @@ export default function ItemCard({
   themeColors,
   globalComponentStyles,
 }) {
-
+const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
   const getItemNameStyles = {
     color:
       styles?.AllCategoriesItemNameTextColor?.value !== ""
@@ -27,11 +31,11 @@ export default function ItemCard({
           : themeColors?.AllCategoriesItemNameTextColor?.value,
 
     fontSize:
-      styles?.AllCategoriesItemNameTextSize?.value != 0
+      getFontSize(styles?.AllCategoriesItemNameTextSize?.value != 0
         ? styles?.AllCategoriesItemNameTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.AllCategoriesItemNameTextSize?.value,
+          : themeColors?.AllCategoriesItemNameTextSize?.value,smDown,16),
 
     fontFamily:
       styles?.AllCategoriesItemNameTextFont?.value !== ""
@@ -57,12 +61,11 @@ export default function ItemCard({
           : themeColors?.AllCategoriesPriceTagTextColor?.value,
 
     fontSize:
-      styles?.AllCategoriesPriceTagTextSize?.value != 0
+      getFontSize(styles?.AllCategoriesPriceTagTextSize?.value != 0
         ? styles?.AllCategoriesPriceTagTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.AllCategoriesPriceTagTextSize?.value,
-
+          : themeColors?.AllCategoriesPriceTagTextSize?.value,smDown,16),
     fontFamily:
       styles?.AllCategoriesPriceTagTextFont?.value !== ""
         ? styles?.AllCategoriesPriceTagTextFont?.value
@@ -98,11 +101,11 @@ export default function ItemCard({
           : themeColors?.AllCategoriesCartAddTextColor?.value,
 
     fontSize:
-      styles?.AllCategoriesCartAddTextSize?.value != 0
+      getFontSize(styles?.AllCategoriesCartAddTextSize?.value != 0
         ? styles?.AllCategoriesCartAddTextSize?.value
         : globalComponentStyles?.Button?.size?.value != 0
           ? globalComponentStyles?.Button?.size?.value
-          : themeColors?.AllCategoriesPriceTagTextSize?.value,
+          : themeColors?.AllCategoriesPriceTagTextSize?.value,smDown,16),
 
     fontFamily:
       styles?.AllCategoriesCartAddTextFont?.value !== ""
