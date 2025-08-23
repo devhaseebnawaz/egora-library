@@ -8,6 +8,8 @@ import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
 import UniversalImage from "../../../UniversalImage";
+import { useTheme } from '@mui/material/styles';
+import { getFontSize,getIconWidthHeight } from "../../../utils/fontsize";
 
 export default function CustomNavbar({
   themeColors,
@@ -21,6 +23,8 @@ export default function CustomNavbar({
 }) {
   const isMobile = useMediaQuery('(max-width:600px)');
   const truncateLength = isMobile ? 10 : 25;
+  const isBelow850 = useMediaQuery('(max-width:850px)');
+  console.log('isBelow850',isBelow850);
 
   return (
     <>
@@ -34,8 +38,8 @@ export default function CustomNavbar({
           boxShadow: "none",
           position: "relative",
           zIndex: 10,
-          paddingLeft: "14px",
-          paddingRight: "14px",
+          paddingLeft:  isBelow850 ? "10px" : "14px",
+          paddingRight: isBelow850 ? "10px":"14px",
           paddingTop: "4px",
           paddingBottom: "4px",
         }}
@@ -44,11 +48,12 @@ export default function CustomNavbar({
           style={{
             justifyContent: "space-between",
             alignItems: "center",
+            padding:isBelow850 && 0
           }}
         >
           <Box
             style={{
-              display: "flex",
+              display: isBelow850 ? "block" : "flex",
               alignItems: "center",
               gap: "24px",
             }}
@@ -70,14 +75,14 @@ export default function CustomNavbar({
               <Icon
                 icon={locationIcon}
                 width={
-                  styles?.AppBarLocationIconHeightWidth?.value != ""
+                  getIconWidthHeight(styles?.AppBarLocationIconHeightWidth?.value != ""
                     ? styles?.AppBarLocationIconHeightWidth?.value
-                    : themeColors?.AppBarLocationIconHeightWidth?.value
+                    : themeColors?.AppBarLocationIconHeightWidth?.value,isBelow850,18)
                 }
                 height={
-                  styles?.AppBarLocationIconHeightWidth?.value != ""
+                  getIconWidthHeight(styles?.AppBarLocationIconHeightWidth?.value != ""
                     ? styles?.AppBarLocationIconHeightWidth?.value
-                    : themeColors?.AppBarLocationIconHeightWidth?.value
+                    : themeColors?.AppBarLocationIconHeightWidth?.value,isBelow850,18)
                 }
                 color={
                   styles?.AppBarLocationIconColor?.value != ""
@@ -97,9 +102,9 @@ export default function CustomNavbar({
                           ? globalComponentStyles?.Text?.color?.value :
                           themeColors?.AppBarChangeLocationColor?.value,
 
-                    fontSize: styles?.AppBarChangeLocationTextSize?.value != 0
+                    fontSize: getFontSize(styles?.AppBarChangeLocationTextSize?.value != 0
                       ? styles?.AppBarChangeLocationTextSize?.value
-                      : themeColors?.AppBarChangeLocationTextSize?.value,
+                      : themeColors?.AppBarChangeLocationTextSize?.value,isBelow850,12),
 
                     fontFamily: styles?.AppBarChangeLocationTextFont?.value != ""
                       ? styles?.AppBarChangeLocationTextFont?.value
@@ -110,12 +115,13 @@ export default function CustomNavbar({
                       : themeColors?.AppBarChangeLocationTextStyle?.value,
                   }}
                 >
-                  Change Location
+                  Change {states.orderType === "storeDelivery" ? "Location" : "Branch"}
 
                 </Typography>
                 <Typography
                   variant="caption"
                   style={{
+                    display: isBelow850 && 'none',
                     color:
                       styles?.AppBarAddressColor?.value != ""
                         ? styles?.AppBarAddressColor?.value
@@ -148,6 +154,7 @@ export default function CustomNavbar({
 
             <Box
               style={{
+                marginTop: isBelow850 && '4px',
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
@@ -157,14 +164,14 @@ export default function CustomNavbar({
                 icon={phoneIcon}
 
                 width={
-                  styles?.AppBarPhoneIconHeightWidth?.value != ""
+                  getIconWidthHeight(styles?.AppBarPhoneIconHeightWidth?.value != ""
                     ? styles?.AppBarPhoneIconHeightWidth?.value
-                    : themeColors?.AppBarPhoneIconHeightWidth?.value
+                    : themeColors?.AppBarPhoneIconHeightWidth?.value,isBelow850,18)
                 }
                 height={
-                  styles?.AppBarPhoneIconHeightWidth?.value != ""
+                  getIconWidthHeight(styles?.AppBarPhoneIconHeightWidth?.value != ""
                     ? styles?.AppBarPhoneIconHeightWidth?.value
-                    : themeColors?.AppBarPhoneIconHeightWidth?.value
+                    : themeColors?.AppBarPhoneIconHeightWidth?.value,isBelow850,18)
                 }
                 color={
                   styles?.AppBarPhoneIconColor?.value != ""
@@ -184,9 +191,9 @@ export default function CustomNavbar({
                         themeColors?.AppBarPhoneColor?.value,
 
 
-                  fontSize: styles?.AppBarPhoneTextSize?.value != 0
+                  fontSize: getFontSize(styles?.AppBarPhoneTextSize?.value != 0
                     ? styles?.AppBarPhoneTextSize?.value
-                    : themeColors?.AppBarPhoneTextSize?.value,
+                    : themeColors?.AppBarPhoneTextSize?.value,isBelow850,12),
 
                   fontFamily: styles?.AppBarPhoneTextFont?.value != ""
                     ? styles?.AppBarPhoneTextFont?.value
@@ -278,8 +285,8 @@ export default function CustomNavbar({
             top: "100%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 100,
-            height: 100,
+            width: isBelow850 ? 70 : 100,
+            height: isBelow850 ? 70 : 100,
             borderRadius: "50%",
             overflow: "hidden",
             backgroundColor: "#121212",
