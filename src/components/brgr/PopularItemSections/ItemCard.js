@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Typography, Box ,useMediaQuery} from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
+import { useTheme } from '@mui/material/styles';
 import { getFontSize } from "../../../utils/fontsize";
 
 export default function ItemCard ({ item, themeColors, styles, actions, states, globalComponentStyles }) {
