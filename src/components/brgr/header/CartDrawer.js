@@ -455,7 +455,7 @@ const CartDrawer = ({
 
   const content = (
     <Box style={{ position: "relative", height: "100%" }}>
-      <Box
+      {!totalCartQuantity === 0 && <Box
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -472,7 +472,7 @@ const CartDrawer = ({
         <IconButton onClick={onClose} style={getIconButtonStyles}>
           <Icon icon={closeIcon} width={18} height={18} />
         </IconButton>
-      </Box>
+      </Box>}
 
       {totalCartQuantity === 0 ? (
         <Box
@@ -485,7 +485,12 @@ const CartDrawer = ({
             textAlign: "center",
           }}
         >
-          <Icon icon="mdi:bag-personal-outline" width={80} height={80} />
+          <img
+            src="/assets/cartIcon.svg"
+            alt="Bag Icon"
+            width={100}
+            height={100}
+          />         
           <Typography
             style={{  marginTop: 16, ...getSubHeadingStyles }}
           >
