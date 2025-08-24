@@ -17,6 +17,7 @@ import {
   DialogContent,
   Grid,
   Divider,
+  useMediaQuery
 } from '@mui/material';
 import Iconify from '../iconify';
 import FormProvider, { RHFTextField } from "../../hook-form";
@@ -25,6 +26,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Variant from '../options/Variant';
 import Group from '../options/Group';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useTheme } from '@mui/material/styles';
+import { getFontSize } from '../../../utils/fontsize';
+
+
 
 export default function ItemDetailModal({
   themeColors,
@@ -39,6 +44,10 @@ export default function ItemDetailModal({
   layout
 }) {
  layout = layout?.json ? layout?.json : layout
+  const theme = useTheme();
+  const mdDown = useMediaQuery(theme.breakpoints.down("md")); 
+  const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
+
   const getHeadingStyles = {
     color:
       layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextColor?.value !== ""
@@ -47,11 +56,11 @@ export default function ItemDetailModal({
           ? globalComponentStyles?.Text?.color?.value
           : `${themeColors?.ItemDetailModalHeadingsTextColor?.value}`,
     fontSize:
-      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value != 0
+      getFontSize(layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value != 0
         ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.ItemDetailModalHeadingsTextSize?.value,
+          : themeColors?.ItemDetailModalHeadingsTextSize?.value,mdDown,18),
 
     fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value != ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value}`
@@ -74,11 +83,11 @@ export default function ItemDetailModal({
           ? globalComponentStyles?.Text?.color?.value
           : `${themeColors?.ItemDetailModalDescriptionTextColor?.value}`,
     fontSize:
-      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value != 0
+      getFontSize(layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value != 0
         ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
           ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.ItemDetailModalDescriptionTextSize?.value,
+          : themeColors?.ItemDetailModalDescriptionTextSize?.value,mdDown,12),
 
     fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value != ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value}`
@@ -297,7 +306,7 @@ export default function ItemDetailModal({
       }}
     >
 
-      <Box style={{
+      {/* <Box style={{
         ...(previewMode
           ? {
             position: 'absolute',
@@ -339,19 +348,19 @@ export default function ItemDetailModal({
         >
           <Iconify icon="mdi:close" width={20} height={20} />
         </IconButton>
-      </Box>
+      </Box> */}
 
-
+ {!mdDown && (
       <Box
         style={{
-          width: '45%',
-          backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor
-            || styles?.ItemDetailModalImageDivBackgroundColor
-            || '#f4f4f4',
+          flex: 0.42,
+          // backgroundColor: themeColors?.ItemDetailModalImageDivBackgroundColor
+          //   || styles?.ItemDetailModalImageDivBackgroundColor
+          //   || '#f4f4f4',
           display: 'flex',
           alignItems: 'flex-start',
           justifyContent: 'center',
-          padding: 32,
+          margin: 20,
         }}
       >
         <Box
@@ -374,39 +383,126 @@ export default function ItemDetailModal({
         />
       </Box>
 
-      <Box style={{ width: '1px', backgroundColor: '#e0e0e0' }} />
+  )}
+
+      {/* <Box style={{ width: '1px', backgroundColor: '#e0e0e0' }} /> */}
 
       <Box
         style={{
-          width: '54%',
-          padding: 32,
+          flex: mdDown ? 1 : 0.58,
           overflowY: 'auto',
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
+          borderLeft: mdDown ? 'none' : '1px solid #dee2e6',
+          
         }}
       >
+          <Box
+    style={{
+      padding: smDown ? 10 : 20,
+      overflowY: 'auto',
+      flexGrow: 1,
+      paddingRight: smDown ? 10 : 20,
+    }}
+  >
+
         {/* Title and Description */}
         <Box
           style={{
             display: 'flex',
-            alignItems: 'center',
+            alignItems: mdDown ? "" :'center',
             justifyContent: 'space-between',
-            marginBottom: 5,
+            position: "sticky",
+            top: 0,
+            zIndex: 1000,
+            backdropFilter: "blur(8px)",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
           }}
         >
           <Typography variant="h6" fontWeight="bold" sx={{ ...getHeadingStyles }}>
             {states.itemForDetailedModal.name}
           </Typography>
+          <Box style={{
+            ...(previewMode
+              ? {
+                // position: 'absolute',
+                // right: '0px',
+                // top: '0px',
+              }
+              : {
+
+              }),
+
+          }}>
+            <IconButton
+              onClick={() => {
+                if (!previewMode) {
+                  actions.handleOpenCard();
+                  isItemEdit && actions?.handleItemEditClose();
+                }
+              }}
+              style={{
+                backgroundColor: '#121212',
+                color: '#fff',
+                width: 36,
+                height: 36,
+                // ...(!previewMode
+                //   ? {
+                //     position: 'absolute',
+                //     right: '0px',
+                //     top: '-10px',
+                //   }
+                //   : {
+                //     margin: "0 auto",
+                //   }),
+
+
+                zIndex: 9999,
+              }}
+              onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
+              onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
+            >
+              <Iconify icon="mdi:close" width={20} height={20} />
+            </IconButton>
+          </Box>
         </Box>
 
-        <Typography color="gray" style={{ marginBottom: 15, ...getDescriptionStyles }}  >
+        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 15 , ...getHeadingStyles}} >
+          Rs. {states.itemForDetailedModal.price}
+        </Typography>
+        <Typography color="gray" style={{ marginBottom: 20, ...getDescriptionStyles }}  >
           {states.itemForDetailedModal.description || ''}
         </Typography>
 
-        <Typography variant="h6" color="text.secondary" gutterBottom style={{ marginBottom: 20 , ...getHeadingStyles}} >
-          Rs. {states.itemForDetailedModal.price}
-        </Typography>
+         {/* Mobile Image (below description, only on mdDown) */}
+      {mdDown && (
+        <Box
+          style={{
+            marginBottom: 20,
+            with:"100%",
+          }}
+        >
+          <Box
+            component="img"
+            src={states.itemForDetailedModal?.photoURL
+              ? `${states.storeImagesBaseUrl}/${states.itemForDetailedModal.photoURL}`
+              : '/assets/placeholder.png'}
+            alt={states.itemForDetailedModal?.name || "Menu Item"}
+            loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/assets/placeholder.png';
+            }}
+            style={{
+              width:"100%",
+              maxHeight: 250,
+              borderRadius: 8,
+            }}
+          />
+        </Box>
+      )}
+
 
         <CardContent sx={{ padding: "0" }}>
           <FormProvider methods={methods}>
@@ -449,6 +545,8 @@ export default function ItemDetailModal({
           </FormProvider>
         </CardContent>
 
+        </Box>
+
 
         <Box
           style={{
@@ -457,17 +555,17 @@ export default function ItemDetailModal({
             justifyContent: 'space-between',
             alignItems: 'center',
             borderTop: '1px solid #eee',
-            paddingTop: 16,
-            gap: 16,
+            padding: smDown ? 10 : 20,
+            gap: smDown ? 10 : 16,
           }}
         >
           <Box style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Button
               onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
               style={{
-                minWidth: 36,
-                height: 36,
-                borderRadius: 12,
+                minWidth: smDown ? 30 : 36,
+                height: smDown ? 30 : 36,
+                borderRadius: smDown ? 8: 12,
                 backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor
                   || styles?.ItemDetailModalQtyDecreseBackgroundColor
                   || '#ccc',
@@ -475,7 +573,7 @@ export default function ItemDetailModal({
                   || styles?.ItemDetailModalQtyDecreseColor
                   || '#fff',
                 fontWeight: 'bold',
-                fontSize: 20,
+                 fontSize: smDown ? 16 : 20,
               }}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = '#b0b0b0'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = '#ccc'}
@@ -486,9 +584,9 @@ export default function ItemDetailModal({
             <Button
               onClick={() => setQuantity((prev) => prev + 1)}
               style={{
-                minWidth: 36,
-                height: 36,
-                borderRadius: 12,
+               minWidth: smDown ? 30 : 36,
+                height: smDown ? 30 : 36,
+                borderRadius: smDown ? 8: 12,
                 backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor
                   || styles?.ItemDetailModalQtyIncreaseBackgroundColor
                   || '#121212',
@@ -496,7 +594,7 @@ export default function ItemDetailModal({
                   || styles?.ItemDetailModalQtyIncreaseColor
                   || '#fff',
                 fontWeight: 'bold',
-                fontSize: 20,
+                fontSize: smDown ? 16 : 20,
               }}
               onMouseEnter={e => e.currentTarget.style.backgroundColor = '#000'}
               onMouseLeave={e => e.currentTarget.style.backgroundColor = '#121212'}
@@ -513,9 +611,9 @@ export default function ItemDetailModal({
               justifyContent: states.loadingForAddUpdateItemCart ? 'center' : 'space-between',
               alignItems: 'center',
               borderRadius: 12,
-              padding: '12px 24px',
+              padding: smDown ? '12px' : '12px 24px',
               fontWeight: 'bold',
-              fontSize: 16,
+              fontSize: smDown ? 12 : 16,
               backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
               color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
             }}
