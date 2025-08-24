@@ -557,8 +557,8 @@ const CartDrawer = ({
               paddingLeft: 0,
               paddingRight: 0,
               marginTop: 8,
-              backgroundColor: "transparent",
               ...getSecondaryButtonStyles,
+              backgroundColor: "transparent",
             }}
           >
             Add more items
