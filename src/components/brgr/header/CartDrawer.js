@@ -455,7 +455,7 @@ const CartDrawer = ({
 
   const content = (
     <Box style={{ position: "relative", height: "100%" }}>
-      {!totalCartQuantity === 0 && <Box
+      {totalCartQuantity > 0 && <Box
         style={{
           display: "flex",
           justifyContent: "space-between",
