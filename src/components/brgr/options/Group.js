@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import Options from "./Options";
 
 export default function Group({
+  layout,
   choiceGroup,
   hanldeSelectOption,
   selectedSauces,
@@ -16,7 +17,7 @@ export default function Group({
     <>
       {choiceGroup && (
         <>
-          <Typography sx={{ fontSize: 15, ...getHeadingStyles }} variant="subtitle2">
+          <Typography sx={{ fontSize: 15, ...getHeadingStyles }} >
             {choiceGroup.name}
             <Typography sx={{ fontSize: 12, ml: 1, ...getHeadingStyles }} variant="span">
               ({choiceGroup.quantity}
@@ -25,6 +26,7 @@ export default function Group({
           </Typography>
 
           <Options
+            layout={layout}
             getDescriptionStyles={getDescriptionStyles}
             getHeadingStyles={getHeadingStyles}
             choiceGroups={choiceGroup}

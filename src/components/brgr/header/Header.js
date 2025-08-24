@@ -34,7 +34,9 @@ export default function CustomNavbar({
           backgroundColor:
             styles?.AppBarBackgroundColor?.value != ""
               ? styles?.AppBarBackgroundColor?.value
-              : themeColors?.AppBarBackgroundColor?.value,
+              : globalComponentStyles?.Background?.color?.value != ""
+                ? globalComponentStyles?.Background?.color?.value
+                : themeColors?.AppBarBackgroundColor?.value,
           boxShadow: "none",
           position: "relative",
           zIndex: 10,
@@ -77,17 +79,23 @@ export default function CustomNavbar({
                 width={
                   getIconWidthHeight(styles?.AppBarLocationIconHeightWidth?.value != ""
                     ? styles?.AppBarLocationIconHeightWidth?.value
-                    : themeColors?.AppBarLocationIconHeightWidth?.value,isBelow850,18)
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarLocationIconHeightWidth?.value,isBelow850,18)
                 }
                 height={
                   getIconWidthHeight(styles?.AppBarLocationIconHeightWidth?.value != ""
                     ? styles?.AppBarLocationIconHeightWidth?.value
-                    : themeColors?.AppBarLocationIconHeightWidth?.value,isBelow850,18)
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarLocationIconHeightWidth?.value,isBelow850,18)
                 }
                 color={
                   styles?.AppBarLocationIconColor?.value != ""
                     ? styles?.AppBarLocationIconColor?.value
-                    : themeColors?.AppBarLocationIconColor?.value
+                    : globalComponentStyles?.Icon?.color?.value != ""
+                      ? globalComponentStyles?.Icon?.color?.value
+                      : themeColors?.AppBarLocationIconColor?.value
                 }
               />
               <Box>
@@ -104,15 +112,21 @@ export default function CustomNavbar({
 
                     fontSize: getFontSize(styles?.AppBarChangeLocationTextSize?.value != 0
                       ? styles?.AppBarChangeLocationTextSize?.value
-                      : themeColors?.AppBarChangeLocationTextSize?.value,isBelow850,12),
+                      : globalComponentStyles?.Text?.size?.value != ""
+                        ? globalComponentStyles?.Text?.size?.value
+                        : themeColors?.AppBarChangeLocationTextSize?.value,isBelow850,12),
 
                     fontFamily: styles?.AppBarChangeLocationTextFont?.value != ""
                       ? styles?.AppBarChangeLocationTextFont?.value
-                      : themeColors?.AppBarChangeLocationTextFont?.value,
+                      : globalComponentStyles?.Text?.fontFamily?.value != ""
+                        ? globalComponentStyles?.Text?.fontFamily?.value
+                        : themeColors?.AppBarChangeLocationTextFont?.value,
 
                     fontStyle: styles?.AppBarChangeLocationTextStyle?.value != ""
                       ? styles?.AppBarChangeLocationTextStyle?.value
-                      : themeColors?.AppBarChangeLocationTextStyle?.value,
+                      : globalComponentStyles?.Text?.fontWeight?.value != ""
+                        ? globalComponentStyles?.Text?.fontWeight?.value
+                        : themeColors?.AppBarChangeLocationTextStyle?.value,
                   }}
                 >
                   Change {states.orderType === "storeDelivery" ? "Location" : "Branch"}
@@ -131,15 +145,21 @@ export default function CustomNavbar({
 
                     fontSize: styles?.AppBarAddressTextSize?.value != ""
                       ? styles?.AppBarAddressTextSize?.value
-                      : themeColors?.AppBarAddressTextSize?.value,
+                      : globalComponentStyles?.Text?.size?.value != ""
+                        ? globalComponentStyles?.Text?.size?.value
+                        : themeColors?.AppBarAddressTextSize?.value,
 
                     fontFamily: styles?.AppBarAddressTextFont?.value != ""
                       ? styles?.AppBarAddressTextFont?.value
-                      : themeColors?.AppBarAddressTextFont?.value,
+                      : globalComponentStyles?.Text?.fontFamily?.value != ""
+                        ? globalComponentStyles?.Text?.fontFamily?.value
+                        : themeColors?.AppBarAddressTextFont?.value,
 
                     fontStyle: styles?.AppBarAddressTextStyle?.value != ""
                       ? styles?.AppBarAddressTextStyle?.value
-                      : themeColors?.AppBarAddressTextStyle?.value,
+                      : globalComponentStyles?.Text?.fontWeight?.value != ""
+                        ? globalComponentStyles?.Text?.fontWeight?.value
+                        : themeColors?.AppBarAddressTextStyle?.value,
 
                   }}
                 >
@@ -166,17 +186,23 @@ export default function CustomNavbar({
                 width={
                   getIconWidthHeight(styles?.AppBarPhoneIconHeightWidth?.value != ""
                     ? styles?.AppBarPhoneIconHeightWidth?.value
-                    : themeColors?.AppBarPhoneIconHeightWidth?.value,isBelow850,18)
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarPhoneIconHeightWidth?.value,isBelow850,18)
                 }
                 height={
                   getIconWidthHeight(styles?.AppBarPhoneIconHeightWidth?.value != ""
                     ? styles?.AppBarPhoneIconHeightWidth?.value
-                    : themeColors?.AppBarPhoneIconHeightWidth?.value,isBelow850,18)
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarPhoneIconHeightWidth?.value,isBelow850,18)
                 }
                 color={
                   styles?.AppBarPhoneIconColor?.value != ""
                     ? styles?.AppBarPhoneIconColor?.value
-                    : themeColors?.AppBarPhoneIconColor?.value
+                    : globalComponentStyles?.Icon?.color?.value != ""
+                      ? globalComponentStyles?.Icon?.color?.value
+                      : themeColors?.AppBarPhoneIconColor?.value
                 }
               />
               <Typography
@@ -193,15 +219,21 @@ export default function CustomNavbar({
 
                   fontSize: getFontSize(styles?.AppBarPhoneTextSize?.value != 0
                     ? styles?.AppBarPhoneTextSize?.value
-                    : themeColors?.AppBarPhoneTextSize?.value,isBelow850,12),
+                    : globalComponentStyles?.Text?.size?.value != ""
+                      ? globalComponentStyles?.Text?.size?.value
+                      : themeColors?.AppBarPhoneTextSize?.value,isBelow850,12),
 
                   fontFamily: styles?.AppBarPhoneTextFont?.value != ""
                     ? styles?.AppBarPhoneTextFont?.value
-                    : themeColors?.AppBarPhoneTextFont?.value,
+                    : globalComponentStyles?.Text?.fontFamily?.value != ""
+                      ? globalComponentStyles?.Text?.fontFamily?.value
+                      : themeColors?.AppBarPhoneTextFont?.value,
 
                   fontStyle: styles?.AppBarPhoneTextStyle?.value != ""
                     ? styles?.AppBarPhoneTextStyle?.value
-                    : themeColors?.AppBarPhoneTextStyle?.value,
+                    : globalComponentStyles?.Text?.fontWeight?.value != ""
+                      ? globalComponentStyles?.Text?.fontWeight?.value
+                      : themeColors?.AppBarPhoneTextStyle?.value,
 
                 }}
               >
@@ -225,17 +257,23 @@ export default function CustomNavbar({
                 width={
                   styles?.AppBarCartIconHeightWidth?.value != ""
                     ? styles?.AppBarCartIconHeightWidth?.value
-                    : themeColors?.AppBarCartIconHeightWidth?.value
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarCartIconHeightWidth?.value
                 }
                 height={
                   styles?.AppBarCartIconHeightWidth?.value != ""
                     ? styles?.AppBarCartIconHeightWidth?.value
-                    : themeColors?.AppBarCartIconHeightWidth?.value
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarCartIconHeightWidth?.value
                 }
                 color={
                   styles?.AppBarCartIconColor?.value != ""
                     ? styles?.AppBarCartIconColor?.value
-                    : themeColors?.AppBarCartIconColor?.value
+                    : globalComponentStyles?.Icon?.color?.value != ""
+                      ? globalComponentStyles?.Icon?.color?.value
+                      : themeColors?.AppBarCartIconColor?.value
                 }
               />
             </IconButton>
@@ -257,14 +295,45 @@ export default function CustomNavbar({
                 position: "absolute",
                 top: 2,
                 right: 2,
-                width: 18,
-                height: 20,
+                width:
+                  styles?.AppBarCartQtyIconHeightWidth?.value != ""
+                    ? styles?.AppBarCartQtyIconHeightWidth?.value
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarCartQtyIconHeightWidth?.value
+                ,
+                height:
+                  styles?.AppBarCartQtyIconHeightWidth?.value != ""
+                    ? styles?.AppBarCartQtyIconHeightWidth?.value
+                    : globalComponentStyles?.Icon?.size?.value != ""
+                      ? globalComponentStyles?.Icon?.size?.value
+                      : themeColors?.AppBarCartQtyIconHeightWidth?.value
+                ,
+                color:
+                  styles?.AppBarCartQtyIconColor?.value != ""
+                    ? styles?.AppBarCartQtyIconColor?.value
+                    : globalComponentStyles?.Icon?.color?.value != ""
+                      ? globalComponentStyles?.Icon?.color?.value
+                      : themeColors?.AppBarCartQtyIconColor?.value
+                ,
+
                 fontSize: "0.8rem",
                 fontWeight: "bold",
-                backgroundColor: "black",
-                color: "white",
-                borderRadius: "50%",
-                border: "2px solid #f6e6d6",
+                backgroundColor:
+                  styles?.AppBarCartQtyIconBackgroundColor?.value != ""
+                    ? styles?.AppBarCartQtyIconBackgroundColor?.value
+                    : globalComponentStyles?.Icon?.color?.value != ""
+                      ? globalComponentStyles?.Icon?.color?.value
+                      : themeColors?.AppBarCartQtyIconBackgroundColor?.value
+                ,
+                borderRadius:
+                  styles?.AppBarCartQtyIconBorderRadius?.value != ""
+                    ? styles?.AppBarCartQtyIconBorderRadius?.value
+                    : themeColors?.AppBarCartQtyIconBorderRadius?.value,
+
+                border: `2px solid ${styles?.AppBarCartQtyIconBorderColor?.value != ""
+                  ? styles?.AppBarCartQtyIconBorderColor?.value
+                  : themeColors?.AppBarCartQtyIconBorderColor?.value}`,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -285,11 +354,32 @@ export default function CustomNavbar({
             top: "100%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: isBelow850 ? 70 : 100,
-            height: isBelow850 ? 70 : 100,
-            borderRadius: "50%",
+            width: isBelow850 ? 70 :
+              styles?.AppBarImageHeightWidth?.value != ""
+                ? styles?.AppBarImageHeightWidth?.value
+                : globalComponentStyles?.LogoImage?.size?.value != ""
+                  ? globalComponentStyles?.LogoImage?.size?.value
+                  : themeColors?.AppBarImageHeightWidth?.value,
+            height: isBelow850 ? 70 :
+              styles?.AppBarImageHeightWidth?.value != ""
+                ? styles?.AppBarImageHeightWidth?.value
+                : globalComponentStyles?.LogoImage?.size?.value != ""
+                  ? globalComponentStyles?.LogoImage?.size?.value
+                  : themeColors?.AppBarImageHeightWidth?.value,
+            backgroundColor:
+              styles?.AppBarImageBackgroundColor?.value != ""
+                ? styles?.AppBarImageBackgroundColor?.value
+                : globalComponentStyles?.LogoImage?.backgroundColor?.value != ""
+                  ? globalComponentStyles?.LogoImage?.backgroundColor?.value
+                  : themeColors?.AppBarImageBackgroundColor?.value
+            ,
+            borderRadius:
+              styles?.AppBarImageBorderRadius?.value != ""
+                ? styles?.AppBarImageBorderRadius?.value
+                : globalComponentStyles?.LogoImage?.borderRadius?.value != ""
+                  ? globalComponentStyles?.LogoImage?.borderRadius?.value
+                  : themeColors?.AppBarImageBorderRadius?.value,
             overflow: "hidden",
-            backgroundColor: "#121212",
           }}
         >
           {prop?.editable?.logoImage ? (

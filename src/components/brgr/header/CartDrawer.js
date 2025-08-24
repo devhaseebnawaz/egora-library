@@ -35,7 +35,7 @@ const CartDrawer = ({
   globalComponentStyles,
   previewMode = false
 }) => {
-   layout = layout?.json ? layout?.json : layout
+  layout = layout?.json ? layout?.json : layout
   const getHeadingStyles = {
     color:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextColor
