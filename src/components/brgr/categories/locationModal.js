@@ -28,7 +28,7 @@ const modalStyle = {
 };
 
 export default function LocationModal({ themeColors, actions, prop, styles, states, isGoogleMapsLoaded, previewMode = false, globalComponentStyles, layout }) {
-     layout = layout?.json ? layout?.json : layout
+    layout = layout?.json ? layout?.json : layout
     const filteredOutlets = states.outlets?.filter((outlet) =>
         outlet.name.toLowerCase().includes(states.searchQuery.toLowerCase())
     ) || [];

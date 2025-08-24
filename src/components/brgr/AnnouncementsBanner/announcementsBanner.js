@@ -48,6 +48,8 @@ export default function AnnouncementsBanner({ themeColors, actions, prop, styles
                 alignItems: 'center',
                 backgroundColor: styles?.AnnouncementsBannerBackgroundColor?.value != ""
                     ? styles?.AnnouncementsBannerBackgroundColor?.value
+                    : globalComponentStyles?.Background?.color?.value != ""
+                      ? globalComponentStyles?.Background?.color?.value
                     : themeColors?.AnnouncementsBannerBackgroundColor?.value,
             }}
         >

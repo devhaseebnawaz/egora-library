@@ -3,6 +3,7 @@ import { Typography, Box, Button } from "@mui/material";
 import { fNumber } from "../../../utils/formatNumber";
 
 export default function Variant({
+    layout,
     variants,
     hanldeSelectOption,
     selectedVariant,
@@ -41,7 +42,15 @@ export default function Variant({
                                         flexGrow: { xs: 0, sm: 0, md: 0 },
                                         ml: { xs: 0, sm: 0, md: 0 },
                                         mb: 1,
-                                        ...getDescriptionStyles
+                                        ...getDescriptionStyles,
+                                        border: `solid ${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalButtonBorderColor?.value}`, 
+                                        borderRadius: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalButtonBorderRadius?.value , 
+                                        backgroundColor: isSelected ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalButtonSelectedBackgroundColor?.value : layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalButtonBackgroundColor?.value,
+                                        color: isSelected ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalSelectedDescriptionTextColor?.value  : layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextColor?.value, 
+                                        '&:hover': {
+                                          backgroundColor: isSelected ?  layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalButtonSelectedHoverColor?.value : layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalButtonHoverColor?.value, 
+                                        }
+                                        
                                     }}
                                     variant={isSelected ? "contained" : "outlined"}
                                     key={index}

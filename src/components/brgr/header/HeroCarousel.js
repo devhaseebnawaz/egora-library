@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 
-export default function HeroCarousel({ prop, themeColors, styles, states }) {
+export default function HeroCarousel({ prop, themeColors, styles, states, globalComponentStyles }) {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
   const slideInterval = useRef(null);
@@ -81,20 +81,14 @@ export default function HeroCarousel({ prop, themeColors, styles, states }) {
 
   const getCarouselDotColor = (index) => {
     if (index === realIndex) {
-      let color = "#fff";
-      if (themeColors?.HeroCarouselDisplayedImageBackgroundColor) {
-        color = themeColors?.HeroCarouselDisplayedImageBackgroundColor;
-      } else if (styles?.HeroCarouselDisplayedImageBackgroundColor !== "") {
-        color = styles?.HeroCarouselDisplayedImageBackgroundColor;
-      }
+      let color = styles?.HeroCarouselDisplayedImageDotColor?.value != ""
+        ? styles?.HeroCarouselDisplayedImageDotColor?.value
+        : themeColors?.HeroCarouselDisplayedImageDotColor?.value
       return color
     } else {
-      let color = "rgba(255,255,255,0.5)";
-      if (themeColors?.HeroCarouselNotDisplayedImageBackgroundColor) {
-        color = themeColors?.HeroCarouselNotDisplayedImageBackgroundColor;
-      } else if (styles?.HeroCarouselNotDisplayedImageBackgroundColor !== "") {
-        color = styles?.HeroCarouselNotDisplayedImageBackgroundColor;
-      }
+      let color = styles?.HeroCarouselHiddenImageDotColor?.value != ""
+        ? styles?.HeroCarouselHiddenImageDotColor?.value
+        : themeColors?.HeroCarouselHiddenImageDotColor?.value
       return color
     }
   };
@@ -142,12 +136,36 @@ export default function HeroCarousel({ prop, themeColors, styles, states }) {
           top: "50%",
           left: "20px",
           transform: "translateY(-50%)",
-          backgroundColor: themeColors?.HeroCarouselGoPrevBackgroundColor ? themeColors?.HeroCarouselGoPrevBackgroundColor : styles?.HeroCarouselGoPrevBackgroundColor != "" ? styles?.HeroCarouselGoPrevBackgroundColor : "rgba(0,0,0,0.5)",
-          color: "#fff",
+          backgroundColor:
+            styles?.HeroCarouselGoPrevIconBackgroundColor?.value != ""
+              ? styles?.HeroCarouselGoPrevIconBackgroundColor?.value
+              : themeColors?.HeroCarouselGoPrevIconBackgroundColor?.value,
+
+          color:
+            styles?.HeroCarouselGoPrevIconColor?.value != ""
+              ? styles?.HeroCarouselGoPrevIconColor?.value
+              : globalComponentStyles?.Icon?.color?.value != ""
+                ? globalComponentStyles?.Icon?.color?.value
+                : themeColors?.HeroCarouselGoPrevIconColor?.value
+          ,
           zIndex: 2,
         }}
       >
-        <Icon icon={arrowLeft} width={24} height={24} />
+        <Icon icon={arrowLeft}
+          width={
+            styles?.HeroCarouselGoPrevIconHeightWidth?.value != ""
+              ? styles?.HeroCarouselGoPrevIconHeightWidth?.value
+              : globalComponentStyles?.Icon?.size?.value != ""
+                ? globalComponentStyles?.Icon?.size?.value
+                : themeColors?.HeroCarouselGoPrevIconHeightWidth?.value
+          }
+          height={
+            styles?.HeroCarouselGoPrevIconHeightWidth?.value != ""
+              ? styles?.HeroCarouselGoPrevIconHeightWidth?.value
+              : globalComponentStyles?.Icon?.size?.value != ""
+                ? globalComponentStyles?.Icon?.size?.value
+                : themeColors?.HeroCarouselGoPrevIconHeightWidth?.value
+          } />
       </IconButton>
 
       <IconButton
@@ -157,12 +175,36 @@ export default function HeroCarousel({ prop, themeColors, styles, states }) {
           top: "50%",
           right: "20px",
           transform: "translateY(-50%)",
-          backgroundColor: themeColors?.HeroCarouselGoNextBackgroundColor ? themeColors?.HeroCarouselGoNextBackgroundColor : styles?.HeroCarouselGoNextBackgroundColor != "" ? styles?.HeroCarouselGoNextBackgroundColor : "rgba(0,0,0,0.5)",
-          color: "#fff",
+          backgroundColor:
+            styles?.HeroCarouselGoNextIconBackgroundColor?.value != ""
+              ? styles?.HeroCarouselGoNextIconBackgroundColor?.value
+              : themeColors?.HeroCarouselGoNextIconBackgroundColor?.value,
+
+          color:
+            styles?.HeroCarouselGoNextIconColor?.value != ""
+              ? styles?.HeroCarouselGoNextIconColor?.value
+              : globalComponentStyles?.Icon?.color?.value != ""
+                ? globalComponentStyles?.Icon?.color?.value
+                : themeColors?.HeroCarouselGoNextIconColor?.value
+          ,
           zIndex: 2,
         }}
       >
-        <Icon icon={arrowRight} width={24} height={24} />
+        <Icon icon={arrowRight}
+          width={
+            styles?.HeroCarouselGoNextIconHeightWidth?.value != ""
+              ? styles?.HeroCarouselGoNextIconHeightWidth?.value
+              : globalComponentStyles?.Icon?.size?.value != ""
+                ? globalComponentStyles?.Icon?.size?.value
+                : themeColors?.HeroCarouselGoNextIconHeightWidth?.value
+          }
+          height={
+            styles?.HeroCarouselGoNextIconHeightWidth?.value != ""
+              ? styles?.HeroCarouselGoNextIconHeightWidth?.value
+              : globalComponentStyles?.Icon?.size?.value != ""
+                ? globalComponentStyles?.Icon?.size?.value
+                : themeColors?.HeroCarouselGoNextIconHeightWidth?.value
+          } />
       </IconButton>
 
       <Box
@@ -181,9 +223,23 @@ export default function HeroCarousel({ prop, themeColors, styles, states }) {
             key={index}
             onClick={() => goToIndex(index)}
             style={{
-              width: 10,
-              height: 10,
-              borderRadius: "50%",
+              width:
+                styles?.HeroCarouselDotHeightWidth?.value != ""
+                  ? styles?.HeroCarouselDotHeightWidth?.value
+                  : globalComponentStyles?.Icon?.size?.value != ""
+                    ? globalComponentStyles?.Icon?.size?.value
+                    : themeColors?.HeroCarouselDotHeightWidth?.value
+              ,
+              height:
+                styles?.HeroCarouselDotHeightWidth?.value != ""
+                  ? styles?.HeroCarouselDotHeightWidth?.value
+                  : globalComponentStyles?.Icon?.size?.value != ""
+                    ? globalComponentStyles?.Icon?.size?.value
+                    : themeColors?.HeroCarouselDotHeightWidth?.value
+              ,
+              borderRadius: styles?.HeroCarouselDotBorderRadius?.value != ""
+                ? styles?.HeroCarouselDotBorderRadius?.value
+                : themeColors?.HeroCarouselDotBorderRadius?.value,
               backgroundColor: getCarouselDotColor(index),
               cursor: "pointer",
               transition: "background-color 0.3s ease",

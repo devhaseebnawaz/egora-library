@@ -30,9 +30,9 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                 position: "sticky",
                 top: 0,
                 zIndex: 1100,
-                backgroundColor:  styles?.CategoryCarouselBackgroundColor?.value != ""
-                ? styles?.CategoryCarouselBackgroundColor?.value
-                : themeColors?.CategoryCarouselBackgroundColor?.value,
+                backgroundColor: styles?.CategoryCarouselBackgroundColor?.value != ""
+                    ? styles?.CategoryCarouselBackgroundColor?.value
+                    : themeColors?.CategoryCarouselBackgroundColor?.value,
 
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
             }}
@@ -50,16 +50,43 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                     <IconButton
                         onClick={() => actions.handleScroll("left")}
                         style={{
-                            color: "#fff",
                             position: "absolute",
                             left: 0,
                             zIndex: 2,
-                            backgroundColor: "rgba(0,0,0,0.5)",
+                            backgroundColor:
+                                styles?.CategoryCarouselGoPrevIconBackgroundColor?.value != ""
+                                    ? styles?.CategoryCarouselGoPrevIconBackgroundColor?.value
+                                    : themeColors?.CategoryCarouselGoPrevIconBackgroundColor?.value,
+
+                            color:
+                                styles?.CategoryCarouselGoPrevIconColor?.value != ""
+                                    ? styles?.CategoryCarouselGoPrevIconColor?.value
+                                    : globalComponentStyles?.Icon?.color?.value != ""
+                                        ? globalComponentStyles?.Icon?.color?.value
+                                        : themeColors?.CategoryCarouselGoPrevIconColor?.value
+                            ,
                         }}
                         onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.7)"}
-                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.5)"}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = styles?.CategoryCarouselGoPrevIconBackgroundColor?.value != ""
+                            ? styles?.CategoryCarouselGoPrevIconBackgroundColor?.value
+                            : themeColors?.CategoryCarouselGoPrevIconBackgroundColor?.value}
                     >
-                        <Icon icon={arrowLeft} />
+                        <Icon icon={arrowLeft}
+                            width={
+                                styles?.CategoryCarouselGoPrevIconHeightWidth?.value != ""
+                                    ? styles?.CategoryCarouselGoPrevIconHeightWidth?.value
+                                    : globalComponentStyles?.Icon?.size?.value != ""
+                                        ? globalComponentStyles?.Icon?.size?.value
+                                        : themeColors?.CategoryCarouselGoPrevIconHeightWidth?.value
+                            }
+                            height={
+                                styles?.CategoryCarouselGoPrevIconHeightWidth?.value != ""
+                                    ? styles?.CategoryCarouselGoPrevIconHeightWidth?.value
+                                    : globalComponentStyles?.Icon?.size?.value != ""
+                                        ? globalComponentStyles?.Icon?.size?.value
+                                        : themeColors?.CategoryCarouselGoPrevIconHeightWidth?.value
+                            }
+                        />
                     </IconButton>
                 )}
 
@@ -88,28 +115,28 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                 flex: "0 0 auto",
                                 whiteSpace: "nowrap",
                                 color: styles?.CategoryCarouselTextColor?.value != ""
-                                ? styles?.CategoryCarouselTextColor?.value 
-                                : globalComponentStyles?.Text?.color?.value != "" 
-                                ? globalComponentStyles?.Text?.color?.value : 
-                                  themeColors?.CategoryCarouselTextColor?.value,
+                                    ? styles?.CategoryCarouselTextColor?.value
+                                    : globalComponentStyles?.Text?.color?.value != ""
+                                        ? globalComponentStyles?.Text?.color?.value :
+                                        themeColors?.CategoryCarouselTextColor?.value,
 
                                 fontSize: getFontSize(styles?.CategoryCarouselTextSize?.value != ""
                                     ? styles?.CategoryCarouselTextSize?.value
-                                    : globalComponentStyles?.Text?.size?.value != "" 
-                                    ? globalComponentStyles?.Text?.size?.value : 
-                                      themeColors?.CategoryCarouselTextSize?.value,smDown,16),
+                                    : globalComponentStyles?.Text?.size?.value != ""
+                                        ? globalComponentStyles?.Text?.size?.value :
+                                        themeColors?.CategoryCarouselTextSize?.value, smDown, 16),
 
                                 fontFamily: styles?.CategoryCarouselTextFont?.value != ""
                                     ? styles?.CategoryCarouselTextFont?.value
-                                    : globalComponentStyles?.Text?.fontFamily?.value != "" 
-                                    ? globalComponentStyles?.Text?.fontFamily?.value : 
-                                      themeColors?.CategoryCarouselTextFont?.value,
+                                    : globalComponentStyles?.Text?.fontFamily?.value != ""
+                                        ? globalComponentStyles?.Text?.fontFamily?.value :
+                                        themeColors?.CategoryCarouselTextFont?.value,
 
                                 fontStyle: styles?.CategoryCarouselTextStyle?.value != ""
                                     ? styles?.CategoryCarouselTextStyle?.value
-                                    : globalComponentStyles?.Text?.fontWeight?.value != "" 
-                                    ? globalComponentStyles?.Text?.fontWeight?.value : 
-                                      themeColors?.CategoryCarouselTextStyle?.value,
+                                    : globalComponentStyles?.Text?.fontWeight?.value != ""
+                                        ? globalComponentStyles?.Text?.fontWeight?.value :
+                                        themeColors?.CategoryCarouselTextStyle?.value,
 
                                 fontWeight: 600,
                                 padding: "8px 16px",
@@ -117,17 +144,19 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                 // maxWidth: "160px",
                                 borderRadius: "8px",
                                 textTransform: "none",
-                                backgroundColor: states.selectedCategoryItem === cat ? "orange" : "transparent", 
+                                backgroundColor: states.selectedCategoryItem === cat ?
+                                    styles?.CategoryCarouselHoverColor?.value != ""
+                                        ? styles?.CategoryCarouselHoverColor?.value
+                                        : themeColors?.CategoryCarouselHoverColor?.value : "transparent",
                             }}
                             onMouseOver={(e) => {
                                 if (states.selectedCategoryItem !== cat) {
-                                  const bgColor = styles?.CategoryCarouselHoverColor?.value !== ""
-                                    ? styles.CategoryCarouselHoverColor.value
-                                    : themeColors?.CategoryCarouselHoverColor?.value || "transparent";
-                              
-                                  e.currentTarget.style.backgroundColor = bgColor;
+                                    const bgColor = styles?.CategoryCarouselHoverColor?.value !== ""
+                                        ? styles.CategoryCarouselHoverColor.value
+                                        : themeColors?.CategoryCarouselHoverColor?.value || "transparent";
+                                    e.currentTarget.style.backgroundColor = bgColor;
                                 }
-                              }}
+                            }}
                             onMouseOut={(e) => { if (states.selectedCategoryItem !== cat) e.currentTarget.style.backgroundColor = "transparent"; }}
                             onClick={() => handleCategoryClick(cat)}
                         >
@@ -140,16 +169,42 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                     <IconButton
                         onClick={() => actions.handleScroll("right")}
                         style={{
-                            color: "#fff",
                             position: "absolute",
                             right: 0,
                             zIndex: 2,
-                            backgroundColor: "rgba(0,0,0,0.5)",
+                            backgroundColor:
+                                styles?.CategoryCarouselGoNextIconBackgroundColor?.value != ""
+                                    ? styles?.CategoryCarouselGoNextIconBackgroundColor?.value
+                                    : themeColors?.CategoryCarouselGoNextIconBackgroundColor?.value,
+                            color:
+                                styles?.CategoryCarouselGoNextIconColor?.value != ""
+                                    ? styles?.CategoryCarouselGoNextIconColor?.value
+                                    : globalComponentStyles?.Icon?.color?.value != ""
+                                        ? globalComponentStyles?.Icon?.color?.value
+                                        : themeColors?.CategoryCarouselGoNextIconColor?.value,
                         }}
                         onMouseOver={(e) => e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.7)"}
-                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.5)"}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor =
+                            styles?.CategoryCarouselGoNextIconBackgroundColor?.value != ""
+                                ? styles?.CategoryCarouselGoNextIconBackgroundColor?.value
+                                : themeColors?.CategoryCarouselGoNextIconBackgroundColor?.value}
                     >
-                        <Icon icon={arrowRight} />
+                        <Icon icon={arrowRight}
+                            width={
+                                styles?.CategoryCarouselGoNextIconHeightWidth?.value != ""
+                                    ? styles?.CategoryCarouselGoNextIconHeightWidth?.value
+                                    : globalComponentStyles?.Icon?.size?.value != ""
+                                        ? globalComponentStyles?.Icon?.size?.value
+                                        : themeColors?.CategoryCarouselGoNextIconHeightWidth?.value
+                            }
+                            height={
+                                styles?.CategoryCarouselGoNextIconHeightWidth?.value != ""
+                                    ? styles?.CategoryCarouselGoNextIconHeightWidth?.value
+                                    : globalComponentStyles?.Icon?.size?.value != ""
+                                        ? globalComponentStyles?.Icon?.size?.value
+                                        : themeColors?.CategoryCarouselGoNextIconHeightWidth?.value
+                            }
+                        />
                     </IconButton>
                 )}
             </Box>

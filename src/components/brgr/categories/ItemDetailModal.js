@@ -93,6 +93,88 @@ export default function ItemDetailModal({
         : `${themeColors?.ItemDetailModalDescriptionTextStyle?.value}`,
   };
 
+  const getAddToCartEnabledStyles = {
+    color:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartEnabledTextColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartEnabledTextColor?.value}`
+        : globalComponentStyles?.Text?.color?.value != ""
+          ? globalComponentStyles?.Text?.color?.value
+          : `${themeColors?.ItemDetailModalAddToCartEnabledTextColor?.value}`,
+
+    backgroundColor:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartEnabledBackgroundColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartEnabledBackgroundColor?.value}`
+        : globalComponentStyles?.Button?.backgroundColor?.value != ""
+          ? globalComponentStyles?.Button?.backgroundColor?.value
+          : `${themeColors?.ItemDetailModalAddToCartEnabledBackgroundColor?.value}`,
+
+  };
+
+
+  const getAddedQuantityStyles = {
+    color:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextColor?.value}`
+        : globalComponentStyles?.Text?.color?.value != ""
+          ? globalComponentStyles?.Text?.color?.value
+          : `${themeColors?.ItemDetailModalAddedQtyTextColor?.value}`,
+    fontSize:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextSize?.value != 0
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.ItemDetailModalAddedQtyTextSize?.value,
+
+    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextFont?.value != ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextFont?.value}`
+      : globalComponentStyles?.Text?.fontFamily?.value != ""
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : `${themeColors?.ItemDetailModalAddedQtyTextFont?.value}`,
+
+    fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextStyle?.value !== ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextStyle?.value}`
+      : globalComponentStyles?.Text?.fontWeight?.value != ""
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : `${themeColors?.ItemDetailModalAddedQtyTextStyle?.value}`,
+  };
+
+  const getAddToCartDisabledStyles = {
+    color:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartDisabledTextColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartDisabledTextColor?.value}`
+        : globalComponentStyles?.Text?.color?.value != ""
+          ? globalComponentStyles?.Text?.color?.value
+          : `${themeColors?.ItemDetailModalAddToCartDisabledTextColor?.value}`,
+    backgroundColor:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartDisabledBackgroundColor?.value !== ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartDisabledBackgroundColor?.value}`
+        : globalComponentStyles?.Button?.backgroundColor?.value != ""
+          ? globalComponentStyles?.Button?.backgroundColor?.value
+          : `${themeColors?.ItemDetailModalAddToCartDisabledBackgroundColor?.value}`,
+
+  };
+
+  const getAddToCartStyles = {
+    fontSize:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextSize?.value != 0
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextSize?.value
+        : globalComponentStyles?.Text?.size?.value != 0
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.ItemDetailModalAddToCartTextSize?.value,
+
+    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextFont?.value != ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextFont?.value}`
+      : globalComponentStyles?.Text?.fontFamily?.value != ""
+        ? globalComponentStyles?.Text?.fontFamily?.value
+        : `${themeColors?.ItemDetailModalAddToCartTextFont?.value}`,
+
+    fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextStyle?.value !== ""
+      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextStyle?.value}`
+      : globalComponentStyles?.Text?.fontWeight?.value != ""
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : `${themeColors?.ItemDetailModalAddToCartTextStyle?.value}`,
+  };
+
   const methods = useForm();
   const { selectedVenue, choiceGroups, isItemEdit } = states ?? {}
   const { isOnlineForStore } = selectedVenue ?? {}
@@ -317,10 +399,10 @@ export default function ItemDetailModal({
             }
           }}
           style={{
-            backgroundColor: '#121212',
-            color: '#fff',
-            width: 36,
-            height: 36,
+            backgroundColor: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalCloseIconBackgroundColor?.value,
+            color: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalCloseIconColor?.value,
+            width: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalCloseHeightWidth?.value,
+            height: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalCloseHeightWidth?.value,
             ...(!previewMode
               ? {
                 position: 'absolute',
@@ -413,6 +495,7 @@ export default function ItemDetailModal({
             <Stack spacing={1}>
               {states.itemForDetailedModal.hasVariant && (
                 <Variant
+                  layout={layout}
                   getDescriptionStyles={getDescriptionStyles}
                   getHeadingStyles={getHeadingStyles}
                   variants={states.itemForDetailedModal.variants}
@@ -420,9 +503,10 @@ export default function ItemDetailModal({
                   selectedVariant={selectedVariant}
                 />
               )}
-              <Divider />
+              <Divider color={layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDividerColor?.value} />
               {filteredChoiceGroups.map((cg, index) => (
                 <Group
+                  layout={layout}
                   getDescriptionStyles={getDescriptionStyles}
                   getHeadingStyles={getHeadingStyles}
                   key={index}
@@ -465,14 +549,12 @@ export default function ItemDetailModal({
             <Button
               onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
               style={{
-                minWidth: 36,
-                height: 36,
-                borderRadius: 12,
-                backgroundColor: themeColors?.ItemDetailModalQtyDecreseBackgroundColor
-                  || styles?.ItemDetailModalQtyDecreseBackgroundColor
+                minWidth: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalSubtractIconHeightWidth?.value,
+                height: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalSubtractIconHeightWidth?.value,
+                borderRadius:  layout?.itemDetailModalLayout?.body[0].styles?.IItemDetailModalSubtractIconBorderRadius?.value,
+                backgroundColor: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalSubtractIconBackColor?.value
                   || '#ccc',
-                color: themeColors?.ItemDetailModalQtyDecreseColor
-                  || styles?.ItemDetailModalQtyDecreseColor
+                color: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalSubtractIconColor?.value
                   || '#fff',
                 fontWeight: 'bold',
                 fontSize: 20,
@@ -482,18 +564,18 @@ export default function ItemDetailModal({
             >
               –
             </Button>
-            <Typography fontWeight="bold">{quantity}</Typography>
+            <Typography fontWeight="bold" sx={{
+             ...getAddedQuantityStyles
+            }}>{quantity}</Typography>
             <Button
               onClick={() => setQuantity((prev) => prev + 1)}
               style={{
-                minWidth: 36,
-                height: 36,
-                borderRadius: 12,
-                backgroundColor: themeColors?.ItemDetailModalQtyIncreaseBackgroundColor
-                  || styles?.ItemDetailModalQtyIncreaseBackgroundColor
+                minWidth: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddIconHeightWidth?.value,
+                height: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddIconHeightWidth?.value,
+                borderRadius: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddIconBorderRadius?.value,
+                backgroundColor: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddIconBackgroundColor?.value
                   || '#121212',
-                color: themeColors?.ItemDetailModalQtyIncreaseColor
-                  || styles?.ItemDetailModalQtyIncreaseColor
+                color: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddIconColor?.value
                   || '#fff',
                 fontWeight: 'bold',
                 fontSize: 20,
@@ -512,12 +594,13 @@ export default function ItemDetailModal({
               display: 'flex',
               justifyContent: states.loadingForAddUpdateItemCart ? 'center' : 'space-between',
               alignItems: 'center',
-              borderRadius: 12,
+              borderRadius:  layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartButtonBorderRadius?.value,
               padding: '12px 24px',
               fontWeight: 'bold',
               fontSize: 16,
-              backgroundColor: areAllRequiredGroupsSelected ? '#121212' : '#333',
-              color: areAllRequiredGroupsSelected ? '#f4e3d3' : '#888',
+              backgroundColor: areAllRequiredGroupsSelected ? getAddToCartEnabledStyles.backgroundColor : getAddToCartDisabledStyles.backgroundColor,
+              color: areAllRequiredGroupsSelected ? getAddToCartEnabledStyles.color : getAddToCartDisabledStyles.color,
+              ...getAddToCartStyles
             }}
             disabled={!isOnlineForStore || !areAllRequiredGroupsSelected}
             onClick={() =>
