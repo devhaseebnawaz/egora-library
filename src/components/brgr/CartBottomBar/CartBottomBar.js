@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
-import Iconify from "src/components/iconify/iconify";
+// import {Iconify} from "src/components/brgr/iconify";
 import { calculateSubTotal } from 'src/utils/cart';
 import {fNumber}  from 'src/utils/formatNumber';
 // import { useCart } from '../CartContext';
@@ -58,7 +58,7 @@ export default function CartBottomBar  ({ states, actions, previewMode = false,}
                 >
                     <Box style={{ width: 40, height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {/* {showScrollTop ? ( */}
-                            <IconButton
+                            {/* <IconButton
                                 style={{
                                     backgroundColor: '#121212',
                                     color: 'white',
@@ -68,7 +68,7 @@ export default function CartBottomBar  ({ states, actions, previewMode = false,}
                                 // onClick={scrollToSearch}
                             >
                                 <Iconify icon="mdi:magnify" width={20} height={20} />
-                            </IconButton>
+                            </IconButton> */}
                         {/* ) : null} */}
                     </Box>
 
@@ -105,7 +105,7 @@ export default function CartBottomBar  ({ states, actions, previewMode = false,}
 
                     <Box style={{ width: 40, height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {/* {showScrollTop ? ( */}
-                            <IconButton
+                            {/* <IconButton
                                 style={{
                                     backgroundColor: '#121212',
                                     color: 'white',
@@ -115,7 +115,7 @@ export default function CartBottomBar  ({ states, actions, previewMode = false,}
                                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                             >
                                 <Iconify icon="mdi:arrow-up" width={20} height={20} />
-                            </IconButton>
+                            </IconButton> */}
                         {/* ) : null} */}
                     </Box>
                 </Box>
