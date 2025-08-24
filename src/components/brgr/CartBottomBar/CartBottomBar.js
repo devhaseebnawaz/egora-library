@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
 // import {Iconify} from "src/components/brgr/iconify";
-import { calculateSubTotal } from 'src/utils/cart';
-import {fNumber}  from 'src/utils/formatNumber';
+import {
+  calculateSubTotal,
+} from "../../../utils/cart";
+import { fNumber } from "../../../utils/formatNumber";
 // import { useCart } from '../CartContext';
 // import CartDrawer from '../header/CartDrawer';
 // import { useUI } from './ScrollContext';
