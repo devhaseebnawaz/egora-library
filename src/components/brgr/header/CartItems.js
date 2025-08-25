@@ -21,7 +21,7 @@ import { fNumber } from "../../../utils/formatNumber";
 // import capitalizeWords from "src/utils/capitalizeWords";
 
 
-const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick,states }) => {
+const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, previewMode }) => {
 
     // console.log("the cart item sis", cartItem)
     // const sessionInfo = useSession();
@@ -163,7 +163,11 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                                 >
                                     <Typography
                                         // onClick={() => handleMenuItemClick(cartItem)}
-                                         onClick={()=>{ actions.handleOpenCard(); actions.handleItemEditOpen(), states.setItemForDetailedModal(cartItem) }}
+                                        onClick={() => {
+                                            if (!previewMode) {
+                                                actions.handleOpenCard(); actions.handleItemEditOpen(), states.setItemForDetailedModal(cartItem)
+                                            }
+                                        }}
                                         sx={{
                                             fontWeight: 400,
                                             fontSize: "14px",
@@ -345,7 +349,11 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                                     </IconButton>
                                 ) : (
                                     <IconButton
-                                        onClick={() => { actions.handleRemoveFromCart(cartItem) }}
+                                        onClick={() => {
+                                            if (!previewMode) {
+                                                actions.handleRemoveFromCart(cartItem)
+                                            }
+                                        }}
                                         sx={{ color: "#F08203", p: 0 }}
                                     >
                                         <Iconify icon={"mdi:trash-outline"} />
@@ -357,7 +365,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                                 </Typography>
 
                                 <IconButton
-                                    onClick={() => actions.updateItemFromCardAddByOne(cartItem)}
+                                    onClick={() => { if (!previewMode) { actions.updateItemFromCardAddByOne(cartItem) } }}
                                     sx={{ color: "#F08203", p: 0 }}
                                 >
                                     <Iconify icon={"ic:baseline-plus"} />
