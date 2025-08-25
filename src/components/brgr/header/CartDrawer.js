@@ -108,6 +108,21 @@ const CartDrawer = ({
           : themeColors?.cartDrawerSubHeadingsTextStyle?.value,
   };
 
+  const getAddMoreItemButtonStyles = {
+    width:
+        layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemHeightWidth?.value !== ""
+            ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemHeightWidth?.value
+              : themeColors?.cartDrawerAddMoreItemHeightWidth?.value,
+    height:
+        layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemHeightWidth?.value != 0
+            ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemHeightWidth?.value
+                : themeColors?.cartDrawerAddMoreItemHeightWidth?.value,
+
+    color: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemIconColor?.value != ""
+        ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemIconColor?.value}`
+            : `${themeColors?.cartDrawerAddMoreItemIconColor?.value}`,
+  };
+
   const getDescriptionStyles = {
     color:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextColor
@@ -398,7 +413,34 @@ const CartDrawer = ({
           : themeColors?.cartDrawerBorderRadius?.value,
   };
 
- 
+
+  const getAddMoreItemTextStyles = {
+    color:
+        layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextColor?.value !== ""
+            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextColor?.value}`
+            : globalComponentStyles?.Text?.color?.value != ""
+                ? globalComponentStyles?.Text?.color?.value
+                : `${themeColors?.cartDrawerAddMoreItemTextColor?.value}`,
+    fontSize:
+        layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextSize?.value != 0
+            ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextSize?.value
+            : globalComponentStyles?.Text?.size?.value != 0
+                ? globalComponentStyles?.Text?.size?.value
+                : themeColors?.cartDrawerAddMoreItemTextSize?.value,
+
+    fontFamily: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextFont?.value != ""
+        ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextFont?.value}`
+        : globalComponentStyles?.Text?.fontFamily?.value != ""
+            ? globalComponentStyles?.Text?.fontFamily?.value
+            : `${themeColors?.cartDrawerAddMoreItemTextFont?.value}`,
+
+    fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextStyle?.value !== ""
+        ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextStyle?.value}`
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+            ? globalComponentStyles?.Text?.fontWeight?.value
+            : `${themeColors?.cartDrawerAddMoreItemTextStyle?.value}`,
+  };
+
   const cardItems = states.cardItems?.items ?? [];
   const { orderType, franchise } = states ?? {};
   const { serviceFeesObject, configurations, storeTaxOnCash, platformFees, deliveryFees } = franchise ?? {};
@@ -454,7 +496,7 @@ const CartDrawer = ({
   };
 
   const content = (
-    <Box style={{ position: "relative", height: "100%" }}>
+    <Box style={{ position: "relative", height: "100%", ...getDrawerStyles }}>
       {totalCartQuantity > 0 && <Box
         style={{
           display: "flex",
@@ -492,7 +534,7 @@ const CartDrawer = ({
             height={100}
           />         
           <Typography
-            style={{  marginTop: 16, ...getSubHeadingStyles }}
+            style={{ marginTop: 16, ...getSubHeadingStyles }}
           >
             Your Cart is Empty
           </Typography>
@@ -527,6 +569,9 @@ const CartDrawer = ({
           {cardItems?.map((cartItem, index) => (
             <CartItems
               previewMode={previewMode}
+              themeColors={themeColors}
+              globalComponentStyles={globalComponentStyles}
+              layout={layout}
               key={index}
               cartItem={cartItem}
               actions={actions}
@@ -553,9 +598,8 @@ const CartDrawer = ({
             startIcon={
               <Icon
                 icon="mdi:plus"
-                width={18}
-                height={18}
-                style={{ marginRight: 4 }}
+                
+                style={{ marginRight: 4 , ...getAddMoreItemButtonStyles}}
               />
             }
             style={{
@@ -564,8 +608,8 @@ const CartDrawer = ({
               paddingLeft: 0,
               paddingRight: 0,
               marginTop: 8,
-              ...getSecondaryButtonStyles,
               backgroundColor: "transparent",
+              ...getAddMoreItemTextStyles,
             }}
           >
             Add more items
@@ -679,14 +723,14 @@ const CartDrawer = ({
 
   return previewMode ? (
     <Box
-    style={{
-      width: "50%",
-      margin: "0 auto",
-      padding: 16,
-      boxSizing: "border-box",
-      border: '2px solid #f0f0f0'
-
-    }}
+      style={{
+        width: "50%",
+        margin: "0 auto",
+        padding: 16,
+        boxSizing: "border-box",
+        border: '2px solid #f0f0f0',
+        ...getDrawerStyles,
+      }}
     >{content}</Box>
   ) : (
     <>
