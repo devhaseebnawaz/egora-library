@@ -507,7 +507,11 @@ const CartDrawer = ({
           </Typography>
           <Button
             variant="contained"
-            onClick={onClose}
+            onClick={() => { 
+              if (!previewMode) {
+                onClose()
+              }
+            }}
             style={{
               textTransform: "none",
               paddingLeft: 24,
@@ -522,6 +526,7 @@ const CartDrawer = ({
         <>
           {cardItems?.map((cartItem, index) => (
             <CartItems
+              previewMode={previewMode}
               key={index}
               cartItem={cartItem}
               actions={actions}
@@ -540,8 +545,10 @@ const CartDrawer = ({
             fullWidth
             disableRipple
             disableElevation
-            onClick={() => {
-              onClose();
+            onClick={() => { 
+              if (!previewMode) {
+                onClose()
+              }
             }}
             startIcon={
               <Icon
@@ -646,7 +653,11 @@ const CartDrawer = ({
           <Button
             variant="contained"
             fullWidth
-            onClick={actions.naviagateCheckout}
+            onClick={() => { 
+              if (!previewMode) {
+                actions.naviagateCheckout();
+              }
+            }}
             endIcon={<Icon icon={arrowRightIcon} width={20} height={20} />}
             style={{
               textTransform: "none",
