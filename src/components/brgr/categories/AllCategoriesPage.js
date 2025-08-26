@@ -109,7 +109,62 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
 //     if (observer) observer.disconnect();
 //   };
 // }, [products]);
+ useEffect(() => {
+    if (
+      states.selectedCategoryItem &&
+      categoryRefs.current[states.selectedCategoryItem] &&
+      states?.isManualScroll.current
+    ) {
+      categoryRefs.current[states.selectedCategoryItem].current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
 
+      setTimeout(() => {
+        states.isManualScroll.current = false;
+      }, 500);
+    }
+  }, [states.selectedCategoryItem]);
+
+  useEffect(() => {
+    let observer = null;
+
+    const observe = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const visibleCategory = entry.target.getAttribute('data-category-name');
+              if (visibleCategory && visibleCategory !== states.selectedCategoryItem) {
+                if (!states?.isManualScroll.current) {
+                  states.setSelectedCategoryItem(visibleCategory);
+                }
+              }
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.5,
+        }
+      );
+
+      Object.values(categoryRefs.current).forEach((ref) => {
+        if (ref?.current) {
+          observer.observe(ref.current);
+        }
+      });
+    };
+
+    const timeout = setTimeout(() => {
+      observe();
+    }, 200);
+
+    return () => {
+      clearTimeout(timeout);
+      if (observer) observer.disconnect();
+    };
+  }, [products]);
 
   const getCategoryNameStyles = {
     color:
