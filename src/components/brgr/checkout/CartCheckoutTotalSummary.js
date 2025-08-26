@@ -173,15 +173,12 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   
   return (
     <>
-      <Box>
-        <Typography variant="h3" sx={{ fontWeight: "700", ml: 2, fontSize: 25, mb: 1, ...getOrderHeadingStyles }}>
-          Order Total
+      <Card sx={{ mb:2, backgroundColor: '#f7f7f7' }}>
+        <CardContent sx={{ padding: '16px !important' }}>
+          <Stack spacing={1}>    
+        <Typography variant="h4" sx={{ fontWeight: "700", fontSize: 25,  ...getOrderHeadingStyles }}>
+          Your Order
         </Typography>
-      </Box>
-
-      <Card sx={{ border: "1px solid rgba(0, 0, 0, 0.10)", borderRadius: "20px" }}>
-        <CardContent>
-          <Stack spacing={2}>
             <Stack direction="row" justifyContent="space-between">
               <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Sub Total</Typography>
               <Typography variant="subtitle2" sx={{...getDescriptionStyles}}>Rs. {fNumber(subTotal)}</Typography>

@@ -21,7 +21,7 @@ import { fNumber } from "../../../utils/formatNumber";
 // import capitalizeWords from "src/utils/capitalizeWords";
 
 
-const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, layout, globalComponentStyles, themeColors }) => {
+const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, layout, globalComponentStyles, themeColors }) => {
     const getItemPriceStyles = {
         color:
             layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextColor?.value !== ""
@@ -608,16 +608,14 @@ const CartItems = ({ showButtons = true, actions, cartItem, index, showDeleteInd
                     </Box>
                 </Box>
 
-                {/* {index < cardItems.data.items.length - 1 && (
+                 {index < cardItems?.length - 1 && (
                     <Divider
                         sx={{
-                            marginRight: "13px",
-                            marginLeft: "8px",
                             marginTop: "10px",
-                            borderColor: "#f0820373",
+                            borderColor: "#E0E0E0",
                         }}
                     />
-                )} */}
+                )}
             </>
 
         </Box>

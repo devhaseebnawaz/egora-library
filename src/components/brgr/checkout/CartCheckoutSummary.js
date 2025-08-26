@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import CartItems from '../header/CartItems';
 import CartCheckoutTotalSummary from './CartCheckoutTotalSummary';
 import PaymentMethods from './PaymentMethods';
+import { RHFTextField } from "../../../components/hook-form";
 
 
 const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
@@ -118,39 +119,38 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
         ((orderType === "storeDelivery" && isCardAvailableOnDelivery) ||
             (orderType === "storePickUp" && isCardAvailableOnPickUp));
 
-            
     const canShowPaymentMethods = isCashAllowed || isCardAllowed;
 
     const UserSchema = Yup.object().shape({
-    firstName: Yup.string().required("First name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
-    lastName: Yup.string().required("Last name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
-    phone: Yup.string().required("Phone is required").matches(/^\d+$/, "Only numbers allowed").length(10, "10 digits required"),
-    email: Yup.string().required("Email is required").email("Invalid email"),
-    address: Yup.object().shape({
-      street: Yup.string().when([], {
-        is: () => orderType === "storeDelivery",
-        then: (schema) => schema.required("Street is required"),
-        otherwise: (schema) => schema.notRequired(),
-      }),
-      area: Yup.string().when([], {
-        is: () => orderType === "storeDelivery",
-        then: (schema) => schema.required("Area is required"),
-        otherwise: (schema) => schema.notRequired(),
-      }),
-      city: Yup.string(),
-    }),
+        firstName: Yup.string().required("First name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
+        lastName: Yup.string().required("Last name is required").matches(/^[a-zA-Z ]*$/, "Only alphabets allowed"),
+        phone: Yup.string().required("Phone is required").matches(/^\d+$/, "Only numbers allowed").length(10, "10 digits required"),
+        email: Yup.string().required("Email is required").email("Invalid email"),
+        address: Yup.object().shape({
+            street: Yup.string().when([], {
+                is: () => orderType === "storeDelivery",
+                then: (schema) => schema.required("Street is required"),
+                otherwise: (schema) => schema.notRequired(),
+            }),
+            area: Yup.string().when([], {
+                is: () => orderType === "storeDelivery",
+                then: (schema) => schema.required("Area is required"),
+                otherwise: (schema) => schema.notRequired(),
+            }),
+            city: Yup.string(),
+        }),
     });
 
-   const defaultValues = {
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    address: {
-        street: "",
-        area: "",
-        city:  states.selectedVenue?.city ?? "",
-    },   
+    const defaultValues = {
+        firstName: "",
+        lastName: "",
+        phone: "",
+        email: "",
+        address: {
+            street: "",
+            area: "",
+            city: states.selectedVenue?.city ?? "",
+        },
     };
 
     const methods = useForm({
@@ -188,7 +188,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{  py: { xs: 10, sm: 10, md: 10 }, px: { xs: 2, sm: 2, md: 10 }, backgroundColor: '#f5f5f5'}} >
+            <Box sx={{ py: { xs: 10, sm: 10, md: 10 }, px: { xs: 2, sm: 2, md: 10 } }} >
                 <Grid container spacing={3} justifyContent="center">
                     {states.logoUrl &&
                         <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -196,77 +196,58 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                         </Grid>
                     }
 
-                    <Grid item xs={12} md={12} container spacing={2}>
-                        <Grid item xs={12} md={7}>
-                            <Paper sx={{ p: 2 }}>
-                                <Typography fontWeight="bold" sx={{ ...getHeadingStyles }}>
-                                    This is a <span style={{ fontWeight: 700 }}>{"  "}{states.orderType} order</span>
+                    <Grid item xs={12} md={12} container spacing={2} >
+                        <Grid item xs={12} md={7} >
+                            <Paper sx={{ p: 4, backgroundColor: '#f7f7f7' }} >
+                                <Typography fontWeight="bold" fontSize={20}   >
+                                    Checkout
                                 </Typography>
-                                <Typography mt={1} sx={{ ...getDescriptionStyles }} >You have to collect your order from</Typography>
+                                <Typography sx={{ ...getHeadingStyles }}>
+                                    This is a <span style={{ fontWeight: "bold", fontWeight: 600 }}>{"  "}{states.orderType == 'storePickUp' ? 'PickUp Order' : 'Delivery Order'}</span>
+                                </Typography>
+                                <Typography mb={2} sx={{ ...getHeadingStyles }}  >
+                                    Just a last step, please enter your details
+                                </Typography>
+                                <Divider
+                                    sx={{
+                                        marginTop: "10px",
+                                        borderColor: "#E0E0E0",
+                                    }}
+                                />
                                 <Box mt={2}>
-                                    <Typography fontWeight="bold" sx={{ ...getHeadingStyles }} >{states?.selectedVenue?.name}</Typography>
-                                    <Typography>
+                                    {/* <Typography fontWeight="bold" sx={{ ...getHeadingStyles }} >{states?.selectedVenue?.name}</Typography> */}
+                                    {/* <Typography>
                                        <Box component="strong" sx={{ ...getHeadingStyles }}>
                                             Location:
                                         </Box>{' '}
                                         <Box component="strong" sx={{ ...getDescriptionStyles }}>
                                         {states?.selectedVenue?.venueAddressOne} {states?.selectedVenue?.venueAddressTwo}
                                         </Box>{' '}
-                                    </Typography>
-                                    <Link href="#" underline="hover" sx={{ fontSize: 14 }}>
+                                    </Typography> */}
+                                    {/* <Link href="#" underline="hover" sx={{ fontSize: 14 }}>
                                         View Location 📍
-                                    </Link>
-                                    <Typography>
+                                    </Link> */}
+                                    {/* <Typography>
                                         <Box component="strong" sx={{ ...getHeadingStyles }}>
                                             Phone:
                                         </Box>{' '}
                                         <Link href="tel:03XX-XXXXXXX" underline="hover" sx={{ ...getDescriptionStyles }}>
                                             {states?.selectedVenue?.venuePhoneNumber}
                                         </Link>
+                                    </Typography> */}
+                                </Box >
+                                <UserInfoPage states={states} layout={layout} />
+                                <Box mt={2}>
+                                    <Typography fontWeight="bold" sx={{ ...getHeadingStyles }}  >
+                                        Delivery Address
                                     </Typography>
+                                    <RHFTextField name="address.area" sx={{ backgroundColor: "white" }} value={`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressTwo}`} />
                                 </Box>
-                            </Paper>
-
-                            <Paper sx={{ p: 2, mt: 3 }}>
-                                <Typography fontWeight="bold" mb={2} sx={{ ...getHeadingStyles }}  >
-                                    JUST A LAST STEP, PLEASE FILL YOUR INFORMATION BELOW
-                                </Typography>
-                                <UserInfoPage  states={states}/>
-                            </Paper>
-                        </Grid>
-
-                        <Grid item xs={12} md={5}>
-                            <Paper sx={{ p: 2 }}>
-
-                                {cartItems?.map((cartItem, index) => (
-                                    <CartItems
-                                        showButtons={false}
-                                        key={index}
-                                        cartItem={cartItem}
-                                        actions={actions}
-                                        index={index}
-                                        showDeleteIndex={states.showDeleteIndex}
-                                        setShowDeleteIndex={states.setShowDeleteIndex}
-                                        handleRemoveFromCart={actions.handleRemoveFromCart}
-                                        handleMenuItemClick={actions.handleMenuItemClick}
-                                        states={states}
-                                    />
-                                ))}
-                                <CartCheckoutTotalSummary
-                                    getDescriptionStyles={getDescriptionStyles}
-                                    getHeadingStyles={getHeadingStyles}
-                                    getOrderHeadingStyles={getOrderHeadingStyles}
-                                    open={states.locationModalOpen}
-                                    handleClose={actions.handleOpenLocationModal}
-                                    themeColors={themeColors}
-                                    actions={actions}
-                                    prop={prop}
-                                    styles={styles}
-                                    states={states}
-                                    setOrderData={setOrderData}
-                                />
-                                {canShowPaymentMethods ? (
-                                    <>
+                                {canShowPaymentMethods && (
+                                    <Box mt={2}>
+                                        <Typography fontWeight="bold" sx={{ ...getHeadingStyles }}  >
+                                            Payment Information
+                                        </Typography>
                                         <PaymentMethods
                                             actions={actions}
                                             prop={prop}
@@ -274,6 +255,54 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                             states={states}
                                             PaymentComponent={PaymentComponent}
                                         />
+                                    </Box>
+                                )}
+
+                            </Paper>
+                        </Grid>
+
+                        <Grid item xs={12} md={5}>
+                            <Grid item xs={12} md={12} mb={2}>
+                                <Paper sx={{ p: 2, mb: 2, backgroundColor: '#f7f7f7' }}>
+                                    {cartItems?.map((cartItem, index) => (
+                                        <CartItems
+                                            showButtons={false}
+                                            key={index}
+                                            cartItem={cartItem}
+                                            actions={actions}
+                                            index={index}
+                                            showDeleteIndex={states.showDeleteIndex}
+                                            setShowDeleteIndex={states.setShowDeleteIndex}
+                                            handleRemoveFromCart={actions.handleRemoveFromCart}
+                                            handleMenuItemClick={actions.handleMenuItemClick}
+                                            states={states}
+                                            cardItems={cartItems}
+                                        />
+                                    ))}
+                                </Paper>
+                            </Grid>
+
+                            <Grid item xs={12} md={12}>
+
+                                <Paper >
+                                    <CartCheckoutTotalSummary
+                                        getDescriptionStyles={getDescriptionStyles}
+                                        getHeadingStyles={getHeadingStyles}
+                                        getOrderHeadingStyles={getOrderHeadingStyles}
+                                        open={states.locationModalOpen}
+                                        handleClose={actions.handleOpenLocationModal}
+                                        themeColors={themeColors}
+                                        actions={actions}
+                                        prop={prop}
+                                        styles={styles}
+                                        states={states}
+                                        setOrderData={setOrderData}
+                                    />
+                                </Paper>
+
+                                {canShowPaymentMethods ? (
+                                    <>
+
                                         {states.paymentMethod === "cash" &&
                                             <Button
                                                 variant="contained"
@@ -289,7 +318,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                                 {states.errorForPlaceOrder}
                                             </Alert>
                                         )}
-                                         {
+                                        {
                                             previewMode && <Box textAlign="center" mt={2}>
                                                 <Link underline="hover" fontSize={14} >
                                                     ← continue to add more items
@@ -310,7 +339,8 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                         You can't place the order.
                                     </Typography>
                                 }
-                            </Paper>
+                                {/* </Paper> */}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
