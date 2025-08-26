@@ -39,15 +39,33 @@ export default function UserInfoPage({ states, layout }) {
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                         <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
-                            First Name
+                            First Name*
                         </Typography>
-                        <RHFTextField name="firstName" sx={{ backgroundColor: "white" }} placeholder="First Name" fullWidth />
+                        <RHFTextField name="firstName" 
+                          sx={{
+                                "& .MuiInputBase-root": {
+                                    backgroundColor: "white",
+                                },
+                                "& .Mui-error .MuiInputBase-root": {
+                                    backgroundColor: "transparent",
+                                },
+                            }}
+                        placeholder="First Name" fullWidth />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
-                            Last Name
+                            Last Name*
                         </Typography>
-                        <RHFTextField name="lastName" sx={{ backgroundColor: "white" }} placeholder="Last Name" fullWidth />
+                        <RHFTextField name="lastName"
+                          sx={{
+                                "& .MuiInputBase-root": {
+                                    backgroundColor: "white",
+                                },
+                                "& .Mui-error .MuiInputBase-root": {
+                                    backgroundColor: "transparent",
+                                },
+                            }}
+                    placeholder="Last Name" fullWidth />
                     </Grid>
                 </Grid>
             </Grid>
@@ -62,7 +80,14 @@ export default function UserInfoPage({ states, layout }) {
                             fullWidth
                             name="phone"
                             placeholder="3xxxxxxxxx"
-                            sx={{ backgroundColor: "white" }}
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    backgroundColor: "white",
+                                },
+                                "& .Mui-error .MuiInputBase-root": {
+                                    backgroundColor: "transparent",
+                                },
+                            }}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -88,27 +113,81 @@ export default function UserInfoPage({ states, layout }) {
                         <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
                             Email Address*
                         </Typography>
-                        <RHFTextField name="email" sx={{ backgroundColor: "white" }} placeholder="Enter your email" fullWidth />
+                        <RHFTextField name="email" 
+                         sx={{
+                                "& .MuiInputBase-root": {
+                                    backgroundColor: "white",
+                                },
+                                "& .Mui-error .MuiInputBase-root": {
+                                    backgroundColor: "transparent",
+                                },
+                            }}
+                       placeholder="Enter your email" fullWidth />
                     </Grid>
                 </Grid>
             </Grid>
             {orderType === "storeDelivery" && (
                 <>
                     <Grid item xs={12} sm={12}>
-                        <RHFTextField name="address.street" label="House No / Apartment No / Street No*" fullWidth />
+                        <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
+                            Delivery Address*
+                        </Typography>
+                        <RHFTextField name="address.street"
+                           sx={{
+                                "& .MuiInputBase-root": {
+                                    backgroundColor: "white",
+                                },
+                                "& .Mui-error .MuiInputBase-root": {
+                                    backgroundColor: "transparent",
+                                },
+                            }}
+                         fullWidth />
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <RHFTextField name="address.area" label="Area*" />
+                                <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
+                                    Area*
+                                </Typography>
+                                <RHFTextField name="address.area"
+                                   sx={{
+                                   "& .MuiInputBase-root": {
+                                    backgroundColor: "white",
+                                    },
+                                    "& .Mui-error .MuiInputBase-root": {
+                                    backgroundColor: "transparent",
+                                },
+                                 }}
+                             />
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <RHFTextField name="address.city" label="City*" disabled />
+                                <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
+                                    City*
+                                </Typography>
+                                <RHFTextField name="address.city" 
+                                sx={{ backgroundColor: "white" }}
+                                disabled />
                             </Grid>
                         </Grid>
                     </Grid>
                 </>
             )}
+              {/* <Grid item xs={12} sm={12}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={12}>
+                        <Typography fontWeight="600" sx={{ ...getHeadingStyles }}  >
+                            {orderType === "storeDelivery" ? "Delivery Instructions" : "Pickup Notes"}
+                        </Typography>
+                        <RHFTextField name="notes" sx={{ backgroundColor: "white" }}
+                            placeholder={
+                                orderType === "storeDelivery"
+                                    ? "Delivery Instructions"
+                                    : "Notes"
+                            }
+                            fullWidth />
+                    </Grid>
+                </Grid>
+            </Grid> */}
         </Grid>
     );
 }
