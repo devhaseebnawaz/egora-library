@@ -45,7 +45,7 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
         onChange={(event) => actions.handleSetPaymentMethod(event.target.value)}
         sx={{ marginTop: 0 }}
       >
-        <Stack spacing={3}>
+        <Stack sx={{ display: 'flex', flexDirection: { sm: 'row' }, justifyContent: 'space-between', gap: 1 }}>
           {PAYMENT_OPTIONS.filter((option) => {
             if (option.value === "cash") return isCashAvailable();
             if (option.value === "card") return isCardAvailable();
@@ -84,11 +84,11 @@ function PaymentOption({
       variant="outlined"
       sx={{
         display: "flex",
-        alignItems: "center",
         position: "relative",
+        justifyContent: "space-between",
+        width:"100%",
         transition: (theme) => theme.transitions.create("all"),
         ...(hasChild && {
-          flexWrap: "wrap",
         }),
       }}
     >
