@@ -10,15 +10,20 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
     useEffect(() => {
-        const el = states?.scrollRef?.current;
-        if (el) {
-            el.addEventListener("scroll", actions.updateArrows);
-            actions.updateArrows();
+        if (states.selectedCategoryItem && states.scrollRef?.current) {
+            const buttons = states.scrollRef.current.querySelectorAll("button");
+            const activeButton = Array.from(buttons).find(
+                (btn) => btn.textContent === states.selectedCategoryItem
+            );
+            if (activeButton) {
+                activeButton.scrollIntoView({
+                    behavior: "smooth",
+                    inline: "nearest",
+                    block: "nearest"
+                });
+            }
         }
-        return () => {
-            if (el) el.removeEventListener("scroll", actions.updateArrows);
-        };
-    }, []);
+    }, [states.selectedCategoryItem]);
 
     const handleCategoryClick = (category) => {
         actions.handleCategoryClick(category);
