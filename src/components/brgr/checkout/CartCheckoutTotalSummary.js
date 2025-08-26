@@ -206,10 +206,10 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
               </Stack>
             )}
 
-            <Stack direction="row" justifyContent="space-between">
+            {/* <Stack direction="row" justifyContent="space-between">
               <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Tip</Typography>
               <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {fNumber(selectedTip || 0)}</Typography>
-            </Stack>
+            </Stack> */}
 
             {isTaxApplicableOnStore && (
               <Stack direction="row" justifyContent="space-between">
