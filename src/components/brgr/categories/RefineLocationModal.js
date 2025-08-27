@@ -40,7 +40,7 @@ export default function RefineLocationModal({
 }) {
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyDL9J82iDhcUWdQiuIvBYa0t5asrtz3Swk",
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     });
 
 
