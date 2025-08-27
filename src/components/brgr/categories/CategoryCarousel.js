@@ -159,7 +159,13 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                     const bgColor = styles?.CategoryCarouselHoverColor?.value !== ""
                                         ? styles.CategoryCarouselHoverColor.value
                                         : themeColors?.CategoryCarouselHoverColor?.value || "transparent";
+                                    const color =  styles?.CategoryCarouselTextHoverColor?.value != ""
+                                        ? styles?.CategoryCarouselTextHoverColor?.value
+                                        : globalComponentStyles?.Text?.color?.value != ""
+                                            ? globalComponentStyles?.Text?.color?.value :
+                                            themeColors?.CategoryCarouselTextHoverColor?.value;
                                     e.currentTarget.style.backgroundColor = bgColor;
+                                    e.currentTarget.style.color = color;
                                 }
                             }}
                             onMouseOut={(e) => { if (states.selectedCategoryItem !== cat) e.currentTarget.style.backgroundColor = "transparent"; }}

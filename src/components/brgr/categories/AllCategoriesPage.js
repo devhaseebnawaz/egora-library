@@ -151,9 +151,12 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
             <CategoryLayout
             // banner={<Banner img={category.bannerImg} />}
             >
+            { prop.editable.categoryId.value[index]?.img ? 
+              <Banner img={prop.editable.categoryId.value[index]?.img} /> : 
               <Typography variant="h3" style={{ marginBottom: "16px" , ...getCategoryNameStyles }}>
-              {category.name}
-            </Typography>
+                {category.name} 
+              </Typography>
+            }
 
             <Grid container spacing={2}>
               {category.items.map((item, index) => (
