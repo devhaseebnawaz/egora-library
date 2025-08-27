@@ -141,7 +141,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
 
   return (
     <Container style={{ marginTop: "30px" }}>
-      {products.map((category) => (
+      {products.map((category,index) => (
         <Box
           key={category.id}
           ref={categoryRefs.current[category.name]}
