@@ -14,7 +14,8 @@ export default function CartBottomBar({
     actions,
     previewMode = false,
     globalComponentStyles,
-    layout
+    layout,
+    themeColors
 }) {
     // console.log("CartBottomBar layout", layout);
     // console.log("CartBottomBar globalComponentStyles", globalComponentStyles);
@@ -41,6 +42,39 @@ export default function CartBottomBar({
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    const getTextStyles = {
+        color:
+            layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextColor?.value !== ""
+                ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.cartBottomBarTextColor?.value}`,
+
+        fontSize:
+            layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextSize?.value != 0
+                ? layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextSize?.value
+                : globalComponentStyles?.Text?.size?.value != 0
+                    ? globalComponentStyles?.Text?.size?.value
+                    : themeColors?.cartBottomBarTextSize?.value,
+
+        fontFamily: layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextFont?.value != ""
+            ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.cartBottomBarTextFont?.value}`,
+
+        fontStyle: layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextStyle?.value !== ""
+            ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.cartBottomBarTextStyle?.value}`,
+        backgroundColor: layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarBackgroundColor?.value !== ""
+            ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarBackgroundColor?.value}`
+            : globalComponentStyles?.Background?.color?.value !== ""
+                ? globalComponentStyles?.Background?.color?.value
+                : `${themeColors?.cartBottomBarBackgroundColor?.value}`,
     };
 
     const content = (
@@ -84,10 +118,10 @@ export default function CartBottomBar({
                 {states?.cardItems?.items?.length > 0 && (
                     <Box
                         style={{
+                            ...getTextStyles,
                             display: 'flex',
                             alignItems: 'center',
                             gap: 30,
-                            backgroundColor: '#121212',
                             padding: 16,
                             borderRadius: '20px',
                             maxWidth: 400,
@@ -140,8 +174,8 @@ export default function CartBottomBar({
         >
             <Box
                 sx={{
+                    ...getTextStyles,
                     width: '90%',
-                    backgroundColor: "#fff",
                     borderRadius: "20px",
                     boxShadow: 24,
                     padding: "32px 24px 24px",
