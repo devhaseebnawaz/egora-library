@@ -135,13 +135,13 @@ export default function CartBottomBar({
                                 actions.handleOpenCart()
                             }
                         }}>
-                        <Box style={{ color: 'white', fontWeight: 'bold' }}>
-                            {states.cardItems?.items.length}
-                        </Box>
-                        <Typography style={{ color: 'white', fontWeight: 'bold' }}>
+                        <Typography style={{ fontWeight: 'bold' }}>
+                            {states?.cardItems?.items?.length}
+                        </Typography>
+                        <Typography style={{  fontWeight: 'bold' }}>
                             View Cart
                         </Typography>
-                        <Typography style={{ color: 'white', fontWeight: 'bold' }}>
+                        <Typography style={{ fontWeight: 'bold' }}>
                             Rs. {fNumber(calculateSubTotal(cardItems))}
                         </Typography>
                     </Box>
