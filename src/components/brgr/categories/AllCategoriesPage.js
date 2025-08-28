@@ -114,47 +114,55 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
       styles?.AllCategoriesCategoryTextColor?.value !== ""
         ? styles?.AllCategoriesCategoryTextColor?.value
         : globalComponentStyles?.Text?.color?.value !== ""
-        ? globalComponentStyles?.Text?.color?.value
-        : themeColors?.AllCategoriesCategoryTextColor?.value,
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.AllCategoriesCategoryTextColor?.value,
 
     fontSize:
       getFontSize(styles?.AllCategoriesCategoryTextSize?.value != 0
         ? styles?.AllCategoriesCategoryTextSize?.value
         : globalComponentStyles?.Text?.size?.value != 0
-        ? globalComponentStyles?.Text?.size?.value
-        : themeColors?.AllCategoriesCategoryTextSize?.value,mdDown,20),
+          ? globalComponentStyles?.Text?.size?.value
+          : themeColors?.AllCategoriesCategoryTextSize?.value, mdDown, 20),
 
     fontFamily:
       styles?.AllCategoriesCategoryTextFont?.value !== ""
         ? styles?.AllCategoriesCategoryTextFont?.value
         : globalComponentStyles?.Text?.fontFamily?.value !== ""
-        ? globalComponentStyles?.Text?.fontFamily?.value
-        : themeColors?.AllCategoriesCategoryTextFont?.value,
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : themeColors?.AllCategoriesCategoryTextFont?.value,
 
     fontStyle:
       styles?.AllCategoriesCategoryTextStyle?.value !== ""
         ? styles?.AllCategoriesCategoryTextStyle?.value
         : globalComponentStyles?.Text?.fontWeight?.value !== ""
-        ? globalComponentStyles?.Text?.fontWeight?.value
-        : themeColors?.AllCategoriesCategoryTextStyle?.value,
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.AllCategoriesCategoryTextStyle?.value,
   };
 
+  const values = prop.editable.categoryId.value;
+
+  const valueIds = values.map(item => item.id);
+
+  const sortedCategory = valueIds
+    .map(id => products.find(cat => cat.id === id))
+    .filter(Boolean);
+    
   return (
     <Container style={{ marginTop: "30px" }}>
-      {products.map((category,index) => (
+      {sortedCategory.map((category, index) => (
         <Box
           key={category.id}
           ref={categoryRefs.current[category.name]}
           data-category-name={category.name}
           style={{ margin: "48px 0px" }}
         >
-            <CategoryLayout
-            // banner={<Banner img={category.bannerImg} />}
-            >
-            { prop.editable.categoryId.value[index]?.img ? 
-              <Banner img={prop.editable.categoryId.value[index]?.img} /> : 
-              <Typography variant="h3" style={{ marginBottom: "16px" , ...getCategoryNameStyles }}>
-                {category.name} 
+          <CategoryLayout
+          // banner={<Banner img={category.bannerImg} />}
+          >
+            {prop.editable.categoryId.value[index]?.img ?
+              <Banner img={prop.editable.categoryId.value[index]?.img} /> :
+              <Typography variant="h3" style={{ marginBottom: "16px", ...getCategoryNameStyles }}>
+                {category.name}
               </Typography>
             }
 

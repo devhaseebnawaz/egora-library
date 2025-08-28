@@ -17,6 +17,7 @@ export default function CartBottomBar({
     layout,
     themeColors
 }) {
+    layout = layout?.json ? layout?.json : layout
     // console.log("CartBottomBar layout", layout);
     // console.log("CartBottomBar globalComponentStyles", globalComponentStyles);
     // const { cartItems } = useCart();
