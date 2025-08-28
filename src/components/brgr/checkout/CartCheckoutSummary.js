@@ -265,8 +265,8 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
                                     )
                                 }
-                                
-                                <UserInfoPage states={states} layout={layout} globalComponentStyles={globalComponentStyles} />
+
+                                <UserInfoPage states={states} layout={layout} globalComponentStyles={globalComponentStyles} themeColors={themeColors} />
                                 {canShowPaymentMethods && (
                                     <Box mt={2}>
                                         <Typography fontWeight="bold" sx={{ ...getHeadingStyles }}  >
@@ -290,6 +290,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                 <Paper sx={{ p: 2, mb: 2, backgroundColor: '#f7f7f7' }}>
                                     {cartItems?.map((cartItem, index) => (
                                         <CartItems
+                                            previewMode={previewMode}
                                             showButtons={false}
                                             key={index}
                                             cartItem={cartItem}

@@ -21,7 +21,7 @@ import { fNumber } from "../../../utils/formatNumber";
 // import capitalizeWords from "src/utils/capitalizeWords";
 
 
-const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, layout, globalComponentStyles, themeColors }) => {
+const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, layout, globalComponentStyles, themeColors, previewMode }) => {
     const getItemPriceStyles = {
         color:
             layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextColor?.value !== ""
@@ -221,6 +221,9 @@ const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, sh
         : globalComponentStyles?.Button?.borderRadius?.value !== ""
             ? globalComponentStyles?.Button?.borderRadius?.value
             : themeColors?.cartDrawerItemQtyBorderRadius?.value,
+        border: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyBorderColor?.value !== ""
+            ? `2px solid ${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyBorderColor?.value}`
+                : `2px solid  ${themeColors?.cartDrawerItemQtyBorderColor?.value}`,
     };
 
     // console.log("the cart item sis", cartItem)
@@ -536,7 +539,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, sh
                                     height: "40px",
                                     width: "130px",
                                     borderRadius: "20px",
-                                    border: "2px solid #F08203",
+                                    // border: "2px solid #F08203",
                                     marginRight: "10px",
                                     display: "flex",
                                     alignItems: "center",
