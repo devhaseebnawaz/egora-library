@@ -290,6 +290,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                 <Paper sx={{ p: 2, mb: 2, backgroundColor: '#f7f7f7' }}>
                                     {cartItems?.map((cartItem, index) => (
                                         <CartItems
+                                            previewMode={previewMode}
                                             showButtons={false}
                                             key={index}
                                             cartItem={cartItem}
