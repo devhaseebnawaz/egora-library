@@ -177,23 +177,31 @@ const theme = useTheme();
           <Box>
             <Typography
               variant="h6"
-              sx={{ fontWeight: "bold", ...getItemNameStyles }}
+              sx={{
+                fontWeight: "bold",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,   // max 2 lines
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                minHeight: "3em",     // ensure height same even if text short
+                ...getItemNameStyles
+              }}
             >
               {item.name}
             </Typography>
 
-            {/* Description with 3-line ellipsis */}
             <Typography
               variant="body1"
               sx={{
                 color: "#555",
                 marginBottom: "16px",
                 display: "-webkit-box",
-                WebkitLineClamp: 3,
+                WebkitLineClamp: 2,   // max 2 lines for description also
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                minHeight: "4.5em", // ensures height same even if text is short
+                minHeight: "3em",     // fix height for uniformity
               }}
             >
               {item.description}
