@@ -4,7 +4,7 @@ import { RHFTextField } from "../../../components/hook-form";
 
 const CountryCode = process.env.NEXT_PUBLIC_COUNTRY_CODE;
 
-export default function UserInfoPage({ states, layout, globalComponentStyles }) {
+export default function UserInfoPage({ states, layout, globalComponentStyles, themeColors }) {
     const { orderType } = states ?? {}
     const getHeadingStyles = {
         color:
