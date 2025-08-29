@@ -115,15 +115,23 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
 
                     {states?.categoryCarousel?.map((cat, idx) => (
                         <Button
+                            disableRipple
+                            disableElevation
                             key={idx}
                             style={{
                                 flex: "0 0 auto",
                                 whiteSpace: "nowrap",
-                                color: styles?.CategoryCarouselTextColor?.value != ""
-                                    ? styles?.CategoryCarouselTextColor?.value
-                                    : globalComponentStyles?.Text?.color?.value != ""
-                                        ? globalComponentStyles?.Text?.color?.value :
-                                        themeColors?.CategoryCarouselTextColor?.value,
+                                color: states.selectedCategoryItem === cat
+                                    ? (styles?.CategoryCarouselTextHoverColor?.value !== ""
+                                        ? styles?.CategoryCarouselTextHoverColor?.value
+                                        : globalComponentStyles?.Text?.color?.value !== ""
+                                            ? globalComponentStyles?.Text?.color?.value
+                                            : themeColors?.CategoryCarouselTextHoverColor?.value)
+                                    : (styles?.CategoryCarouselTextColor?.value !== ""
+                                        ? styles?.CategoryCarouselTextColor?.value
+                                        : globalComponentStyles?.Text?.color?.value !== ""
+                                            ? globalComponentStyles?.Text?.color?.value
+                                            : themeColors?.CategoryCarouselTextColor?.value),
 
                                 fontSize: getFontSize(styles?.CategoryCarouselTextSize?.value != ""
                                     ? styles?.CategoryCarouselTextSize?.value
@@ -168,14 +176,13 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                     e.currentTarget.style.color = color;
                                 }
                             }}
-                            onMouseOut={(e) => { 
-                                if (states.selectedCategoryItem !== cat) 
-                                 e.currentTarget.style.backgroundColor = "transparent"; 
-                                 e.currentTarget.style.color = styles?.CategoryCarouselTextColor?.value != ""
-                                 ? styles?.CategoryCarouselTextColor?.value
-                                 : globalComponentStyles?.Text?.color?.value != ""
-                                     ? globalComponentStyles?.Text?.color?.value :
-                                     themeColors?.CategoryCarouselTextColor?.value
+                            onMouseOut={(e) => {
+                                if (states.selectedCategoryItem !== cat) {
+                                    e.currentTarget.style.backgroundColor = "transparent";
+                                    e.currentTarget.style.color = styles?.CategoryCarouselTextColor?.value ||
+                                        globalComponentStyles?.Text?.color?.value ||
+                                        themeColors?.CategoryCarouselTextColor?.value;
+                                }
                             }}
                             onClick={() => handleCategoryClick(cat)}
                         >
