@@ -144,7 +144,9 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
   const valueIds = values.map(item => item.id);
 
   const sortedCategory = valueIds
-    .map(id => products.find(cat => { return  cat.id === id || cat.id.toString() == cat.franchiseCategoryId.toString()}))
+    .map(id => products.find(cat => { 
+      return  cat?.id === id || id?.toString() == cat?.franchiseCategoryId?.toString()
+    }))
     .filter(Boolean);
     
   return (
