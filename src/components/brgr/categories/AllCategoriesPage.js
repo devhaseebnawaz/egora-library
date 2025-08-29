@@ -62,7 +62,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
       const yOffset = mdDown ? 0 : -100;
 
       const y =
-        element.getBoundingClientRect().top +
+        element?.getBoundingClientRect().top +
         window.pageYOffset +
         yOffset;
 
