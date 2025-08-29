@@ -52,16 +52,21 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
     }
   }, [products]);
   
- useEffect(() => {
+  useEffect(() => {
     if (
       states.selectedCategoryItem &&
       categoryRefs.current[states.selectedCategoryItem] &&
       states?.isManualScroll.current
     ) {
-      categoryRefs.current[states.selectedCategoryItem].current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      const element = categoryRefs.current[states.selectedCategoryItem].current;
+      const yOffset = -80;
+
+      const y =
+        element.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
 
       setTimeout(() => {
         states.isManualScroll.current = false;
