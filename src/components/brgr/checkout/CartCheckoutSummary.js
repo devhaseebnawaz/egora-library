@@ -330,6 +330,8 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
                                         {states.paymentMethod === "cash" &&
                                             <Button
+                                                disableRipple
+                                                disableElevation
                                                 variant="contained"
                                                 fullWidth
                                                 type="submit"
