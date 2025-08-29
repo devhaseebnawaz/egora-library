@@ -224,6 +224,8 @@ const theme = useTheme();
             </Box>
 
             <Button
+               disableRipple
+               disableElevation
               variant="contained"
               sx={{
                 padding: "8px 32px",
