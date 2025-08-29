@@ -59,7 +59,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
       states?.isManualScroll.current
     ) {
       const element = categoryRefs.current[states.selectedCategoryItem].current;
-      const yOffset = -80;
+      const yOffset = mdDown ? 0 : -100;
 
       const y =
         element.getBoundingClientRect().top +
