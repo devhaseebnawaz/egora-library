@@ -525,7 +525,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                         )}
                                                     </TableCell>
                                                     <TableCell align="center">{item.qty}</TableCell>
-                                                    <TableCell align="right">Rs. {Number(item.qty) * Number(tem.price)}</TableCell>
+                                                    <TableCell align="right">Rs. {Number(item.qty) * Number(item.price)}</TableCell>
                                                 </TableRow>
 
                                             ))}
