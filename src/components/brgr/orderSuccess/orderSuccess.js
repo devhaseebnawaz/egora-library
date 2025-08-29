@@ -568,7 +568,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                             </Typography>
                         </Box>
 
-                        <Button variant="contained"
+                        {/* <Button variant="contained"
                             // onClick={redirectHome}
                             sx={{
                                 background: "#0F1110",
@@ -576,7 +576,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                             }}
                         >
                             Place another order
-                        </Button>
+                        </Button> */}
                     </Box>
                     <Box
                         sx={{
