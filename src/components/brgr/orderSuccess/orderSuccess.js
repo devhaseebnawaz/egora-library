@@ -525,7 +525,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                         )}
                                                     </TableCell>
                                                     <TableCell align="center">{item.qty}</TableCell>
-                                                    <TableCell align="right">Rs. {item.price}</TableCell>
+                                                    <TableCell align="right">Rs. {Number(item.qty) * Number(tem.price)}</TableCell>
                                                 </TableRow>
 
                                             ))}
@@ -563,7 +563,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                     fontWeight: 700,
                                     marginLeft: 10
                                 }}>
-                                    Call us: 0333-3122223
+                                    Call us: 0{venuePhoneNumber}
                                 </span>
                             </Typography>
                         </Box>
