@@ -168,7 +168,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     customer: { ...data },
                 });
                 if (response) {
-                    actions.naviagateOrderSuccess();
+                    actions.naviagateOrderSuccess(response.data.id);
                 }
             } else {
                 let response = await actions.handlePlaceOrderFromCard({
