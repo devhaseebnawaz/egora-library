@@ -9,7 +9,7 @@ import { getFontSize } from "../../../utils/fontsize";
 import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
     const { activeOrder } = prop ?? {}
@@ -18,19 +18,19 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
     const { firstName, lastName, address, phone } = customer ?? {}
     const { street, area } = address ?? {}
     const theme = useTheme();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const mdDown = useMediaQuery(theme.breakpoints.down("md"));
 
 
-    const redirectHome = () => {
-        const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
-        const urlsToAppendId = ["http://localhost:3031", "http://stores.dev.egora.pk", "http://stores.stg.egora.pk", "http://stores.test.egora.pk", "http://stores.egora.pk"];
-        if (urlsToAppendId.includes(baseUrl)) {
-            navigate(`${baseUrl}/?${franchiseId.id}`)
-        } else {
-            navigate(`${baseUrl}`)
-        }
-    }
+    // const redirectHome = () => {
+    //     const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
+    //     const urlsToAppendId = ["http://localhost:3031", "http://stores.dev.egora.pk", "http://stores.stg.egora.pk", "http://stores.test.egora.pk", "http://stores.egora.pk"];
+    //     if (urlsToAppendId.includes(baseUrl)) {
+    //         navigate(`${baseUrl}/?${franchiseId.id}`)
+    //     } else {
+    //         navigate(`${baseUrl}`)
+    //     }
+    // }
 
     layout = layout?.json ? layout?.json : layout
 
@@ -569,7 +569,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                         </Box>
 
                         <Button variant="contained"
-                            onClick={redirectHome}
+                            // onClick={redirectHome}
                             sx={{
                                 background: "#0F1110",
                                 color: '#F1D9C4'
