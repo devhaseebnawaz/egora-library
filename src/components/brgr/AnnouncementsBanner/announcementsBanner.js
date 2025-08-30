@@ -1,9 +1,16 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { getScreenSizeCategory } from "../utils/fontsize";
 
 export default function AnnouncementsBanner({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
     const getTextBlockStyles = {
+        fontWeight:
+                   styles?.AnnouncementsBannerTextWeight?.value != ""
+                    ? styles?.AnnouncementsBannerTextWeight?.value
+                    : globalComponentStyles?.Text?.fontWeight?.value != ""
+                      ? globalComponentStyles?.Text?.fontWeight?.value :
+                      themeColors?.AnnouncementsBannerTextWeight?.value,
         color:
             styles?.AnnouncementsBannerTextColor?.value !== ""
                 ? styles?.AnnouncementsBannerTextColor?.value
@@ -12,11 +19,11 @@ export default function AnnouncementsBanner({ themeColors, actions, prop, styles
                     : themeColors?.AnnouncementsBannerTextColor?.value,
     
         fontSize:
-            styles?.AnnouncementsBannerTextSize?.value != 0
-                ? styles?.AnnouncementsBannerTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.AnnouncementsBannerTextSize?.value,
+            styles?.AnnouncementsBannerTextSize?.value[getScreenSizeCategory()] != 0
+                ? styles?.AnnouncementsBannerTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.AnnouncementsBannerTextSize?.value[getScreenSizeCategory()],
     
         fontFamily:
             styles?.AnnouncementsBannerTextFont?.value !== ""
@@ -28,8 +35,8 @@ export default function AnnouncementsBanner({ themeColors, actions, prop, styles
         fontStyle:
             styles?.AnnouncementsBannerTextStyle?.value !== ""
                 ? styles?.AnnouncementsBannerTextStyle?.value
-                : globalComponentStyles?.Text?.fontWeight?.value !== ""
-                    ? globalComponentStyles?.Text?.fontWeight?.value
+                : globalComponentStyles?.Text?.fontStyle?.value !== ""
+                    ? globalComponentStyles?.Text?.fontStyle?.value
                     : themeColors?.AnnouncementsBannerTextStyle?.value,
     };
 

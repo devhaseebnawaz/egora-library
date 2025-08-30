@@ -3,7 +3,7 @@
 import React from "react";
 import { Typography, Box, Link ,useMediaQuery} from "@mui/material";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from '../../../utils/fontsize';
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function CustomFooter({
   themeColors,
@@ -19,21 +19,25 @@ export default function CustomFooter({
   const linksArray = prop?.editable?.links?.value || [];
 
   const getFooterStyles = (type) => ({
+    fontWeight:
+      styles?.[type + "Weight"]?.value ||
+        globalComponentStyles?.Text?.fontWeight?.value ||
+        themeColors?.[type + "Weight"]?.value,
     color:
       styles?.[type + "Color"]?.value ||
       globalComponentStyles?.Text?.color?.value ||
       themeColors?.[type + "Color"]?.value,
     fontSize:
-      getFontSize(styles?.[type + "Size"]?.value ||
-      globalComponentStyles?.Text?.size?.value ||
-      themeColors?.[type + "Size"]?.value,mdDown,14),
+      styles?.[type + "Size"]?.value[getScreenSizeCategory()] ||
+      globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] ||
+      themeColors?.[type + "Size"]?.value[getScreenSizeCategory()],
     fontFamily:
       styles?.[type + "Font"]?.value ||
       globalComponentStyles?.Text?.fontFamily?.value ||
       themeColors?.[type + "Font"]?.value,
     fontStyle:
       styles?.[type + "Style"]?.value ||
-      globalComponentStyles?.Text?.fontWeight?.value ||
+      globalComponentStyles?.Text?.fontStyle?.value ||
       themeColors?.[type + "Style"]?.value,
   });
 

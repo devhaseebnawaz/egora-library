@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import arrowLeft from "@iconify-icons/mdi/chevron-left";
 import arrowRight from "@iconify-icons/mdi/chevron-right";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from "../../../utils/fontsize";
+import { getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function CategoryCarousel({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
     const theme = useTheme();
@@ -121,6 +121,12 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                             style={{
                                 flex: "0 0 auto",
                                 whiteSpace: "nowrap",
+                                fontWeight:
+                                    styles?.CategoryCarouselTextWeight?.value != ""
+                                        ? styles?.CategoryCarouselTextWeight?.value
+                                        : globalComponentStyles?.Text?.fontWeight?.value != ""
+                                            ? globalComponentStyles?.Text?.fontWeight?.value :
+                                            themeColors?.CategoryCarouselTextWeight?.value,
                                 color: states.selectedCategoryItem === cat
                                     ? (styles?.CategoryCarouselTextHoverColor?.value !== ""
                                         ? styles?.CategoryCarouselTextHoverColor?.value
@@ -133,11 +139,11 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
                                             ? globalComponentStyles?.Text?.color?.value
                                             : themeColors?.CategoryCarouselTextColor?.value),
 
-                                fontSize: getFontSize(styles?.CategoryCarouselTextSize?.value != ""
-                                    ? styles?.CategoryCarouselTextSize?.value
-                                    : globalComponentStyles?.Text?.size?.value != ""
-                                        ? globalComponentStyles?.Text?.size?.value :
-                                        themeColors?.CategoryCarouselTextSize?.value, smDown, 16),
+                                fontSize: styles?.CategoryCarouselTextSize?.value[getScreenSizeCategory()] != 0
+                                    ? styles?.CategoryCarouselTextSize?.value[getScreenSizeCategory()]
+                                    : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                                        ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] :
+                                        themeColors?.CategoryCarouselTextSize?.value[getScreenSizeCategory()],
 
                                 fontFamily: styles?.CategoryCarouselTextFont?.value != ""
                                     ? styles?.CategoryCarouselTextFont?.value
@@ -147,8 +153,8 @@ export default function CategoryCarousel({ themeColors, actions, prop, styles, s
 
                                 fontStyle: styles?.CategoryCarouselTextStyle?.value != ""
                                     ? styles?.CategoryCarouselTextStyle?.value
-                                    : globalComponentStyles?.Text?.fontWeight?.value != ""
-                                        ? globalComponentStyles?.Text?.fontWeight?.value :
+                                    : globalComponentStyles?.Text?.fontStyle?.value != ""
+                                        ? globalComponentStyles?.Text?.fontStyle?.value :
                                         themeColors?.CategoryCarouselTextStyle?.value,
 
                                 fontWeight: 600,

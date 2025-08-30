@@ -10,7 +10,7 @@ import {
   useMediaQuery
 } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from "../../../utils/fontsize";
+import { getFontSize, getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function ItemCard({
   item,
@@ -29,13 +29,18 @@ const theme = useTheme();
         : globalComponentStyles?.Text?.color?.value !== ""
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.AllCategoriesItemNameTextColor?.value,
-
+    fontWeight:
+      styles?.AllCategoriesItemNameTextWeight?.value != ""
+        ? styles?.AllCategoriesItemNameTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value :
+          themeColors?.AllCategoriesItemNameTextWeight?.value,
     fontSize:
-      getFontSize(styles?.AllCategoriesItemNameTextSize?.value != 0
-        ? styles?.AllCategoriesItemNameTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.AllCategoriesItemNameTextSize?.value,smDown,16),
+      styles?.AllCategoriesItemNameTextSize?.value[getScreenSizeCategory()] != 0
+        ? styles?.AllCategoriesItemNameTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.AllCategoriesItemNameTextSize?.value[getScreenSizeCategory()],
 
     fontFamily:
       styles?.AllCategoriesItemNameTextFont?.value !== ""
@@ -47,8 +52,8 @@ const theme = useTheme();
     fontStyle:
       styles?.AllCategoriesItemNameTextStyle?.value !== ""
         ? styles?.AllCategoriesItemNameTextStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value !== ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.AllCategoriesItemNameTextStyle?.value,
   };
 
@@ -59,13 +64,18 @@ const theme = useTheme();
         : globalComponentStyles?.Text?.color?.value !== ""
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.AllCategoriesPriceTagTextColor?.value,
-
+    fontWeight:
+      styles?.AllCategoriesPriceTagTextWeight?.value != ""
+        ? styles?.AllCategoriesPriceTagTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value :
+          themeColors?.AllCategoriesPriceTagTextWeight?.value,
     fontSize:
-      getFontSize(styles?.AllCategoriesPriceTagTextSize?.value != 0
-        ? styles?.AllCategoriesPriceTagTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.AllCategoriesPriceTagTextSize?.value,smDown,16),
+      styles?.AllCategoriesPriceTagTextSize?.value[getScreenSizeCategory()] != 0
+        ? styles?.AllCategoriesPriceTagTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.AllCategoriesPriceTagTextSize?.value[getScreenSizeCategory()],
     fontFamily:
       styles?.AllCategoriesPriceTagTextFont?.value !== ""
         ? styles?.AllCategoriesPriceTagTextFont?.value
@@ -76,8 +86,8 @@ const theme = useTheme();
     fontStyle:
       styles?.AllCategoriesPriceTagTextStyle?.value !== ""
         ? styles?.AllCategoriesPriceTagTextStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value !== ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.AllCategoriesPriceTagTextStyle?.value,
 
     borderRadius: styles?.AllCategoriesPriceTagBorderRadius?.value !== ""
@@ -99,13 +109,18 @@ const theme = useTheme();
         : globalComponentStyles?.Button?.color?.value !== ""
           ? globalComponentStyles?.Button?.color?.value
           : themeColors?.AllCategoriesCartAddTextColor?.value,
-
+    fontWeight:
+      styles?.AllCategoriesCartAddTextWeight?.value != ""
+        ? styles?.AllCategoriesCartAddTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value :
+          themeColors?.AllCategoriesCartAddTextWeight?.value,
     fontSize:
-      getFontSize(styles?.AllCategoriesCartAddTextSize?.value != 0
-        ? styles?.AllCategoriesCartAddTextSize?.value
-        : globalComponentStyles?.Button?.size?.value != 0
-          ? globalComponentStyles?.Button?.size?.value
-          : themeColors?.AllCategoriesPriceTagTextSize?.value, smDown, 16),
+      styles?.AllCategoriesCartAddTextSize?.value[getScreenSizeCategory()] != 0
+        ? styles?.AllCategoriesCartAddTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Button?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Button?.size?.value[getScreenSizeCategory()]
+          : themeColors?.AllCategoriesPriceTagTextSize?.value[getScreenSizeCategory()],
 
     fontFamily:
       styles?.AllCategoriesCartAddTextFont?.value !== ""
@@ -117,8 +132,8 @@ const theme = useTheme();
     fontStyle:
       styles?.AllCategoriesCartAddTagTextStyle?.value !== ""
         ? styles?.AllCategoriesCartAddTagTextStyle?.value
-        : globalComponentStyles?.Button?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Button?.fontWeight?.value
+        : globalComponentStyles?.Button?.fontStyle?.value !== ""
+          ? globalComponentStyles?.Button?.fontStyle?.value
           : themeColors?.AllCategoriesCartAddTagTextStyle?.value,
 
     borderRadius: styles?.AllCategoriesCartAddBorderRadius?.value !== ""
