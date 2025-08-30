@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, InputAdornment, Typography } from "@mui/material";
-import { RHFTextField } from "../hook-form";
-import { getScreenSizeCategory } from '../utils/fontsize';
+import { RHFTextField } from "../../hook-form";
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 const CountryCode = process.env.NEXT_PUBLIC_COUNTRY_CODE;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { getScreenSizeCategory } from "../utils/fontsize";
+import { getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function AnnouncementsBanner({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 

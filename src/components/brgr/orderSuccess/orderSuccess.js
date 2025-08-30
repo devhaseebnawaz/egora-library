@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
-import { getScreenSizeCategory } from '../../..utils/fontsize';
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
     const { activeOrder } = prop ?? {}
