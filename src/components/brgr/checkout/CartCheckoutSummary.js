@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import CartItems from '../header/CartItems';
 import CartCheckoutTotalSummary from './CartCheckoutTotalSummary';
 import PaymentMethods from './PaymentMethods';
-
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actions, prop, styles, states, PaymentComponent, previewMode = false }) => {
     layout = layout?.json ? layout?.json : layout
@@ -22,11 +22,17 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.CartCheckoutSummaryDescriptionTextColor?.value}`,
         fontSize:
-            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value != 0
-                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.CartCheckoutSummaryDescriptionTextSize?.value,
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.CartCheckoutSummaryDescriptionTextSize?.value[getScreenSizeCategory()],
+
+        fontWeight: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextWeight?.value != ""
+            ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextWeight?.value
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : themeColors?.CartCheckoutSummaryDescriptionTextWeight?.value,
 
         fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextFont?.value != ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextFont?.value}`
@@ -36,8 +42,8 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
         fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextStyle?.value !== ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryDescriptionTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
+            : globalComponentStyles?.Text?.fontStyle?.value != ""
+                ? globalComponentStyles?.Text?.fontStyle?.value
                 : `${themeColors?.CartCheckoutSummaryDescriptionTextStyle?.value}`,
     };
 
@@ -49,17 +55,23 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.CartCheckoutSummaryHeadingTextColor?.value}`,
         fontSize:
-            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value != 0
-                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.CartCheckoutSummaryHeadingTextSize?.value,
-
-        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value != ""
-            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.CartCheckoutSummaryHeadingTextFont?.value}`,
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.CartCheckoutSummaryHeadingTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextWeight?.value != ""
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.CartCheckoutSummaryHeadingTextWeight?.value,
+        fontFamily:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value != ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.CartCheckoutSummaryHeadingTextFont?.value}`,
 
         fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextStyle?.value !== ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextStyle?.value}`
@@ -76,22 +88,28 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextColor?.value}`,
         fontSize:
-            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value != 0
-                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value,
-
-        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value != ""
-            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`,
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.CartCheckoutSummaryOrderTotalHeadingTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextWeight?.value != ""
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.CartCheckoutSummaryOrderTotalHeadingTextWeight?.value,
+        fontFamily:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value != ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextFont?.value}`,
 
         fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextStyle?.value !== ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderTotalHeadingTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
+            : globalComponentStyles?.Text?.fontStyle?.value != ""
+                ? globalComponentStyles?.Text?.fontStyle?.value
                 : `${themeColors?.CartCheckoutSummaryOrderTotalHeadingTextStyle?.value}`,
     };
 

@@ -22,6 +22,7 @@ import {
   calculateServiceFee,
   calculateFinalTotal,
 } from "../../../utils/cart";
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 const CartDrawer = ({
   open,
@@ -46,28 +47,32 @@ const CartDrawer = ({
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.cartDrawerHeadingsTextColor?.value,
     fontSize:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize?.value != 0
-        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize?.value
-          : globalComponentStyles?.Text?.size?.value != 0
-            ? globalComponentStyles?.Text?.size?.value
-              : themeColors?.cartDrawerHeadingsTextSize?.value,
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerHeadingsTextSize?.value[getScreenSizeCategory()],
 
     fontFamily:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextFont
-        ?.value != ""
-        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextFont
-          ?.value
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextFont?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextFont?.value
         : globalComponentStyles?.Text?.fontFamily?.value != ""
           ? globalComponentStyles?.Text?.fontFamily?.value
           : themeColors?.cartDrawerHeadingsTextFont?.value,
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerHeadingsTextWeight?.value,
 
     fontStyle:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextStyle
         ?.value !== ""
         ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerHeadingsTextStyle
           ?.value
-        : globalComponentStyles?.Text?.fontWeight?.value != ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value != ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.cartDrawerHeadingsTextStyle?.value,
   };
 
@@ -81,14 +86,17 @@ const CartDrawer = ({
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.cartDrawerSubHeadingsTextColor?.value,
     fontSize:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSubHeadingsTextSize
-        ?.value != 0
-        ? layout?.cartDrawerLayout?.body[0].styles
-          ?.cartDrawerSubHeadingsTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.cartDrawerSubHeadingsTextSize?.value,
-
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSubHeadingsTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSubHeadingsTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerSubHeadingsTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSubHeadingsTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSubHeadingsTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerSubHeadingsTextWeight?.value,
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSubHeadingsTextFont
         ?.value != ""
@@ -133,14 +141,17 @@ const CartDrawer = ({
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.cartDrawerDescriptionTextColor?.value,
     fontSize:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextSize
-        ?.value != 0
-        ? layout?.cartDrawerLayout?.body[0].styles
-          ?.cartDrawerDescriptionTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.cartDrawerDescriptionTextSize?.value,
-
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerDescriptionTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerDescriptionTextWeight?.value,
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDescriptionTextFont
         ?.value != ""
@@ -155,8 +166,8 @@ const CartDrawer = ({
         ?.value !== ""
         ? layout?.cartDrawerLayout?.body[0].styles
           ?.cartDrawerDescriptionTextStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value != ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value != ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.cartDrawerDescriptionTextStyle?.value,
   };
 
@@ -170,13 +181,17 @@ const CartDrawer = ({
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.cartDrawerPriceTextColor?.value,
     fontSize:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextSize
-        ?.value != 0
-        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextSize
-          ?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.cartDrawerPriceTextSize?.value,
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerPriceTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerPriceTextWeight?.value,
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextFont
         ?.value != ""
@@ -190,8 +205,8 @@ const CartDrawer = ({
         ?.value !== ""
         ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerPriceTextStyle
           ?.value
-        : globalComponentStyles?.Text?.fontWeight?.value != ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value != ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.cartDrawerPriceTextStyle?.value,
   };
 
@@ -206,12 +221,18 @@ const CartDrawer = ({
           : themeColors?.cartDrawerTotalTextColor?.value,
     fontSize:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerTotalTextSize
-        ?.value != 0
+        ?.value[getScreenSizeCategory()] != 0
         ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerTotalTextSize
-          ?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.cartDrawerTotalTextSize?.value,
+          ?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerTotalTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerTotalTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerTotalTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerTotalTextWeight?.value,
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerTotalTextFont
         ?.value != ""
@@ -225,8 +246,8 @@ const CartDrawer = ({
         ?.value !== ""
         ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerTotalTextStyle
           ?.value
-        : globalComponentStyles?.Text?.fontWeight?.value != ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value != ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.cartDrawerTotalTextStyle?.value,
   };
 
@@ -248,13 +269,17 @@ const CartDrawer = ({
           ? globalComponentStyles?.Button?.color?.value
           : themeColors?.cartDrawerButtonTextColor?.value,
     fontSize:
-      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextSize
-        ?.value != 0
-        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextSize
-          ?.value
-        : globalComponentStyles?.Button?.size?.value != 0
-          ? globalComponentStyles?.Button?.size?.value
-          : themeColors?.cartDrawerButtonTextSize?.value,
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Button?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Button?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerButtonTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerButtonTextWeight?.value,
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextFont
         ?.value != ""
@@ -268,8 +293,8 @@ const CartDrawer = ({
         ?.value !== ""
         ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonTextStyle
           ?.value
-        : globalComponentStyles?.Button?.fontWeight?.value != ""
-          ? globalComponentStyles?.Button?.fontWeight?.value
+        : globalComponentStyles?.Button?.fontStyle?.value != ""
+          ? globalComponentStyles?.Button?.fontStyle?.value
           : themeColors?.cartDrawerButtonTextStyle?.value,
     borderRadius:
       layout?.cartDrawerLayout?.body[0].styles?.cartDrawerButtonBorderRadius
@@ -300,12 +325,18 @@ const CartDrawer = ({
           : themeColors?.cartDrawerSecondaryButtonTextColor?.value,
     fontSize:
       layout?.cartDrawerLayout?.body[0].styles
-        ?.cartDrawerSecondaryButtonTextSize?.value != 0
+        ?.cartDrawerSecondaryButtonTextSize?.value[getScreenSizeCategory()] != 0
         ? layout?.cartDrawerLayout?.body[0].styles
-          ?.cartDrawerSecondaryButtonTextSize?.value
-        : globalComponentStyles?.Button?.secondarySize?.value != 0
-          ? globalComponentStyles?.Button?.secondarySize?.value
-          : themeColors?.cartDrawerSecondaryButtonTextSize?.value,
+          ?.cartDrawerSecondaryButtonTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Button?.secondarySize?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Button?.secondarySize?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerSecondaryButtonTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSecondaryButtonTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSecondaryButtonTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerSecondaryButtonTextWeight?.value,
     fontFamily:
       layout?.cartDrawerLayout?.body[0].styles
         ?.cartDrawerSecondaryButtonTextFont?.value != ""
@@ -416,29 +447,35 @@ const CartDrawer = ({
 
   const getAddMoreItemTextStyles = {
     color:
-        layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextColor?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextColor?.value}`
-            : globalComponentStyles?.Text?.color?.value != ""
-                ? globalComponentStyles?.Text?.color?.value
-                : `${themeColors?.cartDrawerAddMoreItemTextColor?.value}`,
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextColor?.value !== ""
+        ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextColor?.value}`
+        : globalComponentStyles?.Text?.color?.value != ""
+          ? globalComponentStyles?.Text?.color?.value
+          : `${themeColors?.cartDrawerAddMoreItemTextColor?.value}`,
     fontSize:
-        layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextSize?.value != 0
-            ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextSize?.value
-            : globalComponentStyles?.Text?.size?.value != 0
-                ? globalComponentStyles?.Text?.size?.value
-                : themeColors?.cartDrawerAddMoreItemTextSize?.value,
-
-    fontFamily: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextFont?.value != ""
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.cartDrawerAddMoreItemTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextWeight?.value != ""
+        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.cartDrawerAddMoreItemTextWeight?.value,
+    fontFamily:
+      layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextFont?.value != ""
         ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextFont?.value}`
         : globalComponentStyles?.Text?.fontFamily?.value != ""
-            ? globalComponentStyles?.Text?.fontFamily?.value
-            : `${themeColors?.cartDrawerAddMoreItemTextFont?.value}`,
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : `${themeColors?.cartDrawerAddMoreItemTextFont?.value}`,
 
     fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextStyle?.value !== ""
-        ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextStyle?.value}`
-        : globalComponentStyles?.Text?.fontWeight?.value != ""
-            ? globalComponentStyles?.Text?.fontWeight?.value
-            : `${themeColors?.cartDrawerAddMoreItemTextStyle?.value}`,
+      ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerAddMoreItemTextStyle?.value}`
+      : globalComponentStyles?.Text?.fontWeight?.value != ""
+        ? globalComponentStyles?.Text?.fontWeight?.value
+        : `${themeColors?.cartDrawerAddMoreItemTextStyle?.value}`,
   };
 
   const cardItems = states.cardItems?.items ?? [];

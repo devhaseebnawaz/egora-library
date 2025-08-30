@@ -8,6 +8,7 @@ import { fNumber } from "../../../utils/formatNumber";
 // import { useCart } from '../CartContext';
 // import CartDrawer from '../header/CartDrawer';
 // import { useUI } from './ScrollContext';
+import { getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function CartBottomBar({
     states,
@@ -52,13 +53,18 @@ export default function CartBottomBar({
                 : globalComponentStyles?.Text?.color?.value != ""
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.cartBottomBarTextColor?.value}`,
-
+        fontWeight:
+            layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextWeight?.value !== ""
+                ? layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value :
+                    themeColors?.cartBottomBarTextWeight?.value,
         fontSize:
-            layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextSize?.value != 0
-                ? layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.cartBottomBarTextSize?.value,
+            layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.cartBottomBarTextSize?.value[getScreenSizeCategory()],
 
         fontFamily: layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextFont?.value != ""
             ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextFont?.value}`
@@ -68,14 +74,15 @@ export default function CartBottomBar({
 
         fontStyle: layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextStyle?.value !== ""
             ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
+            : globalComponentStyles?.Text?.fontStyle?.value != ""
+                ? globalComponentStyles?.Text?.fontStyle?.value
                 : `${themeColors?.cartBottomBarTextStyle?.value}`,
-        backgroundColor: layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarBackgroundColor?.value !== ""
-            ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarBackgroundColor?.value}`
-            : globalComponentStyles?.Background?.color?.value !== ""
-                ? globalComponentStyles?.Background?.color?.value
-                : `${themeColors?.cartBottomBarBackgroundColor?.value}`,
+        backgroundColor: 
+           layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarBackgroundColor?.value !== ""
+                ? `${layout?.cartBottomBarLayout?.body[0].styles?.cartBottomBarBackgroundColor?.value}`
+                : globalComponentStyles?.Background?.color?.value !== ""
+                    ? globalComponentStyles?.Background?.color?.value
+                    : `${themeColors?.cartBottomBarBackgroundColor?.value}`,
     };
 
     const content = (

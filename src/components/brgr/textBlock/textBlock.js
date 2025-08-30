@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function TextBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
@@ -10,14 +11,19 @@ export default function TextBlock({ themeColors, actions, prop, styles, states, 
                 : globalComponentStyles?.Text?.color?.value !== ""
                     ? globalComponentStyles?.Text?.color?.value
                     : themeColors?.TextBlockTextColor?.value,
-    
+        fontWeight:
+            styles?.TextBlockTextWeight?.value != ""
+                ? styles?.TextBlockTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value :
+                    themeColors?.TextBlockTextWeight?.value,
         fontSize:
-            styles?.TextBlockTextSize?.value != 0
-                ? styles?.TextBlockTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.TextBlockTextSize?.value,
-    
+            styles?.TextBlockTextSize?.value[getScreenSizeCategory()] != 0
+                ? styles?.TextBlockTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.TextBlockTextSize?.value[getScreenSizeCategory()],
+
         fontFamily:
             styles?.TextBlockTextFont?.value !== ""
                 ? styles?.TextBlockTextFont?.value
@@ -38,7 +44,6 @@ export default function TextBlock({ themeColors, actions, prop, styles, states, 
             style={{
                 width: '100%',
                 padding: '50px 0',
-                fontWeight: '500 !important',
                 fontSize: '14px',
                 margin: '0 auto',
                 height: '345px',
@@ -51,7 +56,7 @@ export default function TextBlock({ themeColors, actions, prop, styles, states, 
                     : themeColors?.TextBlockBackgroundColor?.value,
             }}
         >
-            <Typography sx={{...getTextBlockStyles}} >
+            <Typography sx={{ ...getTextBlockStyles }} >
                 {prop.editable.text.value}
             </Typography>
         </Box>

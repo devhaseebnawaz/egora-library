@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, InputAdornment, Typography } from "@mui/material";
-import { RHFTextField } from "../../../components/hook-form";
+import { RHFTextField } from "../hook-form";
+import { getScreenSizeCategory } from '../utils/fontsize';
 
 const CountryCode = process.env.NEXT_PUBLIC_COUNTRY_CODE;
 
@@ -14,22 +15,29 @@ export default function UserInfoPage({ states, layout, globalComponentStyles, th
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.CartCheckoutSummaryHeadingTextColor?.value}`,
         fontSize:
-            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value != 0
-                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.CartCheckoutSummaryHeadingTextSize?.value,
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.CartCheckoutSummaryHeadingTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextWeight?.value != ""
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.CartCheckoutSummaryHeadingTextWeight?.value,
 
-        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value != ""
-            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.CartCheckoutSummaryHeadingTextFont?.value}`,
+        fontFamily:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value != ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.CartCheckoutSummaryHeadingTextFont?.value}`,
 
         fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextStyle?.value !== ""
             ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryHeadingTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
+            : globalComponentStyles?.Text?.fontStyle?.value != ""
+                ? globalComponentStyles?.Text?.fontStyle?.value
                 : `${themeColors?.CartCheckoutSummaryHeadingTextStyle?.value}`,
     };
 

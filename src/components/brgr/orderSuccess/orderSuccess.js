@@ -5,11 +5,10 @@ import creditCardIcon from '@iconify-icons/mdi/credit-card-outline';
 import locationIcon from '@iconify-icons/mdi/map-marker';
 import { Icon } from "@iconify/react";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from "../../../utils/fontsize";
 import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
-// import { useNavigate } from "react-router-dom";
+import { getScreenSizeCategory } from '../../..utils/fontsize';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
     const { activeOrder } = prop ?? {}
@@ -42,17 +41,23 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.OrderSuccessThankYouTextColor?.value}`,
         fontSize:
-            getFontSize(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value != 0
-                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.OrderSuccessThankYouTextSize?.value, mdDown, 20),
-
-        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value != ""
-            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.OrderSuccessThankYouTextFont?.value}`,
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessThankYouTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessThankYouTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessThankYouTextFont?.value}`,
 
         fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextStyle?.value !== ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessThankYouTextStyle?.value}`
@@ -69,17 +74,23 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.OrderSuccessOrderPlacedTextColor?.value}`,
         fontSize:
-            getFontSize(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value != 0
-                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.OrderSuccessOrderPlacedTextSize?.value, mdDown, 18),
-
-        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value != ""
-            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.OrderSuccessOrderPlacedTextFont?.value}`,
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessOrderPlacedTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessOrderPlacedTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessOrderPlacedTextFont?.value}`,
 
         fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextStyle?.value !== ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextStyle?.value}`
@@ -96,17 +107,23 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.OrderSuccessHeadingsTextColor?.value}`,
         fontSize:
-            getFontSize(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value != 0
-                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.OrderSuccessHeadingsTextSize?.value, mdDown, 22),
-
-        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextFont?.value != ""
-            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.OrderSuccessHeadingsTextFont?.value}`,
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessHeadingsTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessHeadingsTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessHeadingsTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessHeadingsTextFont?.value}`,
 
         fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextStyle?.value !== ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderPlacedTextStyle?.value}`
@@ -124,17 +141,23 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     ? globalComponentStyles?.Text?.color?.value
                     : `${themeColors?.OrderSuccessDescriptionTextColor?.value}`,
         fontSize:
-            getFontSize(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value != 0
-                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.OrderSuccessDescriptionTextSize?.value, mdDown, 16),
-
-        fontFamily: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextFont?.value != ""
-            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.OrderSuccessDescriptionTextFont?.value}`,
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessDescriptionTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessDescriptionTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessDescriptionTextFont?.value}`,
 
         fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextStyle?.value !== ""
             ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessDescriptionTextStyle?.value}`
@@ -149,9 +172,13 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
             globalComponentStyles?.Text?.color?.value ||
             themeColors?.[type + "Color"]?.value,
         fontSize:
-            getFontSize(styles?.[type + "Size"]?.value ||
-                globalComponentStyles?.Text?.size?.value ||
-                themeColors?.[type + "Size"]?.value, mdDown, 14),
+            styles?.[type + "Size"]?.value[getScreenSizeCategory()] ||
+            globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] ||
+            themeColors?.[type + "Size"]?.value[getScreenSizeCategory()],
+        fontWeight:
+            styles?.[type + "Weight"]?.value ||
+            globalComponentStyles?.Text?.fontFamily?.value ||
+            themeColors?.[type + "Weight"]?.value,
         fontFamily:
             styles?.[type + "Font"]?.value ||
             globalComponentStyles?.Text?.fontFamily?.value ||
@@ -200,7 +227,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                 <Typography variant="subtitle1" fontWeight={700} sx={{ ...getHeadingsStyles }}>Your Order is</Typography>
                                 <Chip label={state} color="warning" size="small" />
                                 {state === "processing" || state === "finished" &&
-                                    <Image
+                                    <UniversalImage
                                         src="/assets/live.gif"
                                         alt="Order Success"
                                         width={30}

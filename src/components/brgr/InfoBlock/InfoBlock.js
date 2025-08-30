@@ -1,12 +1,11 @@
 import React from 'react';
 import { Box, Typography,Container,useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from '../../../utils/fontsize';
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function InfoBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
 
     const theme = useTheme();
-    const isMediumScreen = useMediaQuery(theme.breakpoints.down("md")); 
     const getInfoBlockTitleStyles = {
         color:
             styles?.InfoBlockTitleColor?.value !== ""
@@ -14,14 +13,18 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
                 : globalComponentStyles?.Text?.color?.value !== ""
                     ? globalComponentStyles?.Text?.color?.value
                     : themeColors?.InfoBlockTitleColor?.value,
-    
+        fontWeight:
+            styles?.InfoBlockTitleWeight?.value != ""
+                ? styles?.InfoBlockTitleWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value :
+                    themeColors?.InfoBlockTitleWeight?.value,
         fontSize:
-            getFontSize(styles?.InfoBlockTitleSize?.value != 0
-                ? styles?.InfoBlockTitleSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.InfoBlockTitleSize?.value,isMediumScreen,22),
-    
+            styles?.InfoBlockTitleSize?.value[getScreenSizeCategory()] != 0
+                ? styles?.InfoBlockTitleSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.InfoBlockTitleSize?.value[getScreenSizeCategory()],
         fontFamily:
             styles?.InfoBlockTitleFont?.value !== ""
                 ? styles?.InfoBlockTitleFont?.value
@@ -44,14 +47,18 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
                 : globalComponentStyles?.Text?.color?.value !== ""
                     ? globalComponentStyles?.Text?.color?.value
                     : themeColors?.InfoBlockDescriptionColor?.value,
-    
+        fontWeight:
+            styles?.InfoBlockDescriptionWeight?.value != ""
+                ? styles?.InfoBlockDescriptionWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value :
+                    themeColors?.InfoBlockDescriptionWeight?.value,
         fontSize:
-            getFontSize(styles?.InfoBlockDescriptionSize?.value != 0
-                ? styles?.InfoBlockDescriptionSize?.value
-                : globalComponentStyles?.Text?.size?.value != 0
-                    ? globalComponentStyles?.Text?.size?.value
-                    : themeColors?.InfoBlockDescriptionSize?.value,isMediumScreen,14),
-    
+            styles?.InfoBlockDescriptionSize?.value[getScreenSizeCategory()] != 0
+                ? styles?.InfoBlockDescriptionSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.InfoBlockDescriptionSize?.value[getScreenSizeCategory()],
         fontFamily:
             styles?.InfoBlockDescriptionFont?.value !== ""
                 ? styles?.InfoBlockDescriptionFont?.value
@@ -73,8 +80,6 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
             style={{
                 width: '100%',
                 padding: '50px 0',
-                maxWidth:'925px',
-                fontWeight: '500 !important',
                 fontSize: '14px',
                 margin: '0 auto',
                 height: '345px',

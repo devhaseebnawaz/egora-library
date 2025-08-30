@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Typography, Box ,useMediaQuery} from "@mui/material";
 import ItemDetailModal from "../categories/ItemDetailModal";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from "../../../utils/fontsize";
+import { getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function ItemCard ({ item, themeColors, styles, actions, states, globalComponentStyles }) {
   const theme = useTheme();
@@ -14,13 +14,18 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
         : globalComponentStyles?.Text?.color?.value !== ""
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.PopularMenuSectionItemNameTextColor?.value,
-
+    fontWeight:
+      styles?.PopularMenuSectionItemNameTextWeight?.value != ""
+        ? styles?.PopularMenuSectionItemNameTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value :
+          themeColors?.PopularMenuSectionItemNameTextWeight?.value,
     fontSize:
-      getFontSize(styles?.PopularMenuSectionItemNameTextSize?.value != 0
-        ? styles?.PopularMenuSectionItemNameTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.PopularMenuSectionItemNameTextSize?.value,smDown,16),
+      styles?.PopularMenuSectionItemNameTextSize?.value[getScreenSizeCategory()] != 0
+        ? styles?.PopularMenuSectionItemNameTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.PopularMenuSectionItemNameTextSize?.value[getScreenSizeCategory()],
 
     fontFamily:
       styles?.PopularMenuSectionItemNameTextFont?.value !== ""
@@ -44,13 +49,18 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
         : globalComponentStyles?.Text?.color?.value !== ""
           ? globalComponentStyles?.Text?.color?.value
           : themeColors?.PopularMenuSectionPriceTextColor?.value,
-
+    fontWeight:
+      styles?.PopularMenuSectionPriceTextWeight?.value != ""
+        ? styles?.PopularMenuSectionPriceTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value :
+          themeColors?.PopularMenuSectionPriceTextWeight?.value,
     fontSize:
-      getFontSize(styles?.PopularMenuSectionPriceTextSize?.value != 0
-        ? styles?.PopularMenuSectionPriceTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.PopularMenuSectionPriceTextSize?.value,smDown,16),
+      styles?.PopularMenuSectionPriceTextSize?.value[getScreenSizeCategory()] != 0
+        ? styles?.PopularMenuSectionPriceTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.PopularMenuSectionPriceTextSize?.value[getScreenSizeCategory()],
 
     fontFamily:
       styles?.PopularMenuSectionPriceTextFont?.value !== ""

@@ -9,7 +9,7 @@ import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
 import UniversalImage from "../../../UniversalImage";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize,getIconWidthHeight } from "../../../utils/fontsize";
+import { getFontSize,getIconWidthHeight, getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function CustomNavbar({
   themeColors,
@@ -101,7 +101,6 @@ export default function CustomNavbar({
               <Box>
                 <Typography
                   variant="body2"
-                  fontWeight="bold"
                   style={{
                     color:
                       styles?.AppBarChangeLocationColor?.value != ""
@@ -109,12 +108,18 @@ export default function CustomNavbar({
                         : globalComponentStyles?.Text?.color?.value != ""
                           ? globalComponentStyles?.Text?.color?.value :
                           themeColors?.AppBarChangeLocationColor?.value,
+                    fontWeight:
+                      styles?.AppBarChangeLocationTextWeight?.value != ""
+                        ? styles?.AppBarChangeLocationTextWeight?.value
+                          : globalComponentStyles?.Text?.fontWeight?.value != ""
+                            ? globalComponentStyles?.Text?.fontWeight?.value :
+                             themeColors?.AppBarChangeLocationTextWeight?.value,
 
-                    fontSize: getFontSize(styles?.AppBarChangeLocationTextSize?.value != 0
-                      ? styles?.AppBarChangeLocationTextSize?.value
-                      : globalComponentStyles?.Text?.size?.value != ""
-                        ? globalComponentStyles?.Text?.size?.value
-                        : themeColors?.AppBarChangeLocationTextSize?.value,isBelow850,12),
+                    fontSize: styles?.AppBarChangeLocationTextSize?.value[getScreenSizeCategory()] != 0
+                      ? styles?.AppBarChangeLocationTextSize?.value[getScreenSizeCategory()]
+                      : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                        ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                        : themeColors?.AppBarChangeLocationTextSize?.value[getScreenSizeCategory()],
 
                     fontFamily: styles?.AppBarChangeLocationTextFont?.value != ""
                       ? styles?.AppBarChangeLocationTextFont?.value
@@ -124,8 +129,8 @@ export default function CustomNavbar({
 
                     fontStyle: styles?.AppBarChangeLocationTextStyle?.value != ""
                       ? styles?.AppBarChangeLocationTextStyle?.value
-                      : globalComponentStyles?.Text?.fontWeight?.value != ""
-                        ? globalComponentStyles?.Text?.fontWeight?.value
+                      : globalComponentStyles?.Text?.fontStyle?.value != ""
+                        ? globalComponentStyles?.Text?.fontStyle?.value
                         : themeColors?.AppBarChangeLocationTextStyle?.value,
                   }}
                 >
@@ -143,11 +148,18 @@ export default function CustomNavbar({
                           ? globalComponentStyles?.Text?.color?.value :
                           themeColors?.AppBarAddressColor?.value,
 
-                    fontSize: styles?.AppBarAddressTextSize?.value != ""
-                      ? styles?.AppBarAddressTextSize?.value
-                      : globalComponentStyles?.Text?.size?.value != ""
-                        ? globalComponentStyles?.Text?.size?.value
-                        : themeColors?.AppBarAddressTextSize?.value,
+                    fontSize: styles?.AppBarAddressTextSize?.value[getScreenSizeCategory()] != 0
+                      ? styles?.AppBarAddressTextSize?.value[getScreenSizeCategory()]
+                      : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                        ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                        : themeColors?.AppBarAddressTextSize?.value[getScreenSizeCategory()],
+
+                    fontWeight:
+                        styles?.AppBarAddressTextWeight?.value != ""
+                          ? styles?.AppBarAddressTextWeight?.value
+                            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                              ? globalComponentStyles?.Text?.fontWeight?.value :
+                               themeColors?.AppBarAddressTextWeight?.value,
 
                     fontFamily: styles?.AppBarAddressTextFont?.value != ""
                       ? styles?.AppBarAddressTextFont?.value
@@ -157,8 +169,8 @@ export default function CustomNavbar({
 
                     fontStyle: styles?.AppBarAddressTextStyle?.value != ""
                       ? styles?.AppBarAddressTextStyle?.value
-                      : globalComponentStyles?.Text?.fontWeight?.value != ""
-                        ? globalComponentStyles?.Text?.fontWeight?.value
+                      : globalComponentStyles?.Text?.fontStyle?.value != ""
+                        ? globalComponentStyles?.Text?.fontStyle?.value
                         : themeColors?.AppBarAddressTextStyle?.value,
 
                   }}
@@ -207,8 +219,13 @@ export default function CustomNavbar({
               />
               <Typography
                 variant="body2"
-                fontWeight="bold"
                 style={{
+                  fontWeight:
+                   styles?.AppBarPhoneTextWeight?.value != ""
+                    ? styles?.AppBarPhoneTextWeight?.value
+                    : globalComponentStyles?.Text?.fontWeight?.value != ""
+                      ? globalComponentStyles?.Text?.fontStyle?.value :
+                      themeColors?.AppBarPhoneTextWeight?.value,
                   color:
                     styles?.AppBarPhoneColor?.value != ""
                       ? styles?.AppBarPhoneColor?.value
@@ -217,11 +234,11 @@ export default function CustomNavbar({
                         themeColors?.AppBarPhoneColor?.value,
 
 
-                  fontSize: getFontSize(styles?.AppBarPhoneTextSize?.value != 0
-                    ? styles?.AppBarPhoneTextSize?.value
-                    : globalComponentStyles?.Text?.size?.value != ""
-                      ? globalComponentStyles?.Text?.size?.value
-                      : themeColors?.AppBarPhoneTextSize?.value,isBelow850,12),
+                  fontSize: styles?.AppBarPhoneTextSize?.value[getScreenSizeCategory()] != 0
+                    ? styles?.AppBarPhoneTextSize?.value[getScreenSizeCategory()]
+                    : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                      ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                      : themeColors?.AppBarPhoneTextSize?.value[getScreenSizeCategory()],
 
                   fontFamily: styles?.AppBarPhoneTextFont?.value != ""
                     ? styles?.AppBarPhoneTextFont?.value
@@ -231,8 +248,8 @@ export default function CustomNavbar({
 
                   fontStyle: styles?.AppBarPhoneTextStyle?.value != ""
                     ? styles?.AppBarPhoneTextStyle?.value
-                    : globalComponentStyles?.Text?.fontWeight?.value != ""
-                      ? globalComponentStyles?.Text?.fontWeight?.value
+                    : globalComponentStyles?.Text?.fontStyle?.value != ""
+                      ? globalComponentStyles?.Text?.fontStyle?.value
                       : themeColors?.AppBarPhoneTextStyle?.value,
 
                 }}

@@ -27,7 +27,7 @@ import Variant from '../options/Variant';
 import Group from '../options/Group';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from '../../../utils/fontsize';
+import { getFontSize, getScreenSizeCategory } from '../../../utils/fontsize';
 
 
 
@@ -56,11 +56,17 @@ export default function ItemDetailModal({
           ? globalComponentStyles?.Text?.color?.value
           : `${themeColors?.ItemDetailModalHeadingsTextColor?.value}`,
     fontSize:
-      getFontSize(layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value != 0
-        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.ItemDetailModalHeadingsTextSize?.value,mdDown,18),
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.ItemDetailModalHeadingsTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextWeight?.value != ""
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.ItemDetailModalHeadingsTextWeight?.value,
 
     fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value != ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextFont?.value}`
@@ -70,8 +76,8 @@ export default function ItemDetailModal({
 
     fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextStyle?.value !== ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalHeadingsTextStyle?.value}`
-      : globalComponentStyles?.Text?.fontWeight?.value != ""
-        ? globalComponentStyles?.Text?.fontWeight?.value
+      : globalComponentStyles?.Text?.fontStyle?.value != ""
+        ? globalComponentStyles?.Text?.fontStyle?.value
         : `${themeColors?.ItemDetailModalHeadingsTextStyle?.value}`,
   };
 
@@ -83,17 +89,23 @@ export default function ItemDetailModal({
           ? globalComponentStyles?.Text?.color?.value
           : `${themeColors?.ItemDetailModalDescriptionTextColor?.value}`,
     fontSize:
-      getFontSize(layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value != 0
-        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.ItemDetailModalDescriptionTextSize?.value,mdDown,12),
-
-    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value != ""
-      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value}`
-      : globalComponentStyles?.Text?.fontFamily?.value != ""
-        ? globalComponentStyles?.Text?.fontFamily?.value
-        : `${themeColors?.ItemDetailModalDescriptionTextFont?.value}`,
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.ItemDetailModalDescriptionTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextWeight?.value != ""
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.ItemDetailModalDescriptionTextWeight?.value,
+    fontFamily:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value != ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextFont?.value}`
+        : globalComponentStyles?.Text?.fontFamily?.value != ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : `${themeColors?.ItemDetailModalDescriptionTextFont?.value}`,
 
     fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextStyle?.value !== ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalDescriptionTextStyle?.value}`
@@ -128,17 +140,23 @@ export default function ItemDetailModal({
           ? globalComponentStyles?.Text?.color?.value
           : `${themeColors?.ItemDetailModalAddedQtyTextColor?.value}`,
     fontSize:
-      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextSize?.value != 0
-        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.ItemDetailModalAddedQtyTextSize?.value,
-
-    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextFont?.value != ""
-      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextFont?.value}`
-      : globalComponentStyles?.Text?.fontFamily?.value != ""
-        ? globalComponentStyles?.Text?.fontFamily?.value
-        : `${themeColors?.ItemDetailModalAddedQtyTextFont?.value}`,
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.ItemDetailModalAddedQtyTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextWeight?.value != ""
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.ItemDetailModalAddedQtyTextWeight?.value,
+    fontFamily:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextFont?.value != ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextFont?.value}`
+        : globalComponentStyles?.Text?.fontFamily?.value != ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : `${themeColors?.ItemDetailModalAddedQtyTextFont?.value}`,
 
     fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextStyle?.value !== ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddedQtyTextStyle?.value}`
@@ -165,17 +183,23 @@ export default function ItemDetailModal({
 
   const getAddToCartStyles = {
     fontSize:
-      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextSize?.value != 0
-        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.ItemDetailModalAddToCartTextSize?.value,
-
-    fontFamily: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextFont?.value != ""
-      ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextFont?.value}`
-      : globalComponentStyles?.Text?.fontFamily?.value != ""
-        ? globalComponentStyles?.Text?.fontFamily?.value
-        : `${themeColors?.ItemDetailModalAddToCartTextFont?.value}`,
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextSize?.value[getScreenSizeCategory()] != 0
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.ItemDetailModalAddToCartTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextWeight?.value != ""
+        ? layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value
+          : themeColors?.ItemDetailModalAddToCartTextWeight?.value,
+    fontFamily:
+      layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextFont?.value != ""
+        ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextFont?.value}`
+        : globalComponentStyles?.Text?.fontFamily?.value != ""
+          ? globalComponentStyles?.Text?.fontFamily?.value
+          : `${themeColors?.ItemDetailModalAddToCartTextFont?.value}`,
 
     fontStyle: layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextStyle?.value !== ""
       ? `${layout?.itemDetailModalLayout?.body[0].styles?.ItemDetailModalAddToCartTextStyle?.value}`

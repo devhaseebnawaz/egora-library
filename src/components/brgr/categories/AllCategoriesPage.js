@@ -5,7 +5,7 @@ import Banner from "./Banner";
 import CategoryLayout from "./CategoryLayout";
 import ItemCard from "./ItemCard";
 import { useTheme } from '@mui/material/styles';
-import { getFontSize } from "../../../utils/fontsize";
+import { getFontSize, getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function AllCategoriesPage({ prop, actions, styles, states, themeColors, globalComponentStyles }) {
   const theme = useTheme();
@@ -123,12 +123,17 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
           : themeColors?.AllCategoriesCategoryTextColor?.value,
 
     fontSize:
-      getFontSize(styles?.AllCategoriesCategoryTextSize?.value != 0
-        ? styles?.AllCategoriesCategoryTextSize?.value
-        : globalComponentStyles?.Text?.size?.value != 0
-          ? globalComponentStyles?.Text?.size?.value
-          : themeColors?.AllCategoriesCategoryTextSize?.value, mdDown, 20),
-
+      styles?.AllCategoriesCategoryTextSize?.value[getScreenSizeCategory()] != 0
+        ? styles?.AllCategoriesCategoryTextSize?.value[getScreenSizeCategory()]
+        : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+          ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+          : themeColors?.AllCategoriesCategoryTextSize?.value[getScreenSizeCategory()],
+    fontWeight:
+      styles?.AllCategoriesCategoryTextWeight?.value != ""
+        ? styles?.AllCategoriesCategoryTextWeight?.value
+        : globalComponentStyles?.Text?.fontWeight?.value != ""
+          ? globalComponentStyles?.Text?.fontWeight?.value :
+          themeColors?.AllCategoriesCategoryTextWeight?.value,
     fontFamily:
       styles?.AllCategoriesCategoryTextFont?.value !== ""
         ? styles?.AllCategoriesCategoryTextFont?.value
@@ -139,8 +144,8 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
     fontStyle:
       styles?.AllCategoriesCategoryTextStyle?.value !== ""
         ? styles?.AllCategoriesCategoryTextStyle?.value
-        : globalComponentStyles?.Text?.fontWeight?.value !== ""
-          ? globalComponentStyles?.Text?.fontWeight?.value
+        : globalComponentStyles?.Text?.fontStyle?.value !== ""
+          ? globalComponentStyles?.Text?.fontStyle?.value
           : themeColors?.AllCategoriesCategoryTextStyle?.value,
   };
 

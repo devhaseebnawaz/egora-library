@@ -13,6 +13,7 @@ import SearchMenuList from "./SearchMenuList";
 import UniversalImage from "../../../UniversalImage";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import RefineLocationModal from "./RefineLocationModal";
+import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 const modalStyle = {
     position: "absolute",
@@ -105,11 +106,17 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 ? globalComponentStyles?.Text?.color?.value
                                 : `${themeColors?.LocationModalOrderTypeHeadingColor?.value}`,
                     fontSize:
-                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value !== 0
-                            ? layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value
-                            : globalComponentStyles?.Text?.size?.value != 0
-                                ? globalComponentStyles?.Text?.size?.value
-                                : themeColors?.LocationModalOrderTypeHeadingTextSize?.value,
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value[getScreenSizeCategory()] !== 0
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextSize?.value[getScreenSizeCategory()]
+                            : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                                ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                                : themeColors?.LocationModalOrderTypeHeadingTextSize?.value[getScreenSizeCategory()],
+                    fontWeight:
+                        layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextWeight?.value !== 0
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextWeight?.value
+                            : globalComponentStyles?.Text?.fontWeight?.value != 0
+                                ? globalComponentStyles?.Text?.fontWeight?.value
+                                : themeColors?.LocationModalOrderTypeHeadingTextWeight?.value,
 
                     fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value !== 0
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextFont?.value}`
@@ -121,7 +128,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalOrderTypeHeadingTextStyle?.value}`
                         : `${themeColors?.LocationModalOrderTypeHeadingTextStyle?.value}`,
 
-                    fontWeight: 700,
                     marginTop: "60px",
                     marginBottom: "16px",
                 }}
@@ -180,9 +186,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 sx={{
                     marginBottom: "12px",
                     textAlign: "center",
-                    fontWeight: 600,
-
-
                     color:
                         layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingColor?.value !== ""
                             ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingColor?.value}`
@@ -190,17 +193,23 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                 ? globalComponentStyles?.Text?.color?.value
                                 : `${themeColors?.LocationModalSelectLocationHeadingColor?.value}`,
                     fontSize:
-                        layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextSize?.value !== 0
-                            ? layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextSize?.value
-                            : globalComponentStyles?.Text?.size?.value != 0
-                                ? globalComponentStyles?.Text?.size?.value
-                                : themeColors?.LocationModalSelectLocationHeadingTextSize?.value,
-
-                    fontFamily: layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextFont?.value !== 0
-                        ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextFont?.value}`
-                        : globalComponentStyles?.Text?.fontFamily?.value != ""
-                            ? globalComponentStyles?.Text?.fontFamily?.value
-                            : `${themeColors?.LocationModalSelectLocationHeadingTextFont?.value}`,
+                        layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextSize?.value[getScreenSizeCategory()] !== 0
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextSize?.value[getScreenSizeCategory()]
+                            : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                                ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                                : themeColors?.LocationModalSelectLocationHeadingTextSize?.value[getScreenSizeCategory()],
+                    fontWeight:
+                        layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextWeight?.value !== 0
+                            ? layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextWeight?.value
+                            : globalComponentStyles?.Text?.fontWeight?.value != 0
+                                ? globalComponentStyles?.Text?.fontWeight?.value
+                                : themeColors?.LocationModalSelectLocationHeadingTextWeight?.value,
+                    fontFamily:
+                        layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextFont?.value !== 0
+                            ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextFont?.value}`
+                            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                                ? globalComponentStyles?.Text?.fontFamily?.value
+                                : `${themeColors?.LocationModalSelectLocationHeadingTextFont?.value}`,
 
                     fontStyle: layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextStyle?.value !== ""
                         ? `${layout?.locationLayout?.body[0].styles?.LocationModalSelectLocationHeadingTextStyle?.value}`
