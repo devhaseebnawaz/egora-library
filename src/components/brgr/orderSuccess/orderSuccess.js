@@ -11,7 +11,7 @@ import { formatTime, formatDate } from "../../../utils/formatDateTime";
 import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
-    const { orderData } = prop ?? {}
+    const { orderData } = states ?? {}
     const { orderType, customer, billNumber, tax, deliveryFees, serviceFees, platformFees, subTotal, total, paymentType, venueId, items, state, createdAt } = orderData ?? {}
     const { name, venueAddressOne, venueAddressTwo, venuePhoneNumber, franchiseId } = venueId ?? {}
     const { firstName, lastName, address, phone } = customer ?? {}
@@ -19,7 +19,6 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
     const theme = useTheme();
     // const navigate = useNavigate();
     const mdDown = useMediaQuery(theme.breakpoints.down("md"));
-
 
     // const redirectHome = () => {
     //     const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
