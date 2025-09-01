@@ -4,7 +4,6 @@ import cartIcon from "@iconify-icons/mdi/cart";
 import creditCardIcon from '@iconify-icons/mdi/credit-card-outline';
 import locationIcon from '@iconify-icons/mdi/map-marker';
 import { Icon } from "@iconify/react";
-import { useTheme } from '@mui/material/styles';
 import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
@@ -17,8 +16,6 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
     const { name, venueAddressOne, venueAddressTwo, venuePhoneNumber, franchiseId } = venueId ?? {}
     const { firstName, lastName, address, phone } = customer ?? {}
     const { street, area } = address ?? {}
-    const mdDown = useMediaQuery(theme.breakpoints.down("md"));
-    const theme = useTheme();
     const navigate = useUniversalNavigate();
     const redirectHome = () => {
         const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
