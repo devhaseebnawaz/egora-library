@@ -8,7 +8,6 @@ import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
 import { getScreenSizeCategory } from '../../../utils/fontsize';
-import { useUniversalNavigate } from "../../../useUniversalNavigate";
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
     const { orderData } = states ?? {}
@@ -16,14 +15,14 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
     const { name, venueAddressOne, venueAddressTwo, venuePhoneNumber, franchiseId } = venueId ?? {}
     const { firstName, lastName, address, phone } = customer ?? {}
     const { street, area } = address ?? {}
-    const navigate = useUniversalNavigate();
+    
     const redirectHome = () => {
         const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
         const urlsToAppendId = ["http://localhost:3031", "http://stores.dev.egora.pk", "http://stores.stg.egora.pk", "http://stores.test.egora.pk", "http://stores.egora.pk"];
         if (urlsToAppendId.includes(baseUrl)) {
-            navigate(`${baseUrl}/?${franchiseId.id}`)
+            actions.navigateToHome(`${baseUrl}/?${franchiseId.id}`)
         } else {
-            navigate(`${baseUrl}`)
+            actions.navigateToHome(`${baseUrl}`)
         }
     }
 
