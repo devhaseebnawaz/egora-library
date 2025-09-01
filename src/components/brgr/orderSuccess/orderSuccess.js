@@ -9,6 +9,7 @@ import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
 import { getScreenSizeCategory } from '../../../utils/fontsize';
+import { useUniversalNavigate } from "../../../useUniversalNavigate";
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
     const { orderData } = states ?? {}
@@ -16,19 +17,18 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
     const { name, venueAddressOne, venueAddressTwo, venuePhoneNumber, franchiseId } = venueId ?? {}
     const { firstName, lastName, address, phone } = customer ?? {}
     const { street, area } = address ?? {}
-    const theme = useTheme();
-    // const navigate = useNavigate();
     const mdDown = useMediaQuery(theme.breakpoints.down("md"));
-
-    // const redirectHome = () => {
-    //     const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
-    //     const urlsToAppendId = ["http://localhost:3031", "http://stores.dev.egora.pk", "http://stores.stg.egora.pk", "http://stores.test.egora.pk", "http://stores.egora.pk"];
-    //     if (urlsToAppendId.includes(baseUrl)) {
-    //         navigate(`${baseUrl}/?${franchiseId.id}`)
-    //     } else {
-    //         navigate(`${baseUrl}`)
-    //     }
-    // }
+    const theme = useTheme();
+    const navigate = useUniversalNavigate();
+    const redirectHome = () => {
+        const baseUrl = `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}`;
+        const urlsToAppendId = ["http://localhost:3031", "http://stores.dev.egora.pk", "http://stores.stg.egora.pk", "http://stores.test.egora.pk", "http://stores.egora.pk"];
+        if (urlsToAppendId.includes(baseUrl)) {
+            navigate(`${baseUrl}/?${franchiseId.id}`)
+        } else {
+            navigate(`${baseUrl}`)
+        }
+    }
 
     layout = layout?.json ? layout?.json : layout
 
@@ -594,15 +594,15 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                             </Typography>
                         </Box>
 
-                        {/* <Button variant="contained"
-                            // onClick={redirectHome}
+                        <Button variant="contained"
+                            onClick={redirectHome}
                             sx={{
                                 background: "#0F1110",
                                 color: '#F1D9C4'
                             }}
                         >
                             Place another order
-                        </Button> */}
+                        </Button> 
                     </Box>
                     <Box
                         sx={{
