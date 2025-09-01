@@ -1,25 +1,35 @@
-import { useRouter as useNextRouter } from 'next/navigation';
-import { useNavigate as useReactNavigate } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 export function useUniversalNavigate() {
-    let NextRouter;
-    try {
-        NextRouter = useNextRouter();
-    } catch (e) {
-        NextRouter = null;
+  let isNext = false;
+  let isReactRouter = false;
+
+  try {
+    require.resolve("next/router");
+    isNext = true;
+  } catch {}
+
+  try {
+    require.resolve("react-router-dom");
+    isReactRouter = true;
+  } catch {}
+
+  return useMemo(() => {
+    if (isNext) {
+      const { useRouter } = require("next/router");
+      const router = useRouter();
+      return (path) => router.push(path);
     }
-    const reactNavigate = useReactNavigate();
 
-    const navigate = useMemo(() => {
-        return (path) => {
-            if (NextRouter) {
-                NextRouter.push(path);
-            } else {
-                reactNavigate(path);
-            }
-        };
-    }, [NextRouter, reactNavigate]);
-
-    return navigate;
+    if (isReactRouter) {
+      const { useNavigate } = require("react-router-dom");
+      const navigate = useNavigate();
+      return (path) => navigate(path);
+    }
+    return (path) => {
+      if (typeof window !== "undefined") {
+        window.location.href = path;
+      }
+    };
+  }, [isNext, isReactRouter]);
 }
