@@ -11,8 +11,8 @@ import { formatTime, formatDate } from "../../../utils/formatDateTime";
 import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
-    const { activeOrder } = prop ?? {}
-    const { orderType, customer, billNumber, tax, deliveryFees, serviceFees, platformFees, subTotal, total, paymentType, venueId, items, state, createdAt } = activeOrder ?? {}
+    const { orderData } = prop ?? {}
+    const { orderType, customer, billNumber, tax, deliveryFees, serviceFees, platformFees, subTotal, total, paymentType, venueId, items, state, createdAt } = orderData ?? {}
     const { name, venueAddressOne, venueAddressTwo, venuePhoneNumber, franchiseId } = venueId ?? {}
     const { firstName, lastName, address, phone } = customer ?? {}
     const { street, area } = address ?? {}
