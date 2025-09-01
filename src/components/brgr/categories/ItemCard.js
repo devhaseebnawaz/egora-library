@@ -249,7 +249,7 @@ const theme = useTheme();
                 ...getCartAddButtonStyles,
               }}
             >
-              Add to Cart
+              Add
             </Button>
           </Box>
         </CardContent>

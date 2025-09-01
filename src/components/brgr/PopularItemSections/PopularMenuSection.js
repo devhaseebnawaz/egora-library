@@ -143,9 +143,9 @@ export default function PopularMenuSection({ prop, actions, styles, states, them
           No items found.
         </Typography>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {products.map((item, index) => (
-            <Grid key={index} item xs={12} sm={6} md={3} lg={3}>
+            <Grid key={index} item xs={6} sm={6} md={3} lg={3}>
               <ItemCard key={index} item={item} actions={actions} styles={styles} states={states} globalComponentStyles={globalComponentStyles} />
             </Grid>
           ))}
