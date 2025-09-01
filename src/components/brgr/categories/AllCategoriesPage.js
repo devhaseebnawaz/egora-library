@@ -166,7 +166,6 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
           key={category.id}
           ref={categoryRefs.current[category.name]}
           data-category-name={category.name}
-          style={{ margin: "48px 0px" }}
         >
           <CategoryLayout
           // banner={<Banner img={category.bannerImg} />}
@@ -180,7 +179,7 @@ export default function AllCategoriesPage({ prop, actions, styles, states, theme
 
             <Grid container spacing={2}>
               {category.items.map((item, index) => (
-                <Grid item xs={12} sm={6} md={3} key={`categoryItem${item.id}`}>
+                <Grid item xs={6} sm={6} md={3} key={`categoryItem${item.id}`}>
                     <ItemCard key={`categoryItem${index}item`} globalComponentStyles={globalComponentStyles} themeColors={themeColors} styles={styles} item={item} actions={actions} states={states} />
                 </Grid>
               ))}

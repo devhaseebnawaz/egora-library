@@ -205,7 +205,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{ py: { xs: 10, sm: 10, md: 10 }, px: { xs: 2, sm: 2, md: 10 } }} >
+            <Box sx={{ py: { xs: 4, sm: 4, md: 4 }, px: { xs: 2, sm: 2, md: 10 } }} >
                 <Grid container spacing={3} justifyContent="center">
                     {states.logoUrl &&
                         <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -215,7 +215,7 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
 
                     <Grid item xs={12} md={12} container spacing={2} >
                         <Grid item xs={12} md={7} >
-                            <Paper sx={{ p: 4, backgroundColor: '#f7f7f7' }} >
+                            <Paper sx={{ p: 3, backgroundColor: '#f7f7f7' }} >
                                   {states.orderType == "storeDelivery" && (
                                     <>
                                         <Typography fontWeight="bold" fontSize={20}   >

@@ -4,8 +4,8 @@ import { Box } from '@mui/material';
 export default function Banner({ img }) {
   return (
     <Box
-      style={{
-        height:250,
+      sx={{
+        height: { xs: 100, md: 250 },
         backgroundImage: `url(${img})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
