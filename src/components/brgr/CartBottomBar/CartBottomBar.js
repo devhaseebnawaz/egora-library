@@ -92,8 +92,9 @@ export default function CartBottomBar({
                 bottom: 0,
                 left: 0,
                 right: 0,
-                padding: '12px 16px',
+                padding: '16px',
                 zIndex: 1000,
+                width: '100%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -104,25 +105,9 @@ export default function CartBottomBar({
                     display: 'flex',
                     alignItems: 'center',
                     width: '100%',
-                    justifyContent: 'space-between',
+                    justifyContent: 'center',
                 }}
             >
-                <Box style={{ width: 40, height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {/* {showScrollTop ? ( */}
-                    {/* <IconButton
-                                style={{
-                                    backgroundColor: '#121212',
-                                    color: 'white',
-                                    width: 40,
-                                    height: 40,
-                                }}
-                                // onClick={scrollToSearch}
-                            >
-                                <Iconify icon="mdi:magnify" width={20} height={20} />
-                            </IconButton> */}
-                    {/* ) : null} */}
-                </Box>
-
                 {states?.cardItems?.items?.length > 0 && (
                     <Box
                         style={{
@@ -133,6 +118,7 @@ export default function CartBottomBar({
                             padding: 16,
                             borderRadius: '20px',
                             maxWidth: 400,
+                            width: '100%',
                             justifyContent: 'space-between',
                             flex: 1,
                             margin: '0 12px',
@@ -145,7 +131,7 @@ export default function CartBottomBar({
                         <Typography style={{ fontWeight: 'bold' }}>
                             {states?.cardItems?.items?.length}
                         </Typography>
-                        <Typography style={{  fontWeight: 'bold' }}>
+                        <Typography style={{ fontWeight: 'bold' }}>
                             View Cart
                         </Typography>
                         <Typography style={{ fontWeight: 'bold' }}>
@@ -153,22 +139,6 @@ export default function CartBottomBar({
                         </Typography>
                     </Box>
                 )}
-
-                <Box style={{ width: 40, height: 40, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {/* {showScrollTop ? ( */}
-                    {/* <IconButton
-                                style={{
-                                    backgroundColor: '#121212',
-                                    color: 'white',
-                                    width: 40,
-                                    height: 40,
-                                }}
-                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            >
-                                <Iconify icon="mdi:arrow-up" width={20} height={20} />
-                            </IconButton> */}
-                    {/* ) : null} */}
-                </Box>
             </Box>
         </Box>
     );

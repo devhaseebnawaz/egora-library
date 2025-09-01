@@ -382,7 +382,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, sh
                                         // width: 64,
                                         // height: 64,
                                         // borderRadius: 8,
-                                        marginRight: 16,
+                                        marginRight: 4,
                                         ...getImageStyles,
                                     }}
                                 />

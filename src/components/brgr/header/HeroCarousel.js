@@ -100,7 +100,7 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
       style={{
         position: "relative",
         width: "100%",
-        height: "600px",
+        height: "100%",
         overflow: "hidden",
       }}
     >
@@ -131,7 +131,8 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
 
       <IconButton
         onClick={goToPrev}
-        style={{
+        sx={{
+          display: { xs: "none", md: "flex" },
           position: "absolute",
           top: "50%",
           left: "20px",
@@ -170,7 +171,8 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
 
       <IconButton
         onClick={goToNext}
-        style={{
+         sx={{
+          display: { xs: "none", md: "flex" },
           position: "absolute",
           top: "50%",
           right: "20px",
