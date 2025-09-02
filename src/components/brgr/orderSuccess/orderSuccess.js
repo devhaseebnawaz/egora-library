@@ -7,9 +7,12 @@ import { Icon } from "@iconify/react";
 import { fNumber } from "../../../utils/formatNumber";
 import UniversalImage from "../../../UniversalImage";
 import { formatTime, formatDate } from "../../../utils/formatDateTime";
-import { getScreenSizeCategory } from '../../../utils/fontsize';
+import { getScreenSizeCategory, getIconWidthHeight } from '../../../utils/fontsize';
 
 export default function OrderSuccessPage({ open, onClose, themeColors, actions, prop, styles, states, globalComponentStyles, layout }) {
+
+    layout = layout?.json ? layout?.json : layout
+    const isBelow850 = useMediaQuery('(max-width:850px)');
     const { orderData } = states ?? {}
     const { orderType, customer, billNumber, tax, deliveryFees, serviceFees, platformFees, subTotal, total, paymentType, venueId, items, state, createdAt } = orderData ?? {}
     const { name, venueAddressOne, venueAddressTwo, venuePhoneNumber, franchiseId } = venueId ?? {}
@@ -25,7 +28,323 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
         }
     }
 
-    layout = layout?.json ? layout?.json : layout
+
+
+
+    const getOrderInformationHeadingStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessOrderInformationHeadingTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessOrderInformationHeadingTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessOrderInformationHeadingTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessOrderInformationHeadingTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessOrderInformationHeadingTextStyle?.value}`,
+    };
+
+
+    const getOrderInformationKeyStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessOrderInformationKeyTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessOrderInformationKeyTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessOrderInformationKeyTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessOrderInformationKeyTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationKeyTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessOrderInformationKeyTextStyle?.value}`,
+    };
+
+    const getOrderInformationValueStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessOrderInformationValueTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessOrderInformationValueTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessOrderInformationValueTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessOrderInformationValueTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationValueTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessOrderInformationValueTextStyle?.value}`,
+    };
+
+
+
+
+
+
+
+
+    const getPaymentInformationHeadingStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessPaymentHeadingTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessPaymentHeadingTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessPaymentHeadingTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessPaymentHeadingTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessPaymentHeadingTextStyle?.value}`,
+    };
+
+
+    const getPaymentInformationKeyStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessPaymentKeyTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessPaymentKeyTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessPaymentKeyTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessPaymentKeyTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentKeyTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessPaymentKeyTextStyle?.value}`,
+    };
+
+    const getPaymentInformationValueStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessPaymentValueTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessPaymentValueTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessPaymentValueTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessPaymentValueTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentValueTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessPaymentValueTextStyle?.value}`,
+    };
+
+
+
+
+
+
+
+    const getProductInformationHeadingStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessProductsHeadingTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessProductsHeadingTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessProductsHeadingTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessProductsHeadingTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessProductsHeadingTextStyle?.value}`,
+    };
+
+
+    const getProductInformationKeyStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessProductsKeyTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessProductsKeyTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessProductsKeyTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessProductsKeyTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsKeyTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessProductsKeyTextStyle?.value}`,
+    };
+
+    const getProductInformationValueStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessProductsValueTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessProductsValueTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessProductsValueTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessProductsValueTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsValueTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessProductsValueTextStyle?.value}`,
+    };
+
+
 
     const getThankYouStyles = {
         color:
@@ -184,14 +503,16 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
     });
 
     return (
-        <>
+        <Box sx={{
+            backgroundColor: "#ffffff"
+        }}>
             {states.logoUrl &&
                 <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
                     <img src={states.logoUrl} alt="Logo" style={{ height: '110px', zIndex: '1000000' }} />
                 </Grid>
             }
 
-            <Box px={2} py={4} sx={{ backgroundColor: "#f5f6f7", minHeight: "100vh", position: 'relative', top: '-25px' }}>
+            <Box px={2} py={4} sx={{ backgroundColor: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessBackgroundColor?.value, minHeight: "100vh", position: 'relative', top: '-25px' }}>
                 <Box mx="auto" width="95%" >
                     {/* Thank you part start */}
                     <Stack alignItems="center" spacing={2} mb={4}>
@@ -300,46 +621,63 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     >
                         <Grid container spacing={{ xs: 0, md: 3 }} px={{ xs: 0, md: 3 }} pt={2} >
                             <Grid item xs={12} md={8} px={{ xs: 2, md: 0 }}>
-                                <Typography variant="h6">
-                                    <IconButton sx={{ padding: '0  2px 0 0' }}>
+                                <Typography variant="h6" sx={{
+                                    ...getOrderInformationHeadingStyles
+                                }}>
+                                    <IconButton sx={{
+                                        padding: '0  2px 0 0',
+                                        color: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingIconColor?.value
+                                            ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingIconColor?.value
+                                            : globalComponentStyles?.Icon?.color?.value != ""
+                                                ? globalComponentStyles?.Icon?.color?.value
+                                                : themeColors?.OrderSuccessOrderInformationHeadingIconColor?.value
+                                    }}>
                                         <Icon
+                                            height={getIconWidthHeight(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingIconHeightWidth?.value != ""
+                                                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingIconHeightWidth?.value
+                                                : globalComponentStyles?.Icon?.size?.value != ""
+                                                    ? globalComponentStyles?.Icon?.size?.value
+                                                    : themeColors?.OrderSuccessOrderInformationHeadingIconHeightWidth?.value, isBelow850, 18)}
+                                            width={getIconWidthHeight(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingIconHeightWidth?.value != ""
+                                                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessOrderInformationHeadingIconHeightWidth?.value
+                                                : globalComponentStyles?.Icon?.size?.value != ""
+                                                    ? globalComponentStyles?.Icon?.size?.value
+                                                    : themeColors?.OrderSuccessOrderInformationHeadingIconHeightWidth?.value, isBelow850, 18)}
                                             icon={locationIcon}
-                                            width={24}
-                                            height={24}
-                                            color="black"
+
                                         />
                                     </IconButton>
                                     Order Information
                                 </Typography>
                                 <Divider sx={{ mt: 1 }} />
                                 <Stack direction="row" justifyContent="space-between" mt={1}>
-                                    <Typography>Customer Name</Typography>
-                                    <Typography>{`${firstName} ${lastName}`}</Typography>
+                                    <Typography sx={{ ...getOrderInformationKeyStyles }}>Customer Name</Typography>
+                                    <Typography sx={{ ...getOrderInformationValueStyles }}>{`${firstName} ${lastName}`}</Typography>
                                 </Stack>
                                 {orderType === "storeDelivery" && (
                                     <>
                                         <Divider sx={{ mt: 1.5 }} />
                                         <Stack direction="row" justifyContent="space-between" mt={1}>
-                                            <Typography>Delivery Address</Typography>
-                                            <Typography>{`${street} , ${area}`}</Typography>
+                                            <Typography sx={{ ...getOrderInformationKeyStyles }}>Delivery Address</Typography>
+                                            <Typography sx={{ ...getOrderInformationValueStyles }}>{`${street} , ${area}`}</Typography>
                                         </Stack>
                                     </>
                                 )}
 
                                 <Divider sx={{ mt: 1.5 }} />
                                 <Stack direction="row" justifyContent="space-between" mt={1}>
-                                    <Typography>Type</Typography>
-                                    <Typography>{orderType == "storeDelivery" ? "Delivery" : "Pickup"}</Typography>
+                                    <Typography sx={{ ...getOrderInformationKeyStyles }} >Type</Typography>
+                                    <Typography sx={{ ...getOrderInformationValueStyles }} >{orderType == "storeDelivery" ? "Delivery" : "Pickup"}</Typography>
                                 </Stack>
                                 <Divider sx={{ mt: 1.5 }} />
                                 <Stack direction="row" justifyContent="space-between" mt={1}>
-                                    <Typography>Mobile Number</Typography>
-                                    <Typography>+92{phone}</Typography>
+                                    <Typography sx={{ ...getOrderInformationKeyStyles }} >Mobile Number</Typography>
+                                    <Typography sx={{ ...getOrderInformationValueStyles }} >+92{phone}</Typography>
                                 </Stack>
                                 <Divider sx={{ mt: 1.5 }} />
                                 <Stack direction="row" justifyContent="space-between" mt={1}>
-                                    <Typography>Order Date</Typography>
-                                    <Typography>{`${formatDate(new Date(createdAt))} ${formatTime(new Date(createdAt))}`}</Typography>
+                                    <Typography sx={{ ...getOrderInformationKeyStyles }} >Order Date</Typography>
+                                    <Typography sx={{ ...getOrderInformationValueStyles }} >{`${formatDate(new Date(createdAt))} ${formatTime(new Date(createdAt))}`}</Typography>
                                 </Stack>
                                 {/* <Divider sx={{ mt: 1.5 }} />
                                 <Stack direction="row" justifyContent="space-between" mt={1}>
@@ -359,13 +697,29 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                         px: { xs: 2, md: 3 }
                                     }}
                                 >
-                                    <Typography variant="h6">
-                                        <IconButton sx={{ padding: '0 5px 0 0' }} >
+                                    <Typography variant="h6" sx={{
+                                        ...getPaymentInformationHeadingStyles
+                                    }}>
+                                        <IconButton sx={{
+                                            padding: '0 5px 0 0',
+                                            color: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingIconColor?.value
+                                                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingIconColor?.value
+                                                : globalComponentStyles?.Icon?.color?.value != ""
+                                                    ? globalComponentStyles?.Icon?.color?.value
+                                                    : themeColors?.OrderSuccessPaymentHeadingIconColor?.value
+                                        }} >
                                             <Icon
                                                 icon={creditCardIcon}
-                                                width={24}
-                                                height={24}
-                                                color="black"
+                                                height={getIconWidthHeight(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingIconHeightWidth?.value != ""
+                                                    ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingIconHeightWidth?.value
+                                                    : globalComponentStyles?.Icon?.size?.value != ""
+                                                        ? globalComponentStyles?.Icon?.size?.value
+                                                        : themeColors?.OrderSuccessPaymentHeadingIconHeightWidth?.value, isBelow850, 18)}
+                                                width={getIconWidthHeight(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingIconHeightWidth?.value != ""
+                                                    ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPaymentHeadingIconHeightWidth?.value
+                                                    : globalComponentStyles?.Icon?.size?.value != ""
+                                                        ? globalComponentStyles?.Icon?.size?.value
+                                                        : themeColors?.OrderSuccessPaymentHeadingIconHeightWidth?.value, isBelow850, 18)}
                                             />
                                         </IconButton>
                                         Payment
@@ -373,16 +727,16 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                     <Divider sx={{ mt: 1 }} />
 
                                     <Stack direction="row" justifyContent="space-between" mt={1}>
-                                        <Typography>Total</Typography>
-                                        <Typography>Rs. {subTotal}</Typography>
+                                        <Typography sx={{ ...getPaymentInformationKeyStyles }}>Total</Typography>
+                                        <Typography sx={{ ...getPaymentInformationValueStyles }} >Rs. {subTotal}</Typography>
                                     </Stack>
 
                                     {tax > 0 && (
                                         <>
                                             <Divider sx={{ mt: 1.5 }} />
                                             <Stack direction="row" justifyContent="space-between" mt={1}>
-                                                <Typography>Tax</Typography>
-                                                <Typography>Rs. {tax}</Typography>
+                                                <Typography sx={{ ...getPaymentInformationKeyStyles }} >Tax</Typography>
+                                                <Typography sx={{ ...getPaymentInformationValueStyles }} >Rs. {tax}</Typography>
                                             </Stack>
                                         </>
                                     )}
@@ -391,8 +745,8 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                         <>
                                             <Divider sx={{ mt: 1.5 }} />
                                             <Stack direction="row" justifyContent="space-between" mt={1}>
-                                                <Typography>Service Fee</Typography>
-                                                <Typography>Rs. {serviceFees}</Typography>
+                                                <Typography sx={{ ...getPaymentInformationKeyStyles }}>Service Fee</Typography>
+                                                <Typography sx={{ ...getPaymentInformationValueStyles }} >Rs. {serviceFees}</Typography>
                                             </Stack>
                                         </>
                                     )}
@@ -401,8 +755,8 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                         <>
                                             <Divider sx={{ mt: 1.5 }} />
                                             <Stack direction="row" justifyContent="space-between" mt={1}>
-                                                <Typography>Delivery Fee</Typography>
-                                                <Typography>Rs. {deliveryFees}</Typography>
+                                                <Typography sx={{ ...getPaymentInformationKeyStyles }} >Delivery Fee</Typography>
+                                                <Typography sx={{ ...getPaymentInformationValueStyles }} >Rs. {deliveryFees}</Typography>
                                             </Stack>
                                         </>
                                     )}
@@ -411,22 +765,22 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                         <>
                                             <Divider sx={{ mt: 1.5 }} />
                                             <Stack direction="row" justifyContent="space-between" mt={1}>
-                                                <Typography>Platform Fee</Typography>
-                                                <Typography>Rs. {platformFees}</Typography>
+                                                <Typography sx={{ ...getPaymentInformationKeyStyles }} >Platform Fee</Typography>
+                                                <Typography sx={{ ...getPaymentInformationValueStyles }} >Rs. {platformFees}</Typography>
                                             </Stack>
                                         </>
                                     )}
 
                                     <Divider sx={{ mt: 1.5 }} />
                                     <Stack direction="row" justifyContent="space-between" mt={1}>
-                                        <Typography sx={{ fontWeight: "bold", fontSize: '20px' }}>Grand Total</Typography>
-                                        <Typography sx={{ fontWeight: "bold", fontSize: '20px' }}>Rs. {total}</Typography>
+                                        <Typography sx={{ ...getPaymentInformationKeyStyles }} >Grand Total</Typography>
+                                        <Typography sx={{ ...getPaymentInformationValueStyles }}>Rs. {total}</Typography>
                                     </Stack>
 
                                     <Divider sx={{ mt: 1.5 }} />
                                     <Stack direction="row" justifyContent="space-between" mt={1}>
-                                        <Typography>Payment Type</Typography>
-                                        <Typography sx={{ fontWeight: "bold" }}>
+                                        <Typography sx={{ ...getPaymentInformationKeyStyles }} >Payment Type</Typography>
+                                        <Typography sx={{ ...getPaymentInformationValueStyles, fontWeight: "bold" }}>
                                             {paymentType === "cash" ? "Cash" : "Card"}
                                         </Typography>
                                     </Stack>
@@ -437,13 +791,27 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                         <Divider sx={{ mt: 1.5 }} />
                         <Grid container spacing={2} p={{ xs: 2, md: 3 }}>
                             <Grid item xs={12} md={12}>
-                                <Typography variant="h6" gutterBottom>
-                                    <IconButton sx={{ padding: '0 5px 0 0' }} >
+                                <Typography variant="h6" gutterBottom sx={{ ...getProductInformationHeadingStyles }}>
+                                    <IconButton sx={{
+                                        padding: '0 5px 0 0',
+                                        color: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingIconColor?.value
+                                            ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingIconColor?.value
+                                            : globalComponentStyles?.Icon?.color?.value != ""
+                                                ? globalComponentStyles?.Icon?.color?.value
+                                                : themeColors?.OrderSuccessProductsHeadingIconColor?.value
+                                    }} >
                                         <Icon
                                             icon={cartIcon}
-                                            width={24}
-                                            height={24}
-                                            color="black"
+                                            height={getIconWidthHeight(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingIconHeightWidth?.value != ""
+                                                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingIconHeightWidth?.value
+                                                : globalComponentStyles?.Icon?.size?.value != ""
+                                                    ? globalComponentStyles?.Icon?.size?.value
+                                                    : themeColors?.OrderSuccessProductsHeadingIconHeightWidth?.value, isBelow850, 18)}
+                                            width={getIconWidthHeight(layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingIconHeightWidth?.value != ""
+                                                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessProductsHeadingIconHeightWidth?.value
+                                                : globalComponentStyles?.Icon?.size?.value != ""
+                                                    ? globalComponentStyles?.Icon?.size?.value
+                                                    : themeColors?.OrderSuccessProductsHeadingIconHeightWidth?.value, isBelow850, 18)}
                                         />
                                     </IconButton>
                                     Product
@@ -452,20 +820,20 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                 <TableContainer component={Paper} sx={{ boxShadow: 0 }}>
                                     <Table size="small">
                                         <TableHead>
-                                            <TableRow>
-                                                <TableCell><strong>Name</strong></TableCell>
+                                            <TableRow sx={{ ...getProductInformationKeyStyles }}>
+                                                <TableCell><strong  >Name</strong></TableCell>
                                                 <TableCell align="center"><strong>Quantity</strong></TableCell>
                                                 <TableCell align="right"><strong>Price</strong></TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {items.map((item, index) => (
-                                                <TableRow key={index}>
+                                                <TableRow key={index} >
                                                     <TableCell align="left">
                                                         <Typography
                                                             sx={{
+                                                                ...getProductInformationValueStyles,
                                                                 fontWeight: "bold",
-                                                                fontSize: 14,
                                                             }}
                                                         >
                                                             {item.name}
@@ -477,11 +845,13 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                                         fontSize: 12,
                                                                         fontWeight: "bold",
                                                                         mr: 0.5,
+                                                                        ...getPaymentInformationKeyStyles
+
                                                                     }}
                                                                 >
                                                                     Variant:
                                                                 </Typography>
-                                                                <Typography sx={{ fontSize: 12 }}>
+                                                                <Typography sx={{ fontSize: 12 , ...getProductInformationValueStyles}}>
                                                                     {item?.selectedVariant?.name}
                                                                 </Typography>
                                                             </Box>
@@ -498,6 +868,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                                             flexWrap: "wrap",
                                                                             fontWeight: "bold",
                                                                             fontSize: 12,
+                                                                            ...getProductInformationValueStyles
                                                                         }}
                                                                     >
                                                                         + {sauce?.name} :
@@ -508,6 +879,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                                                 fontSize: 12,
                                                                                 display: "flex",
                                                                                 flexWrap: "wrap",
+                                                                                ...getProductInformationValueStyles
                                                                             }}
                                                                         >
                                                                             {sauce?.items?.map((sauceItem, sauceIndex) => (
@@ -539,14 +911,15 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                                         fontSize: "10px",
                                                                         maxWidth: "120px",
                                                                     },
+                                                                    ...getProductInformationKeyStyles
                                                                 }}
                                                             >
-                                                                Note: {item?.notes}
+                                                                Note: <span sx={{ ...getProductInformationValueStyles }}>{item?.notes} </span>
                                                             </Typography>
                                                         )}
                                                     </TableCell>
-                                                    <TableCell align="center">{item.qty}</TableCell>
-                                                    <TableCell align="right">Rs. {Number(item.qty) * Number(item.price)}</TableCell>
+                                                    <TableCell align="center" sx={{ ...getProductInformationValueStyles }} >{item.qty}</TableCell>
+                                                    <TableCell align="right" sx={{ ...getProductInformationValueStyles }} >Rs. {Number(item.qty) * Number(item.price)}</TableCell>
                                                 </TableRow>
 
                                             ))}
@@ -627,7 +1000,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                     </Box>
                 </Box>
             </Box>
-        </>
+        </Box>
 
     );
 }

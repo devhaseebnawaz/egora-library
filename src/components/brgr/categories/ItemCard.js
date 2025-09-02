@@ -20,8 +20,8 @@ export default function ItemCard({
   themeColors,
   globalComponentStyles,
 }) {
-const theme = useTheme();
-  const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
+  const theme = useTheme();
+  const smDown = useMediaQuery(theme.breakpoints.down("sm"));
   const getItemNameStyles = {
     color:
       styles?.AllCategoriesItemNameTextColor?.value !== ""
@@ -221,7 +221,7 @@ const theme = useTheme();
             >
               {item.description}
             </Typography>
-        </Box>
+          </Box>
 
           <Box>
             <Box sx={{ marginBottom: "16px" }}>
@@ -239,14 +239,17 @@ const theme = useTheme();
             </Box>
 
             <Button
-               disableRipple
-               disableElevation
+              disableRipple
+              disableElevation
               variant="contained"
               sx={{
                 padding: "8px 32px",
                 fontWeight: "bold",
                 textTransform: "none",
                 ...getCartAddButtonStyles,
+                "&:hover": {
+                  ...getCartAddButtonStyles,
+                },
               }}
             >
               Add
