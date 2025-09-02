@@ -5,12 +5,16 @@ export default function Banner({ img }) {
   return (
     <Box
       sx={{
-        height: { xs: 100, md: 250 },
+        width: '100%',
+        height: 'auto', 
+        maxHeight: { xs: 100, md: 300 },
+        minHeight: { xs: 100, md: 300 }, 
         backgroundImage: `url(${img})`,
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         borderRadius: '20px',
+        margin: '20px 0',
       }}
     />
   );

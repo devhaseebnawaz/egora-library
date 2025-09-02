@@ -273,7 +273,7 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                                     {option.name} {!option.isOnlineForStore && "(Offline)"}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {option.location}
+                                    {option?.venueAddressOne} {option?.venueAddressTwo}
                                 </Typography>
                             </Box>
                         </li>
