@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Box, IconButton } from "@mui/material";
 import { Icon } from "@iconify/react";
@@ -100,7 +101,7 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
       style={{
         position: "relative",
         width: "100%",
-        height: "100%",
+        height: "600px",
         overflow: "hidden",
       }}
     >
@@ -121,7 +122,7 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
             alt={`slide-${index}`}
             style={{
               width: "100%",
-              height: "100%",
+              height: "auto",
               objectFit: "cover",
               flexShrink: 0,
             }}

@@ -8,8 +8,7 @@ import cartIcon from "@iconify-icons/mdi/cart";
 import CartDrawer from "./CartDrawer";
 import LocationModal from "../categories/locationModal";
 import UniversalImage from "../../../UniversalImage";
-import { useTheme } from '@mui/material/styles';
-import { getFontSize,getIconWidthHeight, getScreenSizeCategory } from "../../../utils/fontsize";
+import { getIconWidthHeight, getScreenSizeCategory } from "../../../utils/fontsize";
 
 export default function CustomNavbar({
   themeColors,
@@ -24,7 +23,39 @@ export default function CustomNavbar({
   const isMobile = useMediaQuery('(max-width:600px)');
   const truncateLength = isMobile ? 10 : 25;
   const isBelow850 = useMediaQuery('(max-width:850px)');
-  console.log('isBelow850',isBelow850);
+  const { selectedVenue, currentLocation, orderType,selectedOutlet } = states ?? {}
+  const { venueAddressOne, venueAddressTwo } = selectedVenue ?? {}
+    
+  let showCurrentLocation 
+  let showAddress 
+
+  if (selectedOutlet && selectedVenue && orderType==="storePickUp") {
+    showCurrentLocation = false
+    showAddress = true
+  }
+  else if (currentLocation && orderType==="storeDelivery") {
+    showCurrentLocation = false
+    showAddress = true
+  }
+  else {
+    showCurrentLocation = true
+    showAddress = false
+  }
+  
+  showCurrentLocation = isBelow850 ? showCurrentLocation : true;
+  showAddress = isBelow850 ? showAddress : true;
+
+  const venueAddress = `${venueAddressOne ?? ""} ${venueAddressTwo ?? ""}`.trim();
+  const addressMap = {
+    storeDelivery: currentLocation ?? "",
+    storePickUp: venueAddress,
+  };
+
+ const addressText = actions?.handleTruncateText(
+  (orderType === "storePickUp" && selectedOutlet)
+   ? (addressMap[orderType] ?? "Address") 
+   :  (orderType === "storeDelivery" && currentLocation)
+  ? (addressMap[orderType] ?? "Address") : "" ,truncateLength);
 
   return (
     <>
@@ -102,6 +133,7 @@ export default function CustomNavbar({
                 <Typography
                   variant="body2"
                   style={{
+                    display: showCurrentLocation ? 'block' : 'none',
                     color:
                       styles?.AppBarChangeLocationColor?.value != ""
                         ? styles?.AppBarChangeLocationColor?.value
@@ -134,13 +166,13 @@ export default function CustomNavbar({
                         : themeColors?.AppBarChangeLocationTextStyle?.value,
                   }}
                 >
-                  Change {states.orderType === "storeDelivery" ? "Location" : "Branch"}
+                  Current {states.orderType === "storeDelivery" ? "Location" : "Branch"}
 
                 </Typography>
                 <Typography
                   variant="caption"
                   style={{
-                    display: isBelow850 && 'none',
+                    display: showAddress ? 'block' : 'none',
                     color:
                       styles?.AppBarAddressColor?.value != ""
                         ? styles?.AppBarAddressColor?.value
@@ -175,11 +207,7 @@ export default function CustomNavbar({
 
                   }}
                 >
-                  {states.orderType === "storeDelivery" ?
-                    actions?.handleTruncateText(states?.currentLocation, truncateLength) :
-                    states.orderType === "storePickUp" ?
-                      actions?.handleTruncateText(`${states?.selectedVenue?.venueAddressOne} ${states?.selectedVenue?.venueAddressTwo}`, truncateLength)
-                      : "Address"}
+                 {addressText}
                 </Typography>
               </Box>
             </Box>
