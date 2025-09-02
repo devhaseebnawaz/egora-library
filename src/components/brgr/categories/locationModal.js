@@ -47,12 +47,21 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
             }
         }
     }
-    const handleOutletSelection = () => {
-        states.setGetNewData(true);
-        actions.handleOpenLocationModal(false);
-        actions.handleOpenLocationModalOnClick(false);
-        actions.handleDeleteCartBySessionId();
-        actions.handleSetSelectedVenue(states.selectedOutlet);
+    const handleOutletSelection = async () => {
+        try {
+            if (!states?.addressForPickUpMode) {
+                await actions.handleLocateMe();
+            }
+            if (states?.addressForPickUpMode) {
+                states.setGetNewData(true);
+                actions.handleOpenLocationModal(false);
+                actions.handleOpenLocationModalOnClick(false);
+                actions.handleDeleteCartBySessionId();
+                actions.handleSetSelectedVenue(states.selectedOutlet);
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
     const handleSelectedLocation = () => {
         actions.handleSelectedLocation(states.userLocationLatlong)
@@ -418,25 +427,38 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 </>
             }
 
-            {states?.orderType === 'storePickUp' && <Button
-                fullWidth
-                onClick={handleOutletSelection}
-                sx={{
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    borderRadius: "12px",
-                    py: 1.5,
-                    fontWeight: "bold",
-                    textTransform: "none",
-                    fontSize: "16px",
-                    ":hover": {
-                        backgroundColor: "#333",
-                    },
-                }}
-                disabled={!states.selectedOutlet || !states.selectedOutlet.isOnlineForStore}
-            >
-                Select
-            </Button>}
+            {states?.orderType === 'storePickUp' &&
+                <>
+                    <Button
+                        fullWidth
+                        onClick={handleOutletSelection}
+                        sx={{
+                            backgroundColor: "#000",
+                            color: "#fff",
+                            borderRadius: "12px",
+                            py: 1.5,
+                            fontWeight: "bold",
+                            textTransform: "none",
+                            fontSize: "16px",
+                            ":hover": {
+                                backgroundColor: "#333",
+                            },
+                        }}
+                        disabled={!states.selectedOutlet || !states.selectedOutlet.isOnlineForStore}
+                    >
+                        Select
+                    </Button>
+                    {states?.errorForDeniedLocation && (
+                        <Typography
+                            variant="body2"
+                            color="error"
+                            sx={{ mt: 2, textAlign: "center" }}
+                        >
+                            {states?.errorForDeniedLocation}
+                        </Typography>
+                    )}
+                </>
+            }
         </Box>
     );
 
