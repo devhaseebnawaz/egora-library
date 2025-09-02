@@ -7,8 +7,7 @@ export default function Banner({ img }) {
       sx={{
         width: '100%',
         height: 'auto', 
-        maxHeight: { xs: 100, md: 300 },
-        minHeight: { xs: 100, md: 300 }, 
+        minHeight: { xs: 100, md: 200 }, 
         backgroundImage: `url(${img})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',

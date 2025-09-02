@@ -177,7 +177,7 @@ const theme = useTheme();
               : "/assets/placeholder.png"
           }
           alt={item.name}
-          style={{ height: "250px", objectFit: "cover" }}
+          style={{ height: "250px", objectFit: "fill" }}
         />
 
         <CardContent
