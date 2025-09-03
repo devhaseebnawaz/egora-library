@@ -479,6 +479,147 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                 : `${themeColors?.OrderSuccessDescriptionTextStyle?.value}`,
     };
 
+    const getPlaceOrderButtonStyles = {
+        backgroundColor:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextBackgroundColor?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextBackgroundColor?.value}`
+                : globalComponentStyles?.Button?.backgroundColor?.value != ""
+                    ? globalComponentStyles?.Button?.backgroundColor?.value
+                    : `${themeColors?.OrderSuccessPlaceAnotherOrderTextBackgroundColor?.value}`,
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessPlaceAnotherOrderTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessPlaceAnotherOrderTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessPlaceAnotherOrderTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessPlaceAnotherOrderTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessPlaceAnotherOrderTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessPlaceAnotherOrderTextStyle?.value}`,
+    };
+
+
+
+    const getNeedSupportStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessNeedSupportTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessNeedSupportTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessNeedSupportTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessNeedSupportTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessNeedSupportTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessNeedSupportTextStyle?.value}`,
+    };
+
+
+    const getCallUsStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessCallUsTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessCallUsTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessCallUsTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessCallUsTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCallUsTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessCallUsTextStyle?.value}`,
+    };
+
+    const getInquiryStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessInquiryTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessInquiryTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessInquiryTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessInquiryTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessInquiryTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessInquiryTextStyle?.value}`,
+    };
+
     const getFooterStyles = (type) => ({
         color:
             styles?.[type + "Color"]?.value ||
@@ -535,9 +676,15 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                         borderRadius={3}
                         bgcolor="white"
                         boxShadow={1}
+                        sx={{
+                            background: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCardOneColor?.value
+                        }}
+
                     >
                         {orderType === "storePickUp"}
-                        <>
+                        <Box sx={{
+                           
+                        }}>
                             <Stack direction="row" alignItems="center" spacing={1} mb={1}>
                                 <Typography variant="subtitle1" fontWeight={700} sx={{ ...getHeadingsStyles }}>Your Order is</Typography>
                                 <Chip label={state} color="warning" size="small" />
@@ -607,7 +754,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                 </>
                             )
                             }
-                        </>
+                        </Box>
                     </Box>
 
                     {/* order and branch detail end */}
@@ -618,6 +765,9 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                         borderRadius={3}
                         bgcolor="white"
                         boxShadow={1}
+                        sx={{
+                            background: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessCardTwoColor?.value
+                        }}
                     >
                         <Grid container spacing={{ xs: 0, md: 3 }} px={{ xs: 0, md: 3 }} pt={2} >
                             <Grid item xs={12} md={8} px={{ xs: 2, md: 0 }}>
@@ -851,7 +1001,7 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                                                 >
                                                                     Variant:
                                                                 </Typography>
-                                                                <Typography sx={{ fontSize: 12 , ...getProductInformationValueStyles}}>
+                                                                <Typography sx={{ fontSize: 12, ...getProductInformationValueStyles }}>
                                                                     {item?.selectedVariant?.name}
                                                                 </Typography>
                                                             </Box>
@@ -947,15 +1097,16 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                         <Box>
                             <Typography variant="h4"
                                 sx={{
-                                    textAlign: { xs: "center", md: "left" }
+                                    textAlign: { xs: "center", md: "left", ...getNeedSupportStyles }
                                 }}
                             >Need Support ?
                             </Typography>
-                            <Typography mt={1}>
+                            <Typography mt={1} sx={{...getInquiryStyles}}>
                                 Question regarding your order?
                                 <span style={{
                                     fontWeight: 700,
-                                    marginLeft: 10
+                                    marginLeft: 10, 
+                                    ...getCallUsStyles
                                 }}>
                                     Call us: 0{venuePhoneNumber}
                                 </span>
@@ -965,12 +1116,11 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                         <Button variant="contained"
                             onClick={redirectHome}
                             sx={{
-                                background: "#0F1110",
-                                color: '#F1D9C4'
+                                ...getPlaceOrderButtonStyles
                             }}
                         >
                             Place another order
-                        </Button> 
+                        </Button>
                     </Box>
                     <Box
                         sx={{

@@ -353,7 +353,11 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                                 variant="contained"
                                                 fullWidth
                                                 type="submit"
-                                                sx={{ mt: 2, backgroundColor: 'black', color: 'white', fontWeight: 'bold' }}
+                                                sx={{  
+                                                mt: 2, backgroundColor: 'black', color: 'white', fontWeight: 'bold',
+                                                "&:hover": {
+                                                    backgroundColor: 'black'
+                                                }}}
                                             >
                                                 {isSubmitting ? "Placing Order..." : "Place Order"}
                                             </Button>
