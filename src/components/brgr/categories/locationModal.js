@@ -298,20 +298,13 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
                 : themeColors?.LocationModalSelectOutletTextStyle?.value,
     };
 
-    useEffect(() => {
-        if (states?.handleOpenModal) {
-            handleOutletSelection();
-        }
-    }, [states?.handleOpenModal]);
-
     const handleOutletSelection = async () => {
         try {
             if (!states?.addressForPickUpMode) {
                 await actions.handleLocateMe();
             }
-            if (states?.addressForPickUpMode || states.handleOpenModal) {
+            if (states?.addressForPickUpMode) {
                 states.setGetNewData(true);
-                states?.setHandleOpenModal(false)
                 actions.handleOpenLocationModal(false);
                 actions.handleOpenLocationModalOnClick(false);
                 actions.handleDeleteCartBySessionId();
