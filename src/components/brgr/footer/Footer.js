@@ -44,6 +44,8 @@ export default function CustomFooter({
   return (
     <Box
       style={{
+        bottom: 0,
+        position: "absolute",
         width: "100%",
         padding: "4rem 0",
         backgroundColor:
