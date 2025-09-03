@@ -17,6 +17,14 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
   const totalSlides = carouselImages.value.length;
   const fullSlides = [carouselImages.value[totalSlides - 1], ...carouselImages.value, carouselImages.value[0]];
 
+  const [imgHeight, setImgHeight] = useState("auto");
+
+  const handleImageLoad = (e) => {
+    const naturalHeight = e.target.naturalHeight;
+    setImgHeight(naturalHeight > 800 ? 800 : "auto");
+  };
+
+
   const goToIndex = (index) => {
     setCurrentIndex(index + 1);
   };
@@ -100,8 +108,6 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
       onMouseLeave={startSlide}
       style={{
         position: "relative",
-        width: "100%",
-        height: "600px",
         overflow: "hidden",
       }}
     >
@@ -111,7 +117,6 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
           transition: transitionEnabled ? "transform 0.8s ease-in-out" : "none",
           transform: `translateX(-${currentIndex * 100}%)`,
           width: "100%",
-          height: "100%",
         }}
       >
         {fullSlides.map((img, index) => (
@@ -120,10 +125,11 @@ export default function HeroCarousel({ prop, themeColors, styles, states, global
             component="img"
             src={img}
             alt={`slide-${index}`}
+            onLoad={handleImageLoad}
             style={{
               width: "100%",
-              height: "auto",
-              objectFit: "cover",
+              maxHeight:imgHeight,
+              objectFit: "fill",
               flexShrink: 0,
             }}
           />
