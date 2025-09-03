@@ -58,11 +58,6 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
             }
         }
     }
-    useEffect(() => {
-        if (states?.addressForPickUpMode) {
-            handleOutletSelection();
-        }
-    }, [states?.addressForPickUpMode]);
 
     const getOrderTypeSelectorSelectedButtonStyles = {
         fontSize:
