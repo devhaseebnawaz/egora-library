@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
     Modal,
     Box,
@@ -58,7 +58,11 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
             }
         }
     }
-
+    useEffect(() => {
+        if (states?.addressForPickUpMode) {
+            handleOutletSelection();
+        }
+    }, [states?.addressForPickUpMode]);
 
     const getOrderTypeSelectorSelectedButtonStyles = {
         fontSize:
