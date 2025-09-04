@@ -1,8 +1,5 @@
-'use client';
-
-import React from "react";
-import { Typography, Box, Link ,useMediaQuery} from "@mui/material";
-import { useTheme } from '@mui/material/styles';
+import React , {useState,useEffect} from "react";
+import { Typography, Box, Link } from "@mui/material";
 import { getScreenSizeCategory } from '../../../utils/fontsize';
 
 export default function CustomFooter({
@@ -14,9 +11,8 @@ export default function CustomFooter({
   inFranchise = false
 }) {
 
-   const theme = useTheme();
-  const mdDown = useMediaQuery(theme.breakpoints.down("md")); 
   const linksArray = prop?.editable?.links?.value || [];
+  const [isShort, setIsShort] = useState(false);
 
   const getFooterStyles = (type) => ({
     fontWeight:
@@ -41,11 +37,32 @@ export default function CustomFooter({
       themeColors?.[type + "Style"]?.value,
   });
 
+  useEffect(() => {
+    const checkHeight = () => {
+      const body = document.body;
+      const bodyHeight = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight,
+        document.documentElement.offsetHeight
+      );
+      const viewportHeight = window.innerHeight;
+      if (bodyHeight <= viewportHeight) {
+        setIsShort(true)
+      } else {
+        setIsShort(false)
+      }
+    };
+    checkHeight();
+    window.addEventListener("resize", checkHeight);
+    return () => window.removeEventListener("resize", checkHeight);
+  }, []);
+
+
   return (
     <Box
       style={{
-        // bottom: 0,
-        // position: "absolute",
         width: "100%",
         padding: "4rem 0",
         backgroundColor:
@@ -59,6 +76,8 @@ export default function CustomFooter({
         minHeight: "280px",
         padding: "25px 15px",
         justifyContent: "center",
+        position: isShort && "fixed",
+        bottom: isShort &&  "0",
       }}
     >
       <Typography
