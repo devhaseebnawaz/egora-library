@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Modal,
     Box,
@@ -43,7 +43,7 @@ export default function RefineLocationModal({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     });
 
-
+    const [userLocation, setUserLocation] = useState(null);
 
     // const handleUpdate = () => {
     //     onSave( states?.markerPosition);
@@ -86,7 +86,7 @@ export default function RefineLocationModal({
                     }}
                 >
                     <Typography fontWeight={700} fontSize="16px">
-                         Refine Your Delivery Location
+                        Refine Your Delivery Location
                     </Typography>
                     <IconButton onClick={onClose}>
                         <CloseIcon />
@@ -99,12 +99,91 @@ export default function RefineLocationModal({
                         center={states?.markerPosition}
                         zoom={15}
                         onClick={actions?.handleMapClick}
+                        options={{
+                            fullscreenControl: false,
+                            streetViewControl: false,
+                            mapTypeControl: true,
+                            zoomControl: true,
+                        }}
+                        onLoad={(map) => {
+                            const locationButton = document.createElement("button");
+                            locationButton.textContent = "◉";
+                            locationButton.style.background = "#fff";
+                            locationButton.style.border = "none";
+                            locationButton.style.padding = "8px 12px";
+                            locationButton.style.margin = "12px";
+                            locationButton.style.fontSize = "16px";
+                            locationButton.style.borderRadius = "50%";
+                            locationButton.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+                            locationButton.style.cursor = "pointer";
+                            locationButton.title = "Getting current location";
+                            locationButton.addEventListener("mouseenter", () => {
+                                locationButton.style.color = "black";
+                            });
+                            locationButton.addEventListener("mouseleave", () => {
+                                locationButton.style.color = "rgb(100 90 90)";
+                            });
+
+                            map.controls[window.google.maps.ControlPosition.RIGHT_BOTTOM].push(locationButton);
+
+                            locationButton.addEventListener("click", () => {
+                                if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(
+                                        (pos) => {
+                                            const posCoords = {
+                                                lat: pos.coords.latitude,
+                                                lng: pos.coords.longitude,
+                                            };
+
+                                            setUserLocation(posCoords);
+                                            states.setMarkerPosition(posCoords);
+                                            map.setCenter(posCoords);
+
+                                            const geocoder = new window.google.maps.Geocoder();
+                                            geocoder.geocode({ location: posCoords }, (results, status) => {
+                                                if (status === "OK" && results[0]) {
+                                                    const formattedAddress = results[0].formatted_address;
+                                                    console.log("Formatted Address: ", formattedAddress);
+
+                                                    actions.updateLocation(formattedAddress);
+                                                } else {
+                                                    console.error("Geocoder failed due to: " + status);
+                                                }
+                                            });
+                                        },
+                                        (err) => {
+                                            console.error("Geolocation error:", err);
+                                        },
+                                        {
+                                            enableHighAccuracy: true,
+                                            timeout: 10000,
+                                            maximumAge: 0,
+                                        }
+                                    );
+                                }
+                            });
+
+                        }}
                     >
                         <Marker
                             position={states?.markerPosition}
                             draggable
                             onDragEnd={actions?.handleMarkerDragEnd}
                         />
+
+                        {userLocation && (
+                            <Marker
+                                position={userLocation}
+                                icon={{
+                                    path: window.google.maps.SymbolPath.CIRCLE,
+                                    scale: 8,
+                                    fillColor: "#4285F4",
+                                    fillOpacity: 1,
+                                    strokeWeight: 2,
+                                    strokeColor: "#fff",
+                                }}
+                            />
+                        )}
                     </GoogleMap>
                 ) : (
                     <Box
