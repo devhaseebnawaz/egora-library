@@ -14,4 +14,5 @@ import TextBlock from './components/brgr/textBlock/textBlock';
 import AnnouncementsBanner from './components/brgr/AnnouncementsBanner/announcementsBanner';
 import CartDrawer from './components/brgr//header/CartDrawer';
 import CartBottomBar from './components/brgr/CartBottomBar/CartBottomBar';
-export { AnnouncementsBanner, CartDrawer, ItemDetailModal,CartCheckoutSummary, TextBlock, OrderSuccessPage, Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock, CartBottomBar };
+import EditorTextBlock from './components/brgr/editorTextBlock/editorTextBlock';
+export { AnnouncementsBanner, CartDrawer, ItemDetailModal,CartCheckoutSummary, TextBlock,EditorTextBlock, OrderSuccessPage, Header, LocationModal, HeroCarousel, CategoryCarousel, SearchBar, PopularMenuSection, AllCategoriesPage, Footer, InfoBlock, CartBottomBar };
