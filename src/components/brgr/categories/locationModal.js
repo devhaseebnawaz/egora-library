@@ -299,24 +299,34 @@ export default function LocationModal({ themeColors, actions, prop, styles, stat
     };
 
     const handleOutletSelection = async () => {
-        try {
-            if (!states?.addressForPickUpMode) {
-                await actions.handleLocateMe();
+        if (!states?.addressForPickUpMode) {
+            try {
+                const response = await actions.handleLocateMe();
+                if (response) {
+                    states.setGetNewData(true);
+                    actions.handleOpenLocationModal(false);
+                    actions.handleOpenLocationModalOnClick(false);
+                    actions.handleDeleteCartBySessionId();
+                    actions.handleSetSelectedVenue(states.selectedOutlet);
+                }
+            } catch (err) {
+                console.log(err);
             }
-            if (states?.addressForPickUpMode) {
-                states.setGetNewData(true);
-                actions.handleOpenLocationModal(false);
-                actions.handleOpenLocationModalOnClick(false);
-                actions.handleDeleteCartBySessionId();
-                actions.handleSetSelectedVenue(states.selectedOutlet);
-            }
-        } catch (err) {
-            console.log(err);
+        }
+
+        if (states?.addressForPickUpMode) {
+            states.setGetNewData(true);
+            actions.handleOpenLocationModal(false);
+            actions.handleOpenLocationModalOnClick(false);
+            actions.handleDeleteCartBySessionId();
+            actions.handleSetSelectedVenue(states.selectedOutlet);
         }
     };
+
     const handleSelectedLocation = () => {
         actions.handleSelectedLocation(states.userLocationLatlong)
     }
+    
     const content = (
         <Box >
             <Box
