@@ -3,14 +3,12 @@ import { Box, Typography } from '@mui/material';
 import Markdown from '../../markdown';
 
 export default function EditorTextBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
-
     return (
         <Box
             sx={{
                 width: '100%',
                 py: '50px',
                 px: {
-                    // xs: '12px',
                     sm: '20px',
                     md: '40px',
                 },
