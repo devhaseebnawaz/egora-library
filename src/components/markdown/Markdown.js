@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import '../../utils/highlight';
+// import '../../utils/highlight';
 import { Link as RouterLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 // markdown plugins
