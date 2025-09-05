@@ -10,7 +10,7 @@ export default function EditorTextBlock({ themeColors, actions, prop, styles, st
                 width: '100%',
                 py: '50px',
                 px: {
-                    xs: '12px',
+                    // xs: '12px',
                     sm: '20px',
                     md: '40px',
                 },
