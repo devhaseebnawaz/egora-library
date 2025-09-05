@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Markdown from '../../markdown';
+import { decodeHTML } from '../../../utils/decodeHTML';
 
 export default function EditorTextBlock({ themeColors, actions, prop, styles, states, globalComponentStyles }) {
     
@@ -21,7 +22,7 @@ export default function EditorTextBlock({ themeColors, actions, prop, styles, st
             }}
         >
             <Typography>
-                <Markdown children={prop.editable.text.value} />
+                <Markdown children={decodeHTML(prop.editable.text.value)} />
             </Typography>
         </Box>
     );
