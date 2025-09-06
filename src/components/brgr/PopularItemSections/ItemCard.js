@@ -8,6 +8,16 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm")); 
   const getItemNameStyles = {
+    backgroundColor:
+      styles?.PopularMenuSectionItemNameTextBackgroundColor?.value !== ""
+        ? styles?.PopularMenuSectionItemNameTextBackgroundColor?.value
+        : globalComponentStyles?.Text?.color?.value !== ""
+          ? globalComponentStyles?.Text?.color?.value
+          : themeColors?.PopularMenuSectionItemNameTextBackgroundColor?.value,
+    borderRadius:
+      styles?.PopularMenuSectionItemNameBorderRadius?.value !== ""
+        ? `${styles?.PopularMenuSectionItemNameBorderRadius?.value}%`
+        : `${themeColors?.PopularMenuSectionItemNameBorderRadius?.value}%`,
     color:
       styles?.PopularMenuSectionItemNameTextColor?.value !== ""
         ? styles?.PopularMenuSectionItemNameTextColor?.value
@@ -77,14 +87,14 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
           : themeColors?.PopularMenuSectionPriceTextStyle?.value,
 
     borderRadius: styles?.PopularMenuSectionPriceBorderRadius?.value !== ""
-    ? styles?.PopularMenuSectionPriceBorderRadius?.value
-     : themeColors?.PopularMenuSectionPriceBorderRadius?.value,
-    
-    backgroundColor:  styles?.PopularMenuSectionPriceBackgroundcolor?.value !== ""
-    ? styles?.PopularMenuSectionPriceBackgroundcolor?.value
-    : globalComponentStyles?.Text?.backgroundColor?.value !== ""
-      ? globalComponentStyles?.Text?.backgroundColor?.value
-      : themeColors?.PopularMenuSectionPriceBackgroundcolor?.value,
+      ? styles?.PopularMenuSectionPriceBorderRadius?.value
+      : themeColors?.PopularMenuSectionPriceBorderRadius?.value,
+
+    backgroundColor: styles?.PopularMenuSectionPriceBackgroundcolor?.value !== ""
+      ? styles?.PopularMenuSectionPriceBackgroundcolor?.value
+      : globalComponentStyles?.Text?.backgroundColor?.value !== ""
+        ? globalComponentStyles?.Text?.backgroundColor?.value
+        : themeColors?.PopularMenuSectionPriceBackgroundcolor?.value,
   };
 
   return (
@@ -144,7 +154,8 @@ export default function ItemCard ({ item, themeColors, styles, actions, states, 
             // fontWeight: "bold",
             // color: themeColors?.ItemCardItemNameColor ? themeColors?.ItemCardItemNameColor : styles?.ItemCardItemNameColor != "" ? styles?.ItemCardItemNameColor : "#fff",
             textShadow: "0 1px 3px rgba(0,0,0,0.6)",
-            ...getItemNameStyles
+            ...getItemNameStyles,
+            padding: "2px 9px",
           }}
         >
           {item?.name}

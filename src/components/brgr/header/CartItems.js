@@ -22,241 +22,7 @@ import { fNumber } from "../../../utils/formatNumber";
 
 import { getScreenSizeCategory } from '../../../utils/fontsize';
 
-const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, layout, globalComponentStyles, themeColors, previewMode }) => {
-    const getItemPriceStyles = {
-        color:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextColor?.value !== ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextColor?.value}`
-                : globalComponentStyles?.Text?.color?.value != ""
-                    ? globalComponentStyles?.Text?.color?.value
-                    : `${themeColors?.cartDrawerSummaryItemPriceTextColor?.value}`,
-        fontSize:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextSize?.value[getScreenSizeCategory()] != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextSize?.value[getScreenSizeCategory()]
-                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
-                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
-                    : themeColors?.cartDrawerSummaryItemPriceTextSize?.value[getScreenSizeCategory()],
-        fontWeight:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextWeight?.value != ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextWeight?.value
-                : globalComponentStyles?.Text?.fontWeight?.value != ""
-                    ? globalComponentStyles?.Text?.fontWeight?.value
-                    : themeColors?.cartDrawerSummaryItemPriceTextWeight?.value,
-        fontFamily:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextFont?.value != ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextFont?.value}`
-                : globalComponentStyles?.Text?.fontFamily?.value != ""
-                    ? globalComponentStyles?.Text?.fontFamily?.value
-                    : `${themeColors?.cartDrawerSummaryItemPriceTextFont?.value}`,
-
-        fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextStyle?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemPriceTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
-                : `${themeColors?.cartDrawerSummaryItemPriceTextStyle?.value}`,
-    };
-    
-    const getItemIncreaseButtonStyles = {
-        width:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerIncreaseItemHeightWidth?.value !== ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerIncreaseItemHeightWidth?.value
-                : themeColors?.cartDrawerIncreaseItemHeightWidth?.value,
-        height:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerIncreaseItemHeightWidth?.value != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerIncreaseItemHeightWidth?.value
-                : themeColors?.cartDrawerIncreaseItemHeightWidth?.value,
-
-        color: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerIncreaseItemIconColor?.value != ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerIncreaseItemIconColor?.value}`
-            : `${themeColors?.cartDrawerIncreaseItemIconColor?.value}`,
-    };
-
-
-    const getItemDecreaseButtonStyles = {
-        width:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDecreaseItemHeightWidth?.value !== ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDecreaseItemHeightWidth?.value
-                : themeColors?.cartDrawerDecreaseItemHeightWidth?.value,
-        height:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDecreaseItemHeightWidth?.value != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDecreaseItemHeightWidth?.value
-                : themeColors?.cartDrawerDecreaseItemHeightWidth?.value,
-
-        color: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDecreaseItemIconColor?.value != ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerDecreaseItemIconColor?.value}`
-            : `${themeColors?.cartDrawerDecreaseItemIconColor?.value}`,
-    };
-
-
-
-
-    const getItemDescriptionStyles = {
-        color:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextColor?.value !== ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextColor?.value}`
-                : globalComponentStyles?.Text?.color?.value != ""
-                    ? globalComponentStyles?.Text?.color?.value
-                    : `${themeColors?.cartDrawerSummaryItemDescriptionTextColor?.value}`,
-        fontSize:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextSize?.value[getScreenSizeCategory()] != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextSize?.value[getScreenSizeCategory()]
-                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
-                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
-                    : themeColors?.cartDrawerSummaryItemDescriptionTextSize?.value[getScreenSizeCategory()],
-        fontWeight:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextWeight?.value != ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextWeight?.value
-                : globalComponentStyles?.Text?.fontWeight?.value != ""
-                    ? globalComponentStyles?.Text?.fontWeight?.value
-                    : themeColors?.cartDrawerSummaryItemDescriptionTextWeight?.value,
-        fontFamily:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextFont?.value != ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextFont?.value}`
-                : globalComponentStyles?.Text?.fontFamily?.value != ""
-                    ? globalComponentStyles?.Text?.fontFamily?.value
-                    : `${themeColors?.cartDrawerSummaryItemDescriptionTextFont?.value}`,
-
-        fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextStyle?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemDescriptionTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
-                : `${themeColors?.cartDrawerSummaryItemDescriptionTextStyle?.value}`,
-    };
-    
-    const getItemHeadingStyles = {
-        color:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextColor?.value !== ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextColor?.value}`
-                : globalComponentStyles?.Text?.color?.value != ""
-                    ? globalComponentStyles?.Text?.color?.value
-                    : `${themeColors?.cartDrawerSummaryItemHeadingsTextColor?.value}`,
-        fontSize:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextSize?.value[getScreenSizeCategory()] != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextSize?.value[getScreenSizeCategory()]
-                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
-                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
-                    : themeColors?.cartDrawerSummaryItemHeadingsTextSize?.value[getScreenSizeCategory()],
-        fontWeight:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextWeight?.value != ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextWeight?.value
-                : globalComponentStyles?.Text?.fontWeight?.value != ""
-                    ? globalComponentStyles?.Text?.fontWeight?.value
-                    : themeColors?.cartDrawerSummaryItemHeadingsTextWeight?.value,
-        fontFamily:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextFont?.value != ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextFont?.value}`
-                : globalComponentStyles?.Text?.fontFamily?.value != ""
-                    ? globalComponentStyles?.Text?.fontFamily?.value
-                    : `${themeColors?.cartDrawerSummaryItemHeadingsTextFont?.value}`,
-
-        fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextStyle?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemHeadingsTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
-                : `${themeColors?.cartDrawerSummaryItemHeadingsTextStyle?.value}`,
-    };
-
-    const getItemNameStyles = {
-        color:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextColor?.value !== ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextColor?.value}`
-                : globalComponentStyles?.Text?.color?.value != ""
-                    ? globalComponentStyles?.Text?.color?.value
-                    : `${themeColors?.cartDrawerSummaryItemNameTextColor?.value}`,
-        fontSize:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextSize?.value[getScreenSizeCategory()] != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextSize?.value[getScreenSizeCategory()]
-                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
-                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
-                    : themeColors?.cartDrawerSummaryItemNameTextSize?.value[getScreenSizeCategory()],
-        fontWeight:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextWeight?.value != ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextWeight?.value
-                : globalComponentStyles?.Text?.fontWeight?.value != ""
-                    ? globalComponentStyles?.Text?.fontWeight?.value
-                    : themeColors?.cartDrawerSummaryItemNameTextWeight?.value,
-
-        fontFamily: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextFont?.value != ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.cartDrawerSummaryItemNameTextFont?.value}`,
-
-        fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextStyle?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemNameTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
-                : `${themeColors?.cartDrawerSummaryItemNameTextStyle?.value}`,
-    };
-
-    const getImageStyles = {
-        width:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageHeightWidth?.value != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageHeightWidth?.value
-                : themeColors?.cartDrawerSummaryItemImageHeightWidth?.value,
-        height:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageHeightWidth?.value != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageHeightWidth?.value
-                : themeColors?.cartDrawerSummaryItemImageHeightWidth?.value,
-
-        backgroundColor: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageBackgroundColor?.value != ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageBackgroundColor?.value}`
-            : `${themeColors?.cartDrawerSummaryItemImageBackgroundColor?.value}`,
-
-        borderRadius: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageBorderRadius?.value != 0
-            ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerSummaryItemImageBorderRadius?.value
-            : themeColors?.cartDrawerSummaryItemImageBorderRadius?.value,
-    };
-    
-    const getItemQtyStyles = {
-        color:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextColor?.value !== ""
-                ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextColor?.value}`
-                : globalComponentStyles?.Text?.color?.value != ""
-                    ? globalComponentStyles?.Text?.color?.value
-                    : `${themeColors?.cartDrawerItemQtyTextColor?.value}`,
-        fontSize:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextSize?.value[getScreenSizeCategory()] != 0
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextSize?.value[getScreenSizeCategory()]
-                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
-                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
-                    : themeColors?.cartDrawerItemQtyTextSize?.value[getScreenSizeCategory()],
-        fontWeight:
-            layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextWeight?.value != ""
-                ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextWeight?.value
-                : globalComponentStyles?.Text?.fontWeight?.value != ""
-                    ? globalComponentStyles?.Text?.fontWeight?.value
-                    : themeColors?.cartDrawerItemQtyTextWeight?.value,
-
-        fontFamily: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextFont?.value != ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextFont?.value}`
-            : globalComponentStyles?.Text?.fontFamily?.value != ""
-                ? globalComponentStyles?.Text?.fontFamily?.value
-                : `${themeColors?.cartDrawerItemQtyTextFont?.value}`,
-
-        fontStyle: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextStyle?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyTextStyle?.value}`
-            : globalComponentStyles?.Text?.fontWeight?.value != ""
-                ? globalComponentStyles?.Text?.fontWeight?.value
-                : `${themeColors?.cartDrawerItemQtyTextStyle?.value}`,
-    };
-
-    const getItemQtyButtonStyles = {
-        backgroundColor: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyButtonBackgroundColor?.value !== ""
-            ? `${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyButtonBackgroundColor?.value}`
-            : globalComponentStyles?.Button?.fontFamily?.value !== ""
-                ? globalComponentStyles?.Button?.fontFamily?.value
-                : themeColors?.cartDrawerItemQtyButtonBackgroundColor?.value,
-        borderRadius: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyBorderRadius?.value !== ""
-        ? layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyBorderRadius?.value
-        : globalComponentStyles?.Button?.borderRadius?.value !== ""
-            ? globalComponentStyles?.Button?.borderRadius?.value
-            : themeColors?.cartDrawerItemQtyBorderRadius?.value,
-        border: layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyBorderColor?.value !== ""
-            ? `2px solid ${layout?.cartDrawerLayout?.body[0].styles?.cartDrawerItemQtyBorderColor?.value}`
-                : `2px solid  ${themeColors?.cartDrawerItemQtyBorderColor?.value}`,
-    };
-
+const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, showDeleteIndex, setShowDeleteIndex, handleRemoveFromCart, handleMenuItemClick, states, layout, globalComponentStyles, themeColors, previewMode, getItemPriceStyles, getItemIncreaseButtonStyles, getItemDecreaseButtonStyles, getItemDescriptionStyles, getItemHeadingStyles, getItemNameStyles, getImageStyles, getItemQtyStyles, getItemQtyButtonStyles, getItemNotesStyles }) => {
     // console.log("the cart item sis", cartItem)
     // const sessionInfo = useSession();
     // const dispatch = useDispatch();
@@ -400,7 +166,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, sh
                                         // onClick={() => handleMenuItemClick(cartItem)}
                                         onClick={() => {
                                             if (!previewMode) {
-                                                actions.handleOpenCard(); actions.handleItemEditOpen(), states.setItemForDetailedModal(cartItem)
+                                                // actions.handleOpenCard(); actions.handleItemEditOpen(), states.setItemForDetailedModal(cartItem)
                                             }
                                         }}
                                         sx={{
@@ -531,6 +297,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, sh
                                                 maxWidth: "80px",
                                             },
                                         },
+                                        ...getItemNotesStyles
                                     }}
                                 >
                                     <span>{cartItem?.notes}</span>
@@ -561,7 +328,7 @@ const CartItems = ({ showButtons = true, actions, cartItem, cardItems, index, sh
                     >
                         {!showButtons &&
                             <Typography sx={{ ...getItemQtyStyles }}>
-                                {cartItem.qty}
+                                x{cartItem.qty}
                             </Typography>}
                         {
                             showButtons &&

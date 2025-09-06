@@ -75,7 +75,6 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
     };
 
     return (
-        <Container>
         <Box
             style={{
                 width: '100%',
@@ -100,6 +99,5 @@ export default function InfoBlock({ themeColors, actions, prop, styles, states, 
                 {prop.editable.description.value}
             </Typography>
         </Box>
-        </Container>
     );
 }

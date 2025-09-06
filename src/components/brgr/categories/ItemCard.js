@@ -183,7 +183,7 @@ export default function ItemCard({
         <CardContent
           sx={{
             textAlign: "center",
-            flexGrow: 1, // equal height maintain
+            flexGrow: 1,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
@@ -231,6 +231,10 @@ export default function ItemCard({
                   padding: "4px 16px",
                   textTransform: "none",
                   boxShadow: "none",
+                  "&:hover": {
+                    ...getPriceTagStyles,
+                    boxShadow: "none"
+                  },
                   ...getPriceTagStyles,
                 }}
               >
@@ -248,6 +252,7 @@ export default function ItemCard({
                 textTransform: "none",
                 ...getCartAddButtonStyles,
                 "&:hover": {
+                  boxShadow: "none",
                   ...getCartAddButtonStyles,
                 },
               }}
