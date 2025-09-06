@@ -4,11 +4,11 @@ import {
 } from "@mui/material";
 import { fNumber } from "../../../utils/formatNumber";
 
-const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData, getDescriptionStyles, getHeadingStyles,  getOrderHeadingStyles }) => {
+const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, setOrderData, getDescriptionStyles, getHeadingStyles, getOrderHeadingStyles, checkoutTotalSummaryBackground }) => {
 
-  const {  cardItems,franchise,orderType } = states ?? {};
-  const { serviceFeesObject, configurations,storeTaxOnCash,storeTaxOnCard,platformFees,deliveryFees } = franchise ?? {};
-  const { isServiceFeesApplicableOnStore,isTaxApplicableOnStore,isPlatformFeeApplicableOnStore,isCashAvailableOnPickUp,isCashAvailableOnDelivery,isDeliveryFeeApplicableOnStore } = configurations ?? {};
+  const { cardItems, franchise, orderType } = states ?? {};
+  const { serviceFeesObject, configurations, storeTaxOnCash, storeTaxOnCard, platformFees, deliveryFees } = franchise ?? {};
+  const { isServiceFeesApplicableOnStore, isTaxApplicableOnStore, isPlatformFeeApplicableOnStore, isCashAvailableOnPickUp, isCashAvailableOnDelivery, isDeliveryFeeApplicableOnStore } = configurations ?? {};
 
   const [subTotal, setSubTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -23,7 +23,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   };
 
   const isApplicable = (applicable) => applicable === "true" || applicable === true;
-  
+
   const calculateSubTotal = () => {
     return cardItems.items.reduce((total, cartItem) => {
       const qty = cartItem.qty;
@@ -48,11 +48,11 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
   const taxRate = isTaxApplicableOnStore
     ? (states.paymentMethod === "cash"
       ? storeTaxOnCash / 100
-      : states.paymentMethod=== "card"
+      : states.paymentMethod === "card"
         ? storeTaxOnCard / 100
         : 0)
     : 0;
-  
+
   const taxAmount = useMemo(() => (
     calculateAndRoundTax(subTotal, taxRate, discount)
   ), [subTotal, taxRate, discount]);
@@ -62,7 +62,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
 
     const modeCashAvailability = {
       storePickUp: isCashAvailableOnPickUp,
-      storeDelivery:isCashAvailableOnDelivery,
+      storeDelivery: isCashAvailableOnDelivery,
     };
 
     if (!modeCashAvailability[states.orderType] && states.paymentMethod === "cash") {
@@ -94,8 +94,8 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     ) {
       updatedTotal += Number(serviceFee);
     }
-    const platformFee = isPlatformFeeApplicableOnStore ? platformFees:0;
-    const deliveryFee = (isDeliveryFeeApplicableOnStore && orderType ==="storeDelivery") ? deliveryFees : 0;
+    const platformFee = isPlatformFeeApplicableOnStore ? platformFees : 0;
+    const deliveryFee = (isDeliveryFeeApplicableOnStore && orderType === "storeDelivery") ? deliveryFees : 0;
     const grandTotal = Number(updatedTotal) + Number(platformFee) + Number(deliveryFee) + Number(taxAmount) + Number(selectedTip);
     setTotal(grandTotal);
   }, [
@@ -117,7 +117,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
     if (isServiceFeesApplicableOnStore && isApplicable(service?.applicable) && serviceFee > 0) {
       return (
         <Stack direction="row" justifyContent="space-between" marginBottom='5px'>
-          <Typography sx={{ color: "text.secondary", fontWeight: "600" , ...getHeadingStyles }}>
+          <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>
             Service Fee {service?.type === "Percentage" ? `(${service.amount}%)` : ""}
           </Typography>
           <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>
@@ -131,12 +131,12 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
 
   useEffect(() => {
     if (!cardItems || cardItems.items?.length === 0) return;
-  
+
     const mode = states.orderType;
-  
+
     let totalServiceValue = 0;
     let serviceFeesObj = {};
-  
+
     if (
       isServiceFeesApplicableOnStore &&
       isApplicable(serviceFeesObject?.[mode]?.[states.paymentMethod]?.applicable)
@@ -148,7 +148,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
         },
       };
     }
-  
+
     const orderData = {
       levelId: cardItems?.levelId,
       venueId: cardItems?.venueId,
@@ -161,48 +161,51 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
       tip: selectedTip === null ? 0 : fNumber(selectedTip),
       serviceFees: fNumber(totalServiceValue),
       location: states.latLong ? states.latLong : "2,2",
-      platformFees: isPlatformFeeApplicableOnStore ? platformFees:0,
-      deliveryFees: (isDeliveryFeeApplicableOnStore && orderType==="storeDelivery") ? deliveryFees :0,
+      platformFees: isPlatformFeeApplicableOnStore ? platformFees : 0,
+      deliveryFees: (isDeliveryFeeApplicableOnStore && orderType === "storeDelivery") ? deliveryFees : 0,
       serviceFeesObject: serviceFeesObj,
     };
-  
+
     setOrderData(orderData);
-  }, [ cardItems, total, selectedTip, serviceFee, taxAmount, subTotal, states.paymentMethod, states.orderType, isServiceFeesApplicableOnStore, serviceFeesObject,
+  }, [cardItems, total, selectedTip, serviceFee, taxAmount, subTotal, states.paymentMethod, states.orderType, isServiceFeesApplicableOnStore, serviceFeesObject,
   ]);
 
-  
+
   return (
     <>
-      <Card sx={{ mb:2, backgroundColor: '#f7f7f7' }}>
+      <Card sx={{
+        mb: 2,
+        backgroundColor: checkoutTotalSummaryBackground
+      }}>
         <CardContent sx={{ padding: '16px !important' }}>
-          <Stack spacing={1}>    
-        <Typography variant="h4" sx={{ fontWeight: "700", fontSize: 25,  ...getOrderHeadingStyles }}>
-          Your Order
-        </Typography>
+          <Stack spacing={1}>
+            <Typography variant="h4" sx={{ fontWeight: "700", fontSize: 25, ...getOrderHeadingStyles }}>
+              Your Order
+            </Typography>
             <Stack direction="row" justifyContent="space-between">
               <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Sub Total</Typography>
-              <Typography variant="subtitle2" sx={{...getDescriptionStyles}}>Rs. {fNumber(subTotal)}</Typography>
+              <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>Rs. {fNumber(subTotal)}</Typography>
             </Stack>
-           {isPlatformFeeApplicableOnStore && (
-            <Stack direction="row" justifyContent="space-between">
-              <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Platform Fee</Typography>
-              <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {platformFees}</Typography>
-            </Stack>
-           )}
+            {isPlatformFeeApplicableOnStore && (
+              <Stack direction="row" justifyContent="space-between">
+                <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Platform Fee</Typography>
+                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>Rs. {platformFees}</Typography>
+              </Stack>
+            )}
 
             {renderServiceFee()}
 
-          {isDeliveryFeeApplicableOnStore && orderType==="storeDelivery" && (
-            <Stack direction="row" justifyContent="space-between">
-              <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Delivery Fee</Typography>
-              <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {deliveryFees}</Typography>
-            </Stack>
-           )}
+            {isDeliveryFeeApplicableOnStore && orderType === "storeDelivery" && (
+              <Stack direction="row" justifyContent="space-between">
+                <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Delivery Fee</Typography>
+                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>Rs. {deliveryFees}</Typography>
+              </Stack>
+            )}
 
             {discount > 0 && (
               <Stack direction="row" justifyContent="space-between">
                 <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Discount</Typography>
-                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {fNumber(discount)}</Typography>
+                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>Rs. {fNumber(discount)}</Typography>
               </Stack>
             )}
 
@@ -214,7 +217,7 @@ const CartCheckoutTotalSummary = ({ themeColors, actions, prop, styles, states, 
             {isTaxApplicableOnStore && (
               <Stack direction="row" justifyContent="space-between">
                 <Typography sx={{ color: "text.secondary", fontWeight: "600", ...getHeadingStyles }}>Tax</Typography>
-                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles}}>Rs. {fNumber(taxAmount)}</Typography>
+                <Typography variant="subtitle2" sx={{ ...getDescriptionStyles }}>Rs. {fNumber(taxAmount)}</Typography>
               </Stack>
             )}
 
