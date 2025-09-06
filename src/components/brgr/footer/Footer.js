@@ -48,9 +48,11 @@ export default function CustomFooter({
         document.documentElement.offsetHeight
       );
       const viewportHeight = window.innerHeight;
-      if (bodyHeight <= viewportHeight) {
+      if(previewMode){
+        setIsShort(false)
+      } else if (bodyHeight <= viewportHeight) {
         setIsShort(true)
-      } else {
+      }  else {
         setIsShort(false)
       }
     };
