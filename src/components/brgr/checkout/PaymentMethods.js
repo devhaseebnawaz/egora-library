@@ -18,9 +18,9 @@ const PAYMENT_OPTIONS = [
   },
 ];
 
-export default function PaymentMethods({ actions, prop, styles, states, PaymentComponent }) {
+export default function PaymentMethods({ actions, prop, styles, states, PaymentComponent, getPayAtCounterStyles, getPaymentCheckedIconStyles, getCreditDebitCardStyles, getPaymentUnCheckedIconStyles, paymentSectionBackground }) {
   const { franchise, orderType } = states ?? {}
-  const {configurations} = franchise ?? {}
+  const { configurations } = franchise ?? {}
   const { isCardAvailableOnStore, isCashAvailableOnStore, isCardAvailableOnDelivery, isCardAvailableOnPickUp, isCashAvailableOnDelivery, isCashAvailableOnPickUp } = configurations ?? {}
 
   const isCashAvailable = () => {
@@ -39,7 +39,7 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
 
 
   return (
-    <Box sx={{ marginTop: '5px'}}>
+    <Box sx={{ marginTop: '5px' }}>
       <RadioGroup
         value={states.paymentMethod}
         onChange={(event) => actions.handleSetPaymentMethod(event.target.value)}
@@ -52,11 +52,16 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
             return false;
           }).map((option) => (
             <PaymentOption
+            paymentSectionBackground={paymentSectionBackground}
               key={option.title}
               option={option}
               isSelected={states.paymentMethod === option.value}
               hasChild={option.value === "card"}
               isCreditMethod={option.value === "card" && states.paymentMethod === "card"}
+              getPayAtCounterStyles={getPayAtCounterStyles}
+              getPaymentCheckedIconStyles={getPaymentCheckedIconStyles}
+              getCreditDebitCardStyles={getCreditDebitCardStyles}
+              getPaymentUnCheckedIconStyles={getPaymentUnCheckedIconStyles}
             />
           ))}
         </Stack>
@@ -76,6 +81,11 @@ export default function PaymentMethods({ actions, prop, styles, states, PaymentC
 function PaymentOption({
   option,
   hasChild,
+  getPayAtCounterStyles,
+  getCreditDebitCardStyles,
+  getPaymentCheckedIconStyles, 
+  getPaymentUnCheckedIconStyles,
+  paymentSectionBackground
 }) {
   const { value, title, icons } = option;
 
@@ -86,19 +96,37 @@ function PaymentOption({
         display: "flex",
         position: "relative",
         justifyContent: "space-between",
-        width:"100%",
+        width: "100%",
         transition: (theme) => theme.transitions.create("all"),
         ...(hasChild && {
         }),
+        ...paymentSectionBackground
       }}
     >
       <FormControlLabel
         value={value}
         control={
-          <Radio checkedIcon={<Iconify icon="eva:checkmark-circle-2-fill" />} />
+          <Radio
+            checkedIcon={<Iconify icon="eva:checkmark-circle-2-fill" />}
+            sx={{
+              color: getPaymentUnCheckedIconStyles, 
+              '&.Mui-checked': {
+                color: getPaymentCheckedIconStyles , 
+              },
+             
+            }}
+          />
         }
         label={title}
-        sx={{ py: 2, pl: 2.5, flexGrow: 1, mr: 0 }}
+        sx={{
+          py: 2, pl: 2.5, flexGrow: 1, mr: 0,
+          '& .MuiFormControlLabel-label': {
+            ...(title === 'Pay at the counter'
+              ? getPayAtCounterStyles
+              : getCreditDebitCardStyles),
+          },
+
+        }}
       />
 
       <Stack
