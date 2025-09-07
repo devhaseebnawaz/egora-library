@@ -600,6 +600,39 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                 : `${themeColors?.CartCheckoutSummaryItemNotesTextStyle?.value}`,
     };
     
+    const getViewLocationtyles = {
+        color:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextColor?.value !== ""
+                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.CartCheckoutSummaryViewLocationTextColor?.value}`,
+        fontSize:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.CartCheckoutSummaryViewLocationTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextWeight?.value != ""
+                ? layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.CartCheckoutSummaryViewLocationTextWeight?.value,
+
+        fontFamily: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextFont?.value != ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextFont?.value}`
+            : globalComponentStyles?.Text?.fontFamily?.value != ""
+                ? globalComponentStyles?.Text?.fontFamily?.value
+                : `${themeColors?.CartCheckoutSummaryViewLocationTextFont?.value}`,
+
+        fontStyle: layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextStyle?.value !== ""
+            ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryViewLocationTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.CartCheckoutSummaryViewLocationTextStyle?.value}`,
+    };
+
     const checkoutTotalSummaryBackground = {
         backgroundColor:
             layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryOrderSectionBackgroundColor?.value !== ""
@@ -646,7 +679,16 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
             }} >
                 <Grid container spacing={3} justifyContent="center">
                     {states.logoUrl &&
-                        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center',
+                        borderRadius:
+                            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryImageBorderRadius?.value !== ""
+                                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryImageBorderRadius?.value}%`
+                                : `${themeColors?.CartCheckoutSummaryImageBorderRadius?.value || 0}%`,
+                        backgroundColor:
+                            layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryImageBackgroundColor?.value != ""
+                                ? `${layout?.cartCheckoutSummaryLayout?.body[0].styles?.CartCheckoutSummaryImageBackgroundColor?.value}`
+                                : `${themeColors?.CartCheckoutSummaryImageBackgroundColor?.value}`,
+                                         }}>
                             <img src={states.logoUrl} alt="Logo" style={{ height: '125px', borderRadius: '20px' }} />
                         </Grid>
                     }
@@ -697,7 +739,9 @@ const CartCheckoutSummary = ({ layout, globalComponentStyles, themeColors, actio
                                                     underline="hover"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    sx={{ fontSize: 14 }}
+                                                    sx={{ 
+                                                        ...getViewLocationtyles
+                                                    }}
                                                 >
                                                     View Location 📍
                                                 </Link>

@@ -620,6 +620,39 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                 : `${themeColors?.OrderSuccessInquiryTextStyle?.value}`,
     };
 
+    const getViewLocationStyles = {
+        color:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextColor?.value !== ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextColor?.value}`
+                : globalComponentStyles?.Text?.color?.value != ""
+                    ? globalComponentStyles?.Text?.color?.value
+                    : `${themeColors?.OrderSuccessViewLocationTextColor?.value}`,
+        fontSize:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextSize?.value[getScreenSizeCategory()] != 0
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextSize?.value[getScreenSizeCategory()]
+                : globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()] != 0
+                    ? globalComponentStyles?.Text?.size?.value[getScreenSizeCategory()]
+                    : themeColors?.OrderSuccessViewLocationTextSize?.value[getScreenSizeCategory()],
+        fontWeight:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextWeight?.value != ""
+                ? layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextWeight?.value
+                : globalComponentStyles?.Text?.fontWeight?.value != ""
+                    ? globalComponentStyles?.Text?.fontWeight?.value
+                    : themeColors?.OrderSuccessViewLocationTextWeight?.value,
+        fontFamily:
+            layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextFont?.value != ""
+                ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextFont?.value}`
+                : globalComponentStyles?.Text?.fontFamily?.value != ""
+                    ? globalComponentStyles?.Text?.fontFamily?.value
+                    : `${themeColors?.OrderSuccessViewLocationTextFont?.value}`,
+
+        fontStyle: layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextStyle?.value !== ""
+            ? `${layout?.orderSuccessLayout?.body[0].styles?.OrderSuccessViewLocationTextStyle?.value}`
+            : globalComponentStyles?.Text?.fontWeight?.value != ""
+                ? globalComponentStyles?.Text?.fontWeight?.value
+                : `${themeColors?.OrderSuccessViewLocationTextStyle?.value}`,
+    };
+
     const getFooterStyles = (type) => ({
         color:
             styles?.[type + "Color"]?.value ||
@@ -741,7 +774,9 @@ export default function OrderSuccessPage({ open, onClose, themeColors, actions, 
                                         underline="hover"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        sx={{ fontSize: 14 }}
+                                        sx={{ 
+                                            ...getViewLocationStyles
+                                         }}
                                     >
                                         View Location 📍
                                     </Link>
